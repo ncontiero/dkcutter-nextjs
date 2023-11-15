@@ -1,6 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 
+{%- if useEnvValidator %}
+
 import { env } from "@/env.mjs";
+{%- else %}
+
+const env = process.env;
+{%- endif %}
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;

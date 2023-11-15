@@ -1,16 +1,5 @@
 import fs from "fs-extra";
 import path from "path";
-import { z } from "zod";
-
-function returnBool(str) {
-  const strToBoolSchema = z
-    .string()
-    .optional()
-    .transform((val) =>
-      val === "false" || val === "true" ? !!val && val !== "false" : val,
-    );
-  return strToBoolSchema.parse(str);
-}
 
 function appendToGitignore(gitignorePath, lines) {
   fs.appendFileSync(gitignorePath, lines);
@@ -66,6 +55,15 @@ function updateEslint({ projectDir, extendsConfig = [] }) {
   return eslintJson;
 }
 
+const ctx = {
+  useAppFolder: "{{ useAppFolder }}" === "true",
+  useLinters: "{{ useLinters }}" === "true",
+  useHusky: "{{ useHusky }}" === "true",
+  useLintStaged: "{{ useLintStaged }}" === "true",
+  useEnvValidator: "{{ useEnvValidator }}" === "true",
+  database: "{{ database }}",
+};
+
 function main() {
   const projectDir = path.resolve("{{ projectSlug }}");
   const srcFolder = path.join(projectDir, "src");
@@ -74,7 +72,7 @@ function main() {
 
   appendToGitignore(gitignorePath, "\n# local env files\n.env*.local\n.env\n");
 
-  if (returnBool("{{ useAppFolder }}")) {
+  if (ctx.useAppFolder) {
     fs.removeSync(path.join(srcFolder, "pages"));
   } else {
     const stylesFolder = path.join(srcFolder, "styles");
@@ -89,7 +87,7 @@ function main() {
     ]);
   }
 
-  if (returnBool("{{ useLinters }}")) {
+  if (ctx.useLinters) {
     updatePackageJson({
       projectDir,
       scripts: {
@@ -109,14 +107,14 @@ function main() {
     ]);
   }
 
-  if (returnBool("{{ useHusky }}")) {
+  if (ctx.useHusky) {
     updatePackageJson({ projectDir, scripts: { prepare: "husky install" } });
   } else {
     updatePackageJson({ projectDir, removeDevDeps: ["husky"] });
     fs.removeSync(path.join(projectDir, ".husky"));
   }
 
-  if (returnBool("{{ useLintStaged }}")) {
+  if (ctx.useLintStaged) {
     updatePackageJson({ projectDir, scripts: { "pre-commit": "lint-staged" } });
   } else {
     updatePackageJson({
@@ -126,13 +124,30 @@ function main() {
     });
   }
 
-  if (!returnBool("{{ useEnvValidator }}")) {
+  if (!ctx.useEnvValidator) {
     fs.removeSync(path.join(srcFolder, "env.mjs"));
     updatePackageJson({
       projectDir,
       removeDeps: ["@t3-oss/env-nextjs", "zod"],
     });
   }
+
+  if (ctx.database === "none") {
+    updatePackageJson({
+      projectDir,
+      removeDevDeps: ["prisma"],
+    });
+    removeFiles([path.join(projectDir, "prisma"), path.join(srcFolder, "lib")]);
+  } else if (ctx.database === "prisma") {
+    updatePackageJson({
+      projectDir,
+      scripts: { postinstall: "prisma generate" },
+    });
+  }
+
+  // if (!ctx.useDockerCompose) {
+  //   fs.removeSync(path.join(projectDir, "docker-compose.yml"));
+  // }
 }
 
 main();

@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 const ctx = {
-  projectSlug: "{{ projectSlug }}",
   useHusky: "{{ useHusky }}" === "true",
   useLintStaged: "{{ useLintStaged }}" === "true",
 };
@@ -9,9 +8,6 @@ const ctx = {
 export function validateProject({ ctx }) {
   try {
     z.object({
-      projectSlug: z
-        .string()
-        .regex(/^[a-z0-9@][a-z0-9-_]*$/, "Invalid project slug."),
       useHusky: z.boolean(),
       useLintStaged: z.boolean(),
     })
