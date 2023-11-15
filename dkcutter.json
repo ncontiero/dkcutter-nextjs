@@ -1,51 +1,55 @@
 {
-  "projectName": {
-    "value": "My Awesome Project",
-    "promptMessage": "What is the project name?"
-  },
-  "projectSlug": {
-    "value": "{{ projectName|lower|replace(' ', '-')|trim }}",
-    "promptMessage": "What is the project slug?"
-  },
-  "description": {
-    "value": "Behold My Awesome Project!",
-    "promptMessage": "What is the project description?"
-  },
-  "authorName": {
-    "value": "DKSHS",
-    "promptMessage": "What is the author name?"
-  },
-  "version": {
-    "value": "0.1.0",
-    "promptMessage": "What is the project version?"
-  },
-  "useLinters": {
-    "value": true,
-    "promptMessage": "Do you want to use linters?"
-  },
-  "useHusky": {
-    "value": false,
-    "promptMessage": "Do you want to use husky?"
-  },
-  "useLintStaged": {
-    "value": false,
-    "promptMessage": "Do you want to use lint staged?"
-  },
-  "useAppFolder": {
-    "value": true,
-    "promptMessage": "Do you want to use Next.Js app folder?"
-  },
-  "useEnvValidator": {
-    "value": false,
-    "promptMessage": "Do you want to use T3 Env?"
-  },
-  "automaticStart": {
-    "value": false,
-    "promptMessage": "Do you want the project to be configured?"
-  },
-  "_pkgManager": "{{ dkcutter.pkgManager }}",
-  "_nextConfig": "next.config.{% if useEnvValidator %}mjs{% else %}js{% endif %}",
-  "_lintScript": "{{ _pkgManager }} run {% if useLinters %}lint:fix{% else %}lint{% endif %}",
-  "_preCommit": "{{ _pkgManager }} run {% if useLintStaged %}pre-commit{% elif useLinters %}lint:fix{% else %}lint{% endif %}",
-  "_ciInstall": "{{ dkcutter.pkgManager }} {% if _pkgManager != 'npm' %}install{% else %}ci{% endif %}{% if _pkgManager == 'yarn' %} --frozen-lockfile{% endif %}"
+  "projectName": {
+    "value": "My Awesome Project",
+    "promptMessage": "What is the project name?"
+  },
+  "projectSlug": {
+    "value": "{{ projectName|lower|replace(' ', '-')|trim }}",
+    "promptMessage": "What is the project slug?",
+    "validateRegex": {
+      "regex": "^[a-z0-9@][a-z0-9-_]*$",
+      "message": "Invalid project slug. Please enter a valid value."
+    }
+  },
+  "description": {
+    "value": "Behold My Awesome Project!",
+    "promptMessage": "What is the project description?"
+  },
+  "authorName": {
+    "value": "DKSHS",
+    "promptMessage": "What is the author name?"
+  },
+  "version": {
+    "value": "0.1.0",
+    "promptMessage": "What is the project version?"
+  },
+  "useLinters": {
+    "value": true,
+    "promptMessage": "Do you want to use linters?"
+  },
+  "useHusky": {
+    "value": false,
+    "promptMessage": "Do you want to use husky?"
+  },
+  "useLintStaged": {
+    "value": false,
+    "promptMessage": "Do you want to use lint staged?"
+  },
+  "useAppFolder": {
+    "value": true,
+    "promptMessage": "Do you want to use Next.Js app folder?"
+  },
+  "useEnvValidator": {
+    "value": false,
+    "promptMessage": "Do you want to use T3 Env?"
+  },
+  "automaticStart": {
+    "value": false,
+    "promptMessage": "Do you want the project to be configured?"
+  },
+  "_pkgManager": "{{ dkcutter.pkgManager }}",
+  "_nextConfig": "next.config.{% if useEnvValidator %}mjs{% else %}js{% endif %}",
+  "_lintScript": "{{ _pkgManager }} run {% if useLinters %}lint:fix{% else %}lint{% endif %}",
+  "_preCommit": "{{ _pkgManager }} run {% if useLintStaged %}pre-commit{% elif useLinters %}lint:fix{% else %}lint{% endif %}",
+  "_ciInstall": "{{ dkcutter.pkgManager }} {% if _pkgManager != 'npm' %}install{% else %}ci{% endif %}{% if _pkgManager == 'yarn' %} --frozen-lockfile{% endif %}"
 }
