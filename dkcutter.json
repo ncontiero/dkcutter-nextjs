@@ -32,6 +32,7 @@
     "promptMessage": "Do you want to use {{ chalk.blue('husky') }}?"
   },
   "useLintStaged": {
+    "disabled": "{% if useHusky != true %}true{% else %}false{% endif %}",
     "value": false,
     "promptMessage": "Do you want to use {{ chalk.blue('lint staged') }}?"
   },
@@ -48,7 +49,7 @@
     "promptMessage": "What {{ chalk.blue('database ORM') }} would you like to use?"
   },
   "useDockerCompose": {
-    "showCondition": "{% if database != 'none' %}true{% else %}false{% endif %}",
+    "disabled": "{% if database == 'none' %}true{% else %}false{% endif %}",
     "value": false,
     "promptMessage": "Do you want to use {{ chalk.blue('Docker compose') }} for the database?"
   },
