@@ -1,0 +1,9 @@
+{% if useEnvValidator -%}
+await import("./src/env.mjs");
+
+{% endif -%}
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+module.exports = nextConfig;
