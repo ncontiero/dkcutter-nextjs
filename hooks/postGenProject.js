@@ -62,6 +62,7 @@ const ctx = {
   useLintStaged: "{{ useLintStaged }}" === "true",
   useEnvValidator: "{{ useEnvValidator }}" === "true",
   database: "{{ database }}",
+  useDockerCompose: "{{ useDockerCompose }}" === "true",
 };
 
 function main() {
@@ -145,9 +146,9 @@ function main() {
     });
   }
 
-  // if (!ctx.useDockerCompose) {
-  //   fs.removeSync(path.join(projectDir, "docker-compose.yml"));
-  // }
+  if (!ctx.useDockerCompose) {
+    fs.removeSync(path.join(projectDir, "docker-compose.yml"));
+  }
 }
 
 main();

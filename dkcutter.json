@@ -47,6 +47,11 @@
     ],
     "promptMessage": "What {{ chalk.blue('database ORM') }} would you like to use?"
   },
+  "useDockerCompose": {
+    "showCondition": "{% if database != 'none' %}true{% else %}false{% endif %}",
+    "value": false,
+    "promptMessage": "Do you want to use {{ chalk.blue('Docker compose') }} for the database?"
+  },
   "useEnvValidator": {
     "value": false,
     "promptMessage": "Do you want to use {{ chalk.blue('T3 Env') }}?"
