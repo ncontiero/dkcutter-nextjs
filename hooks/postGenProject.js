@@ -1,6 +1,17 @@
 import fs from "fs-extra";
 import path from "path";
 
+const CTX = {
+  pkgManager: "{{ dkcutter.pkgManager }}",
+  useAppFolder: "{{ useAppFolder }}" === "true",
+  useLinters: "{{ useLinters }}" === "true",
+  useHusky: "{{ useHusky }}" === "true",
+  useLintStaged: "{{ useLintStaged }}" === "true",
+  useEnvValidator: "{{ useEnvValidator }}" === "true",
+  database: "{{ database }}",
+  useDockerCompose: "{{ useDockerCompose }}" === "true",
+};
+
 function appendToGitignore(gitignorePath, lines) {
   fs.appendFileSync(gitignorePath, lines);
 }
@@ -55,25 +66,15 @@ function updateEslint({ projectDir, extendsConfig = [] }) {
   return eslintJson;
 }
 
-const ctx = {
-  useAppFolder: "{{ useAppFolder }}" === "true",
-  useLinters: "{{ useLinters }}" === "true",
-  useHusky: "{{ useHusky }}" === "true",
-  useLintStaged: "{{ useLintStaged }}" === "true",
-  useEnvValidator: "{{ useEnvValidator }}" === "true",
-  database: "{{ database }}",
-  useDockerCompose: "{{ useDockerCompose }}" === "true",
-};
-
-function main() {
+async function main() {
   const projectDir = path.resolve("{{ projectSlug }}");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
-  const gitignorePath = path.join(projectDir, ".gitignore");
 
+  const gitignorePath = path.join(projectDir, ".gitignore");
   appendToGitignore(gitignorePath, "\n# local env files\n.env*.local\n.env\n");
 
-  if (ctx.useAppFolder) {
+  if (CTX.useAppFolder) {
     fs.removeSync(path.join(srcFolder, "pages"));
   } else {
     const stylesFolder = path.join(srcFolder, "styles");
@@ -88,7 +89,7 @@ function main() {
     ]);
   }
 
-  if (ctx.useLinters) {
+  if (CTX.useLinters) {
     updatePackageJson({
       projectDir,
       scripts: {
@@ -108,14 +109,14 @@ function main() {
     ]);
   }
 
-  if (ctx.useHusky) {
+  if (CTX.useHusky) {
     updatePackageJson({ projectDir, scripts: { prepare: "husky install" } });
   } else {
     updatePackageJson({ projectDir, removeDevDeps: ["husky"] });
     fs.removeSync(path.join(projectDir, ".husky"));
   }
 
-  if (ctx.useLintStaged) {
+  if (CTX.useLintStaged) {
     updatePackageJson({ projectDir, scripts: { "pre-commit": "lint-staged" } });
   } else {
     updatePackageJson({
@@ -125,7 +126,7 @@ function main() {
     });
   }
 
-  if (!ctx.useEnvValidator) {
+  if (!CTX.useEnvValidator) {
     fs.removeSync(path.join(srcFolder, "env.mjs"));
     updatePackageJson({
       projectDir,
@@ -133,20 +134,20 @@ function main() {
     });
   }
 
-  if (ctx.database === "none") {
+  if (CTX.database === "none") {
     updatePackageJson({
       projectDir,
       removeDevDeps: ["prisma"],
     });
     removeFiles([path.join(projectDir, "prisma"), path.join(srcFolder, "lib")]);
-  } else if (ctx.database === "prisma") {
+  } else if (CTX.database === "prisma") {
     updatePackageJson({
       projectDir,
       scripts: { postinstall: "prisma generate" },
     });
   }
 
-  if (!ctx.useDockerCompose) {
+  if (!CTX.useDockerCompose) {
     fs.removeSync(path.join(projectDir, "docker-compose.yml"));
   }
 }
