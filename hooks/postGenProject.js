@@ -1,6 +1,8 @@
 import fs from "fs-extra";
 import path from "path";
 
+import { updatePackageJson, updateEslint } from "./helpers";
+
 const CTX = {
   pkgManager: "{{ dkcutter.pkgManager }}",
   useAppFolder: "{{ useAppFolder }}" === "true",
@@ -18,52 +20,6 @@ function appendToGitignore(gitignorePath, lines) {
 
 function removeFiles(files) {
   files.forEach((file) => fs.removeSync(file));
-}
-
-function updatePackageJson({
-  removeDeps = [],
-  removeDevDeps = [],
-  scripts = {},
-  keys = [],
-  projectDir,
-}) {
-  const packageJsonPath = path.join(projectDir, "package.json");
-  const packageJson = fs.readJSONSync(packageJsonPath);
-
-  removeDeps.forEach((dependency) => {
-    delete packageJson.dependencies?.[dependency];
-  });
-  removeDevDeps.forEach((dependency) => {
-    delete packageJson.devDependencies?.[dependency];
-  });
-  packageJson.scripts = { ...packageJson.scripts, ...scripts };
-  keys.forEach((key) => {
-    delete packageJson[key];
-  });
-
-  fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
-
-  return packageJson;
-}
-
-function updateEslint({ projectDir, extendsConfig = [] }) {
-  const eslintPath = path.join(projectDir, ".eslintrc");
-  const eslintJson = fs.readJsonSync(eslintPath);
-
-  const extendsSet = new Set(eslintJson.extends);
-
-  extendsConfig.forEach((extend) => {
-    if (extendsSet.has(extend)) {
-      extendsSet.delete(extend);
-    } else {
-      extendsSet.add(extend);
-    }
-  });
-
-  eslintJson.extends = Array.from(extendsSet).sort();
-  fs.writeJsonSync(eslintPath, eslintJson, { spaces: 2 });
-
-  return eslintJson;
 }
 
 async function main() {
