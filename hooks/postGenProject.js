@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 
-import { updatePackageJson, updateEslint } from "./helpers";
+import { updatePackageJson, updateEslint } from "./helpers/index.js";
 
 const CTX = {
   pkgManager: "{{ dkcutter.pkgManager }}",
