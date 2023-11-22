@@ -1,8 +1,11 @@
+import { execa } from "execa";
 import fs from "fs-extra";
 import path from "path";
 
 import { updatePackageJson, updateEslint } from "./helpers/index.js";
+import { initializeGit, stageAndCommit } from "./helpers/git.js";
 
+const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
   pkgManager: "{{ dkcutter.pkgManager }}",
   useAppFolder: "{{ useAppFolder }}" === "true",
@@ -12,6 +15,7 @@ const CTX = {
   useEnvValidator: "{{ useEnvValidator }}" === "true",
   database: "{{ database }}",
   useDockerCompose: "{{ useDockerCompose }}" === "true",
+  automaticStart: "{{ automaticStart }}" === "true",
 };
 
 function appendToGitignore(gitignorePath, lines) {
@@ -105,6 +109,16 @@ async function main() {
 
   if (!CTX.useDockerCompose) {
     fs.removeSync(path.join(projectDir, "docker-compose.yml"));
+  }
+
+  if (CTX.automaticStart) {
+    await initializeGit({ projectDir });
+    await execa(CTX.pkgManager, ["install"]);
+    CTX.useLinters && (await execa(CTX.pkgManager, ["run", "lint:fix"]));
+    await stageAndCommit({
+      projectDir,
+      message: `Initial commit from ${TEMPLATE_REPO}`,
+    });
   }
 }
 

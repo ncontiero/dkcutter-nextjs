@@ -57,6 +57,10 @@
     "value": false,
     "promptMessage": "Do you want to use {{ chalk.blue('T3 Env') }}?"
   },
+  "automaticStart": {
+    "value": false,
+    "promptMessage": "Do you want the project to be configured?"
+  },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_nextConfig": "next.config.{% if useEnvValidator %}mjs{% else %}js{% endif %}",
   "_lintScript": "{{ _pkgManager }} run {% if useLinters %}lint:fix{% else %}lint{% endif %}",
