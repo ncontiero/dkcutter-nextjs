@@ -23,7 +23,7 @@ function removeFiles(files) {
 }
 
 async function main() {
-  const projectDir = path.resolve("{{ projectSlug }}");
+  const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
 
