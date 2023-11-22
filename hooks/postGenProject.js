@@ -1,4 +1,4 @@
-import { execa } from "execa";
+import { execaSync } from "execa";
 import fs from "fs-extra";
 import path from "path";
 
@@ -26,7 +26,7 @@ function removeFiles(files) {
   files.forEach((file) => fs.removeSync(file));
 }
 
-async function main() {
+function main() {
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
@@ -112,10 +112,10 @@ async function main() {
   }
 
   if (CTX.automaticStart) {
-    await initializeGit({ projectDir });
-    await execa(CTX.pkgManager, ["install"]);
-    CTX.useLinters && (await execa(CTX.pkgManager, ["run", "lint:fix"]));
-    await stageAndCommit({
+    initializeGit({ projectDir });
+    execaSync(CTX.pkgManager, ["install"]);
+    CTX.useLinters && execaSync(CTX.pkgManager, ["run", "lint:fix"]);
+    stageAndCommit({
       projectDir,
       message: `Initial commit from ${TEMPLATE_REPO}`,
     });

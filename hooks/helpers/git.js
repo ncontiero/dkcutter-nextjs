@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 import path from "node:path";
-import { execa } from "execa";
+import { execaSync } from "execa";
 import fs from "fs-extra";
 
 export function isGitInstalled(dir) {
@@ -18,10 +18,10 @@ export function isRootGitRepo(dir) {
 }
 
 /** @returns Whether or not this directory or a parent directory has a `.git` directory. */
-export async function isInsideGitRepo(dir) {
+export function isInsideGitRepo(dir) {
   try {
     // If this command succeeds, we're inside a git repo
-    await execa("git", ["rev-parse", "--is-inside-work-tree"], {
+    execaSync("git", ["rev-parse", "--is-inside-work-tree"], {
       cwd: dir,
       stdout: "ignore",
     });
@@ -48,7 +48,7 @@ function getDefaultBranch() {
 }
 
 // This initializes the Git-repository for the project
-export async function initializeGit({ projectDir }) {
+export function initializeGit({ projectDir }) {
   if (!isGitInstalled(projectDir)) {
     return;
   }
@@ -60,19 +60,19 @@ export async function initializeGit({ projectDir }) {
     // --initial-branch flag was added in git v2.28.0
     const { major, minor } = getGitVersion();
     if (major < 2 || (major === 2 && minor < 28)) {
-      await execa("git", ["init"], { cwd: projectDir });
+      execaSync("git", ["init"], { cwd: projectDir });
       // symbolic-ref is used here due to refs/heads/master not existing
       // It is only created after the first commit
       // https://superuser.com/a/1419674
-      await execa("git", ["symbolic-ref", "HEAD", `refs/heads/${branchName}`], {
+      execaSync("git", ["symbolic-ref", "HEAD", `refs/heads/${branchName}`], {
         cwd: projectDir,
       });
     } else {
-      await execa("git", ["init", `--initial-branch=${branchName}`], {
+      execaSync("git", ["init", `--initial-branch=${branchName}`], {
         cwd: projectDir,
       });
     }
-    await execa("git", ["add", "."], { cwd: projectDir });
+    execaSync("git", ["add", "."], { cwd: projectDir });
   } catch (error) {
     let msg =
       "Failed: could not initialize git. Update git to the latest version!\n";
@@ -81,14 +81,14 @@ export async function initializeGit({ projectDir }) {
   }
 }
 
-export async function stageAndCommit({ projectDir, message }) {
+export function stageAndCommit({ projectDir, message }) {
   const isRoot = isRootGitRepo(projectDir);
-  const isInside = await isInsideGitRepo(projectDir);
+  const isInside = isInsideGitRepo(projectDir);
 
   if (isInside && !isRoot) {
     return;
   }
 
-  await execa("git", ["add", "."], { cwd: projectDir });
-  await execa("git", ["commit", "-m", message], { cwd: projectDir });
+  execaSync("git", ["add", "."], { cwd: projectDir });
+  execaSync("git", ["commit", "-m", message], { cwd: projectDir });
 }

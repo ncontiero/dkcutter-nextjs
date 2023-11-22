@@ -1,0 +1,20 @@
+{
+  "name": "dkcutter-nextjs",
+  "version": "1.0.0",
+  "description": "A simple NextJs template with dkcutter. ",
+  "scripts": {
+    "generate": "dkcutter .",
+    "lint": "eslint . && prettier . -c",
+    "lint:fix": "eslint --fix . && prettier . -w"
+  },
+  "author": "DKSHS",
+  "license": "MIT",
+  "devDependencies": {
+    "@dkshs/eslint-config": "1.4.0",
+    "eslint": "^8"
+  },
+  "dependencies": {
+    "dkcutter": "^2.6.0",
+    "execa": "^8.0.1"
+  }
+}
