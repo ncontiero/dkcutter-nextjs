@@ -1,12 +1,16 @@
-import { execaSync } from "execa";
 import fs from "fs-extra";
 import path from "path";
 
-import { updatePackageJson, updateEslint } from "./helpers/index.js";
+import { updatePackageJson } from "./utils/updatePackageJson.js";
+import { updateEslint } from "./utils/updateEslint.js";
 import { initializeGit, stageAndCommit } from "./helpers/git.js";
+import { installDependencies } from "./helpers/installDependencies.js";
+import { runLinters } from "./helpers/runLinters.js";
+import { logNextSteps } from "./helpers/logNextSteps.js";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
+  projectSlug: "{{ projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}",
   useAppFolder: "{{ useAppFolder }}" === "true",
   useLinters: "{{ useLinters }}" === "true",
@@ -26,7 +30,7 @@ function removeFiles(files) {
   files.forEach((file) => fs.removeSync(file));
 }
 
-function main() {
+async function main() {
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
@@ -112,14 +116,13 @@ function main() {
   }
 
   if (CTX.automaticStart) {
-    initializeGit({ projectDir });
-    execaSync(CTX.pkgManager, ["install"]);
-    CTX.useLinters && execaSync(CTX.pkgManager, ["run", "lint:fix"]);
-    stageAndCommit({
-      projectDir,
-      message: `Initial commit from ${TEMPLATE_REPO}`,
-    });
+    await initializeGit(projectDir);
+    await installDependencies(projectDir, CTX.pkgManager);
+    CTX.useLinters && (await runLinters(projectDir, CTX.pkgManager));
+    await stageAndCommit(projectDir, `Initial commit from ${TEMPLATE_REPO}`);
   }
+
+  await logNextSteps(CTX, projectDir, CTX.pkgManager);
 }
 
 main();
