@@ -29,4 +29,4 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Use env validator**: Indicates whether the project should be configured with the [T3 Env](https://env.t3.gg/) environment variable validator.
 
-<!-- - **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository. -->
+- **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository.
