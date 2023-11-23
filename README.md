@@ -36,7 +36,7 @@ You'll be prompted for some values. Provide them, then a Next.Js project will be
 
 **Warning**: After this point, change 'My name', etc to your own information.
 
-Answer the prompts with your own desired [options](./docs/project-generation-options.md). For example:
+Answer the prompts with your own desired [options][options-url]. For example:
 
 ```bash
 ✔ What is the project name? … My Awesome Project
@@ -61,3 +61,43 @@ ls
 ```
 
 Now take a look at your repo. Don't forget to carefully look at the generated README.
+
+## Advanced usage
+
+If you want to start faster, you can use the following options:
+
+| Flag                           | Description                                                                                      |
+| ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `--projectName <string>`       | The Project name.                                                                                |
+| `--projectSlug <string>`       | The Project Slug.                                                                                |
+| `--description <string>`       | The Project description.                                                                         |
+| `--authorName <string>`        | The author name.                                                                                 |
+| `--version <string>`           | The project version.                                                                             |
+| `--useLinters [boolean]`       | Include linters in the project. Such as ESLint and Prettier.                                     |
+| `--useHusky [boolean]`         | Include [husky](https://github.com/typicode/husky) in the project.                               |
+| `--useLintStaged [boolean]`    | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
+| `--useAppFolder [boolean]`     | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
+| `--database <string>`          | Choose a database ORM. [See for more info][options-url].                                         |
+| `--useDockerCompose [boolean]` | Include docker compose in the project for the database. If `database` is different from `none`.  |
+| `--useEnvValidator [boolean]`  | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
+| `--automaticStart [boolean]`   | This option will install the application packages, start a git repo and make the initial commit. |
+
+[See for more information about options][options-url].
+
+### Example
+
+The following would be the structure of an application with T3-env:
+
+```bash
+pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useEnvValidator
+```
+
+If you want to use all the default values with the exception of one or more, you can do it as follows:
+
+```bash
+pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useHusky --useLintStaged -y
+```
+
+This will use the default values, with the exception of the `--useHusky` and `--useLintStaged` options.
+
+[options-url]: ./docs/project-generation-options.md
