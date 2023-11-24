@@ -2,7 +2,7 @@ import path from "node:path";
 import { execa } from "execa";
 import fs from "fs-extra";
 
-import { logger } from "../hooks/utils/logger.js";
+import { logger } from "./logger.js";
 
 const SUPPORTED_COMBINATIONS = [
   { useHusky: true },
@@ -47,9 +47,10 @@ async function runLinters(project) {
     const prettierCmd = ["prettier", ".", "-c", ...ignore];
     await execa("pnpm", eslintCmd, { cwd: project });
     await execa("pnpm", prettierCmd, { cwd: project });
-    logger.success("✓ Linting passed\n");
+    logger.success("✓ Linting passed");
+    logger.break();
   } catch (e) {
-    logger.error("Linting failed\n");
+    logger.error("Linting failed");
     logger.error(e.message);
     process.exit(1);
   }
@@ -67,6 +68,7 @@ async function main() {
   let test = ".test";
   await fs.ensureDir(test);
   test = path.resolve(".test");
+  let testsPassed = 0;
 
   for (const combination of SUPPORTED_COMBINATIONS) {
     const args = constructArgs(combination);
@@ -75,11 +77,12 @@ async function main() {
       const project = path.resolve(args[1]);
       await runLinters(project);
       await fs.move(project, path.resolve(test, args[1]));
+      testsPassed += 1;
     } catch (e) {
       logger.error(
         `Failed to generate project ${args[1]} with args: ${args
           .slice(2)
-          .join(" ")}\n`,
+          .join(" ")}`,
       );
       logger.error(e.message);
       process.exit(1);
@@ -95,9 +98,11 @@ async function main() {
       logger.success(
         `✓ Expected error when creating project ${args[1]} with args: ${args
           .slice(2)
-          .join(" ")}\n`,
+          .join(" ")}`,
       );
+      logger.break();
       pass += 1;
+      testsPassed += 1;
       continue;
     }
   }
@@ -110,15 +115,16 @@ async function main() {
 
   pass = 0;
   for (const slug of INVALID_SLUGS) {
-    const projectName = ["--projectName", generateRandomString(8)];
-    const args = constructArgs([...projectName, "--projectSlug", slug]);
+    const args = constructArgs({ projectSlug: slug });
     try {
       await generateProject(args);
     } catch (e) {
       logger.success(
-        `✓ Expected error when creating project ${args[1]} with slug "${slug}"\n`,
+        `✓ Expected error when creating project ${args[1]} with slug "${slug}"`,
       );
+      logger.break();
       pass += 1;
+      testsPassed += 1;
       continue;
     }
   }
@@ -129,7 +135,8 @@ async function main() {
     process.exit(1);
   }
 
-  logger.success("\n✓ All tests passed");
+  logger.info(`Tests Passed: ${testsPassed}`);
+  logger.success("✓ All tests passed");
   await fs.remove(test);
 }
 
