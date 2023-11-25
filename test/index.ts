@@ -2,7 +2,7 @@ import path from "node:path";
 import { execa } from "execa";
 import fs from "fs-extra";
 
-import { logger } from "./logger.js";
+import { logger } from "./logger";
 
 const SUPPORTED_COMBINATIONS = [
   { useHusky: true },
@@ -22,7 +22,7 @@ const SUPPORTED_COMBINATIONS = [
 const UNSUPPORTED_COMBINATIONS = [{ database: "XXXXXX" }];
 const INVALID_SLUGS = ["", " ", "Test", "teSt", "tes1@", "t!es"];
 
-async function generateProject(args = []) {
+async function generateProject(args: string[] = []) {
   logger.info(
     `Generating project ${args[1]} with args: ${args.slice(2).join(" ")}`,
   );
@@ -30,7 +30,7 @@ async function generateProject(args = []) {
   logger.success(`✓ Project ${args[1]} generated`);
 }
 
-function generateRandomString(n) {
+function generateRandomString(n: number) {
   const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   for (let i = 0; i < n; i++) {
@@ -40,7 +40,7 @@ function generateRandomString(n) {
   return result;
 }
 
-async function runLinters(project) {
+async function runLinters(project: string) {
   try {
     const ignore = ["--ignore-path", path.resolve(".prettierignore")];
     const eslintCmd = ["eslint", "."];
@@ -56,7 +56,8 @@ async function runLinters(project) {
   }
 }
 
-function constructArgs(combination) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function constructArgs(combination: { [key: string]: any }) {
   const args = ["--projectName", generateRandomString(8)];
   for (const [item, value] of Object.entries(combination)) {
     args.push(`--${item}`, value);

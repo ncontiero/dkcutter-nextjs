@@ -1,7 +1,15 @@
-import fs from "fs-extra";
 import path from "path";
+import fs from "fs-extra";
 
-export function updateEslint({ projectDir, extendsConfig = [] }) {
+interface UpdateEslintOptions {
+  projectDir: string;
+  extendsConfig?: string[];
+}
+
+export function updateEslint({
+  projectDir,
+  extendsConfig = [],
+}: UpdateEslintOptions) {
   const eslintPath = path.join(projectDir, ".eslintrc");
   const eslintJson = fs.readJsonSync(eslintPath);
 

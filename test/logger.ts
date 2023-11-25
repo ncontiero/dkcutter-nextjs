@@ -2,7 +2,10 @@ import util from "node:util";
 import { parentPort, isMainThread } from "node:worker_threads";
 import { blue, yellow, green, red } from "colorette";
 
-export const colorize = (type, data) => {
+type LOG_TYPE = "info" | "success" | "error" | "warn";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const colorize = (type: LOG_TYPE, data: any) => {
   switch (type) {
     case "info":
       return blue(data);
@@ -17,7 +20,7 @@ export const colorize = (type, data) => {
   }
 };
 
-export function createLogger(type, ...data) {
+export function createLogger(type: LOG_TYPE, ...data: unknown[]) {
   const args = data.map((item) => colorize(type, item));
   switch (type) {
     case "error": {
@@ -45,16 +48,16 @@ export function createLogger(type, ...data) {
 }
 
 export const logger = {
-  error: (...args) => {
+  error: (...args: unknown[]) => {
     return createLogger("error", ...args);
   },
-  warn: (...args) => {
+  warn: (...args: unknown[]) => {
     return createLogger("warn", ...args);
   },
-  info: (...args) => {
+  info: (...args: unknown[]) => {
     return createLogger("info", ...args);
   },
-  success: (...args) => {
+  success: (...args: unknown[]) => {
     return createLogger("success", ...args);
   },
   break: () => console.log(""),

@@ -1,11 +1,14 @@
 import { z } from "zod";
 
+import { toBoolean } from "./utils/coerce";
+
 const ctx = {
-  useHusky: "{{ useHusky }}" === "true",
-  useLintStaged: "{{ useLintStaged }}" === "true",
+  useHusky: toBoolean("{{ useHusky }}"),
+  useLintStaged: toBoolean("{{ useLintStaged }}"),
 };
 
-export function validateProject({ ctx }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function validateProject({ ctx }: { ctx: any }) {
   try {
     z.object({
       useHusky: z.boolean(),

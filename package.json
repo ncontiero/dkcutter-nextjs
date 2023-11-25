@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "A simple NextJs template with dkcutter. ",
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "generate": "dkcutter .",
     "lint": "eslint . && prettier . -c",
     "lint:fix": "eslint --fix . && prettier . -w",
-    "test": "node test/testGeneration.js"
+    "check": "pnpm lint && pnpm typecheck && pnpm test",
+    "test": "tsx test/index.ts"
   },
   "author": "DKSHS",
   "license": "MIT",
   "type": "module",
   "devDependencies": {
     "@dkshs/eslint-config": "1.4.0",
+    "@types/fs-extra": "^11",
+    "@types/node": "^20",
+    "@types/prompts": "^2",
     "chalk": "^5.3.0",
     "colorette": "^2.0.20",
     "eslint": "^8",
@@ -20,10 +25,16 @@
     "execa": "^8.0.1",
     "fs-extra": "^11.1.1",
     "next": "14.0.3",
+    "ora": "^7.0.1",
     "prettier-plugin-tailwindcss": "^0.5.7",
-    "react": "^18"
+    "prompts": "^2.4.2",
+    "react": "^18",
+    "tsx": "^4.5.0",
+    "type-fest": "^4.8.2",
+    "typescript": "^5",
+    "zod": "^3.22.4"
   },
   "dependencies": {
-    "dkcutter": "^2.7.1"
+    "dkcutter": "2.7.1"
   }
 }

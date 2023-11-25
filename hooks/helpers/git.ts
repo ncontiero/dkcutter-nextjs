@@ -1,14 +1,14 @@
-import { execSync } from "node:child_process";
-import path from "node:path";
+import { execSync } from "child_process";
+import path from "path";
 import prompts from "prompts";
 import chalk from "chalk";
 import { execa } from "execa";
 import fs from "fs-extra";
 import ora from "ora";
 
-import { logger } from "../utils/logger.js";
+import { logger } from "../utils/logger";
 
-export function isGitInstalled(dir) {
+export function isGitInstalled(dir: string) {
   try {
     execSync("git --version", { cwd: dir });
     return true;
@@ -18,12 +18,12 @@ export function isGitInstalled(dir) {
 }
 
 /** @returns Whether or not the provided directory has a `.git` subdirectory in it. */
-export function isRootGitRepo(dir) {
+export function isRootGitRepo(dir: string) {
   return fs.existsSync(path.join(dir, ".git"));
 }
 
 /** @returns Whether or not this directory or a parent directory has a `.git` directory. */
-export async function isInsideGitRepo(dir) {
+export async function isInsideGitRepo(dir: string) {
   try {
     // If this command succeeds, we're inside a git repo
     await execa("git", ["rev-parse", "--is-inside-work-tree"], {
@@ -53,7 +53,7 @@ function getDefaultBranch() {
 }
 
 // This initializes the Git-repository for the project
-export async function initializeGit(projectDir) {
+export async function initializeGit(projectDir: string) {
   logger.info("Initializing Git...");
 
   if (!isGitInstalled(projectDir)) {
@@ -135,7 +135,7 @@ export async function initializeGit(projectDir) {
   }
 }
 
-export async function stageAndCommit(projectDir, message) {
+export async function stageAndCommit(projectDir: string, message: string) {
   const isRoot = isRootGitRepo(projectDir);
   const isInside = await isInsideGitRepo(projectDir);
   const dirName = path.parse(projectDir).name; // skip full path for logging

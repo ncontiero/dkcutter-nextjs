@@ -1,7 +1,20 @@
-import { logger } from "../utils/logger.js";
-import { isInsideGitRepo, isRootGitRepo } from "./git.js";
+import type { PackageManager } from "../utils/types";
 
-export async function logNextSteps(ctx, projectDir, pkgManager) {
+import { logger } from "../utils/logger";
+import { isInsideGitRepo, isRootGitRepo } from "./git";
+
+interface LogNextStepsOptions {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ctx: any;
+  projectDir: string;
+  pkgManager: PackageManager;
+}
+
+export async function logNextSteps({
+  ctx,
+  projectDir,
+  pkgManager,
+}: LogNextStepsOptions) {
   const commands = [`cd ${ctx.projectSlug}`];
 
   if (!ctx.automaticStart) {

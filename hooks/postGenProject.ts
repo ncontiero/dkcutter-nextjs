@@ -1,32 +1,35 @@
+import type { PackageManager } from "./utils/types";
+
 import fs from "fs-extra";
 import path from "path";
 
-import { updatePackageJson } from "./utils/updatePackageJson.js";
-import { updateEslint } from "./utils/updateEslint.js";
-import { initializeGit, stageAndCommit } from "./helpers/git.js";
-import { installDependencies } from "./helpers/installDependencies.js";
-import { runLinters } from "./helpers/runLinters.js";
-import { logNextSteps } from "./helpers/logNextSteps.js";
+import { initializeGit, stageAndCommit } from "./helpers/git";
+import { installDependencies } from "./helpers/installDependencies";
+import { runLinters } from "./helpers/runLinters";
+import { logNextSteps } from "./helpers/logNextSteps";
+import { updatePackageJson } from "./utils/updatePackageJson";
+import { updateEslint } from "./utils/updateEslint";
+import { toBoolean } from "./utils/coerce";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
   projectSlug: "{{ projectSlug }}",
-  pkgManager: "{{ dkcutter.pkgManager }}",
-  useAppFolder: "{{ useAppFolder }}" === "true",
-  useLinters: "{{ useLinters }}" === "true",
-  useHusky: "{{ useHusky }}" === "true",
-  useLintStaged: "{{ useLintStaged }}" === "true",
-  useEnvValidator: "{{ useEnvValidator }}" === "true",
+  pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
+  useAppFolder: toBoolean("{{ useAppFolder }}"),
+  useLinters: toBoolean("{{ useLinters }}"),
+  useHusky: toBoolean("{{ useHusky }}"),
+  useLintStaged: toBoolean("{{ useLintStaged }}"),
+  useEnvValidator: toBoolean("{{ useEnvValidator }}"),
   database: "{{ database }}",
-  useDockerCompose: "{{ useDockerCompose }}" === "true",
-  automaticStart: "{{ automaticStart }}" === "true",
+  useDockerCompose: toBoolean("{{ useDockerCompose }}"),
+  automaticStart: toBoolean("{{ automaticStart }}"),
 };
 
-function appendToGitignore(gitignorePath, lines) {
+function appendToGitignore(gitignorePath: string, lines: string) {
   fs.appendFileSync(gitignorePath, lines);
 }
 
-function removeFiles(files) {
+function removeFiles(files: string[]) {
   files.forEach((file) => fs.removeSync(file));
 }
 
@@ -122,7 +125,7 @@ async function main() {
     await stageAndCommit(projectDir, `Initial commit from ${TEMPLATE_REPO}`);
   }
 
-  await logNextSteps(CTX, projectDir, CTX.pkgManager);
+  await logNextSteps({ ctx: CTX, projectDir, pkgManager: CTX.pkgManager });
 }
 
 main();

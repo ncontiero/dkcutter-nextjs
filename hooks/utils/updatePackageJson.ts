@@ -1,5 +1,15 @@
-import fs from "fs-extra";
+import type { PackageJson } from "type-fest";
+
 import path from "path";
+import fs from "fs-extra";
+
+interface UpdatePackageJsonProps {
+  removeDeps?: string[];
+  removeDevDeps?: string[];
+  scripts?: PackageJson["scripts"];
+  keys?: string[];
+  projectDir: string;
+}
 
 export function updatePackageJson({
   removeDeps = [],
@@ -7,7 +17,7 @@ export function updatePackageJson({
   scripts = {},
   keys = [],
   projectDir,
-}) {
+}: UpdatePackageJsonProps) {
   const packageJsonPath = path.join(projectDir, "package.json");
   const packageJson = fs.readJSONSync(packageJsonPath);
 

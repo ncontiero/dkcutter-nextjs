@@ -1,17 +1,19 @@
-import { execa } from "execa";
-import ora from "ora";
+import type { PackageManager } from "../utils/types";
+
+import { execa, type StdioOption } from "execa";
+import ora, { type Ora } from "ora";
 
 export async function execWithSpinner(
-  projectDir,
-  pkgManager,
-  args = ["install"],
-  stdout = "pipe",
-  onDataHandle,
+  projectDir: string,
+  pkgManager: PackageManager,
+  args: string[] = ["install"],
+  stdout: StdioOption = "pipe",
+  onDataHandle?: (spinner: Ora) => (data: Buffer) => void,
 ) {
   const spinner = ora(`Running ${pkgManager} ${args.join(" ")}...`).start();
   const subprocess = execa(pkgManager, args, { cwd: projectDir, stdout });
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     if (onDataHandle) {
       subprocess.stdout?.on("data", onDataHandle(spinner));
     }
@@ -24,11 +26,11 @@ export async function execWithSpinner(
 }
 
 export async function runPgkCommand(
-  pkgManager,
-  projectDir,
-  args = ["install"],
-) {
-  const onDataHandle = (spinner) => (data) => {
+  pkgManager: PackageManager,
+  projectDir: string,
+  args: string[] = ["install"],
+): Promise<Ora | null> {
+  const onDataHandle = (spinner: Ora) => (data: Buffer) => {
     const text = data.toString();
     spinner.text =
       pkgManager === "pnpm" && text.includes("Progress")

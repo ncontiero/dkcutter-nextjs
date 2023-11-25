@@ -1,10 +1,15 @@
+import type { PackageManager } from "../utils/types";
+
 import chalk from "chalk";
 import ora from "ora";
 
-import { logger } from "../utils/logger.js";
-import { runPgkCommand } from "./runPkgCommand.js";
+import { logger } from "../utils/logger";
+import { runPgkCommand } from "./runPkgCommand";
 
-export async function runLinters(projectDir, pkgManager) {
+export async function runLinters(
+  projectDir: string,
+  pkgManager: PackageManager,
+) {
   logger.info("Running linters. This might take a while...");
 
   const linterSpinner = await runPgkCommand(pkgManager, projectDir, [
