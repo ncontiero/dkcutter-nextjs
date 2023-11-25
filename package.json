@@ -18,7 +18,6 @@
     "@types/fs-extra": "^11",
     "@types/node": "^20",
     "@types/prompts": "^2",
-    "chalk": "^5.3.0",
     "colorette": "^2.0.20",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
@@ -35,6 +34,6 @@
     "zod": "^3.22.4"
   },
   "dependencies": {
-    "dkcutter": "2.7.1"
+    "dkcutter": "3.0.0"
   }
 }

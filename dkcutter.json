@@ -25,20 +25,20 @@
   },
   "useLinters": {
     "value": true,
-    "promptMessage": "Do you want to use {{ chalk.blue('linters') }}?"
+    "promptMessage": "Do you want to use {{ colors.blue('linters') }}?"
   },
   "useHusky": {
     "value": false,
-    "promptMessage": "Do you want to use {{ chalk.blue('husky') }}?"
+    "promptMessage": "Do you want to use {{ colors.blue('husky') }}?"
   },
   "useLintStaged": {
     "disabled": "{% if useHusky != true %}true{% else %}false{% endif %}",
     "value": false,
-    "promptMessage": "Do you want to use {{ chalk.blue('lint staged') }}?"
+    "promptMessage": "Do you want to use {{ colors.blue('lint staged') }}?"
   },
   "useAppFolder": {
     "value": true,
-    "promptMessage": "Do you want to use {{ chalk.blue('Next.Js app folder') }}?"
+    "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"
   },
   "database": {
     "value": "none",
@@ -46,16 +46,16 @@
       { "title": "None", "value": "none" },
       { "title": "Prisma", "value": "prisma" }
     ],
-    "promptMessage": "What {{ chalk.blue('database ORM') }} would you like to use?"
+    "promptMessage": "What {{ colors.blue('database ORM') }} would you like to use?"
   },
   "useDockerCompose": {
     "disabled": "{% if database == 'none' %}true{% else %}false{% endif %}",
     "value": false,
-    "promptMessage": "Do you want to use {{ chalk.blue('Docker compose') }} for the database?"
+    "promptMessage": "Do you want to use {{ colors.blue('Docker compose') }} for the database?"
   },
   "useEnvValidator": {
     "value": false,
-    "promptMessage": "Do you want to use {{ chalk.blue('T3 Env') }}?"
+    "promptMessage": "Do you want to use {{ colors.blue('T3 Env') }}?"
   },
   "automaticStart": {
     "value": false,

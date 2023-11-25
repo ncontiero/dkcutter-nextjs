@@ -1,9 +1,8 @@
 import type { PackageManager } from "../utils/types";
 
-import chalk from "chalk";
 import ora from "ora";
 
-import { logger } from "../utils/logger";
+import { logger, colorize } from "../utils/logger";
 import { runPgkCommand } from "./runPkgCommand";
 
 export async function runLinters(
@@ -19,5 +18,7 @@ export async function runLinters(
 
   // If the spinner was used to show the progress, use succeed method on it
   // If not, use the succeed on a new spinner
-  (linterSpinner ?? ora()).succeed(chalk.green("Successfully ran linters!\n"));
+  (linterSpinner ?? ora()).succeed(
+    colorize("success", "Successfully ran linters!\n"),
+  );
 }

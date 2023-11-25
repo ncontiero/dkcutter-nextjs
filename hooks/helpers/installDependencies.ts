@@ -1,9 +1,8 @@
 import type { PackageManager } from "../utils/types";
 
-import chalk from "chalk";
 import ora from "ora";
 
-import { logger } from "../utils/logger";
+import { logger, colorize } from "../utils/logger";
 import { runPgkCommand } from "./runPkgCommand";
 
 export async function installDependencies(
@@ -17,6 +16,6 @@ export async function installDependencies(
   // If the spinner was used to show the progress, use succeed method on it
   // If not, use the succeed on a new spinner
   (installSpinner ?? ora()).succeed(
-    chalk.green("Successfully installed dependencies!\n"),
+    colorize("success", "Successfully installed dependencies!\n"),
   );
 }

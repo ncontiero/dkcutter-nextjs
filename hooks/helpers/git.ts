@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
 import path from "path";
 import prompts from "prompts";
-import chalk from "chalk";
+import { bold, redBright, green, red } from "colorette";
 import { execa } from "execa";
 import fs from "fs-extra";
 import ora from "ora";
@@ -73,8 +73,8 @@ export async function initializeGit(projectDir: string) {
     const { overwriteGit } = await prompts({
       type: "confirm",
       name: "overwriteGit",
-      message: `${chalk.redBright.bold(
-        "Warning:",
+      message: `${bold(
+        redBright("Warning:"),
       )} Git is already initialized in "${dirName}". Initializing a new git repository would delete the previous history. Would you like to continue anyways?`,
     });
 
@@ -90,8 +90,8 @@ export async function initializeGit(projectDir: string) {
     const { initializeChildGitRepo } = await prompts({
       type: "confirm",
       name: "initializeChildGitRepo",
-      message: `${chalk.redBright.bold(
-        "Warning:",
+      message: `${bold(
+        redBright("Warning:"),
       )} "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
     });
     if (!initializeChildGitRepo) {
@@ -121,15 +121,13 @@ export async function initializeGit(projectDir: string) {
     }
     await execa("git", ["add", "."], { cwd: projectDir });
     spinner.succeed(
-      `${chalk.green("Successfully initialized and staged")} ${chalk.green.bold(
-        "git",
-      )}\n`,
+      `${green("Successfully initialized and staged")} ${bold(green("git"))}\n`,
     );
   } catch (error) {
     // Safeguard, should be unreachable
     spinner.fail(
-      `${chalk.bold.red(
-        "Failed:",
+      `${bold(
+        red("Failed:"),
       )} could not initialize git. Update git to the latest version!\n`,
     );
   }
@@ -143,8 +141,8 @@ export async function stageAndCommit(projectDir: string, message: string) {
   if (isInside && !isRoot) {
     // Dir is inside a git worktree
     logger.warn(
-      `${chalk.redBright.bold(
-        "Warning:",
+      `${bold(
+        redBright("Warning:"),
       )} "${dirName}" is already in a git worktree. Skipping Git commit.`,
     );
     return;
