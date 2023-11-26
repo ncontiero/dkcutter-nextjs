@@ -11,25 +11,25 @@ To scaffold an application using [dkcutter](https://github.com/dkshs/dkcutter), 
 ### npm
 
 ```bash
-npx dkcutter https://github.com/dkshs/dkcutter-nextjs.git
+npx dkcutter@latest https://github.com/dkshs/dkcutter-nextjs.git
 ```
 
 ### yarn
 
 ```bash
-yarn dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git
+yarn dlx dkcutter@latest https://github.com/dkshs/dkcutter-nextjs.git
 ```
 
 ### pnpm
 
 ```bash
-pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git
+pnpm dlx dkcutter@latest https://github.com/dkshs/dkcutter-nextjs.git
 ```
 
 ### bun
 
 ```bash
-bunx dkcutter https://github.com/dkshs/dkcutter-nextjs.git
+bunx dkcutter@latest https://github.com/dkshs/dkcutter-nextjs.git
 ```
 
 You'll be prompted for some values. Provide them, then a Next.Js project will be created for you.
