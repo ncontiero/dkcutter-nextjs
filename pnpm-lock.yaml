@@ -53,8 +53,8 @@ devDependencies:
     specifier: ^18
     version: 18.2.0
   tsx:
-    specifier: ^4.5.0
-    version: 4.5.0
+    specifier: ^4.6.0
+    version: 4.6.0
   type-fest:
     specifier: ^4.8.2
     version: 4.8.2
@@ -1117,7 +1117,7 @@ packages:
       nunjucks: 3.2.4
       ora: 7.0.1
       prompts: 2.4.2
-      tsx: 4.5.0
+      tsx: 4.6.0
       which: 4.0.0
       zod: 3.22.4
     transitivePeerDependencies:
@@ -3173,8 +3173,8 @@ packages:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: true
 
-  /tsx@4.5.0:
-    resolution: {integrity: sha512-hgxdziy9KLaHh9KE+a6tIZFP6kb0MLq/1D0sJVifbGP4QVEYhy6+2FNn7MyCm1pMc63p9CW/L1OzdqTNPxs6rg==}
+  /tsx@4.6.0:
+    resolution: {integrity: sha512-HLHaDQ78mly4Pd5co6tWQOiNVYoYYAPUcwSSZK4bcs3zSEsg+/67LS/ReHook0E7DKPfe1J5jc0ocIhUrnaR4w==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
