@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   dkcutter:
-    specifier: 3.2.0
-    version: 3.2.0(typescript@5.3.2)
+    specifier: 3.3.0
+    version: 3.3.0(typescript@5.3.2)
 
 devDependencies:
   '@dkshs/eslint-config':
@@ -1105,8 +1105,8 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /dkcutter@3.2.0(typescript@5.3.2):
-    resolution: {integrity: sha512-qIinnvejNbKyZNPxRJfw6u7BVU0BhyWDS204Xmjz+FGtH9wVraEorx+JLhHQAunL5LLTto6Jhf/SF19bp+LfIw==}
+  /dkcutter@3.3.0(typescript@5.3.2):
+    resolution: {integrity: sha512-ZNNqaT4TIhyD7nllYwpDEAaKmuEKL7B5z8ArqduOWPPBS6ViJlgkKs/RA333bk9XBf8GgReDrEsG1sArANi3DA==}
     hasBin: true
     dependencies:
       colorette: 2.0.20
