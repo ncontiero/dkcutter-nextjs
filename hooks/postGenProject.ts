@@ -94,7 +94,7 @@ async function main() {
   }
 
   if (!CTX.useEnvValidator) {
-    fs.removeSync(path.join(srcFolder, "env.mjs"));
+    fs.removeSync(path.join(srcFolder, "env.js"));
     updatePackageJson({
       projectDir,
       removeDeps: ["@t3-oss/env-nextjs", "zod"],

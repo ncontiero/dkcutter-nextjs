@@ -2,6 +2,7 @@
   "name": "{{projectSlug}}",
   "version": "{{version}}",
   "private": true,
+  "type": "module",
   "license": "MIT",
   "author": "{{authorName}}",
   "scripts": {

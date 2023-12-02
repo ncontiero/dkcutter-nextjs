@@ -62,7 +62,6 @@
     "promptMessage": "Do you want the project to be configured?"
   },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
-  "_nextConfig": "next.config.{% if useEnvValidator %}mjs{% else %}js{% endif %}",
   "_lintScript": "{{ _pkgManager }} run {% if useLinters %}lint:fix{% else %}lint{% endif %}",
   "_preCommit": "{{ _pkgManager }} run {% if useLintStaged %}pre-commit{% elif useLinters %}lint:fix{% else %}lint{% endif %}",
   "_ciInstall": "{{ _pkgManager }} {% if _pkgManager != 'npm' %}install{% else %}ci{% endif %}{% if _pkgManager == 'yarn' %} --frozen-lockfile{% endif %}"

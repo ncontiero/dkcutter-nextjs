@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 {%- if useEnvValidator %}
 
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 {%- else %}
 
 const env = process.env;
