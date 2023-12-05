@@ -2,7 +2,8 @@ import path from "node:path";
 import { execa } from "execa";
 import fs from "fs-extra";
 
-import { logger } from "./logger";
+import { logger } from "./utils/logger";
+import { handleError } from "./utils/handleError";
 
 const PATTERN = /{{(\s?dkcutter)[.](.*?)}}/;
 
@@ -126,13 +127,11 @@ async function main() {
       logger.break();
       testsPassed += 3;
     } catch (e) {
-      logger.error(
+      handleError(
         `Failed to generate project ${args[1]} with args: ${args
           .slice(2)
-          .join(" ")}`,
+          .join(" ")}\n${e.message}`,
       );
-      logger.error(e.message);
-      process.exit(1);
     }
   }
 
@@ -154,10 +153,9 @@ async function main() {
     }
   }
   if (pass !== UNSUPPORTED_COMBINATIONS.length) {
-    logger.error(
+    handleError(
       `Unsupported Combinations: Expected ${UNSUPPORTED_COMBINATIONS.length} errors, but got ${pass}`,
     );
-    process.exit(1);
   }
 
   pass = 0;
@@ -176,10 +174,9 @@ async function main() {
     }
   }
   if (pass !== INVALID_SLUGS.length) {
-    logger.error(
+    handleError(
       `Project Slug: Expected ${INVALID_SLUGS.length} errors, but got ${pass}`,
     );
-    process.exit(1);
   }
 
   logger.info(`Tests Passed: ${testsPassed}`);
