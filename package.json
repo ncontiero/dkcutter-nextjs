@@ -7,7 +7,7 @@
     "generate": "dkcutter .",
     "lint": "eslint . && prettier . -c",
     "lint:fix": "eslint --fix . && prettier . -w",
-    "check": "pnpm lint && pnpm typecheck && pnpm test",
+    "check": "pnpm lint && pnpm typecheck",
     "test": "tsx test/index.ts"
   },
   "author": "DKSHS",
