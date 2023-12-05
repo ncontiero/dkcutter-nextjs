@@ -25,15 +25,15 @@
     "fs-extra": "^11.2.0",
     "next": "14.0.3",
     "ora": "^7.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.7",
+    "prettier-plugin-tailwindcss": "^0.5.8",
     "prompts": "^2.4.2",
     "react": "^18",
-    "tsx": "^4.6.1",
-    "type-fest": "^4.8.2",
+    "tsx": "^4.6.2",
+    "type-fest": "^4.8.3",
     "typescript": "^5",
     "zod": "^3.22.4"
   },
   "dependencies": {
-    "dkcutter": "3.3.2"
+    "dkcutter": "3.3.3"
   }
 }
