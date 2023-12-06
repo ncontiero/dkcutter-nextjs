@@ -21,6 +21,8 @@ const SUPPORTED_COMBINATIONS = [
   { database: "prisma", useDockerCompose: true },
   { authProvider: "none" },
   { authProvider: "clerk" },
+  { authProvider: "clerk", clerkWebhook: false },
+  { authProvider: "clerk", clerkWebhook: true },
   { useEnvValidator: true },
   { useEnvValidator: false },
 ];

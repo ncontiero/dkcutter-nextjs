@@ -80,6 +80,7 @@ If you want to start faster, you can use the following options:
 | `--database <string>`          | Choose a database ORM. [See for more info][options-url].                                         |
 | `--useDockerCompose [boolean]` | Include docker compose in the project for the database. If `database` is different from `none`.  |
 | `--authProvider <string>`      | Choose a authentication provider. [See for more info][options-url].                              |
+| `--clerkWebhook [boolean]`     | Includes an endpoint to receive events from the [Clerk](https://clerk.com/).                     |
 | `--useEnvValidator [boolean]`  | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
 | `--automaticStart [boolean]`   | This option will install the application packages, start a git repo and make the initial commit. |
 

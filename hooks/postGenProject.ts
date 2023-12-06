@@ -23,6 +23,7 @@ const CTX = {
   database: "{{ database }}",
   useDockerCompose: toBoolean("{{ useDockerCompose }}"),
   authProvider: "{{ authProvider }}",
+  clerkWebhook: toBoolean("{{ clerkWebhook }}"),
   automaticStart: toBoolean("{{ automaticStart }}"),
 };
 
@@ -131,6 +132,19 @@ async function main() {
     }
     updatePackageJson({ projectDir, removeDeps: ["@clerk/nextjs"] });
     removeFiles([middleware, ...pages]);
+  }
+  if (!CTX.clerkWebhook) {
+    const endpoint = [];
+    if (CTX.useAppFolder) {
+      endpoint.push(path.join(srcFolder, "app", "api"));
+    } else {
+      endpoint.push(path.join(srcFolder, "pages", "api", "webhook.ts"));
+    }
+    updatePackageJson({ projectDir, removeDeps: ["svix", "micro"] });
+    removeFiles(endpoint);
+  } else {
+    CTX.useAppFolder &&
+      updatePackageJson({ projectDir, removeDeps: ["micro"] });
   }
 
   if (CTX.automaticStart) {

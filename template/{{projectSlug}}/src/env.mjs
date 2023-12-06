@@ -17,6 +17,9 @@ export const env = createEnv({
 {%- if authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: z.string().min(1),
+{%- if clerkWebhook %}
+    CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
+{%- endif %}
 {%- endif %}
   },
 
@@ -51,6 +54,9 @@ export const env = createEnv({
 {%- if authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+{%- if clerkWebhook %}
+    CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
+{%- endif %}
 {%- endif %}
 
     // Client

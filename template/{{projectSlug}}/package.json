@@ -13,9 +13,11 @@
   "dependencies": {
     "@clerk/nextjs": "^4.27.4",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "micro": "^10.0.1",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
+    "svix": "^1.14.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
