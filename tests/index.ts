@@ -25,6 +25,45 @@ const SUPPORTED_COMBINATIONS = [
   { authProvider: "clerk", clerkWebhook: true },
   { useEnvValidator: true },
   { useEnvValidator: false },
+  // Complex combinations
+  { useLinters: true, useHusky: true, useLintStaged: true },
+  { database: "prisma", authProvider: "clerk" },
+  { database: "prisma", authProvider: "clerk", clerkWebhook: true },
+  { database: "prisma", authProvider: "clerk", useEnvValidator: true },
+  {
+    database: "prisma",
+    authProvider: "clerk",
+    clerkWebhook: true,
+    useEnvValidator: true,
+  },
+  {
+    database: "prisma",
+    authProvider: "clerk",
+    clerkWebhook: true,
+    useAppFolder: false,
+  },
+  {
+    database: "prisma",
+    authProvider: "clerk",
+    clerkWebhook: true,
+    useEnvValidator: true,
+  },
+  {
+    database: "prisma",
+    authProvider: "clerk",
+    clerkWebhook: true,
+    useAppFolder: false,
+    useEnvValidator: true,
+  },
+  { authProvider: "clerk", clerkWebhook: true, useAppFolder: false },
+  { authProvider: "clerk", clerkWebhook: true, useEnvValidator: true },
+  {
+    authProvider: "clerk",
+    clerkWebhook: true,
+    useAppFolder: false,
+    useEnvValidator: true,
+  },
+  { database: "prisma", useEnvValidator: true },
 ];
 const UNSUPPORTED_COMBINATIONS = [
   { database: "XXXXXX" },
