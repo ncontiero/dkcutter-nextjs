@@ -19,11 +19,16 @@ const SUPPORTED_COMBINATIONS = [
   { database: "prisma" },
   { database: "none" },
   { database: "prisma", useDockerCompose: true },
+  { authProvider: "none" },
+  { authProvider: "clerk" },
   { useEnvValidator: true },
   { useEnvValidator: false },
 ];
-const UNSUPPORTED_COMBINATIONS = [{ database: "XXXXXX" }];
-const INVALID_SLUGS = ["", " ", "Test", "teSt", "tes1@", "t!es"];
+const UNSUPPORTED_COMBINATIONS = [
+  { database: "XXXXXX" },
+  { authProvider: "non" },
+];
+const INVALID_SLUGS = ["", " ", "Test", "teSt", "tes1@", "t!es", "test test"];
 
 /**
  * Build a list containing absolute paths to the generated files.

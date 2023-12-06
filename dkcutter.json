@@ -53,6 +53,14 @@
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('Docker compose') }} for the database?"
   },
+  "authProvider": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      { "title": "Clerk", "value": "clerk" }
+    ],
+    "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
+  },
   "useEnvValidator": {
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('T3 Env') }}?"

@@ -11,6 +11,7 @@
     "lint": "next lint --dir ."
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.27.4",
     "@t3-oss/env-nextjs": "^0.7.1",
     "next": "14.0.3",
     "react": "^18",

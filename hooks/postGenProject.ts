@@ -22,6 +22,7 @@ const CTX = {
   useEnvValidator: toBoolean("{{ useEnvValidator }}"),
   database: "{{ database }}",
   useDockerCompose: toBoolean("{{ useDockerCompose }}"),
+  authProvider: "{{ authProvider }}",
   automaticStart: toBoolean("{{ automaticStart }}"),
 };
 
@@ -116,6 +117,20 @@ async function main() {
 
   if (!CTX.useDockerCompose) {
     fs.removeSync(path.join(projectDir, "docker-compose.yml"));
+  }
+
+  if (CTX.authProvider === "none") {
+    const middleware = path.join(srcFolder, "middleware.ts");
+    const pages = [];
+    if (CTX.useAppFolder) {
+      pages.push(path.join(srcFolder, "app", "sign-in"));
+      pages.push(path.join(srcFolder, "app", "sign-up"));
+    } else {
+      pages.push(path.join(srcFolder, "pages", "sign-in"));
+      pages.push(path.join(srcFolder, "pages", "sign-up"));
+    }
+    updatePackageJson({ projectDir, removeDeps: ["@clerk/nextjs"] });
+    removeFiles([middleware, ...pages]);
   }
 
   if (CTX.automaticStart) {
