@@ -27,6 +27,11 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database. This question will only be asked if `Database ORM` is different from `none`.
 
+- **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
+
+  - None
+  - [Clerk](https://clerk.com/)
+
 - **Use env validator**: Indicates whether the project should be configured with the [T3 Env](https://env.t3.gg/) environment variable validator.
 
 - **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository.

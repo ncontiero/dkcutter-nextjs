@@ -79,6 +79,7 @@ If you want to start faster, you can use the following options:
 | `--useAppFolder [boolean]`     | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
 | `--database <string>`          | Choose a database ORM. [See for more info][options-url].                                         |
 | `--useDockerCompose [boolean]` | Include docker compose in the project for the database. If `database` is different from `none`.  |
+| `--authProvider <string>`      | Choose a authentication provider. [See for more info][options-url].                              |
 | `--useEnvValidator [boolean]`  | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
 | `--automaticStart [boolean]`   | This option will install the application packages, start a git repo and make the initial commit. |
 
