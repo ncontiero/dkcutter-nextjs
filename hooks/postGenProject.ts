@@ -106,7 +106,7 @@ async function main() {
   if (CTX.database === "none") {
     updatePackageJson({
       projectDir,
-      removeDevDeps: ["prisma"],
+      removeDevDeps: ["prisma", "@prisma/client"],
     });
     removeFiles([path.join(projectDir, "prisma"), path.join(srcFolder, "lib")]);
   } else if (CTX.database === "prisma") {
