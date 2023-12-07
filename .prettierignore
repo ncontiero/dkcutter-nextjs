@@ -6,3 +6,4 @@ yarn.lock
 template
 .test/**/.eslintrc
 .test/**/.next
+.test/**/next-env.d.ts
