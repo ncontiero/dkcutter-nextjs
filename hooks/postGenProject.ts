@@ -165,7 +165,6 @@ async function main() {
       files.push(path.join(pagesFolder, "sign-in"));
       files.push(path.join(pagesFolder, "sign-up"));
     }
-    CTX.database === "none" && files.push(path.join(srcFolder, "lib"));
     updatePackageJson({
       projectDir,
       removeDeps: ["next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs"],
@@ -184,6 +183,13 @@ async function main() {
   } else {
     CTX.useAppFolder &&
       updatePackageJson({ projectDir, removeDeps: ["micro"] });
+  }
+
+  if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
+    removeFiles([path.join(srcFolder, "lib")]);
+  }
+  if (CTX.useAppFolder && CTX.authProvider !== "nextAuth") {
+    removeFiles([path.join(appFolder, "api")]);
   }
 
   if (CTX.automaticStart) {
