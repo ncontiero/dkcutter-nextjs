@@ -4,6 +4,7 @@ import fs from "fs-extra";
 
 import { logger } from "./utils/logger";
 import { handleError } from "./utils/handleError";
+import { env } from "./utils/env";
 
 const PATTERN = /{{(\s?dkcutter)[.](.*?)}}/;
 
@@ -157,17 +158,22 @@ async function testCMDPassesFunc(
   cmd: string,
   projectDir: string,
   args: string[] = [],
+  skipEnvValidation = false,
 ) {
   const cmdCapitalized = cmd.charAt(0).toUpperCase() + cmd.slice(1);
-  const result = await execa(cmd, args, { cwd: projectDir });
+  const result = await execa(cmd, args, {
+    cwd: projectDir,
+    env: { SKIP_ENV_VALIDATION: `${skipEnvValidation}`, ...env },
+  });
   if (result.failed) {
     throw new Error(`${cmdCapitalized} failed`);
   }
   logger.success(`✓ ${cmdCapitalized} passed`);
 }
 
-async function testEslintPasses(projectDir: string) {
-  await testCMDPassesFunc("eslint", projectDir);
+async function testNextLintPasses(projectDir: string) {
+  const args = ["lint", "--dir", "."];
+  await testCMDPassesFunc("next", projectDir, args);
 }
 
 async function testPrettierPasses(projectDir: string) {
@@ -187,11 +193,12 @@ async function main() {
     try {
       await generateProject(args);
       const projectDir = path.join(test, args[1]);
-      await testEslintPasses(projectDir);
+      await testNextLintPasses(projectDir);
+      await testCMDPassesFunc("eslint", projectDir);
       await testPrettierPasses(projectDir);
       logger.success(`✓ All checks passed for project ${args[1]}`);
       logger.break();
-      testsPassed += 3;
+      testsPassed += 4;
     } catch (e) {
       handleError(
         `Failed to generate project ${args[1]} with args: ${args
