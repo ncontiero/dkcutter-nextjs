@@ -23,6 +23,7 @@ const SUPPORTED_COMBINATIONS = [
   { authProvider: "clerk" },
   { authProvider: "clerk", clerkWebhook: false },
   { authProvider: "clerk", clerkWebhook: true },
+  { authProvider: "nextAuth" },
   { useEnvValidator: true },
   { useEnvValidator: false },
   // Complex combinations
@@ -30,6 +31,7 @@ const SUPPORTED_COMBINATIONS = [
   { database: "prisma", authProvider: "clerk" },
   { database: "prisma", authProvider: "clerk", clerkWebhook: true },
   { database: "prisma", authProvider: "clerk", useEnvValidator: true },
+  { database: "prisma", authProvider: "clerk", useAppFolder: false },
   {
     database: "prisma",
     authProvider: "clerk",
@@ -41,12 +43,6 @@ const SUPPORTED_COMBINATIONS = [
     authProvider: "clerk",
     clerkWebhook: true,
     useAppFolder: false,
-  },
-  {
-    database: "prisma",
-    authProvider: "clerk",
-    clerkWebhook: true,
-    useEnvValidator: true,
   },
   {
     database: "prisma",
@@ -60,6 +56,30 @@ const SUPPORTED_COMBINATIONS = [
   {
     authProvider: "clerk",
     clerkWebhook: true,
+    useAppFolder: false,
+    useEnvValidator: true,
+  },
+  { database: "prisma", authProvider: "nextAuth" },
+  {
+    database: "prisma",
+    authProvider: "nextAuth",
+    useEnvValidator: true,
+  },
+  {
+    database: "prisma",
+    authProvider: "nextAuth",
+    useAppFolder: false,
+  },
+  {
+    database: "prisma",
+    authProvider: "nextAuth",
+    useAppFolder: false,
+    useEnvValidator: true,
+  },
+  { authProvider: "nextAuth", useAppFolder: false },
+  { authProvider: "nextAuth", useEnvValidator: true },
+  {
+    authProvider: "nextAuth",
     useAppFolder: false,
     useEnvValidator: true,
   },

@@ -39,23 +39,22 @@ async function main() {
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
+  const pagesFolder = path.join(srcFolder, "pages");
+  const appFolder = path.join(srcFolder, "app");
 
   const gitignorePath = path.join(projectDir, ".gitignore");
   appendToGitignore(gitignorePath, "\n# local env files\n.env*.local\n.env\n");
 
   if (CTX.useAppFolder) {
-    fs.removeSync(path.join(srcFolder, "pages"));
+    fs.removeSync(pagesFolder);
   } else {
     const stylesFolder = path.join(srcFolder, "styles");
     fs.mkdirSync(stylesFolder);
     fs.moveSync(
-      path.join(srcFolder, "app", "globals.css"),
+      path.join(appFolder, "globals.css"),
       path.join(stylesFolder, "globals.css"),
     );
-    removeFiles([
-      path.join(publicFolder, ".gitkeep"),
-      path.join(srcFolder, "app"),
-    ]);
+    removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
   }
 
   if (CTX.useLinters) {
@@ -108,7 +107,10 @@ async function main() {
       projectDir,
       removeDevDeps: ["prisma", "@prisma/client"],
     });
-    removeFiles([path.join(projectDir, "prisma"), path.join(srcFolder, "lib")]);
+    removeFiles([
+      path.join(projectDir, "prisma"),
+      path.join(srcFolder, "lib", "prisma.ts"),
+    ]);
   } else if (CTX.database === "prisma") {
     updatePackageJson({
       projectDir,
@@ -120,25 +122,58 @@ async function main() {
     fs.removeSync(path.join(projectDir, "docker-compose.yml"));
   }
 
-  if (CTX.authProvider === "none") {
-    const middleware = path.join(srcFolder, "middleware.ts");
-    const pages = [];
+  if (CTX.authProvider === "clerk") {
+    const files = [path.join(srcFolder, "lib", "nextAuth.ts")];
     if (CTX.useAppFolder) {
-      pages.push(path.join(srcFolder, "app", "sign-in"));
-      pages.push(path.join(srcFolder, "app", "sign-up"));
+      files.push(path.join(appFolder, "api", "auth"));
     } else {
-      pages.push(path.join(srcFolder, "pages", "sign-in"));
-      pages.push(path.join(srcFolder, "pages", "sign-up"));
+      files.push(path.join(pagesFolder, "api", "auth"));
     }
-    updatePackageJson({ projectDir, removeDeps: ["@clerk/nextjs"] });
-    removeFiles([middleware, ...pages]);
+    updatePackageJson({
+      projectDir,
+      removeDeps: ["next-auth", "@next-auth/prisma-adapter"],
+    });
+    removeFiles(files);
+  } else if (CTX.authProvider === "nextAuth") {
+    const removeDeps = ["@clerk/nextjs"];
+    const files = [path.join(srcFolder, "middleware.ts")];
+    if (CTX.useAppFolder) {
+      files.push(path.join(appFolder, "sign-in"));
+      files.push(path.join(appFolder, "sign-up"));
+    } else {
+      files.push(path.join(pagesFolder, "sign-in"));
+      files.push(path.join(pagesFolder, "sign-up"));
+    }
+    CTX.database !== "prisma" && removeDeps.push("@next-auth/prisma-adapter");
+    updatePackageJson({ projectDir, removeDeps });
+    removeFiles(files);
+  } else {
+    const files = [
+      path.join(srcFolder, "lib", "nextAuth.ts"),
+      path.join(srcFolder, "middleware.ts"),
+    ];
+    if (CTX.useAppFolder) {
+      files.push(path.join(appFolder, "api", "auth"));
+      files.push(path.join(appFolder, "sign-in"));
+      files.push(path.join(appFolder, "sign-up"));
+    } else {
+      files.push(path.join(pagesFolder, "api", "auth"));
+      files.push(path.join(pagesFolder, "sign-in"));
+      files.push(path.join(pagesFolder, "sign-up"));
+    }
+    CTX.database === "none" && files.push(path.join(srcFolder, "lib"));
+    updatePackageJson({
+      projectDir,
+      removeDeps: ["next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs"],
+    });
+    removeFiles(files);
   }
-  if (!CTX.clerkWebhook) {
+  if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {
     const endpoint = [];
     if (CTX.useAppFolder) {
-      endpoint.push(path.join(srcFolder, "app", "api"));
+      endpoint.push(path.join(appFolder, "api", "webhook"));
     } else {
-      endpoint.push(path.join(srcFolder, "pages", "api", "webhook.ts"));
+      endpoint.push(path.join(pagesFolder, "api", "webhook.ts"));
     }
     updatePackageJson({ projectDir, removeDeps: ["svix", "micro"] });
     removeFiles(endpoint);

@@ -57,7 +57,8 @@
     "value": "none",
     "choices": [
       { "title": "None", "value": "none" },
-      { "title": "Clerk", "value": "clerk" }
+      { "title": "Clerk", "value": "clerk" },
+      { "title": "NextAuth.js", "value": "nextAuth" }
     ],
     "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
