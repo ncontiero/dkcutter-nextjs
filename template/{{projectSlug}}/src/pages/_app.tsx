@@ -4,11 +4,13 @@ import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 
 import { SessionProvider } from "next-auth/react";
-{% elif authProvider == 'clerk' %}
+
+{%- elif authProvider == 'clerk' %}
 
 import { ClerkProvider } from "@clerk/nextjs";
-{% endif %}
-{%- if authProvider == 'nextAuth' %}
+
+{%- endif %}
+{% if authProvider == 'nextAuth' %}
 export default function App({
   Component,
   pageProps,
@@ -19,9 +21,7 @@ export default function App({
     </SessionProvider>
   );
 }
-
-{%- else %}
-
+{% else %}
 export default function App({ Component, pageProps }: AppProps) {
 {%- if authProvider == 'clerk' %}
   return (
@@ -33,4 +33,4 @@ export default function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 {%- endif %}
 }
-{%- endif %}
+{% endif %}
