@@ -21,6 +21,7 @@ export default function App({
 }
 
 {%- else %}
+
 export default function App({ Component, pageProps }: AppProps) {
 {%- if authProvider == 'clerk' %}
   return (
