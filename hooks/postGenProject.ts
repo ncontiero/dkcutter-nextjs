@@ -36,6 +36,8 @@ function removeFiles(files: string[]) {
 }
 
 async function main() {
+  const REMOVE_DEPS = [];
+  const REMOVE_DEV_DEPS = [];
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
@@ -70,10 +72,7 @@ async function main() {
       },
     });
   } else {
-    updatePackageJson({
-      projectDir,
-      removeDevDeps: ["prettier-plugin-tailwindcss", "@dkshs/eslint-config"],
-    });
+    REMOVE_DEV_DEPS.push("prettier-plugin-tailwindcss", "@dkshs/eslint-config");
     updateEslint({ projectDir, extendsConfig: ["@dkshs/eslint-config/react"] });
     removeFiles([
       path.join(projectDir, "prettier.config.js"),
@@ -84,33 +83,28 @@ async function main() {
   if (CTX.useHusky) {
     updatePackageJson({ projectDir, scripts: { prepare: "husky install" } });
   } else {
-    updatePackageJson({ projectDir, removeDevDeps: ["husky"] });
+    REMOVE_DEV_DEPS.push("husky");
     fs.removeSync(path.join(projectDir, ".husky"));
   }
 
   if (CTX.useLintStaged) {
     updatePackageJson({ projectDir, scripts: { "pre-commit": "lint-staged" } });
   } else {
+    REMOVE_DEV_DEPS.push("lint-staged");
     updatePackageJson({
       projectDir,
-      removeDevDeps: ["lint-staged"],
       keys: ["lint-staged"],
     });
   }
 
   if (!CTX.useEnvValidator) {
+    REMOVE_DEPS.push("@t3-oss/env-nextjs", "zod");
     fs.removeSync(path.join(srcFolder, "env.mjs"));
-    updatePackageJson({
-      projectDir,
-      removeDeps: ["@t3-oss/env-nextjs", "zod"],
-    });
   }
 
   if (CTX.database === "none") {
-    updatePackageJson({
-      projectDir,
-      removeDevDeps: ["prisma", "@prisma/client"],
-    });
+    REMOVE_DEPS.push("@prisma/client");
+    REMOVE_DEV_DEPS.push("prisma");
     removeFiles([
       path.join(projectDir, "prisma"),
       path.join(srcFolder, "lib", "prisma.ts"),
@@ -133,13 +127,10 @@ async function main() {
     } else {
       files.push(path.join(pagesFolder, "api", "auth"));
     }
-    updatePackageJson({
-      projectDir,
-      removeDeps: ["next-auth", "@next-auth/prisma-adapter"],
-    });
+    REMOVE_DEPS.push("next-auth", "@next-auth/prisma-adapter");
     removeFiles(files);
   } else if (CTX.authProvider === "nextAuth") {
-    const removeDeps = ["@clerk/nextjs"];
+    REMOVE_DEPS.push("@clerk/nextjs");
     const files = [path.join(srcFolder, "middleware.ts")];
     if (CTX.useAppFolder) {
       files.push(path.join(appFolder, "sign-in"));
@@ -148,8 +139,7 @@ async function main() {
       files.push(path.join(pagesFolder, "sign-in"));
       files.push(path.join(pagesFolder, "sign-up"));
     }
-    CTX.database !== "prisma" && removeDeps.push("@next-auth/prisma-adapter");
-    updatePackageJson({ projectDir, removeDeps });
+    CTX.database !== "prisma" && REMOVE_DEPS.push("@next-auth/prisma-adapter");
     removeFiles(files);
   } else {
     const files = [
@@ -165,10 +155,7 @@ async function main() {
       files.push(path.join(pagesFolder, "sign-in"));
       files.push(path.join(pagesFolder, "sign-up"));
     }
-    updatePackageJson({
-      projectDir,
-      removeDeps: ["next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs"],
-    });
+    REMOVE_DEPS.push("next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs");
     removeFiles(files);
   }
   if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {
@@ -178,11 +165,10 @@ async function main() {
     } else {
       endpoint.push(path.join(pagesFolder, "api", "webhook.ts"));
     }
-    updatePackageJson({ projectDir, removeDeps: ["svix", "micro"] });
+    REMOVE_DEPS.push("svix", "micro");
     removeFiles(endpoint);
   } else {
-    CTX.useAppFolder &&
-      updatePackageJson({ projectDir, removeDeps: ["micro"] });
+    CTX.useAppFolder && REMOVE_DEPS.push("micro");
   }
 
   if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
@@ -191,6 +177,12 @@ async function main() {
   if (CTX.useAppFolder && CTX.authProvider !== "nextAuth") {
     removeFiles([path.join(appFolder, "api")]);
   }
+
+  updatePackageJson({
+    projectDir,
+    removeDeps: REMOVE_DEPS,
+    removeDevDeps: REMOVE_DEV_DEPS,
+  });
 
   if (CTX.automaticStart) {
     await initializeGit(projectDir);
