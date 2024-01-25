@@ -81,7 +81,7 @@ async function main() {
   }
 
   if (CTX.useHusky) {
-    updatePackageJson({ projectDir, scripts: { prepare: "husky install" } });
+    updatePackageJson({ projectDir, scripts: { prepare: "husky" } });
   } else {
     REMOVE_DEV_DEPS.push("husky");
     fs.removeSync(path.join(projectDir, ".husky"));
