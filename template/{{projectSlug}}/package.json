@@ -1,9 +1,10 @@
 {
   "name": "{{projectSlug}}",
   "version": "{{version}}",
-  "private": true,
-  "license": "MIT",
+  "description": "{{description}}",
   "author": "{{authorName}}",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

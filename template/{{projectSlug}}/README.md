@@ -1,7 +1,7 @@
 # {{projectName}}
 
-[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](LICENSE)
-[![Built with create-dk-app](https://img.shields.io/badge/built%20with-Create%20DK%20App-7c3aed.svg)](https://github.com/dkshs/create-dk-app)
+[![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](/LICENSE)
+[![Built with dkcutter-nextjs](https://img.shields.io/badge/built%20with-DKCutter%20NextJs-7c3aed.svg)](https://github.com/dkshs/dkcutter-nextjs)
 
 {{ description }}
 
@@ -10,11 +10,7 @@
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+{{ _pkgManager }} run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
