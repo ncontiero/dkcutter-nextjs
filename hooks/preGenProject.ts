@@ -7,8 +7,13 @@ const ctx = {
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function validateProject({ ctx }: { ctx: any }) {
+// Removing cmd `run` when the package manager is `yarn` or `pnpm`.
+// {% if ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
+// {{ dkcutter.update('_lintScript', dkcutter._lintScript|replace('run ', '')) }}
+// {{ dkcutter.update('_preCommit', dkcutter._preCommit|replace('run ', '')) }}
+// {% endif %}
+
+export function validateProject({ ctx }: { ctx: unknown }) {
   try {
     z.object({
       useHusky: z.boolean(),

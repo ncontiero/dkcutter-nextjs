@@ -14,7 +14,7 @@ import { toBoolean } from "./utils/coerce";
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
   projectSlug: "{{ dkcutter.projectSlug }}",
-  pkgManager: "{{ dkcutter.dkcutter.pkgManager }}" as PackageManager,
+  pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   useLinters: toBoolean("{{ dkcutter.useLinters }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),

@@ -45,4 +45,8 @@ jobs:
         run: {{ dkcutter._ciInstall }}
 
       - name: Running lint
+        {%- if not ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
         run: {{ dkcutter.pkgManager }} run lint
+        {%- else %}
+        run: {{ dkcutter.pkgManager }} lint
+        {%- endif %}
