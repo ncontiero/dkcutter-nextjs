@@ -3,7 +3,7 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { buffer } from "micro";
 
-{%- if useEnvValidator %}
+{%- if dkcutter.useEnvValidator %}
 
 import { env } from "@/env.mjs";
 {%- endif %}
@@ -22,7 +22,7 @@ export default async function handler(
     return res.status(405);
   }
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
-{%- if useEnvValidator %}
+{%- if dkcutter.useEnvValidator %}
   const WEBHOOK_SECRET = env.CLERK_WEBHOOK_SIGNING_SECRET;
 {%- else %}
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SIGNING_SECRET;

@@ -1,8 +1,8 @@
 {
-  "name": "{{projectSlug}}",
-  "version": "{{version}}",
-  "description": "{{description}}",
-  "author": "{{authorName}}",
+  "name": "{{dkcutter.projectSlug}}",
+  "version": "{{dkcutter.version}}",
+  "description": "{{dkcutter.description}}",
+  "author": "{{dkcutter.authorName}}",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -42,7 +42,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": [
-      "{{ _lintScript }}"
+      "{{ dkcutter._lintScript }}"
     ]
   }
 }

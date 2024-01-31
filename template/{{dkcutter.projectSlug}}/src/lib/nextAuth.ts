@@ -1,4 +1,4 @@
-{% if not useAppFolder -%}
+{% if not dkcutter.useAppFolder -%}
 import type { GetServerSidePropsContext } from "next";
 
 {% endif -%}
@@ -7,15 +7,15 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-{%- if database == 'prisma' %}
+{%- if dkcutter.database == 'prisma' %}
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 {%- endif %}
 import DiscordProvider from "next-auth/providers/discord";
-{%- if database == 'prisma' %}
+{%- if dkcutter.database == 'prisma' %}
 
 import { prisma } from "@/lib/prisma";
 {%- endif %}
-{%- if useEnvValidator %}
+{%- if dkcutter.useEnvValidator %}
 import { env } from "@/env.mjs";
 {%- else %}
 
@@ -62,7 +62,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   },
-{%- if database == 'prisma' %}
+{%- if dkcutter.database == 'prisma' %}
   adapter: PrismaAdapter(prisma),
 {%- endif %}
   providers: [
@@ -87,7 +87,7 @@ export const authOptions: NextAuthOptions = {
  *
  * @see https://next-auth.js.org/configuration/nextjs
  */
-{%- if useAppFolder %}
+{%- if dkcutter.useAppFolder %}
 export const getServerAuthSession = () => getServerSession(authOptions);
 {%- else %}
 export const getServerAuthSession = (ctx: {

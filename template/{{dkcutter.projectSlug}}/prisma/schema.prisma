@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  {%- if authProvider == 'nextAuth' %}
+  {%- if dkcutter.authProvider == 'nextAuth' %}
   // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
   // Further reading:
   // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
@@ -16,7 +16,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-{%- if authProvider == 'nextAuth' %}
+{%- if dkcutter.authProvider == 'nextAuth' %}
 
 // Necessary for Next auth
 model Account {

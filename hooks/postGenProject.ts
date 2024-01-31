@@ -13,18 +13,18 @@ import { toBoolean } from "./utils/coerce";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
-  projectSlug: "{{ projectSlug }}",
-  pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
-  useAppFolder: toBoolean("{{ useAppFolder }}"),
-  useLinters: toBoolean("{{ useLinters }}"),
-  useHusky: toBoolean("{{ useHusky }}"),
-  useLintStaged: toBoolean("{{ useLintStaged }}"),
-  useEnvValidator: toBoolean("{{ useEnvValidator }}"),
-  database: "{{ database }}",
-  useDockerCompose: toBoolean("{{ useDockerCompose }}"),
-  authProvider: "{{ authProvider }}",
-  clerkWebhook: toBoolean("{{ clerkWebhook }}"),
-  automaticStart: toBoolean("{{ automaticStart }}"),
+  projectSlug: "{{ dkcutter.projectSlug }}",
+  pkgManager: "{{ dkcutter.dkcutter.pkgManager }}" as PackageManager,
+  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
+  useLinters: toBoolean("{{ dkcutter.useLinters }}"),
+  useHusky: toBoolean("{{ dkcutter.useHusky }}"),
+  useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
+  useEnvValidator: toBoolean("{{ dkcutter.useEnvValidator }}"),
+  database: "{{ dkcutter.database }}",
+  useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
+  authProvider: "{{ dkcutter.authProvider }}",
+  clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
+  automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
 function appendToGitignore(gitignorePath: string, lines: string) {

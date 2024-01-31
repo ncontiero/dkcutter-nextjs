@@ -10,11 +10,11 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-{%- if database != 'none' %}
-    // Database ({{ database | capitalize }})
+{%- if dkcutter.database != 'none' %}
+    // Database ({{ dkcutter.database | capitalize }})
     DATABASE_URL: z.string().url(),
 {%- endif %}
-{%- if authProvider == 'nextAuth' %}
+{%- if dkcutter.authProvider == 'nextAuth' %}
     // NextAuth.Js
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
@@ -30,10 +30,10 @@ export const env = createEnv({
     // Add ` on ID and SECRET if you want to make sure they're not empty
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
-{%- elif authProvider == 'clerk' %}
+{%- elif dkcutter.  authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: z.string().min(1),
-{%- if clerkWebhook %}
+{%- if dkcutter.clerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
 {%- endif %}
 {%- endif %}
@@ -46,7 +46,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
-{%- if authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
     // Clerk
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
     // Clerk URLs
@@ -63,20 +63,20 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-{%- if database != 'none' %}
-    // Database ({{ database | capitalize }})
+{%- if dkcutter.database != 'none' %}
+    // Database ({{ dkcutter.database | capitalize }})
     DATABASE_URL: process.env.DATABASE_URL,
 {%- endif %}
-{%- if authProvider == 'nextAuth' %}
+{%- if dkcutter.authProvider == 'nextAuth' %}
     // NextAuth.Js
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-{%- elif authProvider == 'clerk' %}
+{%- elif dkcutter.authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-{%- if clerkWebhook %}
+{%- if dkcutter.clerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
 {%- endif %}
 {%- endif %}
@@ -84,7 +84,7 @@ export const env = createEnv({
     // Client
     // ----------------------------
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-{%- if authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
     // Clerk
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,

@@ -1,16 +1,16 @@
-# {{projectName}}
+# {{dkcutter.projectName}}
 
 [![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](/LICENSE)
 [![Built with dkcutter-nextjs](https://img.shields.io/badge/built%20with-DKCutter%20NextJs-7c3aed.svg)](https://github.com/dkshs/dkcutter-nextjs)
 
-{{ description }}
+{{ dkcutter.description }}
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-{{ _pkgManager }} run dev
+{{ dkcutter.pkgManager }} run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
