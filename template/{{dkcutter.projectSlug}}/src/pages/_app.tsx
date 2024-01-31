@@ -1,16 +1,16 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-{%- if authProvider == 'nextAuth' %}
+{%- if dkcutter.authProvider == 'nextAuth' %}
 import type { Session } from "next-auth";
 
 import { SessionProvider } from "next-auth/react";
 
-{%- elif authProvider == 'clerk' %}
+{%- elif dkcutter.authProvider == 'clerk' %}
 
 import { ClerkProvider } from "@clerk/nextjs";
 
 {%- endif %}
-{% if authProvider == 'nextAuth' %}
+{% if dkcutter.authProvider == 'nextAuth' %}
 export default function App({
   Component,
   pageProps,
@@ -23,7 +23,7 @@ export default function App({
 }
 {% else %}
 export default function App({ Component, pageProps }: AppProps) {
-{%- if authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
   return (
     <ClerkProvider {...pageProps}>
       <Component {...pageProps} />

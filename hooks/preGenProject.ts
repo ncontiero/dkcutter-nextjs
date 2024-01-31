@@ -3,8 +3,8 @@ import { z } from "zod";
 import { toBoolean } from "./utils/coerce";
 
 const ctx = {
-  useHusky: toBoolean("{{ useHusky }}"),
-  useLintStaged: toBoolean("{{ useLintStaged }}"),
+  useHusky: toBoolean("{{ dkcutter.useHusky }}"),
+  useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

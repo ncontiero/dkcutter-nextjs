@@ -1,4 +1,4 @@
-{% if not useAppFolder -%}
+{% if not dkcutter.useAppFolder -%}
 import Head from "next/head";
 {% endif -%}
 import Link from "next/link";
@@ -11,7 +11,7 @@ interface PageErrorProps {
 export function PageError({ title, description }: PageErrorProps) {
   return (
     <main className="flex h-screen flex-col items-center justify-center text-center">
-      {%- if not useAppFolder %}
+      {%- if not dkcutter.useAppFolder %}
       <Head>
         <title>{title}</title>
       </Head>

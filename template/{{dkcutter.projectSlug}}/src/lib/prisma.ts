@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-{%- if useEnvValidator %}
+{%- if dkcutter.useEnvValidator %}
 
 import { env } from "@/env.mjs";
 {%- else %}
