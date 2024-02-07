@@ -19,7 +19,7 @@
     "value": "DKSHS",
     "promptMessage": "What is the author name?"
   },
-  "version": {
+  "projectVersion": {
     "value": "0.1.0",
     "promptMessage": "What is the project version?"
   },

@@ -1,6 +1,6 @@
 {
   "name": "{{dkcutter.projectSlug}}",
-  "version": "{{dkcutter.version}}",
+  "version": "{{dkcutter.projectVersion}}",
   "description": "{{dkcutter.description}}",
   "author": "{{dkcutter.authorName}}",
   "license": "MIT",
