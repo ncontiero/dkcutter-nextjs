@@ -31,7 +31,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "prompts": "^2.4.2",
     "react": "^18",
-    "tsx": "^4.7.0",
+    "tsx": "^4.7.1",
     "type-fest": "^4.10.2",
     "typescript": "^5",
     "zod": "^3.22.4"
