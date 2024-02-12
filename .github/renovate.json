@@ -5,7 +5,10 @@
     ":disableRateLimiting",
     ":semanticCommitType(chore)"
   ],
-  "schedule": ["after 10pm and before 5am on every weekday"],
+  "schedule": [
+    "after 10pm every weekday",
+    "before 5am every weekday"
+  ],
   "dependencyDashboard": false,
   "semanticCommits": "enabled",
   "rebaseWhen": "conflicted",
@@ -18,8 +21,13 @@
     {
       "groupName": "definitelyTyped",
       "automerge": true,
-      "matchPackagePatterns": ["^@types/"],
-      "matchUpdateTypes": ["patch", "minor"]
+      "matchPackagePatterns": [
+        "^@types/"
+      ],
+      "matchUpdateTypes": [
+        "patch",
+        "minor"
+      ]
     }
   ]
 }
