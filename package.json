@@ -10,7 +10,7 @@
     "check": "pnpm lint && pnpm typecheck",
     "test": "tsx tests/index.ts",
     "commitlint": "commitlint --edit",
-    "pre-commit": "lint-staged",
+    "pre-commit": "lint-staged -c ./package.json",
     "prepare": "husky"
   },
   "author": "DKSHS",
