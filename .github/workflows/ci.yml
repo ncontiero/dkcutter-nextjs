@@ -30,6 +30,17 @@ jobs:
       - name: Check code
         run: pnpm check
 
+  lint-commits:
+    name: Lint Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: .commitlintrc.json
+
   tests:
     strategy:
       fail-fast: false
