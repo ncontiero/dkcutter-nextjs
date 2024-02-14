@@ -13,6 +13,8 @@ const SUPPORTED_COMBINATIONS = [
   { useHusky: false },
   { useLintStaged: true, useHusky: true },
   { useLintStaged: false },
+  { useCommitlint: true },
+  { useCommitlint: false },
   { useLinters: true },
   { useLinters: false },
   { useAppFolder: true },
@@ -29,6 +31,12 @@ const SUPPORTED_COMBINATIONS = [
   { useEnvValidator: false },
   // Complex combinations
   { useLinters: true, useHusky: true, useLintStaged: true },
+  {
+    useLinters: true,
+    useHusky: true,
+    useLintStaged: true,
+    useCommitlint: true,
+  },
   { database: "prisma", authProvider: "clerk" },
   { database: "prisma", authProvider: "clerk", clerkWebhook: true },
   { database: "prisma", authProvider: "clerk", useEnvValidator: true },

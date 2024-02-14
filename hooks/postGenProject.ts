@@ -19,6 +19,7 @@ const CTX = {
   useLinters: toBoolean("{{ dkcutter.useLinters }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
+  useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useEnvValidator: toBoolean("{{ dkcutter.useEnvValidator }}"),
   database: "{{ dkcutter.database }}",
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
@@ -95,6 +96,15 @@ async function main() {
       projectDir,
       keys: ["lint-staged"],
     });
+  }
+
+  if (!CTX.useCommitlint) {
+    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    const filesToRemove = [path.join(projectDir, ".commitlintrc.json")];
+    if (CTX.useHusky) {
+      filesToRemove.push(path.join(projectDir, ".husky", "commit-msg"));
+    }
+    removeFiles(filesToRemove);
   }
 
   if (!CTX.useEnvValidator) {

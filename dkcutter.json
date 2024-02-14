@@ -36,6 +36,10 @@
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('lint staged') }}?"
   },
+  "useCommitlint": {
+    "value": false,
+    "promptMessage": "Do you want to use {{ colors.blue('Commitlint') }}?"
+  },
   "useAppFolder": {
     "value": true,
     "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"

@@ -76,6 +76,7 @@ If you want to start faster, you can use the following options:
 | `--useLinters [boolean]`       | Include linters in the project. Such as ESLint and Prettier.                                     |
 | `--useHusky [boolean]`         | Include [husky](https://github.com/typicode/husky) in the project.                               |
 | `--useLintStaged [boolean]`    | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
+| `--useCommitlint [boolean]`    | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
 | `--useAppFolder [boolean]`     | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
 | `--database <string>`          | Choose a database ORM. [See for more info][options-url].                                         |
 | `--useDockerCompose [boolean]` | Include docker compose in the project for the database. If `database` is different from `none`.  |
