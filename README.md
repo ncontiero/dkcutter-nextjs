@@ -66,24 +66,25 @@ Now take a look at your repo. Don't forget to carefully look at the generated RE
 
 If you want to start faster, you can use the following options:
 
-| Flag                           | Description                                                                                      |
-| ------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `--projectName <string>`       | The Project name.                                                                                |
-| `--projectSlug <string>`       | The Project Slug.                                                                                |
-| `--description <string>`       | The Project description.                                                                         |
-| `--authorName <string>`        | The author name.                                                                                 |
-| `--version <string>`           | The project version.                                                                             |
-| `--useLinters [boolean]`       | Include linters in the project. Such as ESLint and Prettier.                                     |
-| `--useHusky [boolean]`         | Include [husky](https://github.com/typicode/husky) in the project.                               |
-| `--useLintStaged [boolean]`    | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
-| `--useCommitlint [boolean]`    | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
-| `--useAppFolder [boolean]`     | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
-| `--database <string>`          | Choose a database ORM. [See for more info][options-url].                                         |
-| `--useDockerCompose [boolean]` | Include docker compose in the project for the database. If `database` is different from `none`.  |
-| `--authProvider <string>`      | Choose a authentication provider. [See for more info][options-url].                              |
-| `--clerkWebhook [boolean]`     | Includes an endpoint to receive events from the [Clerk](https://clerk.com/).                     |
-| `--useEnvValidator [boolean]`  | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
-| `--automaticStart [boolean]`   | This option will install the application packages, start a git repo and make the initial commit. |
+| Flag                              | Description                                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `--projectName <string>`          | The Project name.                                                                                |
+| `--projectSlug <string>`          | The Project Slug.                                                                                |
+| `--description <string>`          | The Project description.                                                                         |
+| `--authorName <string>`           | The author name.                                                                                 |
+| `--version <string>`              | The project version.                                                                             |
+| `--useLinters [boolean]`          | Include linters in the project. Such as ESLint and Prettier.                                     |
+| `--useHusky [boolean]`            | Include [husky](https://github.com/typicode/husky) in the project.                               |
+| `--useLintStaged [boolean]`       | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
+| `--useCommitlint [boolean]`       | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
+| `--useAppFolder [boolean]`        | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
+| `--database <string>`             | Choose a database ORM. [See for more info][options-url].                                         |
+| `--useDockerCompose [boolean]`    | Include docker compose in the project for the database. If `database` is different from `none`.  |
+| `--authProvider <string>`         | Choose a authentication provider. [See for more info][options-url].                              |
+| `--clerkWebhook [boolean]`        | Includes an endpoint to receive events from the [Clerk](https://clerk.com/).                     |
+| `--useEnvValidator [boolean]`     | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
+| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater. [See for more info][options-url].                           |
+| `--automaticStart [boolean]`      | This option will install the application packages, start a git repo and make the initial commit. |
 
 [See for more information about options][options-url].
 

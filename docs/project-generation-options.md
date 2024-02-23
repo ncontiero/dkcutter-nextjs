@@ -37,4 +37,10 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Use env validator**: Indicates whether the project should be configured with the [T3 Env](https://env.t3.gg/) environment variable validator.
 
+- **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
+
+  - None
+  - [Mend Renovate](https://docs.renovatebot.com/)
+  - [Github Dependabot](https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+
 - **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository.

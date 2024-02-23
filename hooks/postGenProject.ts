@@ -25,6 +25,7 @@ const CTX = {
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   authProvider: "{{ dkcutter.authProvider }}",
   clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
+  automatedDepsUpdater: "{{ dkcutter.automatedDepsUpdater }}",
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
@@ -193,6 +194,18 @@ async function main() {
     removeDeps: REMOVE_DEPS,
     removeDevDeps: REMOVE_DEV_DEPS,
   });
+
+  const githubFolder = path.join(projectDir, ".github");
+  if (CTX.automatedDepsUpdater === "none") {
+    removeFiles([
+      path.join(githubFolder, "renovate.json"),
+      path.join(githubFolder, "dependabot.yml"),
+    ]);
+  } else if (CTX.automatedDepsUpdater === "renovate") {
+    fs.removeSync(path.join(githubFolder, "dependabot.yml"));
+  } else if (CTX.automatedDepsUpdater === "dependabot") {
+    fs.removeSync(path.join(githubFolder, "renovate.json"));
+  }
 
   if (CTX.automaticStart) {
     await initializeGit(projectDir);
