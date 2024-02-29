@@ -1,9 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":disableRateLimiting"
-  ],
+  "extends": ["config:recommended", ":disableRateLimiting"],
   "schedule": ["before 5am every weekday"],
   "dependencyDashboard": false,
   "semanticCommits": "enabled",
