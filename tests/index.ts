@@ -9,26 +9,19 @@ import { env } from "./utils/env";
 const PATTERN = /{{(\s?dkcutter)[.](.*?)}}/;
 
 const SUPPORTED_COMBINATIONS = [
-  { useHusky: true },
-  { useHusky: false },
-  { useLintStaged: true, useHusky: true },
-  { useLintStaged: false },
-  { useCommitlint: true },
-  { useCommitlint: false },
-  { useLinters: true },
   { useLinters: false },
-  { useAppFolder: true },
+  { useHusky: true },
+  { useLintStaged: true, useHusky: true },
+  { useCommitlint: true },
   { useAppFolder: false },
   { database: "prisma" },
-  { database: "none" },
   { database: "prisma", useDockerCompose: true },
-  { authProvider: "none" },
   { authProvider: "clerk" },
-  { authProvider: "clerk", clerkWebhook: false },
   { authProvider: "clerk", clerkWebhook: true },
   { authProvider: "nextAuth" },
   { useEnvValidator: true },
-  { useEnvValidator: false },
+  { automatedDepsUpdater: "renovate" },
+  { automatedDepsUpdater: "dependabot" },
   // Complex combinations
   { useLinters: true, useHusky: true, useLintStaged: true },
   {
@@ -97,6 +90,7 @@ const SUPPORTED_COMBINATIONS = [
 const UNSUPPORTED_COMBINATIONS = [
   { database: "XXXXXX" },
   { authProvider: "non" },
+  { automatedDepsUpdater: "xpto" },
 ];
 const INVALID_SLUGS = ["", " ", "Test", "teSt", "tes1@", "t!es", "test test"];
 
