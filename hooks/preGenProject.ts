@@ -11,6 +11,7 @@ const ctx = {
 // {% if ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
 // {{ dkcutter.update('_lintScript', dkcutter._lintScript|replace('run ', '')) }}
 // {{ dkcutter.update('_preCommit', dkcutter._preCommit|replace('run ', '')) }}
+// {{ dkcutter.update('_commitMsg', dkcutter._commitMsg|replace('run ', '')) }}
 // {% endif %}
 
 export function validateProject({ ctx }: { ctx: unknown }) {

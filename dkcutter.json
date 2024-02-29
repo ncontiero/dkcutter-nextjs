@@ -91,5 +91,6 @@
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_lintScript": "{{ _pkgManager }} run {% if useLinters %}lint:fix{% else %}lint{% endif %}",
   "_preCommit": "{{ _pkgManager }} run {% if useLintStaged %}pre-commit{% elif useLinters %}lint:fix{% else %}lint{% endif %}",
+  "_commitMsg": "{{ _pkgManager }} run commitlint",
   "_ciInstall": "{{ _pkgManager }} {% if _pkgManager != 'npm' %}install{% else %}ci{% endif %}{% if _pkgManager == 'yarn' %} --frozen-lockfile{% endif %}"
 }

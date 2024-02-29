@@ -89,6 +89,20 @@ async function main() {
     fs.removeSync(path.join(projectDir, ".husky"));
   }
 
+  if (CTX.useCommitlint) {
+    updatePackageJson({
+      projectDir,
+      scripts: { commitlint: "commitlint --edit" },
+    });
+  } else {
+    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    const filesToRemove = [path.join(projectDir, ".commitlintrc.json")];
+    if (CTX.useHusky) {
+      filesToRemove.push(path.join(projectDir, ".husky", "commit-msg"));
+    }
+    removeFiles(filesToRemove);
+  }
+
   if (CTX.useLintStaged) {
     updatePackageJson({ projectDir, scripts: { "pre-commit": "lint-staged" } });
   } else {
@@ -97,15 +111,6 @@ async function main() {
       projectDir,
       keys: ["lint-staged"],
     });
-  }
-
-  if (!CTX.useCommitlint) {
-    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
-    const filesToRemove = [path.join(projectDir, ".commitlintrc.json")];
-    if (CTX.useHusky) {
-      filesToRemove.push(path.join(projectDir, ".husky", "commit-msg"));
-    }
-    removeFiles(filesToRemove);
   }
 
   if (!CTX.useEnvValidator) {
