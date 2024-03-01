@@ -14,6 +14,33 @@ updates:
   # Update npm packages
   - package-ecosystem: "npm"
     directory: "/"
+    groups:
+      definitely-typed:
+        patterns:
+          - "@types*"
+        update-types:
+          - "minor"
+          - "patch"
+      {%- if dkcutter.database == 'prisma' %}
+      prisma:
+        patterns:
+          - "@prisma*"
+          - "prisma"
+      {%- endif %}
+      {%- if dkcutter.database == 'prisma' and dkcutter.authProvider == 'nextAuth' %}
+      next-auth:
+        patterns:
+          - "@next-auth*"
+          - "next-auth"
+      {%- endif %}
+      {%- if dkcutter.useCommitlint %}
+      commitlint:
+        patterns:
+          - "@commitlint*"
+      {%- endif %}
+    ignore:
+      - dependency-name: "@types*"
+        update-types: ["version-update:semver-major"]
     schedule:
       interval: "daily"
     labels:
