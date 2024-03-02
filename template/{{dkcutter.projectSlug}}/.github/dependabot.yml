@@ -15,6 +15,10 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     groups:
+      next:
+        patterns:
+          - "next"
+          - "eslint-config-next"
       definitely-typed:
         patterns:
           - "@types*"
