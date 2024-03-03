@@ -2,7 +2,9 @@
 
 [![license mit](https://img.shields.io/badge/licence-MIT-56BEB8)](LICENSE)
 
-A simple [NextJs](https://nextjs.org/) template with dkcutter.
+Powered by [DKCutter](https://github.com/dkshs/dkcutter), DKCutter NextJs is a framework for quickly starting Next.Js projects.
+
+- If you have problems with DKCutter NextJs, please open [issues](https://github.com/dkshs/dkcutter-nextjs/issues/new).
 
 ## Usage
 
@@ -72,7 +74,7 @@ If you want to start faster, you can use the following options:
 | `--projectSlug <string>`          | The Project Slug.                                                                                |
 | `--description <string>`          | The Project description.                                                                         |
 | `--authorName <string>`           | The author name.                                                                                 |
-| `--version <string>`              | The project version.                                                                             |
+| `--projectVersion <string>`       | The project version.                                                                             |
 | `--useLinters [boolean]`          | Include linters in the project. Such as ESLint and Prettier.                                     |
 | `--useHusky [boolean]`            | Include [husky](https://github.com/typicode/husky) in the project.                               |
 | `--useLintStaged [boolean]`       | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
