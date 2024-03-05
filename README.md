@@ -48,10 +48,13 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project version? … 0.1.0
 ✔ Do you want to use linters? … No / Yes
 ✔ Do you want to use husky? … No / Yes
+✔ Do you want to use Commitlint? … No / Yes
 ✔ Do you want to use Next.Js app folder? … No / Yes
-✔ What database ORM would you like to use? › Prisma
-✔ Do you want to use Docker compose for the database? … No / Yes
+✔ What database ORM would you like to use? › None
+✔ What Authentication Provider would you like to use? › None
 ✔ Do you want to use T3 Env? … No / Yes
+✔ What Automated Dependency Updater do you want to use? › None
+✔ Do you want the project to be configured? … No / Yes
 ✔ Project created!
 ```
 
