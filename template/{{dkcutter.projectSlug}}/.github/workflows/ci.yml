@@ -45,8 +45,21 @@ jobs:
         run: {{ dkcutter._ciInstall }}
 
       - name: Running lint
-        {%- if not ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
+{%- if not ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
         run: {{ dkcutter.pkgManager }} run lint
-        {%- else %}
+{%- else %}
         run: {{ dkcutter.pkgManager }} lint
-        {%- endif %}
+{%- endif %}
+{% if dkcutter.useCommitlint %}
+  lint-commits:
+    name: Lint Commits
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: .commitlintrc.json
+{%- endif %}
