@@ -52,8 +52,6 @@ export const env = createEnv({
     // Clerk URLs
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default("/sign-in"),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default("/sign-up"),
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().default("/"),
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().default("/"),
 {%- endif %}
   },
 
@@ -91,10 +89,6 @@ export const env = createEnv({
     // Clerk URLs
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:
-      process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
-      process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
 {%- endif %}
   },
   /**
