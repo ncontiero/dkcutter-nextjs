@@ -52,8 +52,8 @@ export const env = createEnv({
     // Clerk URLs
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().default("/sign-in"),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().default("/sign-up"),
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: z.string().default("/"),
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: z.string().default("/"),
+    CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: z.string().default("/"),
+    CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: z.string().default("/"),
 {%- endif %}
   },
 
@@ -91,10 +91,10 @@ export const env = createEnv({
     // Clerk URLs
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL:
-      process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL,
-    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL:
-      process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL,
+    CLERK_SIGN_IN_FALLBACK_REDIRECT_URL:
+      process.env.CLERK_SIGN_IN_FALLBACK_REDIRECT_URL,
+    CLERK_SIGN_UP_FALLBACK_REDIRECT_URL:
+      process.env.CLERK_SIGN_UP_FALLBACK_REDIRECT_URL,
 {%- endif %}
   },
   /**
