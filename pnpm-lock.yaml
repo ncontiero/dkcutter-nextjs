@@ -24,7 +24,7 @@ devDependencies:
     version: 1.5.0(eslint@8.57.0)(typescript@5.4.5)
   '@t3-oss/env-nextjs':
     specifier: ^0.9.2
-    version: 0.9.2(typescript@5.4.5)(zod@3.23.0)
+    version: 0.9.2(typescript@5.4.5)(zod@3.23.3)
   '@types/fs-extra':
     specifier: ^11.0.4
     version: 11.0.4
@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^5.4.5
     version: 5.4.5
   zod:
-    specifier: ^3.23.0
-    version: 3.23.0
+    specifier: ^3.23.3
+    version: 3.23.3
 
 packages:
 
@@ -803,7 +803,7 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /@t3-oss/env-core@0.9.2(typescript@5.4.5)(zod@3.23.0):
+  /@t3-oss/env-core@0.9.2(typescript@5.4.5)(zod@3.23.3):
     resolution: {integrity: sha512-KgWXljUTHgO3o7GMZQPAD5+P+HqpauMNNHowlm7V2b9IeMitSUpNKwG6xQrup/xARWHTdxRVIl0mSI4wCevQhQ==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -813,10 +813,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.5
-      zod: 3.23.0
+      zod: 3.23.3
     dev: true
 
-  /@t3-oss/env-nextjs@0.9.2(typescript@5.4.5)(zod@3.23.0):
+  /@t3-oss/env-nextjs@0.9.2(typescript@5.4.5)(zod@3.23.3):
     resolution: {integrity: sha512-dklHrgKLESStNVB67Jdbu6osxDYA+xNKaPBRerlnkEvzbCccSKMvZENx6EZebJuR4snqB3/yRykNMn/bdIAyiQ==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -825,9 +825,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@t3-oss/env-core': 0.9.2(typescript@5.4.5)(zod@3.23.0)
+      '@t3-oss/env-core': 0.9.2(typescript@5.4.5)(zod@3.23.3)
       typescript: 5.4.5
-      zod: 3.23.0
+      zod: 3.23.3
     dev: true
 
   /@types/conventional-commits-parser@5.0.0:
@@ -1710,7 +1710,7 @@ packages:
       prompts: 2.4.2
       tsx: 4.7.2
       which: 4.0.0
-      zod: 3.23.0
+      zod: 3.23.3
     transitivePeerDependencies:
       - chokidar
       - typescript
@@ -4653,5 +4653,5 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zod@3.23.0:
-    resolution: {integrity: sha512-OFLT+LTocvabn6q76BTwVB0hExEBS0IduTr3cqZyMqEDbOnYmcU+y0tUAYbND4uwclpBGi4I4UUBGzylWpjLGA==}
+  /zod@3.23.3:
+    resolution: {integrity: sha512-tPvq1B/2Yu/dh2uAIH2/BhUlUeLIUvAjr6dpL/75I0pCYefHgjhXk1o1Kob3kTU8C7yU1j396jFHlsVWFi9ogg==}
