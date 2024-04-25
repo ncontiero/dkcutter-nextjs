@@ -1,7 +1,8 @@
 {
   "name": "dkcutter-nextjs",
   "version": "1.0.0",
-  "description": "A simple NextJs template with dkcutter. ",
+  "packageManager": "pnpm@9.0.6",
+  "description": "DKCutter NextJs is a framework for quickly starting Next.Js projects.",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "generate": "dkcutter .",
