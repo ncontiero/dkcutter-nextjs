@@ -1,9 +1,0 @@
-# Ignore lockfiles for PNPM, NPM and YARN
-pnpm-lock.yaml
-package-lock.json
-yarn.lock
-
-template
-.test/**/.eslintrc
-.test/**/.next
-.test/**/next-env.d.ts

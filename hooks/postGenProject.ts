@@ -1,14 +1,13 @@
 import type { PackageManager } from "./utils/types";
 
+import path from "node:path";
 import fs from "fs-extra";
-import path from "path";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
 import { runLinters } from "./helpers/runLinters";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { updatePackageJson } from "./utils/updatePackageJson";
-import { updateEslint } from "./utils/updateEslint";
 import { toBoolean } from "./utils/coerce";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
@@ -69,17 +68,15 @@ async function main() {
     updatePackageJson({
       projectDir,
       scripts: {
-        lint: "next lint --dir . && eslint . && prettier . -c",
-        "lint:fix": "eslint --fix . && prettier . -w",
+        lint: "eslint .",
+        "lint:fix": "eslint . --fix",
       },
+      removeDevDeps: ["eslint-config-next"],
     });
+    fs.removeSync(path.join(projectDir, ".eslintrc"));
   } else {
-    REMOVE_DEV_DEPS.push("prettier-plugin-tailwindcss", "@dkshs/eslint-config");
-    updateEslint({ projectDir, extendsConfig: ["@dkshs/eslint-config/react"] });
-    removeFiles([
-      path.join(projectDir, "prettier.config.js"),
-      path.join(projectDir, ".prettierignore"),
-    ]);
+    REMOVE_DEV_DEPS.push("@dkshs/eslint-config");
+    fs.removeSync(path.join(projectDir, "eslint.config.mjs"));
   }
 
   if (CTX.useHusky) {
@@ -149,11 +146,15 @@ async function main() {
     REMOVE_DEPS.push("@clerk/nextjs");
     const files = [path.join(srcFolder, "middleware.ts")];
     if (CTX.useAppFolder) {
-      files.push(path.join(appFolder, "sign-in"));
-      files.push(path.join(appFolder, "sign-up"));
+      files.push(
+        path.join(appFolder, "sign-in"),
+        path.join(appFolder, "sign-up"),
+      );
     } else {
-      files.push(path.join(pagesFolder, "sign-in"));
-      files.push(path.join(pagesFolder, "sign-up"));
+      files.push(
+        path.join(pagesFolder, "sign-in"),
+        path.join(pagesFolder, "sign-up"),
+      );
     }
     CTX.database !== "prisma" && REMOVE_DEPS.push("@next-auth/prisma-adapter");
     removeFiles(files);
@@ -163,13 +164,17 @@ async function main() {
       path.join(srcFolder, "middleware.ts"),
     ];
     if (CTX.useAppFolder) {
-      files.push(path.join(appFolder, "api", "auth"));
-      files.push(path.join(appFolder, "sign-in"));
-      files.push(path.join(appFolder, "sign-up"));
+      files.push(
+        path.join(appFolder, "api", "auth"),
+        path.join(appFolder, "sign-in"),
+        path.join(appFolder, "sign-up"),
+      );
     } else {
-      files.push(path.join(pagesFolder, "api", "auth"));
-      files.push(path.join(pagesFolder, "sign-in"));
-      files.push(path.join(pagesFolder, "sign-up"));
+      files.push(
+        path.join(pagesFolder, "api", "auth"),
+        path.join(pagesFolder, "sign-in"),
+        path.join(pagesFolder, "sign-up"),
+      );
     }
     REMOVE_DEPS.push("next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs");
     removeFiles(files);
@@ -222,4 +227,5 @@ async function main() {
   await logNextSteps({ ctx: CTX, projectDir, pkgManager: CTX.pkgManager });
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 main();

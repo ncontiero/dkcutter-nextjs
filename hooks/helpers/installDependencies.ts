@@ -2,7 +2,7 @@ import type { PackageManager } from "../utils/types";
 
 import ora from "ora";
 
-import { logger, colorize } from "../utils/logger";
+import { colorize, logger } from "../utils/logger";
 import { runPgkCommand } from "./runPkgCommand";
 
 export async function installDependencies(

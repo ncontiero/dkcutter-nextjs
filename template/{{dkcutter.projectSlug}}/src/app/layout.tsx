@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   description: "{{ dkcutter.description }}",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  readonly children: ReactNode;
+}) {
   return (
     {%- if dkcutter.authProvider == 'clerk' %}
     <ClerkProvider>

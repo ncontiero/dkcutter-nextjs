@@ -4,38 +4,38 @@
 version: 2
 updates:
   # Update GitHub actions in workflows
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "daily"
+      interval: daily
     labels:
-      - "update"
+      - update
 
   # Update npm packages
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     groups:
       next:
         patterns:
-          - "next"
-          - "eslint-config-next"
+          - next
+          - eslint-config-next
       definitely-typed:
         patterns:
           - "@types*"
         update-types:
-          - "minor"
-          - "patch"
+          - minor
+          - patch
       {%- if dkcutter.database == 'prisma' %}
       prisma:
         patterns:
           - "@prisma*"
-          - "prisma"
+          - prisma
       {%- endif %}
       {%- if dkcutter.database == 'prisma' and dkcutter.authProvider == 'nextAuth' %}
       next-auth:
         patterns:
           - "@next-auth*"
-          - "next-auth"
+          - next-auth
       {%- endif %}
       {%- if dkcutter.useCommitlint %}
       commitlint:
@@ -46,6 +46,6 @@ updates:
       - dependency-name: "@types*"
         update-types: ["version-update:semver-major"]
     schedule:
-      interval: "daily"
+      interval: daily
     labels:
-      - "update"
+      - update

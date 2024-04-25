@@ -3,9 +3,9 @@ import type { GetServerSidePropsContext } from "next";
 
 {% endif -%}
 import {
-  getServerSession,
   type DefaultSession,
   type NextAuthOptions,
+  getServerSession,
 } from "next-auth";
 {%- if dkcutter.database == 'prisma' %}
 import { PrismaAdapter } from "@next-auth/prisma-adapter";

@@ -1,6 +1,6 @@
 import type { PackageManager } from "../utils/types";
 
-import { execa, type StdioOption } from "execa";
+import { type StdioOption, execa } from "execa";
 import ora, { type Ora } from "ora";
 
 export async function execWithSpinner(

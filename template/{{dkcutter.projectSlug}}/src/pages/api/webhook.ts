@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
+import type { WebhookEvent } from "@clerk/nextjs/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { Webhook } from "svix";
-import { WebhookEvent } from "@clerk/nextjs/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import { buffer } from "micro";
 
 {%- if dkcutter.useEnvValidator %}
@@ -60,9 +61,9 @@ export default async function handler(
       "svix-timestamp": svixTimestamp,
       "svix-signature": svixSignature,
     }) as WebhookEvent;
-  } catch (err) {
-    console.error("Error verifying webhook:", err);
-    return res.status(400).json({ Error: err });
+  } catch (error) {
+    console.error("Error verifying webhook:", error);
+    return res.status(400).json({ Error: error });
   }
 
   // Get the ID and type

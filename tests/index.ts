@@ -6,7 +6,7 @@ import { logger } from "./utils/logger";
 import { handleError } from "./utils/handleError";
 import { env } from "./utils/env";
 
-const PATTERN = /{{(\s?dkcutter)[.](.*?)}}/;
+const PATTERN = /{{(\s?dkcutter)\.(.*?)}}/;
 
 const SUPPORTED_COMBINATIONS = [
   { useLinters: false },
@@ -86,6 +86,12 @@ const SUPPORTED_COMBINATIONS = [
     useEnvValidator: true,
   },
   { database: "prisma", useEnvValidator: true },
+  {
+    automatedDepsUpdater: "dependabot",
+    database: "prisma",
+    authProvider: "nextAuth",
+    useCommitlint: true,
+  },
 ];
 const UNSUPPORTED_COMBINATIONS = [
   { database: "XXXXXX" },
@@ -147,7 +153,6 @@ function generateRandomString(n: number) {
   return result;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function constructArgs(combination: { [key: string]: any }) {
   const args = ["--projectName", generateRandomString(8)];
   for (const [item, value] of Object.entries(combination)) {
@@ -163,7 +168,7 @@ async function testCMDPassesFunc(
   skipEnvValidation = false,
 ) {
   const cmdCapitalized = cmd.charAt(0).toUpperCase() + cmd.slice(1);
-  const result = await execa(cmd, args, {
+  const result = await execa("npx", ["eslint", ...args], {
     cwd: projectDir,
     env: { SKIP_ENV_VALIDATION: `${skipEnvValidation}`, ...env },
   });
@@ -171,17 +176,6 @@ async function testCMDPassesFunc(
     throw new Error(`${cmdCapitalized} failed`);
   }
   logger.success(`✓ ${cmdCapitalized} passed`);
-}
-
-async function testNextLintPasses(projectDir: string) {
-  const args = ["lint", "--dir", "."];
-  await testCMDPassesFunc("next", projectDir, args);
-}
-
-async function testPrettierPasses(projectDir: string) {
-  const ignore = ["--ignore-path", path.resolve(".prettierignore")];
-  const args = [".", "-c", ...ignore];
-  await testCMDPassesFunc("prettier", projectDir, args);
 }
 
 async function main() {
@@ -195,17 +189,15 @@ async function main() {
     try {
       await generateProject(args);
       const projectDir = path.join(test, args[1]);
-      await testNextLintPasses(projectDir);
-      await testCMDPassesFunc("eslint", projectDir);
-      await testPrettierPasses(projectDir);
+      await testCMDPassesFunc("eslint", projectDir, ["."]);
       logger.success(`✓ All checks passed for project ${args[1]}`);
       logger.break();
       testsPassed += 4;
-    } catch (e) {
+    } catch (error) {
       handleError(
         `Failed to generate project ${args[1]} with args: ${args
           .slice(2)
-          .join(" ")}\n${e.message}`,
+          .join(" ")}\n${error.message}`,
       );
     }
   }
@@ -215,7 +207,7 @@ async function main() {
     const args = constructArgs(combination);
     try {
       await generateProject(args);
-    } catch (e) {
+    } catch {
       logger.success(
         `✓ Expected error when creating project ${args[1]} with args: ${args
           .slice(2)
@@ -238,7 +230,7 @@ async function main() {
     const args = constructArgs({ projectSlug: slug });
     try {
       await generateProject(args);
-    } catch (e) {
+    } catch {
       logger.success(
         `✓ Expected error when creating project ${args[1]} with slug "${slug}"`,
       );
@@ -259,4 +251,4 @@ async function main() {
   await fs.remove(test);
 }
 
-main();
+await main();

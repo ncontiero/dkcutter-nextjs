@@ -25,12 +25,12 @@ export function validateProject({ ctx }: { ctx: unknown }) {
         "You must use husky to use lint-staged.",
       )
       .parse(ctx);
-  } catch (err) {
-    if (err instanceof z.ZodError) {
-      console.error(err.format()._errors);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      console.error(error.format()._errors);
       process.exit(1);
     }
-    console.error(err);
+    console.error(error);
     process.exit(1);
   }
 }

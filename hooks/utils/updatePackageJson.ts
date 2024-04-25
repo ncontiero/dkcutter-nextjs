@@ -1,6 +1,6 @@
 import type { PackageJson } from "type-fest";
 
-import path from "path";
+import path from "node:path";
 import fs from "fs-extra";
 
 interface UpdatePackageJsonProps {

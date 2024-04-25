@@ -1,7 +1,7 @@
-import { execSync } from "child_process";
-import path from "path";
+import { execSync } from "node:child_process";
+import path from "node:path";
 import prompts from "prompts";
-import { bold, redBright, green, red } from "colorette";
+import { bold, green, red, redBright } from "colorette";
 import { execa } from "execa";
 import fs from "fs-extra";
 import ora from "ora";
@@ -12,7 +12,7 @@ export function isGitInstalled(dir: string) {
   try {
     execSync("git --version", { cwd: dir });
     return true;
-  } catch (_e) {
+  } catch {
     return false;
   }
 }
@@ -31,7 +31,7 @@ export async function isInsideGitRepo(dir: string) {
       stdout: "ignore",
     });
     return true;
-  } catch (_e) {
+  } catch {
     // Else, it will throw a git-error and we return false
     return false;
   }
@@ -123,7 +123,7 @@ export async function initializeGit(projectDir: string) {
     spinner.succeed(
       `${green("Successfully initialized and staged")} ${bold(green("git"))}\n`,
     );
-  } catch (error) {
+  } catch {
     // Safeguard, should be unreachable
     spinner.fail(
       `${bold(

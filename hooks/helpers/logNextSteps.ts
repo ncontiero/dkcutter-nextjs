@@ -4,7 +4,6 @@ import { logger } from "../utils/logger";
 import { isInsideGitRepo, isRootGitRepo } from "./git";
 
 interface LogNextStepsOptions {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   projectDir: string;
   pkgManager: PackageManager;
@@ -36,5 +35,5 @@ export async function logNextSteps({
     : `${pkgManager} dev`;
   commands.push(runDevCommand);
 
-  logger.info("Next steps:\n  " + commands.join("\n  "));
+  logger.info(`Next steps:\n  ${commands.join("\n  ")}`);
 }

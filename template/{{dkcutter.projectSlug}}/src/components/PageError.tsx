@@ -4,8 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 
 interface PageErrorProps {
-  title: string;
-  description: string;
+  readonly title: string;
+  readonly description: string;
 }
 
 export function PageError({ title, description }: PageErrorProps) {
