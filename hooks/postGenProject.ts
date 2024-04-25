@@ -2,6 +2,7 @@ import type { PackageManager } from "./utils/types";
 
 import path from "node:path";
 import fs from "fs-extra";
+import { execa } from "execa";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
@@ -9,6 +10,7 @@ import { runLinters } from "./helpers/runLinters";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { updatePackageJson } from "./utils/updatePackageJson";
 import { toBoolean } from "./utils/coerce";
+import { logger } from "./utils/logger";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
@@ -27,6 +29,16 @@ const CTX = {
   automatedDepsUpdater: "{{ dkcutter.automatedDepsUpdater }}",
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
+
+async function getPkgManagerVersion() {
+  try {
+    const pkg = CTX.pkgManager;
+    const { stdout } = await execa(pkg, ["-v"]);
+    return `${pkg}@${stdout}`;
+  } catch (error) {
+    logger.warn("Unable to get version from package manager.", error);
+  }
+}
 
 function appendToGitignore(gitignorePath: string, lines: string) {
   fs.appendFileSync(gitignorePath, lines);
@@ -47,6 +59,14 @@ async function main() {
 
   const gitignorePath = path.join(projectDir, ".gitignore");
   appendToGitignore(gitignorePath, "\n# local env files\n.env*.local\n.env\n");
+
+  const pkgVersion = await getPkgManagerVersion();
+  if (pkgVersion) {
+    updatePackageJson({
+      projectDir,
+      modifyKey: { packageManager: pkgVersion },
+    });
+  }
 
   if (CTX.useAppFolder) {
     fs.removeSync(pagesFolder);

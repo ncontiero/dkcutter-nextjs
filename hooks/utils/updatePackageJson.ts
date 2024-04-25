@@ -8,6 +8,7 @@ interface UpdatePackageJsonProps {
   removeDevDeps?: string[];
   scripts?: PackageJson["scripts"];
   keys?: string[];
+  modifyKey?: Record<string, string>;
   projectDir: string;
 }
 
@@ -16,6 +17,7 @@ export function updatePackageJson({
   removeDevDeps = [],
   scripts = {},
   keys = [],
+  modifyKey = {},
   projectDir,
 }: UpdatePackageJsonProps) {
   const packageJsonPath = path.join(projectDir, "package.json");
@@ -33,6 +35,12 @@ export function updatePackageJson({
   keys.forEach((key) => {
     delete packageJson[key];
   });
+
+  if (Object.keys(modifyKey).length > 0) {
+    Object.entries(modifyKey).forEach(([key, value]) => {
+      packageJson[key] = value;
+    });
+  }
 
   fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
 
