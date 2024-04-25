@@ -15,10 +15,12 @@ updates:
   - package-ecosystem: npm
     directory: /
     groups:
+      {%- if not dkcutter.useLinters %}
       next:
         patterns:
           - next
           - eslint-config-next
+      {%- endif %}
       definitely-typed:
         patterns:
           - "@types*"
