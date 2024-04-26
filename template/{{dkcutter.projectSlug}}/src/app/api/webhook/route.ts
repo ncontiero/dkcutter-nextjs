@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
+import type { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
 
 {%- if dkcutter.useEnvValidator %}
 
@@ -50,8 +51,8 @@ export async function POST(req: Request) {
       "svix-timestamp": svixTimestamp,
       "svix-signature": svixSignature,
     }) as WebhookEvent;
-  } catch (err) {
-    console.error("Error verifying webhook:", err);
+  } catch (error) {
+    console.error("Error verifying webhook:", error);
     return new Response("Error occurred -- could not verify webhook", {
       status: 400,
     });
