@@ -66,7 +66,7 @@ function runUnsupportedOptionsTest(
       // Generate the project and check that it fails
       const { exitCode } = await execa(
         "pnpm",
-        ["generate", "-o", TEST_OUTPUT, ...args],
+        ["generate", "-o", TEST_OUTPUT, ...args, "-y"],
         { cwd: TEST_OUTPUT, reject: false },
       );
       expect(exitCode).toBe(1);
