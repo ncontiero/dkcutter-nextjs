@@ -10,10 +10,6 @@ const TEST_OUTPUT = resolve(".test");
 
 beforeAll(async () => {
   await fs.emptyDir(TEST_OUTPUT);
-  await execa("pnpm", ["init"], { cwd: TEST_OUTPUT });
-  await execa("pnpm", ["add", "-D", "dkcutter"], {
-    cwd: TEST_OUTPUT,
-  });
 });
 afterAll(async () => {
   await fs.rm(TEST_OUTPUT, { recursive: true, force: true });
@@ -26,30 +22,18 @@ function runProjectTest(combination: { [key: string]: any }) {
     name,
     async ({ expect }) => {
       const target = resolve(TEST_OUTPUT, name);
-      const generatedProject = resolve(target, name);
-
-      await fs.copy(
-        resolve(TEST_OUTPUT, "package.json"),
-        resolve(target, "package.json"),
-      );
-      await fs.copy(
-        resolve(TEST_OUTPUT, "node_modules"),
-        resolve(target, "node_modules"),
-      );
 
       // Generate the project
-      await execa("pnpm", ["dkcutter", "../..", ...args, "-y"], {
-        cwd: target,
+      await execa("pnpm", ["dkcutter", ".", "-o", TEST_OUTPUT, ...args, "-y"], {
+        cwd: TEST_OUTPUT,
       });
 
       // Check that the project was generated
-      expect(
-        await fs.pathExists(resolve(generatedProject, "package.json")),
-      ).toBe(true);
+      expect(await fs.pathExists(resolve(target, "package.json"))).toBe(true);
 
       // Check that the project is linted
-      await execa("pnpm", ["eslint", "."], {
-        cwd: generatedProject,
+      await execa("pnpm", ["lint"], {
+        cwd: target,
       });
     },
     30_000,
