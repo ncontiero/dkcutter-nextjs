@@ -66,6 +66,8 @@ async function main() {
       projectDir,
       modifyKey: { packageManager: pkgVersion },
     });
+  } else {
+    updatePackageJson({ projectDir, keys: ["packageManager"] });
   }
 
   if (CTX.useAppFolder) {
