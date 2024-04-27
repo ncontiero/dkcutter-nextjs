@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: {{ dkcutter.pkgManager }}
-          node-version: 18
+          node-version: 20
 {% endif %}
       - name: Install dependencies
         run: {{ dkcutter._ciInstall }}
