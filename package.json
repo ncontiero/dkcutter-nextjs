@@ -45,7 +45,7 @@
     "type-fest": "^4.18.1",
     "typescript": "^5.4.5",
     "vitest": "^1.5.3",
-    "zod": "^3.23.5"
+    "zod": "^3.23.6"
   },
   "lint-staged": {
     "*.{ts,tsx,json,css,md}": [
