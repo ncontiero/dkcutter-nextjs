@@ -1,13 +1,13 @@
 import type { PackageManager } from "../utils/types";
 
-import { type StdioOption, execa } from "execa";
+import { type StdoutStderrOption, execa } from "execa";
 import ora, { type Ora } from "ora";
 
 export async function execWithSpinner(
   projectDir: string,
   pkgManager: PackageManager,
   args: string[] = ["install"],
-  stdout: StdioOption = "pipe",
+  stdout: StdoutStderrOption = "pipe",
   onDataHandle?: (spinner: Ora) => (data: Buffer) => void,
 ) {
   const spinner = ora(`Running ${pkgManager} ${args.join(" ")}...`).start();
