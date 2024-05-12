@@ -6,7 +6,7 @@ import { buffer } from "micro";
 
 {%- if dkcutter.useEnvValidator %}
 
-import { env } from "@/env.mjs";
+import { env } from "@/env.js";
 {%- endif %}
 
 export const config = {

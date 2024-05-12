@@ -5,7 +5,7 @@ import { headers } from "next/headers";
 
 {%- if dkcutter.useEnvValidator %}
 
-import { env } from "@/env.mjs";
+import { env } from "@/env.js";
 {%- endif %}
 
 export async function POST(req: Request) {

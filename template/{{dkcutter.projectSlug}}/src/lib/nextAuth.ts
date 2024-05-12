@@ -16,7 +16,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import { prisma } from "@/lib/prisma";
 {%- endif %}
 {%- if dkcutter.useEnvValidator %}
-import { env } from "@/env.mjs";
+import { env } from "@/env.js";
 {%- else %}
 
 const env = process.env;

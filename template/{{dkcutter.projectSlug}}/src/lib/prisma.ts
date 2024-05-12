@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 {%- if dkcutter.useEnvValidator %}
 
-import { env } from "@/env.mjs";
+import { env } from "@/env.js";
 {%- else %}
 
 const env = process.env;
