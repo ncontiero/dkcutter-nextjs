@@ -54,16 +54,8 @@ export const SUPPORTED_COMBINATIONS = [
     useEnvValidator: true,
   },
   { database: "prisma", authProvider: "nextAuth" },
-  {
-    database: "prisma",
-    authProvider: "nextAuth",
-    useEnvValidator: true,
-  },
-  {
-    database: "prisma",
-    authProvider: "nextAuth",
-    useAppFolder: false,
-  },
+  { database: "prisma", authProvider: "nextAuth", useEnvValidator: true },
+  { database: "prisma", authProvider: "nextAuth", useAppFolder: false },
   {
     database: "prisma",
     authProvider: "nextAuth",
@@ -72,11 +64,7 @@ export const SUPPORTED_COMBINATIONS = [
   },
   { authProvider: "nextAuth", useAppFolder: false },
   { authProvider: "nextAuth", useEnvValidator: true },
-  {
-    authProvider: "nextAuth",
-    useAppFolder: false,
-    useEnvValidator: true,
-  },
+  { authProvider: "nextAuth", useAppFolder: false, useEnvValidator: true },
   { database: "prisma", useEnvValidator: true },
   {
     automatedDepsUpdater: "dependabot",
@@ -101,7 +89,3 @@ export const INVALID_SLUGS = [
   "t!es",
   "test test",
 ];
-
-// export const ENV = {
-//   NEXTAUTH_SECRET: "YOUR_NEXTAUTH_SECRET",
-// };

@@ -98,7 +98,7 @@ async function main() {
     fs.removeSync(path.join(projectDir, ".eslintrc"));
   } else {
     REMOVE_DEV_DEPS.push("@dkshs/eslint-config");
-    fs.removeSync(path.join(projectDir, "eslint.config.mjs"));
+    fs.removeSync(path.join(projectDir, "eslint.config.js"));
   }
 
   if (CTX.useHusky) {
@@ -134,7 +134,7 @@ async function main() {
 
   if (!CTX.useEnvValidator) {
     REMOVE_DEPS.push("@t3-oss/env-nextjs", "zod");
-    fs.removeSync(path.join(srcFolder, "env.mjs"));
+    fs.removeSync(path.join(srcFolder, "env.js"));
   }
 
   if (CTX.database === "none") {

@@ -1,7 +1,7 @@
 {
   "name": "{{dkcutter.projectSlug}}",
-  "version": "{{dkcutter.projectVersion}}",
   "type": "module",
+  "version": "{{dkcutter.projectVersion}}",
   "private": true,
   "packageManager": "",
   "description": "{{dkcutter.description}}",
