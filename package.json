@@ -48,8 +48,6 @@
     "zod": "^3.23.8"
   },
   "lint-staged": {
-    "*.{ts,tsx,json,css,md}": [
-      "pnpm lint:fix"
-    ]
+    "*": "pnpm lint:fix"
   }
 }
