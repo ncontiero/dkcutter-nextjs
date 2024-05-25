@@ -8,8 +8,6 @@ updates:
     directory: /
     schedule:
       interval: daily
-    labels:
-      - update
 
   # Update npm packages
   - package-ecosystem: npm
@@ -49,5 +47,3 @@ updates:
         update-types: ["version-update:semver-major"]
     schedule:
       interval: daily
-    labels:
-      - update
