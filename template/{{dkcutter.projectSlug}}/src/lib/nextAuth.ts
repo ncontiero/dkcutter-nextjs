@@ -15,16 +15,7 @@ import DiscordProvider from "next-auth/providers/discord";
 
 import { prisma } from "@/lib/prisma";
 {%- endif %}
-{%- if dkcutter.useEnvValidator %}
 import { env } from "@/env.js";
-{%- else %}
-
-const env = process.env;
-
-if (!env.DISCORD_CLIENT_ID || !env.DISCORD_CLIENT_SECRET) {
-  throw new Error("DISCORD_CLIENT_ID and DISCORD_CLIENT_SECRET are required");
-}
-{%- endif %}
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

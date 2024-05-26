@@ -52,7 +52,6 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Do you want to use Next.Js app folder? … No / Yes
 ✔ What database ORM would you like to use? › None
 ✔ What Authentication Provider would you like to use? › None
-✔ Do you want to use T3 Env? … No / Yes
 ✔ What Automated Dependency Updater do you want to use? › None
 ✔ Do you want the project to be configured? … No / Yes
 ✔ Project created!
@@ -87,7 +86,6 @@ If you want to start faster, you can use the following options:
 | `--useDockerCompose [boolean]`    | Include docker compose in the project for the database. If `database` is different from `none`.  |
 | `--authProvider <string>`         | Choose a authentication provider. [See for more info][options-url].                              |
 | `--clerkWebhook [boolean]`        | Includes an endpoint to receive events from the [Clerk](https://clerk.com/).                     |
-| `--useEnvValidator [boolean]`     | Include [T3-env](https://github.com/t3-oss/t3-env) validator in the project.                     |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater. [See for more info][options-url].                           |
 | `--automaticStart [boolean]`      | This option will install the application packages, start a git repo and make the initial commit. |
 
@@ -95,10 +93,10 @@ If you want to start faster, you can use the following options:
 
 ### Example
 
-The following would be the structure of an application with T3-env:
+The following would be the structure of an application with [Commitlint](https://commitlint.js.org/):
 
 ```bash
-pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useEnvValidator
+pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useCommitlint
 ```
 
 If you want to use all the default values with the exception of one or more, you can do it as follows:

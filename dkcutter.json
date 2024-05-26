@@ -71,10 +71,6 @@
     "promptMessage": "Do you want to receive events from the Clerk using a webhook?",
     "disabled": "{% if authProvider != 'clerk' %}true{% else %}false{% endif %}"
   },
-  "useEnvValidator": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('T3 Env') }}?"
-  },
   "automatedDepsUpdater": {
     "value": "none",
     "choices": [

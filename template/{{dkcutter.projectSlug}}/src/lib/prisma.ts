@@ -1,12 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-
-{%- if dkcutter.useEnvValidator %}
-
 import { env } from "@/env.js";
-{%- else %}
-
-const env = process.env;
-{%- endif %}
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;

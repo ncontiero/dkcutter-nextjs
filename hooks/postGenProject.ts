@@ -21,7 +21,6 @@ const CTX = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
-  useEnvValidator: toBoolean("{{ dkcutter.useEnvValidator }}"),
   database: "{{ dkcutter.database }}",
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   authProvider: "{{ dkcutter.authProvider }}",
@@ -130,11 +129,6 @@ async function main() {
       projectDir,
       keys: ["lint-staged"],
     });
-  }
-
-  if (!CTX.useEnvValidator) {
-    REMOVE_DEPS.push("@t3-oss/env-nextjs", "zod");
-    fs.removeSync(path.join(srcFolder, "env.js"));
   }
 
   if (CTX.database === "none") {

@@ -35,8 +35,6 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/integrations/webhooks#supported-webhook-events). [More information](https://clerk.com/docs/users/sync-data#sync-clerk-data-to-your-backend-with-webhooks).
 
-- **Use env validator**: Indicates whether the project should be configured with the [T3 Env](https://env.t3.gg/) environment variable validator.
-
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
 
   - None

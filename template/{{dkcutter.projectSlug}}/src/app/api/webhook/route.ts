@@ -3,24 +3,11 @@ import type { WebhookEvent } from "@clerk/nextjs/server";
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 
-{%- if dkcutter.useEnvValidator %}
-
 import { env } from "@/env.js";
-{%- endif %}
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
-{%- if dkcutter.useEnvValidator %}
   const WEBHOOK_SECRET = env.CLERK_WEBHOOK_SIGNING_SECRET;
-{%- else %}
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
-
-  if (!WEBHOOK_SECRET) {
-    throw new Error(
-      "Please add CLERK_WEBHOOK_SIGNING_SECRET from Clerk Dashboard to .env",
-    );
-  }
-{%- endif %}
 
   // Get the headers
   const headerPayload = headers();

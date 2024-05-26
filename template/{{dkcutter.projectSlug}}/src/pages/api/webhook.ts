@@ -4,10 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Webhook } from "svix";
 import { buffer } from "micro";
 
-{%- if dkcutter.useEnvValidator %}
-
 import { env } from "@/env.js";
-{%- endif %}
 
 export const config = {
   api: {
@@ -23,17 +20,7 @@ export default async function handler(
     return res.status(405);
   }
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
-{%- if dkcutter.useEnvValidator %}
   const WEBHOOK_SECRET = env.CLERK_WEBHOOK_SIGNING_SECRET;
-{%- else %}
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
-
-  if (!WEBHOOK_SECRET) {
-    throw new Error(
-      "Please add CLERK_WEBHOOK_SIGNING_SECRET from Clerk Dashboard to .env",
-    );
-  }
-{%- endif %}
 
   // Get the headers
   const svixId = req.headers["svix-id"] as string;
