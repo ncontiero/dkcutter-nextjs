@@ -12,8 +12,6 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Project version**: The version of the project at its inception.
 
-- **Use linters**: Indicates that the project should be configured with linters such as [eslint](https://eslint.org/) and [prettier](https://prettier.io/).
-
 - **Use husky**: Indicates that the project should be configured with [husky](https://typicode.github.io/husky/).
 
 - **Use lint staged**: Indicates that the project should be configured with [lint-staged](https://github.com/okonet/lint-staged). This question will only be asked if `Use husky` is chosen.

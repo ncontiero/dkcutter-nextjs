@@ -1,7 +1,6 @@
 export const PATTERN = /{{(\s?dkcutter)\.(.*?)}}/;
 
 export const SUPPORTED_COMBINATIONS = [
-  { useLinters: false },
   { useHusky: true },
   { useLintStaged: true, useHusky: true },
   { useCommitlint: true },
@@ -14,13 +13,8 @@ export const SUPPORTED_COMBINATIONS = [
   { automatedDepsUpdater: "renovate" },
   { automatedDepsUpdater: "dependabot" },
   // Complex combinations
-  { useLinters: true, useHusky: true, useLintStaged: true },
-  {
-    useLinters: true,
-    useHusky: true,
-    useLintStaged: true,
-    useCommitlint: true,
-  },
+  { useHusky: true, useLintStaged: true },
+  { useHusky: true, useLintStaged: true, useCommitlint: true },
   { database: "prisma", authProvider: "clerk" },
   { database: "prisma", authProvider: "clerk", clerkWebhook: true },
   { database: "prisma", authProvider: "clerk", useAppFolder: false },

@@ -17,7 +17,6 @@ const CTX = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
-  useLinters: toBoolean("{{ dkcutter.useLinters }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
@@ -83,21 +82,6 @@ async function main() {
       path.join(publicFolder, "favicon.ico"),
     );
     removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
-  }
-
-  if (CTX.useLinters) {
-    updatePackageJson({
-      projectDir,
-      scripts: {
-        lint: "eslint .",
-        "lint:fix": "eslint . --fix",
-      },
-      removeDevDeps: ["eslint-config-next"],
-    });
-    fs.removeSync(path.join(projectDir, ".eslintrc"));
-  } else {
-    REMOVE_DEV_DEPS.push("@dkshs/eslint-config");
-    fs.removeSync(path.join(projectDir, "eslint.config.js"));
   }
 
   if (CTX.useHusky) {
@@ -236,7 +220,7 @@ async function main() {
   if (CTX.automaticStart) {
     await initializeGit(projectDir);
     await installDependencies(projectDir, CTX.pkgManager);
-    CTX.useLinters && (await runLinters(projectDir, CTX.pkgManager));
+    await runLinters(projectDir, CTX.pkgManager);
     await stageAndCommit(projectDir, `Initial commit from ${TEMPLATE_REPO}`);
   }
 

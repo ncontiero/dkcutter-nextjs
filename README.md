@@ -77,7 +77,6 @@ If you want to start faster, you can use the following options:
 | `--description <string>`          | The Project description.                                                                         |
 | `--authorName <string>`           | The author name.                                                                                 |
 | `--projectVersion <string>`       | The project version.                                                                             |
-| `--useLinters [boolean]`          | Include linters in the project. Such as ESLint and Prettier.                                     |
 | `--useHusky [boolean]`            | Include [husky](https://github.com/typicode/husky) in the project.                               |
 | `--useLintStaged [boolean]`       | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
 | `--useCommitlint [boolean]`       | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
