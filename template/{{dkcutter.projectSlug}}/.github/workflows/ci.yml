@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
 {% if dkcutter.pkgManager == 'bun' %}
       - name: Setup bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
 {% else -%}
 {% if dkcutter.pkgManager == 'pnpm' %}
       - name: Setup pnpm
