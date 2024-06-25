@@ -13,7 +13,7 @@ importers:
         version: 5.1.6(next@14.2.4(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@commitlint/cli':
         specifier: ^19.3.0
-        version: 19.3.0(@types/node@20.14.8)(typescript@5.5.2)
+        version: 19.3.0(@types/node@20.14.9)(typescript@5.5.2)
       '@commitlint/config-conventional':
         specifier: ^19.2.2
         version: 19.2.2
@@ -27,8 +27,8 @@ importers:
         specifier: ^11.0.4
         version: 11.0.4
       '@types/node':
-        specifier: ^20.14.8
-        version: 20.14.8
+        specifier: ^20.14.9
+        version: 20.14.9
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
@@ -88,7 +88,7 @@ importers:
         version: 5.5.2
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.14.8)
+        version: 1.6.0(@types/node@20.14.9)
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -796,8 +796,8 @@ packages:
   '@types/mdast@3.0.15':
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
 
-  '@types/node@20.14.8':
-    resolution: {integrity: sha512-DO+2/jZinXfROG7j7WKFn/3C6nFwxy2lLpgLjEXJz+0XKphZlTLJ14mo8Vfg8X5BWN6XjyESXq+LcYdT7tR3bA==}
+  '@types/node@20.14.9':
+    resolution: {integrity: sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -3479,11 +3479,11 @@ snapshots:
     dependencies:
       csstype: 3.1.1
 
-  '@commitlint/cli@19.3.0(@types/node@20.14.8)(typescript@5.5.2)':
+  '@commitlint/cli@19.3.0(@types/node@20.14.9)(typescript@5.5.2)':
     dependencies:
       '@commitlint/format': 19.3.0
       '@commitlint/lint': 19.2.2
-      '@commitlint/load': 19.2.0(@types/node@20.14.8)(typescript@5.5.2)
+      '@commitlint/load': 19.2.0(@types/node@20.14.9)(typescript@5.5.2)
       '@commitlint/read': 19.2.1
       '@commitlint/types': 19.0.3
       execa: 8.0.1
@@ -3530,7 +3530,7 @@ snapshots:
       '@commitlint/rules': 19.0.3
       '@commitlint/types': 19.0.3
 
-  '@commitlint/load@19.2.0(@types/node@20.14.8)(typescript@5.5.2)':
+  '@commitlint/load@19.2.0(@types/node@20.14.9)(typescript@5.5.2)':
     dependencies:
       '@commitlint/config-validator': 19.0.3
       '@commitlint/execute-rule': 19.0.0
@@ -3538,7 +3538,7 @@ snapshots:
       '@commitlint/types': 19.0.3
       chalk: 5.3.0
       cosmiconfig: 9.0.0(typescript@5.5.2)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.14.8)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.14.9)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -3989,7 +3989,7 @@ snapshots:
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
 
   '@types/eslint@8.56.10':
     dependencies:
@@ -4001,7 +4001,7 @@ snapshots:
   '@types/fs-extra@11.0.4':
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
 
   '@types/json-schema@7.0.15': {}
 
@@ -4009,13 +4009,13 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
 
   '@types/mdast@3.0.15':
     dependencies:
       '@types/unist': 2.0.10
 
-  '@types/node@20.14.8':
+  '@types/node@20.14.9':
     dependencies:
       undici-types: 5.26.5
 
@@ -4023,7 +4023,7 @@ snapshots:
 
   '@types/prompts@2.4.9':
     dependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
       kleur: 3.0.3
 
   '@types/prop-types@15.7.12': {}
@@ -4529,9 +4529,9 @@ snapshots:
     dependencies:
       browserslist: 4.23.0
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.14.8)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@20.14.9)(cosmiconfig@9.0.0(typescript@5.5.2))(typescript@5.5.2):
     dependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
       cosmiconfig: 9.0.0(typescript@5.5.2)
       jiti: 1.21.0
       typescript: 5.5.2
@@ -6851,13 +6851,13 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-node@1.6.0(@types/node@20.14.8):
+  vite-node@1.6.0(@types/node@20.14.9):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.10(@types/node@20.14.8)
+      vite: 5.2.10(@types/node@20.14.9)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6868,16 +6868,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.10(@types/node@20.14.8):
+  vite@5.2.10(@types/node@20.14.9):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.16.4
     optionalDependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
       fsevents: 2.3.3
 
-  vitest@1.6.0(@types/node@20.14.8):
+  vitest@1.6.0(@types/node@20.14.9):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -6896,11 +6896,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.10(@types/node@20.14.8)
-      vite-node: 1.6.0(@types/node@20.14.8)
+      vite: 5.2.10(@types/node@20.14.9)
+      vite-node: 1.6.0(@types/node@20.14.9)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 20.14.8
+      '@types/node': 20.14.9
     transitivePeerDependencies:
       - less
       - lightningcss
