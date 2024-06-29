@@ -1,5 +1,6 @@
 # DKCutter NextJs
 
+[![Build Status](https://img.shields.io/github/actions/workflow/status/dkshs/dkcutter-nextjs/ci.yml?branch=main)](https://github.com/dkshs/dkcutter-nextjs/actions/workflows/ci.yml?query=branch%3Amain)
 [![license mit](https://img.shields.io/badge/licence-MIT-56BEB8)](LICENSE)
 
 Powered by [DKCutter](https://github.com/dkshs/dkcutter), DKCutter NextJs is a framework for quickly starting Next.Js projects.
