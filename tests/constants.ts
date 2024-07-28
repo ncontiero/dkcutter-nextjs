@@ -1,4 +1,4 @@
-export const PATTERN = /{{(\s?dkcutter)\.(.*?)}}/;
+export const PATTERN = /\{\{(\s?dkcutter)\.(.*?)\}\}/;
 
 export const SUPPORTED_COMBINATIONS = [
   { useHusky: true },

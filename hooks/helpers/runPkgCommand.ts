@@ -35,7 +35,7 @@ export async function runPgkCommand(
     spinner.text =
       pkgManager === "pnpm" && text.includes("Progress")
         ? text.includes("|")
-          ? text.split(" | ")[1] ?? ""
+          ? (text.split(" | ")[1] ?? "")
           : text
         : text;
   };

@@ -227,5 +227,4 @@ async function main() {
   await logNextSteps({ ctx: CTX, projectDir, pkgManager: CTX.pkgManager });
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
 main();
