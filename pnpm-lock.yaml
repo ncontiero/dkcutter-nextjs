@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@clerk/nextjs':
-        specifier: ^5.2.9
-        version: 5.2.9(next@14.2.5(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+        specifier: ^5.2.10
+        version: 5.2.10(next@14.2.5(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@commitlint/cli':
         specifier: ^19.3.0
         version: 19.3.0(@types/node@20.14.13)(typescript@5.5.4)
@@ -134,8 +134,8 @@ packages:
       react: '>=18 || >=19.0.0-beta'
       react-dom: '>=18 || >=19.0.0-beta'
 
-  '@clerk/nextjs@5.2.9':
-    resolution: {integrity: sha512-7RKF5Pnv80n58niDS+8Fkn03HTm4/zkceplQh2fN0bjH8WDwRXxB/YWtgC1IFLbZ0PeiHzo1nVRguTSuUqo1+Q==}
+  '@clerk/nextjs@5.2.10':
+    resolution: {integrity: sha512-P2oxgrE7HfR5SLGAEGcuzstiWggyuRgqdytWo9NdKD/el8LYeuxey6FcIzNNzndWyTik7ERXSKG4fVrIrHnv9g==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       next: ^13.5.4 || ^14.0.3 || >=15.0.0-rc
@@ -3345,7 +3345,7 @@ snapshots:
       react-dom: 18.2.0(react@18.3.1)
       tslib: 2.4.1
 
-  '@clerk/nextjs@5.2.9(next@14.2.5(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
+  '@clerk/nextjs@5.2.10(next@14.2.5(react-dom@18.2.0(react@18.3.1))(react@18.3.1))(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@clerk/backend': 1.5.0(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@clerk/clerk-react': 5.3.0(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
