@@ -24,7 +24,7 @@
     "@dkshs/eslint-config": "2.10.0",
     "@t3-oss/env-nextjs": "^0.11.0",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.15.0",
+    "@types/node": "^20.16.0",
     "@types/prompts": "^2.4.9",
     "@types/react": "^18.3.3",
     "colorette": "^2.0.20",
