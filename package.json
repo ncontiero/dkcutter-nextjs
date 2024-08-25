@@ -22,7 +22,7 @@
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@dkshs/eslint-config": "2.10.1",
-    "@t3-oss/env-nextjs": "^0.11.0",
+    "@t3-oss/env-nextjs": "^0.11.1",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.16.1",
     "@types/prompts": "^2.4.9",
