@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { WebhookEvent } from "@clerk/nextjs/server";
-import { Webhook } from "svix";
 import { headers } from "next/headers";
+import { Webhook } from "svix";
 
 import { env } from "@/env.js";
 

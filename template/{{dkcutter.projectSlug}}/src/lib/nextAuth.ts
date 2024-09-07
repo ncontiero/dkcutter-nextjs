@@ -2,20 +2,20 @@
 import type { GetServerSidePropsContext } from "next";
 
 {% endif -%}
+{%- if dkcutter.database == 'prisma' %}
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+{%- endif %}
 import {
   type DefaultSession,
   type NextAuthOptions,
   getServerSession,
 } from "next-auth";
-{%- if dkcutter.database == 'prisma' %}
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-{%- endif %}
 import DiscordProvider from "next-auth/providers/discord";
-{%- if dkcutter.database == 'prisma' %}
 
+import { env } from "@/env.js";
+{%- if dkcutter.database == 'prisma' %}
 import { prisma } from "@/lib/prisma";
 {%- endif %}
-import { env } from "@/env.js";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
