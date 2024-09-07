@@ -1,13 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
-
-{% if dkcutter.authProvider == 'clerk' -%}
-
+{%- if dkcutter.authProvider == 'clerk' %}
 import { ClerkProvider } from "@clerk/nextjs";
-
-{% endif -%}
+{%- endif %}
+import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 

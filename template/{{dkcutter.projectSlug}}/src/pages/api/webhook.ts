@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import type { WebhookEvent } from "@clerk/nextjs/server";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Webhook } from "svix";
 import { buffer } from "micro";
+import { Webhook } from "svix";
 
 import { env } from "@/env.js";
 

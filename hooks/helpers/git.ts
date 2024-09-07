@@ -1,10 +1,10 @@
 import { execSync } from "node:child_process";
 import path from "node:path";
-import prompts from "prompts";
 import { bold, green, red, redBright } from "colorette";
 import { execa } from "execa";
 import fs from "fs-extra";
 import ora from "ora";
+import prompts from "prompts";
 
 import { logger } from "../utils/logger";
 

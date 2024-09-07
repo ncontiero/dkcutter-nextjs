@@ -1,16 +1,16 @@
 import type { PackageManager } from "./utils/types";
 
 import path from "node:path";
-import fs from "fs-extra";
 import { execa } from "execa";
+import fs from "fs-extra";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
-import { runLinters } from "./helpers/runLinters";
 import { logNextSteps } from "./helpers/logNextSteps";
-import { updatePackageJson } from "./utils/updatePackageJson";
+import { runLinters } from "./helpers/runLinters";
 import { toBoolean } from "./utils/coerce";
 import { logger } from "./utils/logger";
+import { updatePackageJson } from "./utils/updatePackageJson";
 
 const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
 const CTX = {
