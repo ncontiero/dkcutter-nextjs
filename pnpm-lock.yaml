@@ -18,8 +18,8 @@ importers:
         specifier: ^19.4.1
         version: 19.4.1
       '@dkshs/eslint-config':
-        specifier: 3.1.0
-        version: 3.1.0(@types/eslint@8.56.12)(@typescript-eslint/eslint-plugin@8.4.0(@typescript-eslint/parser@8.4.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint-config-prettier@9.1.0(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(tailwindcss@3.4.10)(typescript@5.5.4)
+        specifier: 3.1.1
+        version: 3.1.1(@types/eslint@8.56.12)(@typescript-eslint/eslint-plugin@8.4.0(@typescript-eslint/parser@8.4.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint-config-prettier@9.1.0(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(tailwindcss@3.4.10)(typescript@5.5.4)
       '@t3-oss/env-nextjs':
         specifier: ^0.11.1
         version: 0.11.1(typescript@5.5.4)(zod@3.23.8)
@@ -223,8 +223,8 @@ packages:
     resolution: {integrity: sha512-tpyc+7i6bPG9mvaBbtKUeghfyZSDgWquIDfMgqYtTbmZ9Y9VzEm2je9EYcQ0aoz5o7NvGS+rcDec93yO08MHYA==}
     engines: {node: '>=v18'}
 
-  '@dkshs/eslint-config@3.1.0':
-    resolution: {integrity: sha512-Nk0N/WJ3ZVo0bCpritsu73yn2A1CPijf7huJFKKEynr4sXiKzfufQIRwowXewDeQDAU3h01+fjXfcY3mLbqW8g==}
+  '@dkshs/eslint-config@3.1.1':
+    resolution: {integrity: sha512-MAws0DumlcnL/1ELkQLpH3hjfyQq2k1B+PA5vrmcSirI/NPoGHowPj/BEab4lClox8oiKlvY/AB7vESW9nfgXg==}
     peerDependencies:
       '@tanstack/eslint-plugin-query': '>=5.50.0'
       eslint: '>=9.5.0'
@@ -3535,7 +3535,7 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.0
       chalk: 5.3.0
 
-  '@dkshs/eslint-config@3.1.0(@types/eslint@8.56.12)(@typescript-eslint/eslint-plugin@8.4.0(@typescript-eslint/parser@8.4.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint-config-prettier@9.1.0(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(tailwindcss@3.4.10)(typescript@5.5.4)':
+  '@dkshs/eslint-config@3.1.1(@types/eslint@8.56.12)(@typescript-eslint/eslint-plugin@8.4.0(@typescript-eslint/parser@8.4.0(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint@9.10.0(jiti@1.21.6))(typescript@5.5.4))(eslint-config-prettier@9.1.0(eslint@9.10.0(jiti@1.21.6)))(eslint@9.10.0(jiti@1.21.6))(tailwindcss@3.4.10)(typescript@5.5.4)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.4.0(eslint@9.10.0(jiti@1.21.6))
       '@eslint/markdown': 6.1.0(eslint@9.10.0(jiti@1.21.6))
