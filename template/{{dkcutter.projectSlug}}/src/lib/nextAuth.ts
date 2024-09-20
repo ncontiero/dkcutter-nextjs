@@ -1,10 +1,11 @@
-{% if not dkcutter.useAppFolder -%}
+{%- if not dkcutter.useAppFolder -%}
 import type { GetServerSidePropsContext } from "next";
+{%- endif %}
+{%- if dkcutter.database == 'prisma' -%}
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 {% endif -%}
-{%- if dkcutter.database == 'prisma' %}
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-{%- endif %}
+
 import {
   type DefaultSession,
   type NextAuthOptions,
