@@ -13,7 +13,7 @@ import {
 } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 
-import { env } from "@/env.js";
+import { env } from "@/env";
 {%- if dkcutter.database == 'prisma' %}
 import { prisma } from "@/lib/prisma";
 {%- endif %}

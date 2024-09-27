@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { buffer } from "micro";
 import { Webhook } from "svix";
 
-import { env } from "@/env.js";
+import { env } from "@/env";
 
 export const config = {
   api: {
