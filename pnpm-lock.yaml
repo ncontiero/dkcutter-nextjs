@@ -60,8 +60,8 @@ importers:
         specifier: 15.0.4
         version: 15.0.4(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       next-auth:
-        specifier: ^4.24.10
-        version: 4.24.10(next@15.0.4(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
+        specifier: ^4.24.11
+        version: 4.24.11(next@15.0.4(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(react-dom@18.2.0(react@19.0.0))(react@19.0.0)
       ora:
         specifier: ^8.1.1
         version: 8.1.1
@@ -2572,14 +2572,14 @@ packages:
     resolution: {integrity: sha512-kKHJhxwpR/Okycz4HhQKKlhWe4ASEfPgkSWNmKFHd7+ezuQlxkA5cM3+XkBPvm1gmHen3w53qsYAv+8GwRrBlg==}
     engines: {node: '>=18'}
 
-  next-auth@4.24.10:
-    resolution: {integrity: sha512-8NGqiRO1GXBcVfV8tbbGcUgQkAGsX4GRzzXXea4lDikAsJtD5KiEY34bfhUOjHLvr6rT6afpcxw2H8EZqOV6aQ==}
+  next-auth@4.24.11:
+    resolution: {integrity: sha512-pCFXzIDQX7xmHFs4KVH4luCjaCbuPRtZ9oBUjUhOk84mZ9WVPf94n87TxYI4rSRf9HmfHEF8Yep3JrYDVOo3Cw==}
     peerDependencies:
       '@auth/core': 0.34.2
       next: ^12.2.5 || ^13 || ^14 || ^15
       nodemailer: ^6.6.5
-      react: ^17.0.2 || ^18
-      react-dom: ^17.0.2 || ^18
+      react: ^17.0.2 || ^18 || ^19
+      react-dom: ^17.0.2 || ^18 || ^19
     peerDependenciesMeta:
       '@auth/core':
         optional: true
@@ -6283,7 +6283,7 @@ snapshots:
 
   natural-orderby@5.0.0: {}
 
-  next-auth@4.24.10(next@15.0.4(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(react-dom@18.2.0(react@19.0.0))(react@19.0.0):
+  next-auth@4.24.11(next@15.0.4(react-dom@18.2.0(react@19.0.0))(react@19.0.0))(react-dom@18.2.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@babel/runtime': 7.26.0
       '@panva/hkdf': 1.2.1
