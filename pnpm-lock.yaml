@@ -33,8 +33,8 @@ importers:
         specifier: ^2.4.9
         version: 2.4.9
       '@types/react':
-        specifier: ^19.0.0
-        version: 19.0.0
+        specifier: ^19.0.1
+        version: 19.0.1
       colorette:
         specifier: ^2.0.20
         version: 2.0.20
@@ -951,8 +951,8 @@ packages:
   '@types/prompts@2.4.9':
     resolution: {integrity: sha512-qTxFi6Buiu8+50/+3DGIWLHM6QuWsEKugJnnP6iv2Mc4ncxE4A/OJkjuVOA+5X0X1S/nq5VJRa8Lu+nwcvbrKA==}
 
-  '@types/react@19.0.0':
-    resolution: {integrity: sha512-MY3oPudxvMYyesqs/kW1Bh8y9VqSmf+tzqw3ae8a9DZW68pUe3zAdHeI1jc6iAysuRdACnVknHP8AhwD4/dxtg==}
+  '@types/react@19.0.1':
+    resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
 
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
@@ -4272,7 +4272,7 @@ snapshots:
       '@types/node': 22.10.1
       kleur: 3.0.3
 
-  '@types/react@19.0.0':
+  '@types/react@19.0.1':
     dependencies:
       csstype: 3.1.3
 
