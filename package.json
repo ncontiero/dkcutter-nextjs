@@ -18,7 +18,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@clerk/nextjs": "^6.8.1",
+    "@clerk/nextjs": "^6.9.0",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@dkshs/eslint-config": "3.3.1",
@@ -33,7 +33,7 @@
     "execa": "^9.5.2",
     "fs-extra": "^11.2.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.2.11",
     "next": "15.1.0",
     "next-auth": "^4.24.11",
     "ora": "^8.1.1",
@@ -44,7 +44,7 @@
     "type-fest": "^4.30.0",
     "typescript": "^5.7.2",
     "vitest": "^2.1.8",
-    "zod": "^3.23.8"
+    "zod": "^3.24.0"
   },
   "lint-staged": {
     "*": "pnpm lint:fix"
