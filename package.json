@@ -28,7 +28,7 @@
     "@types/prompts": "^2.4.9",
     "@types/react": "^19.0.7",
     "colorette": "^2.0.20",
-    "dkcutter": "4.4.0",
+    "dkcutter": "4.5.0",
     "eslint": "^9.18.0",
     "execa": "^9.5.2",
     "fs-extra": "^11.3.0",
