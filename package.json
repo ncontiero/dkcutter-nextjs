@@ -21,7 +21,7 @@
     "@clerk/nextjs": "^6.10.5",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
-    "@dkshs/eslint-config": "4.0.0",
+    "@dkshs/eslint-config": "4.0.1",
     "@t3-oss/env-nextjs": "^0.12.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.12.0",
