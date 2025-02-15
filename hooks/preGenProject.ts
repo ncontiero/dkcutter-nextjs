@@ -21,7 +21,7 @@ export function validateProject({ ctx }: { ctx: unknown }) {
       useLintStaged: z.boolean(),
     })
       .refine(
-        (data) => !(data.useLintStaged && !data.useHusky),
+        (data) => !data.useLintStaged || data.useHusky,
         "You must use husky to use lint-staged.",
       )
       .parse(ctx);
