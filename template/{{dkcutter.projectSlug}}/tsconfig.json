@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // Compilation and Target Settings
-    "incremental": true,
+    "incremental": false,
     "target": "ES2022",
     "jsx": "preserve",
 
