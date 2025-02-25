@@ -1,4 +1,5 @@
 {
+  "$schema": "https://dkcutter.dkshs.me/schema.json",
   "projectName": {
     "value": "My Awesome Project",
     "promptMessage": "What is the project name?"
