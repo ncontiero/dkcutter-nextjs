@@ -31,13 +31,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           cache: {{ dkcutter.pkgManager }}
-          node-version: 20
+          node-version-file: .nvmrc
 {% endif %}
       - name: Install dependencies
         run: {{ dkcutter._ciInstall }}
 
       - name: Running lint
-{%- if not ['pnpm', 'yarn'].includes(dkcutter.pkgManager) %}
+{%- if not dkcutter.pkgManager in ["pnpm", "yarn"] %}
         run: {{ dkcutter.pkgManager }} run lint
 {%- else %}
         run: {{ dkcutter.pkgManager }} lint
