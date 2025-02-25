@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { toBoolean } from "./utils/coerce";
+import { logger } from "./utils/logger";
 
 const ctx = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
@@ -26,11 +27,12 @@ export function validateProject({ ctx }: { ctx: unknown }) {
       )
       .parse(ctx);
   } catch (error) {
+    logger.break();
     if (error instanceof z.ZodError) {
-      console.error(error.format()._errors);
-      process.exit(1);
+      logger.error(error.format()._errors.join(",").replaceAll(",", "\n"));
+    } else {
+      logger.error(error);
     }
-    console.error(error);
     process.exit(1);
   }
 }

@@ -29,7 +29,7 @@
     "promptMessage": "Do you want to use {{ colors.blue('husky') }}?"
   },
   "useLintStaged": {
-    "disabled": "{% if useHusky != true %}true{% else %}false{% endif %}",
+    "disabled": "{% if not useHusky %}true{% else %}false{% endif %}",
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('lint staged') }}?"
   },
