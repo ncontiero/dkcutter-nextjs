@@ -45,16 +45,23 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project name? … My Awesome Project
 ✔ What is the project slug? … my-awesome-project
 ✔ What is the project description? … Behold My Awesome Project!
-✔ What is the author name? … DKSHS
+✔ What is the author name? … Nicolas Contiero (https://github.com/dkshs)
 ✔ What is the project version? … 0.1.0
-✔ Do you want to use linters? … No / Yes
 ✔ Do you want to use husky? … No / Yes
+✔ Do you want to use lint staged? … No / Yes
 ✔ Do you want to use Commitlint? … No / Yes
 ✔ Do you want to use Next.Js app folder? … No / Yes
 ✔ What database ORM would you like to use? › None
 ✔ What Authentication Provider would you like to use? › None
-✔ What Automated Dependency Updater do you want to use? › None
+✔ What Automated Dependency Updater do you want to use? › Mend Renovate
 ✔ Do you want the project to be configured? … No / Yes
+Next steps:
+  cd my-awesome-project
+  pnpm install
+  git add .
+  git commit -m "initial commit"
+  pnpm dev
+
 ✔ Project created!
 ```
 

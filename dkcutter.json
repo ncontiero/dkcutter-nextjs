@@ -17,7 +17,7 @@
     "promptMessage": "What is the project description?"
   },
   "authorName": {
-    "value": "DKSHS",
+    "value": "Nicolas Contiero (https://github.com/dkshs)",
     "promptMessage": "What is the author name?"
   },
   "projectVersion": {
