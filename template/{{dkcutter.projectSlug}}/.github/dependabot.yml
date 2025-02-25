@@ -1,5 +1,5 @@
 # Config for Dependabot updates. See Documentation here:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 
 version: 2
 updates:
@@ -19,13 +19,13 @@ updates:
         update-types:
           - minor
           - patch
-      {%- if dkcutter.database == 'prisma' %}
+      {%- if dkcutter.database == "prisma" %}
       prisma:
         patterns:
           - "@prisma*"
           - prisma
       {%- endif %}
-      {%- if dkcutter.database == 'prisma' and dkcutter.authProvider == 'nextAuth' %}
+      {%- if dkcutter.database == "prisma" and dkcutter.authProvider == "nextAuth" %}
       next-auth:
         patterns:
           - "@next-auth*"
@@ -36,8 +36,5 @@ updates:
         patterns:
           - "@commitlint*"
       {%- endif %}
-    ignore:
-      - dependency-name: "@types*"
-        update-types: ["version-update:semver-major"]
     schedule:
       interval: daily
