@@ -10,6 +10,10 @@ import { SessionProvider } from "next-auth/react";
 import { ClerkProvider } from "@clerk/nextjs";
 
 {%- endif %}
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 {% if dkcutter.authProvider == 'nextAuth' %}
 export default function App({
   Component,
@@ -17,7 +21,9 @@ export default function App({
 }: AppProps<{ session: Session | null }>) {
   return (
     <SessionProvider session={pageProps.session}>
-      <Component {...pageProps} />
+      <div className={inter.variable}>
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 }
@@ -26,11 +32,17 @@ export default function App({ Component, pageProps }: AppProps) {
 {%- if dkcutter.authProvider == 'clerk' %}
   return (
     <ClerkProvider {...pageProps}>
-      <Component {...pageProps} />
+      <div className={inter.variable}>
+        <Component {...pageProps} />
+      </div>
     </ClerkProvider>
   );
 {%- else %}
-  return <Component {...pageProps} />;
+  return (
+    <div className={inter.variable}>
+      <Component {...pageProps} />
+    </div>
+  );
 {%- endif %}
 }
 {% endif %}

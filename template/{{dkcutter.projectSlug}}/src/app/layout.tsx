@@ -6,7 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}
 import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "{{ dkcutter.projectName }}",
@@ -21,13 +21,13 @@ export default function RootLayout({
   return (
     {%- if dkcutter.authProvider == 'clerk' %}
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.variable}>{children}</body>
       </html>
     </ClerkProvider>
     {%- else %}
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.variable}>{children}</body>
     </html>
     {%- endif %}
   );
