@@ -84,13 +84,6 @@ async function main() {
     removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
   }
 
-  if (CTX.useHusky) {
-    updatePackageJson({ projectDir, scripts: { prepare: "husky" } });
-  } else {
-    REMOVE_DEV_DEPS.push("husky");
-    fs.removeSync(path.join(projectDir, ".husky"));
-  }
-
   if (CTX.useCommitlint) {
     updatePackageJson({
       projectDir,
@@ -98,10 +91,10 @@ async function main() {
     });
   } else {
     REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
-    const filesToRemove = [path.join(projectDir, ".commitlintrc.json")];
-    if (CTX.useHusky) {
-      filesToRemove.push(path.join(projectDir, ".husky", "commit-msg"));
-    }
+    const filesToRemove = [
+      path.join(projectDir, ".commitlintrc.json"),
+      path.join(projectDir, ".husky", "commit-msg"),
+    ];
     removeFiles(filesToRemove);
   }
 
@@ -113,6 +106,13 @@ async function main() {
       projectDir,
       keys: ["lint-staged"],
     });
+  }
+
+  if (CTX.useHusky) {
+    updatePackageJson({ projectDir, scripts: { prepare: "husky" } });
+  } else {
+    REMOVE_DEV_DEPS.push("husky");
+    fs.removeSync(path.join(projectDir, ".husky"));
   }
 
   if (CTX.database === "none") {
