@@ -12,7 +12,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "check": "{{ dkcutter._pkgRun }} lint && {{ dkcutter._pkgRun }} typecheck"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.1",
@@ -44,6 +46,6 @@
     "typescript": "^5.7.3"
   },
   "lint-staged": {
-    "*": "{{ dkcutter._lintScript }}"
+    "*": "{{ dkcutter._pkgRun }} lint:fix"
   }
 }

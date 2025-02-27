@@ -36,12 +36,8 @@ jobs:
       - name: Install dependencies
         run: {{ dkcutter._ciInstall }}
 
-      - name: Running lint
-{%- if not dkcutter.pkgManager in ["pnpm", "yarn"] %}
-        run: {{ dkcutter.pkgManager }} run lint
-{%- else %}
-        run: {{ dkcutter.pkgManager }} lint
-{%- endif %}
+      - name: Check Code
+        run: {{ dkcutter._pkgRun }} lint
 {% if dkcutter.useCommitlint %}
   lint-commits:
     name: Lint Commits
