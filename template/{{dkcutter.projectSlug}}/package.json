@@ -22,7 +22,7 @@
     "@prisma/client": "^6.4.1",
     "@t3-oss/env-nextjs": "^0.12.0",
     "micro": "^10.0.1",
-    "next": "15.2.0",
+    "next": "15.2.1",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
