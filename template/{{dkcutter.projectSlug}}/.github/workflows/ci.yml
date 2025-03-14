@@ -37,11 +37,10 @@ jobs:
         run: {{ dkcutter._ciInstall }}
 
       - name: Check Code
-        run: {{ dkcutter._pkgRun }} lint
+        run: {{ dkcutter._pkgRun }} check
 {% if dkcutter.useCommitlint %}
   lint-commits:
     name: Lint Commits
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
