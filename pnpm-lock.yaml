@@ -39,8 +39,8 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       dkcutter:
-        specifier: 4.5.2
-        version: 4.5.2(chokidar@3.6.0)(typescript@5.8.2)
+        specifier: 4.5.3
+        version: 4.5.3(chokidar@3.6.0)(typescript@5.8.2)
       eslint:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
@@ -1389,8 +1389,8 @@ packages:
   didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
 
-  dkcutter@4.5.2:
-    resolution: {integrity: sha512-E4iJbjLcxtOvfzEq61yNqi8gS+yEOYimquC7UCZqqBebdtQe4pXj1X9zwdb1I/QVEZDXeQEtqvQr5/JcxSf8Wg==}
+  dkcutter@4.5.3:
+    resolution: {integrity: sha512-GW3zVZYKF7JYElCxeAlH7JO9e/RaA/aNLvUJ77rsqkNNzK+h4zvxxKZu616Mb7QIQCYDulTflX4pKobnnytwqw==}
     engines: {node: ^18.19.0 || >=20.5.0}
     hasBin: true
 
@@ -4761,7 +4761,7 @@ snapshots:
 
   didyoumean@1.2.2: {}
 
-  dkcutter@4.5.2(chokidar@3.6.0)(typescript@5.8.2):
+  dkcutter@4.5.3(chokidar@3.6.0)(typescript@5.8.2):
     dependencies:
       colorette: 2.0.20
       commander: 13.1.0
