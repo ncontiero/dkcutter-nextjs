@@ -26,7 +26,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "svix": "^1.61.4",
+    "svix": "^1.62.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
