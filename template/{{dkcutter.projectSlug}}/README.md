@@ -1,7 +1,7 @@
 # {{dkcutter.projectName}}
 
 [![license mit](https://img.shields.io/badge/licence-MIT-7c3aed)](/LICENSE)
-[![Built with dkcutter-nextjs](https://img.shields.io/badge/built%20with-DKCutter%20NextJs-7c3aed.svg)](https://github.com/dkshs/dkcutter-nextjs)
+[![Built with dkcutter-nextjs](https://img.shields.io/badge/built%20with-DKCutter%20NextJs-7c3aed.svg)](https://github.com/ncontiero/dkcutter-nextjs)
 
 {{ dkcutter.description }}
 

@@ -12,7 +12,7 @@ import { toBoolean } from "./utils/coerce";
 import { logger } from "./utils/logger";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
-const TEMPLATE_REPO = "dkshs/dkcutter-nextjs";
+const TEMPLATE_REPO = "ncontiero/dkcutter-nextjs";
 const CTX = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,

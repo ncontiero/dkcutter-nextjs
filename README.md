@@ -1,38 +1,38 @@
 # DKCutter NextJs
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/dkshs/dkcutter-nextjs/ci.yml?branch=main)](https://github.com/dkshs/dkcutter-nextjs/actions/workflows/ci.yml?query=branch%3Amain)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/ncontiero/dkcutter-nextjs/ci.yml?branch=main)](https://github.com/ncontiero/dkcutter-nextjs/actions/workflows/ci.yml?query=branch%3Amain)
 [![license mit](https://img.shields.io/badge/licence-MIT-56BEB8)](LICENSE)
 
-Powered by [DKCutter](https://github.com/dkshs/dkcutter), DKCutter NextJs is a framework for quickly starting Next.Js projects.
+Powered by [DKCutter](https://github.com/ncontiero/dkcutter), DKCutter NextJs is a framework for quickly starting Next.Js projects.
 
-- If you have problems with DKCutter NextJs, please open [issues](https://github.com/dkshs/dkcutter-nextjs/issues/new).
+- If you have problems with DKCutter NextJs, please open [issues](https://github.com/ncontiero/dkcutter-nextjs/issues/new).
 
 ## Usage
 
-To scaffold an application using [dkcutter](https://github.com/dkshs/dkcutter), run any of the following four commands and answer the command prompt questions:
+To scaffold an application using [dkcutter](https://github.com/ncontiero/dkcutter), run any of the following four commands and answer the command prompt questions:
 
 ### npm
 
 ```bash
-npx dkcutter gh:dkshs/dkcutter-nextjs.git
+npx dkcutter gh:ncontiero/dkcutter-nextjs.git
 ```
 
 ### yarn
 
 ```bash
-yarn dlx dkcutter gh:dkshs/dkcutter-nextjs.git
+yarn dlx dkcutter gh:ncontiero/dkcutter-nextjs.git
 ```
 
 ### pnpm
 
 ```bash
-pnpm dlx dkcutter gh:dkshs/dkcutter-nextjs.git
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs.git
 ```
 
 ### bun
 
 ```bash
-bunx dkcutter@latest gh:dkshs/dkcutter-nextjs.git
+bunx dkcutter@latest gh:ncontiero/dkcutter-nextjs.git
 ```
 
 You'll be prompted for some values. Provide them, then a Next.Js project will be created for you.
@@ -45,7 +45,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project name? … My Awesome Project
 ✔ What is the project slug? … my-awesome-project
 ✔ What is the project description? … Behold My Awesome Project!
-✔ What is the author name? … Nicolas Contiero (https://github.com/dkshs)
+✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
 ✔ Do you want to use husky? … No / Yes
 ✔ Do you want to use lint staged? … No / Yes
@@ -103,13 +103,13 @@ If you want to start faster, you can use the following options:
 The following would be the structure of an application with [Commitlint](https://commitlint.js.org/):
 
 ```bash
-pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useCommitlint
+pnpm dlx dkcutter https://github.com/ncontiero/dkcutter-nextjs.git --useCommitlint
 ```
 
 If you want to use all the default values with the exception of one or more, you can do it as follows:
 
 ```bash
-pnpm dlx dkcutter https://github.com/dkshs/dkcutter-nextjs.git --useHusky --useLintStaged -y
+pnpm dlx dkcutter https://github.com/ncontiero/dkcutter-nextjs.git --useHusky --useLintStaged -y
 ```
 
 This will use the default values, with the exception of the `--useHusky` and `--useLintStaged` options.

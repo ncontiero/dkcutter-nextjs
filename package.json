@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@10.7.0",
   "description": "DKCutter NextJs is a framework for quickly starting Next.Js projects.",
-  "author": "DKSHS",
+  "author": "Nicolas Contiero <https://github.com/ncontiero>",
   "license": "MIT",
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -21,7 +21,7 @@
     "@clerk/nextjs": "^6.12.12",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "@dkshs/eslint-config": "4.6.0",
+    "@ncontiero/eslint-config": "5.1.1",
     "@t3-oss/env-nextjs": "^0.12.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.14",
