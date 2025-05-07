@@ -186,10 +186,8 @@ async function main() {
     } else {
       endpoint.push(path.join(pagesFolder, "api", "webhook.ts"));
     }
-    REMOVE_DEPS.push("svix", "micro");
+    REMOVE_DEPS.push("svix");
     removeFiles(endpoint);
-  } else {
-    CTX.useAppFolder && REMOVE_DEPS.push("micro");
   }
 
   if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
