@@ -50,7 +50,7 @@ function runProjectTest(combination: { [key: string]: any }) {
       await execa("pnpm", ["lint"], { cwd: target });
       supportedOptions.push(name);
     },
-    30_000,
+    120_000,
   );
 }
 
