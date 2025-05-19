@@ -39,8 +39,8 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       dkcutter:
-        specifier: 4.6.0
-        version: 4.6.0(chokidar@3.6.0)(typescript@5.8.3)
+        specifier: 5.0.0
+        version: 5.0.0(chokidar@3.6.0)(typescript@5.8.3)
       eslint:
         specifier: ^9.27.0
         version: 9.27.0(jiti@2.4.2)
@@ -1326,6 +1326,10 @@ packages:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
 
+  commander@14.0.0:
+    resolution: {integrity: sha512-2uM9rYjPvyq39NwLRqaiLtWHyDC1FvryJDa2ATTVims5YAS4PupsEQsDvP14FqhFr0P49CYDugi59xaxJlTXRA==}
+    engines: {node: '>=20'}
+
   commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
@@ -1471,9 +1475,9 @@ packages:
   didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
 
-  dkcutter@4.6.0:
-    resolution: {integrity: sha512-3/KU1/ZgCQioU4pB/Bc6Qu230M+SaB7DuAJ3dWHUn4n3xMgIWA+6v90R9E3zb9o+w0lCn8Cn5SFn45sBSN5U5g==}
-    engines: {node: ^18.19.0 || >=20.5.0}
+  dkcutter@5.0.0:
+    resolution: {integrity: sha512-4KX4hHAvN63U/G/s7yddji2LsfLWv7WefnzgEAAMFVvLZJ/7LXcPA+EykLDHfh5nIglkakmdsNedYEqH3KtfKQ==}
+    engines: {node: '>=20'}
     hasBin: true
 
   dlv@1.1.3:
@@ -4768,6 +4772,8 @@ snapshots:
 
   commander@13.1.0: {}
 
+  commander@14.0.0: {}
+
   commander@4.1.1: {}
 
   commander@5.1.0: {}
@@ -4895,10 +4901,10 @@ snapshots:
 
   didyoumean@1.2.2: {}
 
-  dkcutter@4.6.0(chokidar@3.6.0)(typescript@5.8.3):
+  dkcutter@5.0.0(chokidar@3.6.0)(typescript@5.8.3):
     dependencies:
       colorette: 2.0.20
-      commander: 13.1.0
+      commander: 14.0.0
       cosmiconfig: 9.0.0(typescript@5.8.3)
       execa: 9.5.3
       fs-extra: 11.3.0
