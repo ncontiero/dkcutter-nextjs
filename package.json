@@ -24,7 +24,7 @@
     "@ncontiero/eslint-config": "5.2.0",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.15.33",
+    "@types/node": "^22.15.34",
     "@types/prompts": "^2.4.9",
     "@types/react": "^19.1.8",
     "colorette": "^2.0.20",
