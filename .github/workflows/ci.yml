@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, main]
+    branches: [main]
   pull_request:
 
 concurrency:
@@ -21,7 +21,6 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version-file: .nvmrc
       - name: Install dependencies
         run: pnpm install
@@ -58,7 +57,6 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v5
         with:
-          cache: pnpm
           node-version-file: .nvmrc
       - name: Install dependencies
         run: pnpm install
