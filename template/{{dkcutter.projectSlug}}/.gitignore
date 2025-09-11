@@ -31,3 +31,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+{% if dkcutter.database == 'prisma' %}
+# Prisma
+/src/lib/generated/
+{% endif %}
