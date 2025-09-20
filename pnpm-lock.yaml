@@ -63,8 +63,8 @@ importers:
         specifier: ^4.24.11
         version: 4.24.11(next@15.5.3(react-dom@18.2.0(react@19.1.1))(react@19.1.1))(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
       ora:
-        specifier: ^8.2.0
-        version: 8.2.0
+        specifier: ^9.0.0
+        version: 9.0.0
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -1319,6 +1319,10 @@ packages:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
 
+  cli-spinners@3.2.1:
+    resolution: {integrity: sha512-Xh+cRh7dzk9n7gYE+M1Lusy3yg5ADy9m6zOHqmcu9kSkWpo7ySWVUS3dXleR3konJOEOdHzsKjWkGed6g2eJuA==}
+    engines: {node: '>=18.20'}
+
   cli-truncate@5.1.0:
     resolution: {integrity: sha512-7JDGG+4Zp0CsknDCedl0DYdaeOhc46QNpXi3NLQblkZpXXgA6LncLDUUyvrjSvZeF3VRQa+KiMGomazQrC1V8g==}
     engines: {node: '>=20'}
@@ -2420,6 +2424,10 @@ packages:
     resolution: {integrity: sha512-i24m8rpwhmPIS4zscNzK6MSEhk0DUWa/8iYQWxhffV8jkI4Phvs3F+quL5xvS0gdQR0FyTCMMH33Y78dDTzzIw==}
     engines: {node: '>=18'}
 
+  log-symbols@7.0.1:
+    resolution: {integrity: sha512-ja1E3yCr9i/0hmBVaM0bfwDjnGy8I/s6PP4DFp+yP+a+mrHO4Rm7DtmnqROTUkHIkqffC84YY7AeqX6oFk0WFg==}
+    engines: {node: '>=18'}
+
   log-update@6.1.0:
     resolution: {integrity: sha512-9ie8ItPR6tjY5uYJh8K/Zrv/RMZ5VOlOWvtZdEHYSTFKZfIBPQa9tOAEeAWhd+AnIneLJ22w5fjOYtoutpWq5w==}
     engines: {node: '>=18'}
@@ -2751,6 +2759,10 @@ packages:
   ora@8.2.0:
     resolution: {integrity: sha512-weP+BZ8MVNnlCm8c0Qdc1WSWq4Qn7I+9CJGm7Qali6g44e/PUzbjNqJX5NJ9ljlNMosfJvg1fKEGILklK9cwnw==}
     engines: {node: '>=18'}
+
+  ora@9.0.0:
+    resolution: {integrity: sha512-m0pg2zscbYgWbqRR6ABga5c3sZdEon7bSgjnlXC64kxtxLOyjRcbbUkLj7HFyy/FTD+P2xdBWu8snGhYI0jc4A==}
+    engines: {node: '>=20'}
 
   own-keys@1.0.1:
     resolution: {integrity: sha512-qFOyK5PjiWZd+QQIh+1jhdb9LpxTF0qs7Pm8o5QHYZ0M3vKqSqzsZaEB6oWlxZ+q2sJBMI/Ktgd2N5ZwQoRHfg==}
@@ -4768,6 +4780,8 @@ snapshots:
 
   cli-spinners@2.9.2: {}
 
+  cli-spinners@3.2.1: {}
+
   cli-truncate@5.1.0:
     dependencies:
       slice-ansi: 7.1.2
@@ -6025,6 +6039,11 @@ snapshots:
       chalk: 5.6.2
       is-unicode-supported: 1.3.0
 
+  log-symbols@7.0.1:
+    dependencies:
+      is-unicode-supported: 2.1.0
+      yoctocolors: 2.1.2
+
   log-update@6.1.0:
     dependencies:
       ansi-escapes: 7.1.0
@@ -6547,6 +6566,18 @@ snapshots:
       log-symbols: 6.0.0
       stdin-discarder: 0.2.2
       string-width: 7.2.0
+      strip-ansi: 7.1.2
+
+  ora@9.0.0:
+    dependencies:
+      chalk: 5.6.2
+      cli-cursor: 5.0.0
+      cli-spinners: 3.2.1
+      is-interactive: 2.0.0
+      is-unicode-supported: 2.1.0
+      log-symbols: 7.0.1
+      stdin-discarder: 0.2.2
+      string-width: 8.1.0
       strip-ansi: 7.1.2
 
   own-keys@1.0.1:
