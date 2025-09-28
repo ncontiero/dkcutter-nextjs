@@ -29,8 +29,8 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/cli": "^20.0.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@ncontiero/eslint-config": "6.1.0",
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.13",
