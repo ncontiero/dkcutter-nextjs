@@ -33,7 +33,7 @@ importers:
         specifier: ^2.4.9
         version: 2.4.9
       '@types/react':
-        specifier: ^19.1.14
+        specifier: ^19.1.15
         version: 19.1.15
       colorette:
         specifier: ^2.0.20
