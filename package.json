@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@clerk/nextjs": "^6.33.0",
-    "@commitlint/cli": "^20.0.0",
+    "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@ncontiero/eslint-config": "6.2.0",
     "@t3-oss/env-nextjs": "^0.13.8",
