@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@clerk/nextjs':
         specifier: ^6.33.1
-        version: 6.33.1(next@15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1))(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+        version: 6.33.1(next@15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@commitlint/cli':
         specifier: ^20.1.0
         version: 20.1.0(@types/node@24.6.2)(typescript@5.9.3)
@@ -58,10 +58,10 @@ importers:
         version: 16.2.3
       next:
         specifier: 15.5.4
-        version: 15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+        version: 15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       next-auth:
         specifier: ^4.24.11
-        version: 4.24.11(next@15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1))(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+        version: 4.24.11(next@15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       ora:
         specifier: ^9.0.0
         version: 9.0.0
@@ -69,8 +69,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       react:
-        specifier: ^19.1.1
-        version: 19.1.1
+        specifier: ^19.2.0
+        version: 19.2.0
       tailwindcss:
         specifier: ^3.4.18
         version: 3.4.18
@@ -3002,8 +3002,8 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react@19.1.1:
-    resolution: {integrity: sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ==}
+  react@19.2.0:
+    resolution: {integrity: sha512-tmbWg6W31tQLeB5cdIBOicJDJRR2KzXsV7uSK9iNfLWQ5bIZfxuPEHp7M8wiHyHnn0DD1i7w3Zmin0FtkrwoCQ==}
     engines: {node: '>=0.10.0'}
 
   read-cache@1.0.0:
@@ -3665,9 +3665,9 @@ snapshots:
 
   '@babel/runtime@7.28.4': {}
 
-  '@clerk/backend@2.17.0(react-dom@18.2.0(react@19.1.1))(react@19.1.1)':
+  '@clerk/backend@2.17.0(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
-      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@clerk/types': 4.90.0
       cookie: 1.0.2
       standardwebhooks: 1.0.0
@@ -3676,37 +3676,37 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/clerk-react@5.49.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)':
+  '@clerk/clerk-react@5.49.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
-      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@clerk/types': 4.90.0
-      react: 19.1.1
-      react-dom: 18.2.0(react@19.1.1)
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
       tslib: 2.8.1
 
-  '@clerk/nextjs@6.33.1(next@15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1))(react-dom@18.2.0(react@19.1.1))(react@19.1.1)':
+  '@clerk/nextjs@6.33.1(next@15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
-      '@clerk/backend': 2.17.0(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
-      '@clerk/clerk-react': 5.49.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
-      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+      '@clerk/backend': 2.17.0(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
+      '@clerk/clerk-react': 5.49.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
+      '@clerk/shared': 3.27.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       '@clerk/types': 4.90.0
-      next: 15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
-      react: 19.1.1
-      react-dom: 18.2.0(react@19.1.1)
+      next: 15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
       server-only: 0.0.1
       tslib: 2.8.1
 
-  '@clerk/shared@3.27.1(react-dom@18.2.0(react@19.1.1))(react@19.1.1)':
+  '@clerk/shared@3.27.1(react-dom@18.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@clerk/types': 4.90.0
       dequal: 2.0.3
       glob-to-regexp: 0.4.1
       js-cookie: 3.0.5
       std-env: 3.9.0
-      swr: 2.3.4(react@19.1.1)
+      swr: 2.3.4(react@19.2.0)
     optionalDependencies:
-      react: 19.1.1
-      react-dom: 18.2.0(react@19.1.1)
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
 
   '@clerk/types@4.90.0':
     dependencies:
@@ -6513,30 +6513,30 @@ snapshots:
 
   natural-orderby@5.0.0: {}
 
-  next-auth@4.24.11(next@15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1))(react-dom@18.2.0(react@19.1.1))(react@19.1.1):
+  next-auth@4.24.11(next@15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0))(react-dom@18.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@babel/runtime': 7.28.4
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
-      next: 15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1)
+      next: 15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0)
       oauth: 0.9.15
       openid-client: 5.7.1
       preact: 10.27.2
       preact-render-to-string: 5.2.6(preact@10.27.2)
-      react: 19.1.1
-      react-dom: 18.2.0(react@19.1.1)
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
       uuid: 8.3.2
 
-  next@15.5.4(react-dom@18.2.0(react@19.1.1))(react@19.1.1):
+  next@15.5.4(react-dom@18.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@next/env': 15.5.4
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001743
       postcss: 8.4.31
-      react: 19.1.1
-      react-dom: 18.2.0(react@19.1.1)
-      styled-jsx: 5.1.6(react@19.1.1)
+      react: 19.2.0
+      react-dom: 18.2.0(react@19.2.0)
+      styled-jsx: 5.1.6(react@19.2.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.5.4
       '@next/swc-darwin-x64': 15.5.4
@@ -6819,15 +6819,15 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-dom@18.2.0(react@19.1.1):
+  react-dom@18.2.0(react@19.2.0):
     dependencies:
       loose-envify: 1.4.0
-      react: 19.1.1
+      react: 19.2.0
       scheduler: 0.23.2
 
   react-is@16.13.1: {}
 
-  react@19.1.1: {}
+  react@19.2.0: {}
 
   read-cache@1.0.0:
     dependencies:
@@ -7191,10 +7191,10 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  styled-jsx@5.1.6(react@19.1.1):
+  styled-jsx@5.1.6(react@19.2.0):
     dependencies:
       client-only: 0.0.1
-      react: 19.1.1
+      react: 19.2.0
 
   sucrase@3.35.0:
     dependencies:
@@ -7212,11 +7212,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swr@2.3.4(react@19.1.1):
+  swr@2.3.4(react@19.2.0):
     dependencies:
       dequal: 2.0.3
-      react: 19.1.1
-      use-sync-external-store: 1.5.0(react@19.1.1)
+      react: 19.2.0
+      use-sync-external-store: 1.5.0(react@19.2.0)
 
   synckit@0.11.11:
     dependencies:
@@ -7425,9 +7425,9 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  use-sync-external-store@1.5.0(react@19.1.1):
+  use-sync-external-store@1.5.0(react@19.2.0):
     dependencies:
-      react: 19.1.1
+      react: 19.2.0
 
   util-deprecate@1.0.2: {}
 
