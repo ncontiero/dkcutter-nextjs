@@ -17,7 +17,7 @@
     "check": "{{ dkcutter._pkgRun }} lint && {{ dkcutter._pkgRun }} typecheck"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.33.3",
+    "@clerk/nextjs": "^6.33.4",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/adapter-pg": "^6.17.1",
     "@prisma/client": "^6.17.1",
