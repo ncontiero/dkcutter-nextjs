@@ -12,6 +12,9 @@ import { buildFilesList, checkPaths, constructArgs } from "./utils";
 
 const TEST_OUTPUT = resolve(".test");
 
+const isWindows = process.platform === "win32";
+const TIMEOUT = isWindows ? 300_000 : 150_000;
+
 beforeAll(async () => {
   await fs.emptyDir(TEST_OUTPUT);
 });
@@ -50,7 +53,7 @@ function runProjectTest(combination: { [key: string]: any }) {
       await execa("pnpm", ["lint", "--max-warnings", "0"], { cwd: target });
       supportedOptions.push(name);
     },
-    300_000,
+    TIMEOUT,
   );
 }
 
