@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "{{ dkcutter.projectName }}",
+  title: "{{ dkcutter.projectName|truncate(60, true, '') }}",
   description: "{{ dkcutter.description }}",
 };
 

@@ -19,14 +19,12 @@ This page describes all the template options that will be prompted by the [dkcut
 - **Use app folder**: Indicates whether the project should be configured use the app folder from [NextJs](https://nextjs.org/docs/app).
 
 - **Database ORM**: Indicates whether the project should be configured using the following ORM:
-
   - None
   - [Prisma](https://www.prisma.io/)
 
 - **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database. This question will only be asked if `Database ORM` is different from `none`.
 
 - **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
-
   - None
   - [Clerk](https://clerk.com/)
   - [NextAuth.js](https://next-auth.js.org/)
@@ -34,7 +32,6 @@ This page describes all the template options that will be prompted by the [dkcut
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/integrations/webhooks#supported-webhook-events). [More information](https://clerk.com/docs/users/sync-data#sync-clerk-data-to-your-backend-with-webhooks).
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
-
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)
   - [Github Dependabot](https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)

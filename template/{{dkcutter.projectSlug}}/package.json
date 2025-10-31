@@ -31,7 +31,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@ncontiero/eslint-config": "6.2.1",
+    "@ncontiero/eslint-config": "6.4.0",
     "@types/node": "^24.9.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",

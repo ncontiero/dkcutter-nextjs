@@ -47,10 +47,10 @@ function runProjectTest(combination: { [key: string]: any }) {
       checkPaths(paths);
 
       // Check that the project is linted
-      await execa("pnpm", ["lint"], { cwd: target });
+      await execa("pnpm", ["lint", "--max-warnings", "0"], { cwd: target });
       supportedOptions.push(name);
     },
-    120_000,
+    300_000,
   );
 }
 

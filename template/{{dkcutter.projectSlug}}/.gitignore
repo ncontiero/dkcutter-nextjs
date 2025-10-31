@@ -33,5 +33,5 @@ yarn-error.log*
 next-env.d.ts
 {% if dkcutter.database == 'prisma' %}
 # Prisma
-/src/lib/generated/
+src/lib/generated/
 {% endif %}
