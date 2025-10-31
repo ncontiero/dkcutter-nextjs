@@ -14,7 +14,7 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-{% if dkcutter.authProvider == 'nextAuth' %}
+{%- if dkcutter.authProvider == 'nextAuth' %}
 export default function App({
   Component,
   pageProps,
@@ -27,7 +27,7 @@ export default function App({
     </SessionProvider>
   );
 }
-{% else %}
+{%- else %}
 export default function App({ Component, pageProps }: AppProps) {
 {%- if dkcutter.authProvider == 'clerk' %}
   return (
@@ -45,4 +45,4 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 {%- endif %}
 }
-{% endif %}
+{%- endif %}
