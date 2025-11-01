@@ -1,43 +1,43 @@
-# DKCutter NextJs
+# DKCutter Next.js
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/ncontiero/dkcutter-nextjs/ci.yml?branch=main)](https://github.com/ncontiero/dkcutter-nextjs/actions/workflows/ci.yml?query=branch%3Amain)
 [![license mit](https://img.shields.io/badge/licence-MIT-56BEB8)](LICENSE)
 
-Powered by [DKCutter](https://github.com/ncontiero/dkcutter), DKCutter NextJs is a framework for quickly starting Next.Js projects.
+Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter Next.js is a framework for quickly starting Next.js projects.
 
-- If you have problems with DKCutter NextJs, please open [issues](https://github.com/ncontiero/dkcutter-nextjs/issues/new).
+- If you have problems with DKCutter Next.js, please open an [issue](https://github.com/ncontiero/dkcutter-nextjs/issues/new).
 
 ## Usage
 
-To scaffold an application using [dkcutter](https://github.com/ncontiero/dkcutter), run any of the following four commands and answer the command prompt questions:
+To scaffold an application using [DKCutter](https://dkcutter.ncontiero.com/), run any of the following four commands and answer the command prompt questions:
 
 ### npm
 
 ```bash
-npx dkcutter gh:ncontiero/dkcutter-nextjs.git
+npx dkcutter@latest gh:ncontiero/dkcutter-nextjs
 ```
 
 ### yarn
 
 ```bash
-yarn dlx dkcutter gh:ncontiero/dkcutter-nextjs.git
+yarn dlx dkcutter@latest gh:ncontiero/dkcutter-nextjs
 ```
 
 ### pnpm
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs.git
+pnpm dlx dkcutter@latest gh:ncontiero/dkcutter-nextjs
 ```
 
 ### bun
 
 ```bash
-bunx dkcutter@latest gh:ncontiero/dkcutter-nextjs.git
+bunx dkcutter@latest gh:ncontiero/dkcutter-nextjs
 ```
 
-You'll be prompted for some values. Provide them, then a Next.Js project will be created for you.
+You'll be prompted for some values. Provide them, then a Next.js project will be created for you.
 
-**Warning**: After this point, change 'My name', etc to your own information.
+**Warning**: After this point, change 'author name', etc to your own information.
 
 Answer the prompts with your own desired [options][options-url]. For example:
 
@@ -51,8 +51,10 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Do you want to use lint staged? … No / Yes
 ✔ Do you want to use Commitlint? … No / Yes
 ✔ Do you want to use Next.Js app folder? … No / Yes
-✔ What database ORM would you like to use? › None
-✔ What Authentication Provider would you like to use? › None
+✔ What database ORM would you like to use? › Prisma
+✔ Do you want to use Docker compose for the database? … No / Yes
+✔ What Authentication Provider would you like to use? › Clerk
+✔ Do you want to receive events from the Clerk using a webhook? … No / Yes
 ✔ What Automated Dependency Updater do you want to use? › Mend Renovate
 ✔ Do you want the project to be configured? … No / Yes
 Next steps:
@@ -60,6 +62,7 @@ Next steps:
   pnpm install
   git add .
   git commit -m "initial commit"
+  docker compose up -d
   pnpm dev
 
 ✔ Project created!
@@ -88,7 +91,7 @@ If you want to start faster, you can use the following options:
 | `--useHusky [boolean]`            | Include [husky](https://github.com/typicode/husky) in the project.                               |
 | `--useLintStaged [boolean]`       | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
 | `--useCommitlint [boolean]`       | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
-| `--useAppFolder [boolean]`        | Use [Next.Js app folder](https://nextjs.org/docs/app) structure.                                 |
+| `--useAppFolder [boolean]`        | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                 |
 | `--database <string>`             | Choose a database ORM. [See for more info][options-url].                                         |
 | `--useDockerCompose [boolean]`    | Include docker compose in the project for the database. If `database` is different from `none`.  |
 | `--authProvider <string>`         | Choose a authentication provider. [See for more info][options-url].                              |

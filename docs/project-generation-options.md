@@ -1,10 +1,10 @@
 # Project Generation Options
 
-This page describes all the template options that will be prompted by the [dkcutter CLI](https://github.com/ncontiero/dkcutter) prior to generating your project.
+This page describes all the template options that will be prompted by the [DKCutter CLI](https://github.com/ncontiero/dkcutter) prior to generating your project.
 
 - **Project name**: Your project's human-readable name, capitals and spaces allowed.
 
-- **Project slug**: Your project's slug without dashes or spaces. Used to name your repo and in other places.
+- **Project slug**: Your project's slug without spaces. Used to name your repo and in other places.
 
 - **Project description**: Describes your project and gets used in places like README.md and such.
 
@@ -16,7 +16,7 @@ This page describes all the template options that will be prompted by the [dkcut
 
 - **Use lint staged**: Indicates that the project should be configured with [lint-staged](https://github.com/okonet/lint-staged). This question will only be asked if `Use husky` is chosen.
 
-- **Use app folder**: Indicates whether the project should be configured use the app folder from [NextJs](https://nextjs.org/docs/app).
+- **Use app folder**: Indicates whether the project should be configured use the app folder from [Next.js](https://nextjs.org/docs/app).
 
 - **Database ORM**: Indicates whether the project should be configured using the following ORM:
   - None
@@ -27,13 +27,13 @@ This page describes all the template options that will be prompted by the [dkcut
 - **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
   - None
   - [Clerk](https://clerk.com/)
-  - [NextAuth.js](https://next-auth.js.org/)
+  - [NextAuth.js](https://authjs.dev/)
 
-- **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/integrations/webhooks#supported-webhook-events). [More information](https://clerk.com/docs/users/sync-data#sync-clerk-data-to-your-backend-with-webhooks).
+- **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)
-  - [Github Dependabot](https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file)
+  - [Github Dependabot](https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
 
 - **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository.
