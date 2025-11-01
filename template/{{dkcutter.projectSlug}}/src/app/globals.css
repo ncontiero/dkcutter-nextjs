@@ -1,13 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme inline {
+  --font-inter: var(--font-inter);
+}
 
 @layer base {
   html {
     @apply scroll-smooth;
   }
   body {
-    font-family: var(--font-inter), system-ui, sans-serif;
-    @apply flex h-screen w-full flex-col items-center justify-center;
+    @apply flex h-screen w-full flex-col items-center justify-center font-inter;
   }
 }
