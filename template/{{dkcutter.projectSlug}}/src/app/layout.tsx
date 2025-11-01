@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 {%- if dkcutter.authProvider == 'clerk' %}
 import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}

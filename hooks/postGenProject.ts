@@ -83,7 +83,18 @@ async function main() {
       path.join(appFolder, "favicon.ico"),
       path.join(publicFolder, "favicon.ico"),
     );
+
+    const appAuthAPI = path.join(appFolder, "api", "auth");
+    const moveAppAuthAPITo = path.join(pagesFolder, "api", "auth");
+    if (CTX.authProvider === "nextAuth") {
+      fs.moveSync(appAuthAPI, moveAppAuthAPITo);
+    }
     removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
+
+    if (CTX.authProvider === "nextAuth") {
+      fs.ensureDirSync(appFolder);
+      fs.moveSync(moveAppAuthAPITo, appAuthAPI);
+    }
   }
 
   if (CTX.useCommitlint) {
@@ -134,13 +145,11 @@ async function main() {
   }
 
   if (CTX.authProvider === "clerk") {
-    const files = [path.join(srcFolder, "lib", "nextAuth.ts")];
+    const files = [path.join(srcFolder, "lib", "auth.ts")];
     if (CTX.useAppFolder) {
       files.push(path.join(appFolder, "api", "auth"));
-    } else {
-      files.push(path.join(pagesFolder, "api", "auth"));
     }
-    REMOVE_DEPS.push("next-auth", "@next-auth/prisma-adapter");
+    REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter");
     removeFiles(files);
   } else if (CTX.authProvider === "nextAuth") {
     REMOVE_DEPS.push("@clerk/nextjs");
@@ -156,11 +165,11 @@ async function main() {
         path.join(pagesFolder, "sign-up"),
       );
     }
-    CTX.database !== "prisma" && REMOVE_DEPS.push("@next-auth/prisma-adapter");
+    CTX.database !== "prisma" && REMOVE_DEPS.push("@auth/prisma-adapter");
     removeFiles(files);
   } else {
     const files = [
-      path.join(srcFolder, "lib", "nextAuth.ts"),
+      path.join(srcFolder, "lib", "auth.ts"),
       path.join(srcFolder, "proxy.ts"),
     ];
     if (CTX.useAppFolder) {
@@ -171,12 +180,11 @@ async function main() {
       );
     } else {
       files.push(
-        path.join(pagesFolder, "api", "auth"),
         path.join(pagesFolder, "sign-in"),
         path.join(pagesFolder, "sign-up"),
       );
     }
-    REMOVE_DEPS.push("next-auth", "@next-auth/prisma-adapter", "@clerk/nextjs");
+    REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter", "@clerk/nextjs");
     removeFiles(files);
   }
   if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {

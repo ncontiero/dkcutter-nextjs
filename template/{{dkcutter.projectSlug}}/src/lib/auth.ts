@@ -1,19 +1,10 @@
-{%- if not dkcutter.useAppFolder -%}
-import type { GetServerSidePropsContext } from "next";
+import { cache } from "react";
+{%- if dkcutter.database == 'prisma' %}
+import { PrismaAdapter } from "@auth/prisma-adapter";
 {%- endif %}
-{%- if dkcutter.database == 'prisma' -%}
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-
-{% endif -%}
-
-import {
-  type DefaultSession,
-  type NextAuthOptions,
-  getServerSession,
-} from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 
-import { env } from "@/env";
 {%- if dkcutter.database == 'prisma' %}
 import { prisma } from "@/lib/prisma";
 {%- endif %}
@@ -39,12 +30,12 @@ declare module "next-auth" {
   // }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
-export const authOptions: NextAuthOptions = {
+const {
+  auth: uncachedAuth,
+  handlers,
+  signIn,
+  signOut,
+} = NextAuth({
   callbacks: {
     session: ({ session, token }) => ({
       ...session,
@@ -58,10 +49,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
 {%- endif %}
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
+    DiscordProvider,
     /**
      * ...add more providers here.
      *
@@ -72,20 +60,8 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
-};
+});
 
-/**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
- *
- * @see https://next-auth.js.org/configuration/nextjs
- */
-{%- if dkcutter.useAppFolder %}
-export const getServerAuthSession = () => getServerSession(authOptions);
-{%- else %}
-export const getServerAuthSession = (ctx: {
-  req: GetServerSidePropsContext["req"];
-  res: GetServerSidePropsContext["res"];
-}) => {
-  return getServerSession(ctx.req, ctx.res, authOptions);
-};
-{%- endif %}
+const auth = cache(uncachedAuth);
+
+export { auth, handlers, signIn, signOut };
