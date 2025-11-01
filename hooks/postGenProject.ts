@@ -73,12 +73,6 @@ async function main() {
     fs.removeSync(pagesFolder);
     SCRIPTS.postinstall = "next typegen";
   } else {
-    const stylesFolder = path.join(srcFolder, "styles");
-    fs.ensureDirSync(stylesFolder);
-    fs.moveSync(
-      path.join(appFolder, "globals.css"),
-      path.join(stylesFolder, "globals.css"),
-    );
     fs.moveSync(
       path.join(appFolder, "favicon.ico"),
       path.join(publicFolder, "favicon.ico"),
