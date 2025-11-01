@@ -12,7 +12,7 @@ interface UpdatePackageJsonProps {
   projectDir: string;
 }
 
-export function updatePackageJson({
+export async function updatePackageJson({
   removeDeps = [],
   removeDevDeps = [],
   scripts = {},
@@ -21,7 +21,7 @@ export function updatePackageJson({
   projectDir,
 }: UpdatePackageJsonProps) {
   const packageJsonPath = path.join(projectDir, "package.json");
-  const packageJson = fs.readJSONSync(packageJsonPath);
+  const packageJson = await fs.readJSON(packageJsonPath);
 
   packageJson.dependencies = packageJson.dependencies || {};
   packageJson.devDependencies = packageJson.devDependencies || {};
@@ -42,7 +42,7 @@ export function updatePackageJson({
     });
   }
 
-  fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
+  await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
 
   return packageJson;
 }

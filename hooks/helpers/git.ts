@@ -1,4 +1,3 @@
-import { execSync } from "node:child_process";
 import path from "node:path";
 import { bold, green, red, redBright } from "colorette";
 import { execa } from "execa";
@@ -8,9 +7,9 @@ import prompts from "prompts";
 
 import { logger } from "../utils/logger";
 
-export function isGitInstalled(dir: string) {
+export async function isGitInstalled(dir: string) {
   try {
-    execSync("git --version", { cwd: dir });
+    await execa("git --version", { cwd: dir });
     return true;
   } catch {
     return false;
@@ -18,8 +17,8 @@ export function isGitInstalled(dir: string) {
 }
 
 /** @returns Whether or not the provided directory has a `.git` subdirectory in it. */
-export function isRootGitRepo(dir: string) {
-  return fs.existsSync(path.join(dir, ".git"));
+export async function isRootGitRepo(dir: string) {
+  return await fs.exists(path.join(dir, ".git"));
 }
 
 /** @returns Whether or not this directory or a parent directory has a `.git` directory. */
@@ -37,8 +36,8 @@ export async function isInsideGitRepo(dir: string) {
   }
 }
 
-function getGitVersion() {
-  const stdout = execSync("git --version").toString().trim();
+async function getGitVersion() {
+  const stdout = (await execa("git --version")).toString().trim();
   const gitVersionTag = stdout.split(" ")[2];
   const major = gitVersionTag?.split(".")[0];
   const minor = gitVersionTag?.split(".")[1];
@@ -46,8 +45,8 @@ function getGitVersion() {
 }
 
 /** @returns The git config value of "init.defaultBranch". If it is not set, returns "main". */
-function getDefaultBranch() {
-  return execSync("git config --global init.defaultBranch || echo main")
+async function getDefaultBranch() {
+  return (await execa("git config --global init.defaultBranch || echo main"))
     .toString()
     .trim();
 }
@@ -56,14 +55,14 @@ function getDefaultBranch() {
 export async function initializeGit(projectDir: string) {
   logger.info("Initializing Git...");
 
-  if (!isGitInstalled(projectDir)) {
+  if (!(await isGitInstalled(projectDir))) {
     logger.warn("Git is not installed. Skipping Git initialization.");
     return;
   }
 
   const spinner = ora("Creating a new git repo...\n").start();
 
-  const isRoot = isRootGitRepo(projectDir);
+  const isRoot = await isRootGitRepo(projectDir);
   const isInside = await isInsideGitRepo(projectDir);
   const dirName = path.parse(projectDir).name; // skip full path for logging
 
@@ -83,7 +82,7 @@ export async function initializeGit(projectDir: string) {
       return;
     }
     // Deleting the .git folder
-    fs.removeSync(path.join(projectDir, ".git"));
+    await fs.remove(path.join(projectDir, ".git"));
   } else if (isInside && !isRoot) {
     // Dir is inside a git worktree
     spinner.stop();
@@ -102,10 +101,10 @@ export async function initializeGit(projectDir: string) {
 
   // We're good to go, initializing the git repo
   try {
-    const branchName = getDefaultBranch();
+    const branchName = await getDefaultBranch();
 
     // --initial-branch flag was added in git v2.28.0
-    const { major, minor } = getGitVersion();
+    const { major, minor } = await getGitVersion();
     if (major < 2 || (major === 2 && minor < 28)) {
       await execa("git", ["init"], { cwd: projectDir });
       // symbolic-ref is used here due to refs/heads/master not existing
@@ -134,7 +133,7 @@ export async function initializeGit(projectDir: string) {
 }
 
 export async function stageAndCommit(projectDir: string, message: string) {
-  const isRoot = isRootGitRepo(projectDir);
+  const isRoot = await isRootGitRepo(projectDir);
   const isInside = await isInsideGitRepo(projectDir);
   const dirName = path.parse(projectDir).name; // skip full path for logging
 

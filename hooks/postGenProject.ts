@@ -1,4 +1,9 @@
-import type { PackageManager } from "./utils/types";
+import type {
+  AuthProvider,
+  AutomatedDepsUpdater,
+  Database,
+  PackageManager,
+} from "./utils/types";
 
 import path from "node:path";
 import { execa } from "execa";
@@ -20,11 +25,12 @@ const CTX = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
-  database: "{{ dkcutter.database }}",
+  database: "{{ dkcutter.database }}" as Database,
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
-  authProvider: "{{ dkcutter.authProvider }}",
+  authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
   clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
-  automatedDepsUpdater: "{{ dkcutter.automatedDepsUpdater }}",
+  automatedDepsUpdater:
+    "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
@@ -38,12 +44,12 @@ async function getPkgManagerVersion() {
   }
 }
 
-function appendToGitignore(gitignorePath: string, lines: string) {
-  fs.appendFileSync(gitignorePath, lines);
+async function appendToGitignore(gitignorePath: string, lines: string) {
+  await fs.appendFile(gitignorePath, lines);
 }
 
 function removeFiles(files: string[]) {
-  files.forEach((file) => fs.removeSync(file));
+  files.forEach(async (file) => await fs.remove(file));
 }
 
 async function main() {
@@ -57,23 +63,26 @@ async function main() {
   const appFolder = path.join(srcFolder, "app");
 
   const gitignorePath = path.join(projectDir, ".gitignore");
-  appendToGitignore(gitignorePath, "\n# local env files\n.env*.local\n.env\n");
+  await appendToGitignore(
+    gitignorePath,
+    "\n# local env files\n.env*.local\n.env\n",
+  );
 
   const pkgVersion = await getPkgManagerVersion();
   if (pkgVersion) {
-    updatePackageJson({
+    await updatePackageJson({
       projectDir,
       modifyKey: { packageManager: pkgVersion },
     });
   } else {
-    updatePackageJson({ projectDir, keys: ["packageManager"] });
+    await updatePackageJson({ projectDir, keys: ["packageManager"] });
   }
 
   if (CTX.useAppFolder) {
-    fs.removeSync(pagesFolder);
+    await fs.remove(pagesFolder);
     SCRIPTS.postinstall = "next typegen";
   } else {
-    fs.moveSync(
+    await fs.move(
       path.join(appFolder, "favicon.ico"),
       path.join(publicFolder, "favicon.ico"),
     );
@@ -81,13 +90,13 @@ async function main() {
     const appAuthAPI = path.join(appFolder, "api", "auth");
     const moveAppAuthAPITo = path.join(pagesFolder, "api", "auth");
     if (CTX.authProvider === "nextAuth") {
-      fs.moveSync(appAuthAPI, moveAppAuthAPITo);
+      await fs.move(appAuthAPI, moveAppAuthAPITo);
     }
     removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
 
     if (CTX.authProvider === "nextAuth") {
-      fs.ensureDirSync(appFolder);
-      fs.moveSync(moveAppAuthAPITo, appAuthAPI);
+      await fs.ensureDir(appFolder);
+      await fs.move(moveAppAuthAPITo, appAuthAPI);
     }
   }
 
@@ -106,7 +115,7 @@ async function main() {
     SCRIPTS["pre-commit"] = "lint-staged";
   } else {
     REMOVE_DEV_DEPS.push("lint-staged");
-    updatePackageJson({
+    await updatePackageJson({
       projectDir,
       keys: ["lint-staged"],
     });
@@ -116,7 +125,7 @@ async function main() {
     SCRIPTS.prepare = "husky";
   } else {
     REMOVE_DEV_DEPS.push("husky");
-    fs.removeSync(path.join(projectDir, ".husky"));
+    await fs.remove(path.join(projectDir, ".husky"));
   }
 
   if (CTX.database === "none") {
@@ -135,7 +144,7 @@ async function main() {
   }
 
   if (!CTX.useDockerCompose) {
-    fs.removeSync(path.join(projectDir, "docker-compose.yml"));
+    await fs.remove(path.join(projectDir, "docker-compose.yml"));
   }
 
   if (CTX.authProvider === "clerk") {
@@ -199,7 +208,7 @@ async function main() {
     removeFiles([path.join(appFolder, "api")]);
   }
 
-  updatePackageJson({
+  await updatePackageJson({
     projectDir,
     removeDeps: REMOVE_DEPS,
     removeDevDeps: REMOVE_DEV_DEPS,
@@ -213,9 +222,9 @@ async function main() {
       path.join(githubFolder, "dependabot.yml"),
     ]);
   } else if (CTX.automatedDepsUpdater === "renovate") {
-    fs.removeSync(path.join(githubFolder, "dependabot.yml"));
+    await fs.remove(path.join(githubFolder, "dependabot.yml"));
   } else if (CTX.automatedDepsUpdater === "dependabot") {
-    fs.removeSync(path.join(githubFolder, "renovate.json"));
+    await fs.remove(path.join(githubFolder, "renovate.json"));
   }
 
   if (CTX.automaticStart) {
@@ -228,4 +237,7 @@ async function main() {
   await logNextSteps({ ctx: CTX, projectDir, pkgManager: CTX.pkgManager });
 }
 
-main();
+main().catch((error) => {
+  logger.error(`An error occurred: ${error}`);
+  process.exit(1);
+});
