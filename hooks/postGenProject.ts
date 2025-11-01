@@ -6,7 +6,6 @@ import type {
 } from "./utils/types";
 
 import path from "node:path";
-import { execa } from "execa";
 import fs from "fs-extra";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
@@ -14,6 +13,8 @@ import { installDependencies } from "./helpers/installDependencies";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { runLinters } from "./helpers/runLinters";
 import { toBoolean } from "./utils/coerce";
+import { appendToGitignore, removeFiles } from "./utils/files";
+import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
 import { logger } from "./utils/logger";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
@@ -21,10 +22,10 @@ const TEMPLATE_REPO = "ncontiero/dkcutter-nextjs";
 const CTX = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
-  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
+  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   database: "{{ dkcutter.database }}" as Database,
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
@@ -34,28 +35,11 @@ const CTX = {
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
-async function getPkgManagerVersion() {
-  try {
-    const pkg = CTX.pkgManager;
-    const { stdout } = await execa(pkg, ["-v"]);
-    return `${pkg}@${stdout}`;
-  } catch (error) {
-    logger.warn("Unable to get version from package manager.", error);
-  }
-}
-
-async function appendToGitignore(gitignorePath: string, lines: string) {
-  await fs.appendFile(gitignorePath, lines);
-}
-
-function removeFiles(files: string[]) {
-  files.forEach(async (file) => await fs.remove(file));
-}
-
 async function main() {
   const REMOVE_DEPS = [];
   const REMOVE_DEV_DEPS = [];
   const SCRIPTS: Record<string, string> = {};
+
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
@@ -68,7 +52,7 @@ async function main() {
     "\n# local env files\n.env*.local\n.env\n",
   );
 
-  const pkgVersion = await getPkgManagerVersion();
+  const pkgVersion = await getPkgManagerVersion(CTX.pkgManager);
   if (pkgVersion) {
     await updatePackageJson({
       projectDir,
@@ -78,36 +62,11 @@ async function main() {
     await updatePackageJson({ projectDir, keys: ["packageManager"] });
   }
 
-  if (CTX.useAppFolder) {
-    await fs.remove(pagesFolder);
-    SCRIPTS.postinstall = "next typegen";
+  if (CTX.useHusky) {
+    SCRIPTS.prepare = "husky";
   } else {
-    await fs.move(
-      path.join(appFolder, "favicon.ico"),
-      path.join(publicFolder, "favicon.ico"),
-    );
-    await fs.remove(path.join(publicFolder, ".gitkeep"));
-
-    if (CTX.authProvider === "nextAuth") {
-      const appDirContents = await fs.readdir(appFolder);
-      for (const file of appDirContents) {
-        if (file === "api") continue;
-        await fs.remove(path.join(appFolder, file));
-      }
-    } else {
-      await fs.remove(appFolder);
-    }
-  }
-
-  if (CTX.useCommitlint) {
-    SCRIPTS.commitlint = "commitlint --edit";
-  } else {
-    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
-    const filesToRemove = [
-      path.join(projectDir, ".commitlintrc.json"),
-      path.join(projectDir, ".husky", "commit-msg"),
-    ];
-    removeFiles(filesToRemove);
+    REMOVE_DEV_DEPS.push("husky");
+    await fs.remove(path.join(projectDir, ".husky"));
   }
 
   if (CTX.useLintStaged) {
@@ -120,17 +79,45 @@ async function main() {
     });
   }
 
-  if (CTX.useHusky) {
-    SCRIPTS.prepare = "husky";
+  if (CTX.useCommitlint) {
+    SCRIPTS.commitlint = "commitlint --edit";
   } else {
-    REMOVE_DEV_DEPS.push("husky");
-    await fs.remove(path.join(projectDir, ".husky"));
+    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    await removeFiles([
+      path.join(projectDir, ".commitlintrc.json"),
+      path.join(projectDir, ".husky", "commit-msg"),
+    ]);
+  }
+
+  if (CTX.useAppFolder) {
+    await fs.remove(pagesFolder);
+    SCRIPTS.postinstall = "next typegen";
+  } else {
+    await fs.move(
+      path.join(appFolder, "favicon.ico"),
+      path.join(publicFolder, "favicon.ico"),
+    );
+    await fs.remove(path.join(publicFolder, ".gitkeep"));
+
+    if (CTX.authProvider === "nextAuth" || CTX.clerkWebhook) {
+      const appDirContents = await fs.readdir(appFolder);
+      for (const file of appDirContents) {
+        if (file === "api") continue;
+        await fs.remove(path.join(appFolder, file));
+      }
+    } else {
+      await fs.remove(appFolder);
+    }
   }
 
   if (CTX.database === "none") {
-    REMOVE_DEPS.push("@prisma/client");
+    REMOVE_DEPS.push(
+      "@prisma/adapter-pg",
+      "@prisma/client",
+      "@auth/prisma-adapter",
+    );
     REMOVE_DEV_DEPS.push("prisma");
-    removeFiles([
+    await removeFiles([
       path.join(projectDir, "prisma"),
       path.join(srcFolder, "lib", "prisma.ts"),
     ]);
@@ -146,60 +133,38 @@ async function main() {
     await fs.remove(path.join(projectDir, "docker-compose.yml"));
   }
 
-  if (CTX.authProvider === "clerk") {
-    const files = [path.join(srcFolder, "lib", "auth.ts")];
-    if (CTX.useAppFolder) {
-      files.push(path.join(appFolder, "api", "auth"));
-    }
+  const removeNextAuth = async () => {
     REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter");
-    removeFiles(files);
-  } else if (CTX.authProvider === "nextAuth") {
-    REMOVE_DEPS.push("@clerk/nextjs");
-    const files = [path.join(srcFolder, "proxy.ts")];
-    if (CTX.useAppFolder) {
-      files.push(
-        path.join(appFolder, "sign-in"),
-        path.join(appFolder, "sign-up"),
-      );
-    } else {
-      files.push(
-        path.join(pagesFolder, "sign-in"),
-        path.join(pagesFolder, "sign-up"),
-      );
-    }
-    CTX.database !== "prisma" && REMOVE_DEPS.push("@auth/prisma-adapter");
-    removeFiles(files);
-  } else {
-    const files = [
+    await removeFiles([
       path.join(srcFolder, "lib", "auth.ts"),
+      path.join(appFolder, "api", "auth"),
+    ]);
+  };
+  const removeClerk = async () => {
+    REMOVE_DEPS.push("@clerk/nextjs");
+    const folder = CTX.useAppFolder ? appFolder : pagesFolder;
+    await removeFiles([
       path.join(srcFolder, "proxy.ts"),
-    ];
-    if (CTX.useAppFolder) {
-      files.push(
-        path.join(appFolder, "api"),
-        path.join(appFolder, "sign-in"),
-        path.join(appFolder, "sign-up"),
-      );
-    } else {
-      files.push(
-        path.join(pagesFolder, "sign-in"),
-        path.join(pagesFolder, "sign-up"),
-      );
-    }
-    REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter", "@clerk/nextjs");
-    removeFiles(files);
-  }
+      path.join(appFolder, "api", "webhook"),
+      path.join(folder, "sign-in"),
+      path.join(folder, "sign-up"),
+    ]);
+  };
 
-  if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {
-    REMOVE_DEPS.push("svix");
-    removeFiles([path.join(appFolder, "api", "webhook")]);
+  if (CTX.authProvider === "clerk") {
+    await removeNextAuth();
+  } else if (CTX.authProvider === "nextAuth") {
+    await removeClerk();
+  } else {
+    await removeNextAuth();
+    await removeClerk();
   }
 
   if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
-    removeFiles([path.join(srcFolder, "lib")]);
+    await fs.remove(path.join(srcFolder, "lib"));
   }
-  if (CTX.useAppFolder && CTX.authProvider !== "nextAuth") {
-    removeFiles([path.join(appFolder, "api")]);
+  if (CTX.authProvider === "none") {
+    await fs.remove(path.join(appFolder, "api"));
   }
 
   await updatePackageJson({
@@ -210,15 +175,15 @@ async function main() {
   });
 
   const githubFolder = path.join(projectDir, ".github");
-  if (CTX.automatedDepsUpdater === "none") {
-    removeFiles([
-      path.join(githubFolder, "renovate.json"),
-      path.join(githubFolder, "dependabot.yml"),
-    ]);
-  } else if (CTX.automatedDepsUpdater === "renovate") {
+  if (CTX.automatedDepsUpdater === "renovate") {
     await fs.remove(path.join(githubFolder, "dependabot.yml"));
   } else if (CTX.automatedDepsUpdater === "dependabot") {
     await fs.remove(path.join(githubFolder, "renovate.json"));
+  } else {
+    await removeFiles([
+      path.join(githubFolder, "renovate.json"),
+      path.join(githubFolder, "dependabot.yml"),
+    ]);
   }
 
   if (CTX.automaticStart) {
