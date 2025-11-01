@@ -86,17 +86,16 @@ async function main() {
       path.join(appFolder, "favicon.ico"),
       path.join(publicFolder, "favicon.ico"),
     );
-
-    const appAuthAPI = path.join(appFolder, "api", "auth");
-    const moveAppAuthAPITo = path.join(pagesFolder, "api", "auth");
-    if (CTX.authProvider === "nextAuth") {
-      await fs.move(appAuthAPI, moveAppAuthAPITo);
-    }
-    removeFiles([path.join(publicFolder, ".gitkeep"), appFolder]);
+    await fs.remove(path.join(publicFolder, ".gitkeep"));
 
     if (CTX.authProvider === "nextAuth") {
-      await fs.ensureDir(appFolder);
-      await fs.move(moveAppAuthAPITo, appAuthAPI);
+      const appDirContents = await fs.readdir(appFolder);
+      for (const file of appDirContents) {
+        if (file === "api") continue;
+        await fs.remove(path.join(appFolder, file));
+      }
+    } else {
+      await fs.remove(appFolder);
     }
   }
 
@@ -191,14 +190,11 @@ async function main() {
     removeFiles(files);
   }
   if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {
-    const endpoint = [];
-    if (CTX.useAppFolder) {
-      endpoint.push(path.join(appFolder, "api", "webhook"));
-    } else {
-      endpoint.push(path.join(pagesFolder, "api", "webhook.ts"));
-    }
     REMOVE_DEPS.push("svix");
-    removeFiles(endpoint);
+    removeFiles([
+      path.join(appFolder, "api", "webhook"),
+      path.join(pagesFolder, "api", "webhook.ts"),
+    ]);
   }
 
   if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
