@@ -33,10 +33,10 @@ const it = vitestIt.extend<{
 });
 
 function runProjectTest(combination: { [key: string]: any }) {
-  const args = constructArgs(combination);
+  const { args, testName } = constructArgs(combination);
   const name = args[1];
   it.concurrent(
-    name,
+    testName,
     async ({ supportedOptions }) => {
       const target = resolve(TEST_OUTPUT, name);
 
@@ -46,8 +46,8 @@ function runProjectTest(combination: { [key: string]: any }) {
       });
 
       // Check that the project was generated
-      const paths = buildFilesList(target);
-      checkPaths(paths);
+      const paths = await buildFilesList(target);
+      await checkPaths(paths);
 
       // Check that the project is linted
       const getWarnings = process.env.GET_WARNINGS === "true";
@@ -56,6 +56,7 @@ function runProjectTest(combination: { [key: string]: any }) {
         ["lint", ...(getWarnings ? ["--max-warnings", "0"] : [])],
         { cwd: target },
       );
+
       supportedOptions.push(name);
     },
     TIMEOUT,
@@ -66,10 +67,10 @@ function runUnsupportedOptionsTest(
   combination: { [key: string]: any },
   testOption: "slug" | "options" = "options",
 ) {
-  const args = constructArgs(combination);
+  const { args, testName } = constructArgs(combination);
   const name = args[1];
   it.concurrent(
-    name,
+    testName,
     async ({ expect, invalidSlugs, unsupportedOptions }) => {
       // Generate the project and check that it fails
       const { exitCode } = await execa(

@@ -5,14 +5,14 @@ import { PATTERN } from "./constants";
 /**
  * Build a list containing absolute paths to the generated files.
  */
-export function buildFilesList(baseDir: string) {
-  const files = fs.readdirSync(baseDir);
+export async function buildFilesList(baseDir: string) {
+  const files = await fs.readdir(baseDir);
   const paths: string[] = [];
-  files.forEach((file) => {
+  files.forEach(async (file) => {
     const filePath = path.join(baseDir, file);
-    const stat = fs.statSync(filePath);
+    const stat = await fs.stat(filePath);
     if (stat.isDirectory()) {
-      paths.push(...buildFilesList(filePath));
+      paths.push(...(await buildFilesList(filePath)));
     } else {
       paths.push(filePath);
     }
@@ -23,9 +23,9 @@ export function buildFilesList(baseDir: string) {
 /**
  * Method to check all paths have correct substitutions.
  */
-export function checkPaths(paths: string[]) {
+export async function checkPaths(paths: string[]) {
   for (const path of paths) {
-    const content = fs.readFileSync(path, "utf-8");
+    const content = await fs.readFile(path, "utf-8");
     const matches = content.match(PATTERN);
     if (matches) {
       throw new Error(
@@ -46,6 +46,10 @@ export function constructArgs(combination: { [key: string]: any }) {
     args.push(`--${item}`, value);
   }
   name = name.slice(0, -1);
-  args.unshift("--projectName", name.toLowerCase());
-  return args;
+  const projectName = name.toLowerCase();
+  args.unshift(
+    "--projectName",
+    projectName.slice(0, 16).concat(Math.random().toString().slice(2, 8)),
+  );
+  return { args, testName: projectName };
 }

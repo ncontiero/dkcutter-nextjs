@@ -13,6 +13,7 @@
     "lint:fix": "pnpm lint --fix",
     "check": "pnpm lint && pnpm typecheck",
     "test": "vitest",
+    "test:strict": "GET_WARNINGS=true pnpm test",
     "commitlint": "commitlint --edit",
     "pre-commit": "lint-staged -c ./package.json",
     "prepare": "husky"

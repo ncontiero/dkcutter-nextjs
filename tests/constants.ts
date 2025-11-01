@@ -51,3 +51,5 @@ export const INVALID_SLUGS = [
   "t!es",
   "test test",
 ];
+
+export const EXCLUDED_DIRS = ["node_modules"];
