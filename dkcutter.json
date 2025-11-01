@@ -29,7 +29,7 @@
     "promptMessage": "Do you want to use {{ colors.blue('husky') }}?"
   },
   "useLintStaged": {
-    "disabled": "{% if not useHusky %}true{% else %}false{% endif %}",
+    "disabled": "{{ not useHusky }}",
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('lint staged') }}?"
   },
@@ -50,7 +50,7 @@
     "promptMessage": "What {{ colors.blue('database ORM') }} would you like to use?"
   },
   "useDockerCompose": {
-    "disabled": "{% if database == 'none' %}true{% else %}false{% endif %}",
+    "disabled": "{{ database == 'none' }}",
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('Docker compose') }} for the database?"
   },
@@ -66,7 +66,7 @@
   "clerkWebhook": {
     "value": false,
     "promptMessage": "Do you want to receive events from the Clerk using a webhook?",
-    "disabled": "{% if authProvider != 'clerk' %}true{% else %}false{% endif %}"
+    "disabled": "{{ authProvider != 'clerk' }}"
   },
   "automatedDepsUpdater": {
     "value": "none",
@@ -82,6 +82,6 @@
     "promptMessage": "Do you want the project to be configured?"
   },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
-  "_pkgRun": "{{ _pkgManager }}{% if not _pkgManager in ['pnpm', 'yarn'] %} run{% endif %}",
-  "_ciInstall": "{{ _pkgManager }} {% if _pkgManager != 'npm' %}install{% else %}ci{% endif %}{% if _pkgManager == 'yarn' %} --frozen-lockfile{% endif %}"
+  "_pkgRun": "{{ _pkgManager }}{{ ' run' if not _pkgManager in ['pnpm', 'yarn'] }}",
+  "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}"
 }
