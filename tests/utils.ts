@@ -49,7 +49,7 @@ export function constructArgs(combination: { [key: string]: any }) {
   const projectName = name.toLowerCase();
   args.unshift(
     "--projectName",
-    projectName.slice(0, 16).concat(Math.random().toString().slice(2, 8)),
+    projectName.slice(0, 16).concat(Math.random().toString().slice(2, 14)),
   );
   return { args, testName: projectName };
 }
