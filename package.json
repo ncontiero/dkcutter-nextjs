@@ -30,7 +30,7 @@
     "@types/react": "^19.2.2",
     "colorette": "^2.0.20",
     "dkcutter": "5.0.6",
-    "eslint": "^9.38.0",
+    "eslint": "^9.39.0",
     "execa": "^9.6.0",
     "fs-extra": "^11.3.2",
     "husky": "^9.1.7",
@@ -44,7 +44,7 @@
     "tsx": "^4.20.6",
     "type-fest": "^5.1.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.5",
+    "vitest": "^4.0.6",
     "zod": "^4.1.12"
   },
   "lint-staged": {
