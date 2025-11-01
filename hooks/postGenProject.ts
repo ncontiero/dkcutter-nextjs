@@ -144,7 +144,7 @@ async function main() {
     removeFiles(files);
   } else if (CTX.authProvider === "nextAuth") {
     REMOVE_DEPS.push("@clerk/nextjs");
-    const files = [path.join(srcFolder, "middleware.ts")];
+    const files = [path.join(srcFolder, "proxy.ts")];
     if (CTX.useAppFolder) {
       files.push(
         path.join(appFolder, "sign-in"),
@@ -161,7 +161,7 @@ async function main() {
   } else {
     const files = [
       path.join(srcFolder, "lib", "nextAuth.ts"),
-      path.join(srcFolder, "middleware.ts"),
+      path.join(srcFolder, "proxy.ts"),
     ];
     if (CTX.useAppFolder) {
       files.push(
