@@ -49,6 +49,7 @@ function removeFiles(files: string[]) {
 async function main() {
   const REMOVE_DEPS = [];
   const REMOVE_DEV_DEPS = [];
+  const SCRIPTS: Record<string, string> = {};
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
@@ -70,6 +71,7 @@ async function main() {
 
   if (CTX.useAppFolder) {
     fs.removeSync(pagesFolder);
+    SCRIPTS.postinstall = "next typegen";
   } else {
     const stylesFolder = path.join(srcFolder, "styles");
     fs.ensureDirSync(stylesFolder);
@@ -85,10 +87,7 @@ async function main() {
   }
 
   if (CTX.useCommitlint) {
-    updatePackageJson({
-      projectDir,
-      scripts: { commitlint: "commitlint --edit" },
-    });
+    SCRIPTS.commitlint = "commitlint --edit";
   } else {
     REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
     const filesToRemove = [
@@ -99,7 +98,7 @@ async function main() {
   }
 
   if (CTX.useLintStaged) {
-    updatePackageJson({ projectDir, scripts: { "pre-commit": "lint-staged" } });
+    SCRIPTS["pre-commit"] = "lint-staged";
   } else {
     REMOVE_DEV_DEPS.push("lint-staged");
     updatePackageJson({
@@ -109,7 +108,7 @@ async function main() {
   }
 
   if (CTX.useHusky) {
-    updatePackageJson({ projectDir, scripts: { prepare: "husky" } });
+    SCRIPTS.prepare = "husky";
   } else {
     REMOVE_DEV_DEPS.push("husky");
     fs.removeSync(path.join(projectDir, ".husky"));
@@ -123,10 +122,11 @@ async function main() {
       path.join(srcFolder, "lib", "prisma.ts"),
     ]);
   } else if (CTX.database === "prisma") {
-    updatePackageJson({
-      projectDir,
-      scripts: { postinstall: "prisma generate" },
-    });
+    if (SCRIPTS.postinstall) {
+      SCRIPTS.postinstall += " && prisma generate";
+    } else {
+      SCRIPTS.postinstall = "prisma generate";
+    }
   }
 
   if (!CTX.useDockerCompose) {
@@ -201,6 +201,7 @@ async function main() {
     projectDir,
     removeDeps: REMOVE_DEPS,
     removeDevDeps: REMOVE_DEV_DEPS,
+    scripts: SCRIPTS,
   });
 
   const githubFolder = path.join(projectDir, ".github");
