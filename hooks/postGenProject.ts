@@ -176,7 +176,7 @@ async function main() {
     ];
     if (CTX.useAppFolder) {
       files.push(
-        path.join(appFolder, "api", "auth"),
+        path.join(appFolder, "api"),
         path.join(appFolder, "sign-in"),
         path.join(appFolder, "sign-up"),
       );
@@ -189,12 +189,10 @@ async function main() {
     REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter", "@clerk/nextjs");
     removeFiles(files);
   }
+
   if (!CTX.clerkWebhook || CTX.authProvider !== "clerk") {
     REMOVE_DEPS.push("svix");
-    removeFiles([
-      path.join(appFolder, "api", "webhook"),
-      path.join(pagesFolder, "api", "webhook.ts"),
-    ]);
+    removeFiles([path.join(appFolder, "api", "webhook")]);
   }
 
   if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
