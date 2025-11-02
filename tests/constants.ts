@@ -10,6 +10,7 @@ export const SUPPORTED_COMBINATIONS = [
   { authProvider: "clerk" },
   { authProvider: "clerk", clerkWebhook: true },
   { authProvider: "nextAuth" },
+  { authProvider: "betterAuth", database: "prisma" },
   { automatedDepsUpdater: "renovate" },
   { automatedDepsUpdater: "dependabot" },
   // Complex combinations
@@ -25,9 +26,10 @@ export const SUPPORTED_COMBINATIONS = [
     useAppFolder: false,
   },
   { authProvider: "clerk", clerkWebhook: true, useAppFolder: false },
+  { authProvider: "nextAuth", useAppFolder: false },
   { database: "prisma", authProvider: "nextAuth" },
   { database: "prisma", authProvider: "nextAuth", useAppFolder: false },
-  { authProvider: "nextAuth", useAppFolder: false },
+  { database: "prisma", authProvider: "betterAuth", useAppFolder: false },
   {
     automatedDepsUpdater: "dependabot",
     database: "prisma",
@@ -39,6 +41,7 @@ export const SUPPORTED_COMBINATIONS = [
 export const UNSUPPORTED_COMBINATIONS = [
   { database: "XXXXXX" },
   { authProvider: "non" },
+  { authProvider: "betterAuth" },
   { automatedDepsUpdater: "xpto" },
 ];
 

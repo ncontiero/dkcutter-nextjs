@@ -99,7 +99,10 @@ async function main() {
     );
     await fs.remove(path.join(publicFolder, ".gitkeep"));
 
-    if (CTX.authProvider === "nextAuth" || CTX.clerkWebhook) {
+    if (
+      ["nextAuth", "betterAuth"].includes(CTX.authProvider) ||
+      CTX.clerkWebhook
+    ) {
       const appDirContents = await fs.readdir(appFolder);
       for (const file of appDirContents) {
         if (file === "api") continue;
@@ -137,7 +140,7 @@ async function main() {
     REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter");
     await removeFiles([
       path.join(srcFolder, "lib", "auth.ts"),
-      path.join(appFolder, "api", "auth"),
+      path.join(appFolder, "api", "auth", "[...nextauth]"),
     ]);
   };
   const removeClerk = async () => {
@@ -150,21 +153,40 @@ async function main() {
       path.join(folder, "sign-up"),
     ]);
   };
+  const removeBetterAuth = async () => {
+    REMOVE_DEPS.push("better-auth");
+    await removeFiles([
+      path.join(srcFolder, "lib", "auth"),
+      path.join(appFolder, "api", "auth", "[...all]"),
+    ]);
+  };
+  const removeAuthApiFolder = async () => {
+    await fs.remove(path.join(appFolder, "api", "auth"));
+  };
 
   if (CTX.authProvider === "clerk") {
     await removeNextAuth();
+    await removeBetterAuth();
+    await removeAuthApiFolder();
   } else if (CTX.authProvider === "nextAuth") {
     await removeClerk();
+    await removeBetterAuth();
+  } else if (CTX.authProvider === "betterAuth") {
+    await removeClerk();
+    await removeNextAuth();
   } else {
     await removeNextAuth();
     await removeClerk();
+    await removeBetterAuth();
+    await removeAuthApiFolder();
+    await fs.remove(path.join(appFolder, "api"));
   }
 
-  if (CTX.authProvider !== "nextAuth" && CTX.database === "none") {
+  if (
+    !["nextAuth", "betterAuth"].includes(CTX.authProvider) &&
+    CTX.database === "none"
+  ) {
     await fs.remove(path.join(srcFolder, "lib"));
-  }
-  if (CTX.authProvider === "none") {
-    await fs.remove(path.join(appFolder, "api"));
   }
 
   await updatePackageJson({

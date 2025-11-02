@@ -28,6 +28,7 @@ This page describes all the template options that will be prompted by the [DKCut
   - None
   - [Clerk](https://clerk.com/)
   - [NextAuth.js](https://authjs.dev/)
+  - [Better Auth](https://www.better-auth.com/)
 
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
 

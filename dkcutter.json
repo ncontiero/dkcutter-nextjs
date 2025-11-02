@@ -59,7 +59,13 @@
     "choices": [
       { "title": "None", "value": "none" },
       { "title": "Clerk", "value": "clerk" },
-      { "title": "NextAuth.js", "value": "nextAuth" }
+      { "title": "NextAuth.js", "value": "nextAuth" },
+      {
+        "title": "Better Auth",
+        "value": "betterAuth",
+        "disabled": "{{ database == 'none' }}",
+        "helpTextForDisabled": "The Better Auth provider requires a database."
+      }
     ],
     "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
   },

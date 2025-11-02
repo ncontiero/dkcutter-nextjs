@@ -29,6 +29,13 @@ export const env = createEnv({
 {%- if dkcutter.clerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
 {%- endif %}
+{%- elif dkcutter.authProvider == 'betterAuth' %}
+    // Better Auth
+    BETTER_AUTH_SECRET: z.string().min(1),
+    BETTER_AUTH_URL: z.url(),
+    // Providers
+    AUTH_GOOGLE_CLIENT_ID: z.string().min(1),
+    AUTH_GOOGLE_CLIENT_SECRET: z.string().min(1),
 {%- endif %}
   },
 
@@ -69,6 +76,13 @@ export const env = createEnv({
 {%- if dkcutter.clerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
 {%- endif %}
+{%- elif dkcutter.authProvider == 'betterAuth' %}
+    // Better Auth
+    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    // Providers
+    AUTH_GOOGLE_CLIENT_ID: process.env.AUTH_GOOGLE_CLIENT_ID,
+    AUTH_GOOGLE_CLIENT_SECRET: process.env.AUTH_GOOGLE_CLIENT_SECRET,
 {%- endif %}
 
     // Client
