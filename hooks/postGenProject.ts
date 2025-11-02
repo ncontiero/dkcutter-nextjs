@@ -16,6 +16,7 @@ import { toBoolean } from "./utils/coerce";
 import { appendToGitignore, removeFiles } from "./utils/files";
 import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
 import { logger } from "./utils/logger";
+import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
 const TEMPLATE_REPO = "ncontiero/dkcutter-nextjs";
@@ -36,6 +37,24 @@ const CTX = {
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
+async function setNextAuthSecretKey(filePath: string) {
+  return await setFlag({ filePath, flag: "!!!SET AUTH_SECRET!!!" });
+}
+async function setBetterAuthSecretKey(filePath: string) {
+  return await setFlag({ filePath, flag: "!!!SET BETTER_AUTH_SECRET!!!" });
+}
+
+async function setFlagsInEnvs() {
+  const envPath = path.join(".env");
+  const exampleEnvPath = path.join(".env.example");
+
+  await setNextAuthSecretKey(envPath);
+  await setNextAuthSecretKey(exampleEnvPath);
+
+  await setBetterAuthSecretKey(envPath);
+  await setBetterAuthSecretKey(exampleEnvPath);
+}
+
 async function main() {
   const REMOVE_DEPS = [];
   const REMOVE_DEV_DEPS = [];
@@ -46,6 +65,8 @@ async function main() {
   const publicFolder = path.join(projectDir, "public");
   const pagesFolder = path.join(srcFolder, "pages");
   const appFolder = path.join(srcFolder, "app");
+
+  await setFlagsInEnvs();
 
   const gitignorePath = path.join(projectDir, ".gitignore");
   await appendToGitignore(
