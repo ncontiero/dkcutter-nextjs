@@ -9,7 +9,7 @@ import { logger } from "../utils/logger";
 
 export async function isGitInstalled(dir: string) {
   try {
-    await execa("git --version", { cwd: dir });
+    await execa("git", ["--version"], { cwd: dir });
     return true;
   } catch {
     return false;
@@ -37,7 +37,7 @@ export async function isInsideGitRepo(dir: string) {
 }
 
 async function getGitVersion() {
-  const stdout = (await execa("git --version")).toString().trim();
+  const stdout = (await execa("git", ["--version"])).toString().trim();
   const gitVersionTag = stdout.split(" ")[2];
   const major = gitVersionTag?.split(".")[0];
   const minor = gitVersionTag?.split(".")[1];
@@ -46,9 +46,20 @@ async function getGitVersion() {
 
 /** @returns The git config value of "init.defaultBranch". If it is not set, returns "main". */
 async function getDefaultBranch() {
-  return (await execa("git config --global init.defaultBranch || echo main"))
-    .toString()
-    .trim();
+  try {
+    const gitConfig = await execa("git", [
+      "config",
+      "--get",
+      "init.defaultBranch",
+    ]);
+    return gitConfig.toString().trim() || "main";
+  } catch (error) {
+    console.error(
+      "Failed to get git default branch, falling back to 'main':",
+      error,
+    );
+    return "main";
+  }
 }
 
 // This initializes the Git-repository for the project
@@ -133,6 +144,11 @@ export async function initializeGit(projectDir: string) {
 }
 
 export async function stageAndCommit(projectDir: string, message: string) {
+  if (!(await isGitInstalled(projectDir))) {
+    logger.warn("Git is not installed. Skipping Git commit.");
+    return;
+  }
+
   const isRoot = await isRootGitRepo(projectDir);
   const isInside = await isInsideGitRepo(projectDir);
   const dirName = path.parse(projectDir).name; // skip full path for logging
