@@ -52,7 +52,7 @@ async function getDefaultBranch() {
       "--get",
       "init.defaultBranch",
     ]);
-    return gitConfig.toString().trim() || "main";
+    return gitConfig.stdout.toString().trim() || "main";
   } catch (error) {
     console.error(
       "Failed to get git default branch, falling back to 'main':",
