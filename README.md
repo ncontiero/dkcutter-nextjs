@@ -55,6 +55,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Do you want to use Docker compose for the database? … No / Yes
 ✔ What Authentication Provider would you like to use? › Clerk
 ✔ Do you want to receive events from the Clerk using a webhook? … No / Yes
+✔ Do you want to use Trigger.dev? … No / Yes
 ✔ What Automated Dependency Updater do you want to use? › Mend Renovate
 ✔ Do you want the project to be configured? … No / Yes
 Next steps:
