@@ -96,6 +96,7 @@ If you want to start faster, you can use the following options:
 | `--useDockerCompose [boolean]`    | Include docker compose in the project for the database. If `database` is different from `none`.  |
 | `--authProvider <string>`         | Choose a authentication provider. [See for more info][options-url].                              |
 | `--clerkWebhook [boolean]`        | Includes an endpoint to receive events from the [Clerk](https://clerk.com/).                     |
+| `--useTriggerDev [boolean]`       | Include [Trigger.dev](https://trigger.dev/) in the project.                                      |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater. [See for more info][options-url].                           |
 | `--automaticStart [boolean]`      | This option will install the application packages, start a git repo and make the initial commit. |
 

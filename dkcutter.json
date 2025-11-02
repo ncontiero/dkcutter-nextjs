@@ -74,6 +74,10 @@
     "promptMessage": "Do you want to receive events from the Clerk using a webhook?",
     "disabled": "{{ authProvider != 'clerk' }}"
   },
+  "useTriggerDev": {
+    "value": false,
+    "promptMessage": "Do you want to use {{ colors.green('Trigger.dev') }}?"
+  },
   "automatedDepsUpdater": {
     "value": "none",
     "choices": [

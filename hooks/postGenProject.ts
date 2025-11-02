@@ -30,6 +30,7 @@ const CTX = {
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
   clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
+  useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
@@ -187,6 +188,20 @@ async function main() {
     CTX.database === "none"
   ) {
     await fs.remove(path.join(srcFolder, "lib"));
+  }
+
+  if (!CTX.useTriggerDev) {
+    REMOVE_DEPS.push("@trigger.dev/sdk");
+    REMOVE_DEV_DEPS.push("@trigger.dev/build", "trigger.dev", "concurrently");
+    await removeFiles([
+      path.join(projectDir, "trigger.config.ts"),
+      path.join(srcFolder, "trigger"),
+    ]);
+  } else {
+    SCRIPTS["trigger:dev"] = "trigger dev";
+    SCRIPTS["trigger:deploy"] = "trigger deploy";
+    const pkgRun = "{{ dkcutter._pkgRun }}";
+    SCRIPTS.dev = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "next dev" "${pkgRun} trigger:dev"`;
   }
 
   await updatePackageJson({

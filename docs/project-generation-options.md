@@ -32,6 +32,8 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
 
+- **Use Trigger.dev**: Indicates whether the project should be configured with [Trigger.dev](https://trigger.dev/).
+
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)
