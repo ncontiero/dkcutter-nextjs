@@ -1,10 +1,10 @@
-import type { PackageManager } from "../utils/types";
+import type { ContextProps, PackageManager } from "../utils/types";
 
 import { logger } from "../utils/logger";
 import { isInsideGitRepo, isRootGitRepo } from "./git";
 
 interface LogNextStepsOptions {
-  ctx: any;
+  ctx: ContextProps;
   projectDir: string;
   pkgManager: PackageManager;
 }
@@ -30,10 +30,13 @@ export async function logNextSteps({
   }
 
   ctx.useDockerCompose && commands.push("docker compose up -d");
-  const runDevCommand = ["npm", "bun"].includes(pkgManager)
-    ? `${pkgManager} run dev`
-    : `${pkgManager} dev`;
-  commands.push(runDevCommand);
+  if (
+    ["betterAuth", "nextAuth"].includes(ctx.authProvider) &&
+    ctx.database === "prisma"
+  ) {
+    commands.push(`${pkgManager} prisma migrate dev --name init`);
+  }
+  commands.push(`${ctx.pkgRun} dev`);
 
   logger.info(`Next steps:\n  ${commands.join("\n  ")}`);
 }

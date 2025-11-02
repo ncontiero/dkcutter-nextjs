@@ -1,6 +1,7 @@
 import type {
   AuthProvider,
   AutomatedDepsUpdater,
+  ContextProps,
   Database,
   PackageManager,
 } from "./utils/types";
@@ -20,9 +21,10 @@ import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
 const TEMPLATE_REPO = "ncontiero/dkcutter-nextjs";
-const CTX = {
+const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
+  pkgRun: "{{ dkcutter._pkgRun }}",
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
@@ -221,8 +223,7 @@ async function main() {
   } else {
     SCRIPTS["trigger:dev"] = "trigger dev";
     SCRIPTS["trigger:deploy"] = "trigger deploy";
-    const pkgRun = "{{ dkcutter._pkgRun }}";
-    SCRIPTS.dev = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "next dev" "${pkgRun} trigger:dev"`;
+    SCRIPTS.dev = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "next dev" "${CTX.pkgRun} trigger:dev"`;
   }
 
   await updatePackageJson({
