@@ -35,8 +35,7 @@ next-env.d.ts
 # Prisma
 src/lib/generated/
 {% endif %}
-{%- if dkcutter.database == 'prisma' %}
+{%- if dkcutter.useTriggerDev %}
 # Trigger.dev
 .trigger
-
-{%- endif %}
+{% endif %}
