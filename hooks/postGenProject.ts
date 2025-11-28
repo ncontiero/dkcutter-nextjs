@@ -142,10 +142,12 @@ async function main() {
       "@prisma/adapter-pg",
       "@prisma/client",
       "@auth/prisma-adapter",
+      "dotenv",
     );
     REMOVE_DEV_DEPS.push("prisma");
     await removeFiles([
       path.join(projectDir, "prisma"),
+      path.join(projectDir, "prisma.config.ts"),
       path.join(srcFolder, "lib", "prisma.ts"),
     ]);
   } else if (CTX.database === "prisma") {
