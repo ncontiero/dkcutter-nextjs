@@ -19,7 +19,7 @@ importers:
         version: 20.2.0
       '@ncontiero/eslint-config':
         specifier: 6.5.1
-        version: 6.5.1(@types/eslint@9.6.1)(@typescript-eslint/utils@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-config-prettier@9.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1))(jiti@2.6.1)(tailwindcss@4.1.17)(typescript@5.9.3)
+        version: 6.5.1(@types/eslint@9.6.1)(@typescript-eslint/utils@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-config-prettier@9.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1))(jiti@2.6.1)(tailwindcss@4.1.18)(typescript@5.9.3)
       '@t3-oss/env-nextjs':
         specifier: ^0.13.8
         version: 0.13.8(arktype@2.1.20)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(zod@4.1.13)
@@ -78,8 +78,8 @@ importers:
         specifier: 19.2.1
         version: 19.2.1
       tailwindcss:
-        specifier: 4.1.17
-        version: 4.1.17
+        specifier: 4.1.18
+        version: 4.1.18
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -3854,8 +3854,8 @@ packages:
     resolution: {integrity: sha512-FzD187HuFIZEyeR7Xy6sJbJll2d4SybS90satC8SKIuaNRC05CxMvdzN7BUsfDQffcnabckRM5OIcfArjsZ0mg==}
     engines: {node: '>=18.18'}
 
-  tailwindcss@4.1.17:
-    resolution: {integrity: sha512-j9Ee2YjuQqYT9bbRTfTZht9W/ytp5H+jJpZKiYdP/bpnXARAuELt9ofP0lPnmHjbga7SNQIxdTAXCmtKVYjN+Q==}
+  tailwindcss@4.1.18:
+    resolution: {integrity: sha512-4+Z+0yiYyEtUVCScyfHCxOYP06L5Ne+JiHhY2IjR2KWMIWhJOYZKLSGZaP5HkZ8+bY0cxfzwDE5uOmzFXyIwxw==}
 
   tapable@2.3.0:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
@@ -5003,7 +5003,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@ncontiero/eslint-config@6.5.1(@types/eslint@9.6.1)(@typescript-eslint/utils@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-config-prettier@9.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1))(jiti@2.6.1)(tailwindcss@4.1.17)(typescript@5.9.3)':
+  '@ncontiero/eslint-config@6.5.1(@types/eslint@9.6.1)(@typescript-eslint/utils@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-config-prettier@9.1.0(eslint@9.39.1(jiti@2.6.1)))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1))(jiti@2.6.1)(tailwindcss@4.1.18)(typescript@5.9.3)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.5.0(eslint@9.39.1(jiti@2.6.1))
       '@eslint/markdown': 7.5.1
@@ -5016,7 +5016,7 @@ snapshots:
       eslint-config-flat-gitignore: 2.1.0(eslint@9.39.1(jiti@2.6.1))
       eslint-merge-processors: 2.0.0(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-antfu: 3.1.1(eslint@9.39.1(jiti@2.6.1))
-      eslint-plugin-better-tailwindcss: 4.0.0-beta.4(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17)(typescript@5.9.3)
+      eslint-plugin-better-tailwindcss: 4.0.0-beta.4(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.18)(typescript@5.9.3)
       eslint-plugin-command: 3.3.1(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-de-morgan: 2.0.0(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-import-x: 4.16.1(@typescript-eslint/utils@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.9)(eslint@9.39.1(jiti@2.6.1))
@@ -6385,7 +6385,7 @@ snapshots:
     dependencies:
       eslint: 9.39.1(jiti@2.6.1)
 
-  eslint-plugin-better-tailwindcss@4.0.0-beta.4(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.17)(typescript@5.9.3):
+  eslint-plugin-better-tailwindcss@4.0.0-beta.4(eslint@9.39.1(jiti@2.6.1))(tailwindcss@4.1.18)(typescript@5.9.3):
     dependencies:
       '@eslint/css-tree': 3.6.8
       '@valibot/to-json-schema': 1.4.0(valibot@1.2.0(typescript@5.9.3))
@@ -6394,7 +6394,7 @@ snapshots:
       jiti: 2.6.1
       synckit: 0.11.11
       tailwind-csstree: 0.1.4
-      tailwindcss: 4.1.17
+      tailwindcss: 4.1.18
       tsconfig-paths-webpack-plugin: 4.2.0
       valibot: 1.2.0(typescript@5.9.3)
     transitivePeerDependencies:
@@ -8417,7 +8417,7 @@ snapshots:
 
   tailwind-csstree@0.1.4: {}
 
-  tailwindcss@4.1.17: {}
+  tailwindcss@4.1.18: {}
 
   tapable@2.3.0: {}
 
