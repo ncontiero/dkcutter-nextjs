@@ -30,7 +30,7 @@ importers:
         specifier: ^11.0.4
         version: 11.0.4
       '@types/node':
-        specifier: ^24.10.2
+        specifier: ^24.10.3
         version: 24.10.3
       '@types/prompts':
         specifier: ^2.4.9
