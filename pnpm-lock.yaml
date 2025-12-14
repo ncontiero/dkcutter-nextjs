@@ -24,8 +24,8 @@ importers:
         specifier: ^0.13.8
         version: 0.13.8(arktype@2.1.20)(typescript@5.9.3)(valibot@1.2.0(typescript@5.9.3))(zod@4.1.13)
       '@trigger.dev/sdk':
-        specifier: 4.2.0
-        version: 4.2.0(typescript@5.9.3)(zod@4.1.13)
+        specifier: 4.3.0
+        version: 4.3.0(typescript@5.9.3)(zod@4.1.13)
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -1298,12 +1298,12 @@ packages:
       zod:
         optional: true
 
-  '@trigger.dev/core@4.2.0':
-    resolution: {integrity: sha512-VcgZF3n77Wwfr0gD7JqoLnC46uK5bPnu73WBRuQRRdNS8MYijuEh9TpsmJ9ndkC9Ji+m5YwsqwEnqZPA7UYhag==}
+  '@trigger.dev/core@4.3.0':
+    resolution: {integrity: sha512-mOavnsfCEgEES67Lnfbq9vMV+A2JAtCAoMVxNI7umpSXbbKOmsxdcKRG46/0rclqHKp9X5hk2aF3TlFhvgl/EQ==}
     engines: {node: '>=18.20.0'}
 
-  '@trigger.dev/sdk@4.2.0':
-    resolution: {integrity: sha512-OoZIN63qW1Qxsi8QqncWVt45n7wym9ZRvJZxeC/Ly/nhcTHJarRJFRBtyNnPJUDXIW+nRZZFh/Tt3Np3URnCnw==}
+  '@trigger.dev/sdk@4.3.0':
+    resolution: {integrity: sha512-54wyCtXaumNfv1ou8PMGs7gb5+wNz94RjwznTWLoBAMhMmPsiqSTa6qxwjjWbpxAb/FWvasUnfbHxOmio2xdMg==}
     engines: {node: '>=18.20.0'}
     peerDependencies:
       ai: ^4.2.0 || ^5.0.0
@@ -5324,7 +5324,7 @@ snapshots:
       valibot: 1.2.0(typescript@5.9.3)
       zod: 4.1.13
 
-  '@trigger.dev/core@4.2.0(typescript@5.9.3)':
+  '@trigger.dev/core@4.3.0(typescript@5.9.3)':
     dependencies:
       '@bugsnag/cuid': 3.2.1
       '@electric-sql/client': 1.0.14
@@ -5365,11 +5365,11 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@trigger.dev/sdk@4.2.0(typescript@5.9.3)(zod@4.1.13)':
+  '@trigger.dev/sdk@4.3.0(typescript@5.9.3)(zod@4.1.13)':
     dependencies:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/semantic-conventions': 1.36.0
-      '@trigger.dev/core': 4.2.0(typescript@5.9.3)
+      '@trigger.dev/core': 4.3.0(typescript@5.9.3)
       chalk: 5.6.2
       cronstrue: 2.59.0
       debug: 4.4.3
