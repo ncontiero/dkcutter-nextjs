@@ -39,7 +39,7 @@
     "lint-staged": "^16.2.7",
     "next": "16.1.4",
     "next-auth": "5.0.0-beta.30",
-    "ora": "^9.0.0",
+    "ora": "^9.1.0",
     "prompts": "^2.4.2",
     "react": "19.2.3",
     "tailwindcss": "4.1.18",
