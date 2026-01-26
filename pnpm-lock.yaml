@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@clerk/nextjs':
-        specifier: ^6.36.9
+        specifier: ^6.36.10
         version: 6.36.10(next@16.1.4(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@19.2.3))(react@19.2.3))(react-dom@18.2.0(react@19.2.3))(react@19.2.3)
       '@commitlint/cli':
         specifier: ^20.3.1
