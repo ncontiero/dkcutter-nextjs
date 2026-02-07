@@ -19,7 +19,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@clerk/nextjs": "^6.37.1",
+    "@clerk/nextjs": "^6.37.3",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@ncontiero/eslint-config": "7.0.1",
