@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@clerk/nextjs':
-        specifier: ^6.37.1
-        version: 6.37.1(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@19.2.4))(react@19.2.4))(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
+        specifier: ^6.37.3
+        version: 6.37.3(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@19.2.4))(react@19.2.4))(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
       '@commitlint/cli':
         specifier: ^20.4.1
         version: 20.4.1(@types/node@25.2.1)(typescript@5.9.3)
@@ -209,8 +209,8 @@ packages:
   '@bugsnag/cuid@3.2.1':
     resolution: {integrity: sha512-zpvN8xQ5rdRWakMd/BcVkdn2F8HKlDSbM3l7duueK590WmI1T0ObTLc1V/1e55r14WNjPd5AJTYX4yPEAFVi+Q==}
 
-  '@clerk/backend@2.29.7':
-    resolution: {integrity: sha512-OSfFQ85L0FV2wSzqlr0hRvluIu3Z5ClgLiBE6Qx7XjSGyJoqEvP5OP4fl5Nt5icgGvH0EwA1dljPGyQpaqbQEw==}
+  '@clerk/backend@2.30.1':
+    resolution: {integrity: sha512-GoxnJzVH0ycNPAGCDMfo3lPBFbo5nehpLSVFjgGEnzIRGGahBtAB8PQT7KM2zo58pD8apjb/+suhcB/WCiEasQ==}
     engines: {node: '>=18.17.0'}
 
   '@clerk/clerk-react@5.60.0':
@@ -220,8 +220,8 @@ packages:
       react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
       react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
 
-  '@clerk/nextjs@6.37.1':
-    resolution: {integrity: sha512-SqDG/l+HfnGJlOplXc3Jga49/ObTYth+P1RP6dY+uy3BxvDc4iOuxKt7Qh39yMmUf1S0Kuu0nZBgb0lz6uxVvw==}
+  '@clerk/nextjs@6.37.3':
+    resolution: {integrity: sha512-kammmf4b5R2Izb/SN4UbEa/6rdyop9fPHwZkyyJoVfgMLFM26fwpXWaSqVJPe4YL2BmHKP+orIOolzTmEhhdQQ==}
     engines: {node: '>=18.17.0'}
     peerDependencies:
       next: ^13.5.7 || ^14.2.25 || ^15.2.3 || ^16
@@ -4283,7 +4283,7 @@ snapshots:
 
   '@bugsnag/cuid@3.2.1': {}
 
-  '@clerk/backend@2.29.7(react-dom@18.2.0(react@19.2.4))(react@19.2.4)':
+  '@clerk/backend@2.30.1(react-dom@18.2.0(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@clerk/shared': 3.44.0(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
       '@clerk/types': 4.101.14(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
@@ -4300,9 +4300,9 @@ snapshots:
       react-dom: 18.2.0(react@19.2.4)
       tslib: 2.8.1
 
-  '@clerk/nextjs@6.37.1(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@19.2.4))(react@19.2.4))(react-dom@18.2.0(react@19.2.4))(react@19.2.4)':
+  '@clerk/nextjs@6.37.3(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.2.0(react@19.2.4))(react@19.2.4))(react-dom@18.2.0(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@clerk/backend': 2.29.7(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
+      '@clerk/backend': 2.30.1(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
       '@clerk/clerk-react': 5.60.0(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
       '@clerk/shared': 3.44.0(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
       '@clerk/types': 4.101.14(react-dom@18.2.0(react@19.2.4))(react@19.2.4)
