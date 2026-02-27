@@ -33,7 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
-    "@ncontiero/eslint-config": "7.0.1",
+    "@ncontiero/eslint-config": "7.1.0",
     "@tailwindcss/postcss": "4.2.1",
     "@trigger.dev/build": "4.4.1",
     "@types/node": "^25.3.0",

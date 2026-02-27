@@ -22,7 +22,7 @@
     "@clerk/nextjs": "^6.38.2",
     "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.4.2",
-    "@ncontiero/eslint-config": "7.0.1",
+    "@ncontiero/eslint-config": "7.1.0",
     "@t3-oss/env-nextjs": "^0.13.10",
     "@trigger.dev/sdk": "4.4.1",
     "@types/fs-extra": "^11.0.4",
