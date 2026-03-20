@@ -34,7 +34,7 @@
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@ncontiero/eslint-config": "7.1.0",
-    "@tailwindcss/postcss": "4.2.1",
+    "@tailwindcss/postcss": "4.2.2",
     "@trigger.dev/build": "4.4.3",
     "@types/node": "^25.5.0",
     "@types/react": "19.2.14",
@@ -46,7 +46,7 @@
     "lint-staged": "^16.4.0",
     "postcss": "^8.5.8",
     "prisma": "7.5.0",
-    "tailwindcss": "4.2.1",
+    "tailwindcss": "4.2.2",
     "trigger.dev": "4.4.3",
     "typescript": "^5.9.3"
   },
