@@ -37,7 +37,7 @@
     "fs-extra": "^11.3.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "next": "16.2.0",
+    "next": "16.2.1",
     "next-auth": "5.0.0-beta.30",
     "ora": "^9.3.0",
     "prompts": "^2.4.2",
