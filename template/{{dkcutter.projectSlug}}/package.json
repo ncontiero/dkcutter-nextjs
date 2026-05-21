@@ -44,7 +44,7 @@
     "eslint": "^9.39.4",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.5",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.15",
     "prisma": "7.8.0",
     "tailwindcss": "4.3.0",
     "trigger.dev": "4.4.6",
