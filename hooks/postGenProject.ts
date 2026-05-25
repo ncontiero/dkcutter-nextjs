@@ -39,9 +39,6 @@ const CTX: ContextProps = {
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
 };
 
-async function setNextAuthSecretKey(filePath: string) {
-  return await setFlag({ filePath, flag: "!!!SET AUTH_SECRET!!!" });
-}
 async function setBetterAuthSecretKey(filePath: string) {
   return await setFlag({ filePath, flag: "!!!SET BETTER_AUTH_SECRET!!!" });
 }
@@ -49,9 +46,6 @@ async function setBetterAuthSecretKey(filePath: string) {
 async function setFlagsInEnvs() {
   const envPath = path.join(".env");
   const exampleEnvPath = path.join(".env.example");
-
-  await setNextAuthSecretKey(envPath);
-  await setNextAuthSecretKey(exampleEnvPath);
 
   await setBetterAuthSecretKey(envPath);
   await setBetterAuthSecretKey(exampleEnvPath);
@@ -160,13 +154,6 @@ async function main() {
     await fs.remove(path.join(projectDir, "docker-compose.yml"));
   }
 
-  const removeNextAuth = async () => {
-    REMOVE_DEPS.push("next-auth", "@auth/prisma-adapter");
-    await removeFiles([
-      path.join(srcFolder, "lib", "auth.ts"),
-      path.join(appFolder, "api", "auth", "[...nextauth]"),
-    ]);
-  };
   const removeClerk = async () => {
     REMOVE_DEPS.push("@clerk/nextjs");
     const folder = CTX.useAppFolder ? appFolder : pagesFolder;
@@ -180,40 +167,25 @@ async function main() {
     REMOVE_DEPS.push("better-auth", "@better-auth/prisma-adapter");
     await removeFiles([
       path.join(srcFolder, "lib", "auth"),
-      path.join(appFolder, "api", "auth", "[...all]"),
+      path.join(appFolder, "api", "auth"),
     ]);
-  };
-  const removeAuthApiFolder = async () => {
-    await fs.remove(path.join(appFolder, "api", "auth"));
   };
   const removeProxyFile = async () => {
     await fs.remove(path.join(srcFolder, "proxy.ts"));
   };
 
   if (CTX.authProvider === "clerk") {
-    await removeNextAuth();
     await removeBetterAuth();
-    await removeAuthApiFolder();
-  } else if (CTX.authProvider === "nextAuth") {
-    await removeClerk();
-    await removeBetterAuth();
-    await removeProxyFile();
   } else if (CTX.authProvider === "betterAuth") {
     await removeClerk();
-    await removeNextAuth();
   } else {
-    await removeNextAuth();
     await removeClerk();
     await removeBetterAuth();
-    await removeAuthApiFolder();
     await removeProxyFile();
     await fs.remove(path.join(appFolder, "api"));
   }
 
-  if (
-    !["nextAuth", "betterAuth"].includes(CTX.authProvider) &&
-    CTX.database === "none"
-  ) {
+  if (CTX.authProvider !== "betterAuth" && CTX.database === "none") {
     await fs.remove(path.join(srcFolder, "lib"));
   }
 

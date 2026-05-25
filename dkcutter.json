@@ -59,7 +59,6 @@
     "choices": [
       { "title": "None", "value": "none" },
       { "title": "Clerk", "value": "clerk" },
-      { "title": "NextAuth.js", "value": "nextAuth" },
       {
         "title": "Better Auth",
         "value": "betterAuth",

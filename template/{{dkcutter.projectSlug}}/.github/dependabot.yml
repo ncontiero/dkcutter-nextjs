@@ -25,12 +25,6 @@ updates:
           - "@prisma*"
           - prisma
       {%- endif %}
-      {%- if dkcutter.database == "prisma" and dkcutter.authProvider == "nextAuth" %}
-      next-auth:
-        patterns:
-          - "@next-auth*"
-          - next-auth
-      {%- endif %}
       {%- if dkcutter.useCommitlint %}
       commitlint:
         patterns:
