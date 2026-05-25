@@ -123,10 +123,7 @@ async function main() {
     );
     await fs.remove(path.join(publicFolder, ".gitkeep"));
 
-    if (
-      ["nextAuth", "betterAuth"].includes(CTX.authProvider) ||
-      CTX.clerkWebhook
-    ) {
+    if (CTX.authProvider !== "none" || CTX.clerkWebhook) {
       const appDirContents = await fs.readdir(appFolder);
       for (const file of appDirContents) {
         if (file === "api") continue;
@@ -142,6 +139,7 @@ async function main() {
       "@prisma/adapter-pg",
       "@prisma/client",
       "@auth/prisma-adapter",
+      "@better-auth/prisma-adapter",
       "dotenv",
     );
     REMOVE_DEV_DEPS.push("prisma");
@@ -173,14 +171,13 @@ async function main() {
     REMOVE_DEPS.push("@clerk/nextjs");
     const folder = CTX.useAppFolder ? appFolder : pagesFolder;
     await removeFiles([
-      path.join(srcFolder, "proxy.ts"),
       path.join(appFolder, "api", "webhook"),
       path.join(folder, "sign-in"),
       path.join(folder, "sign-up"),
     ]);
   };
   const removeBetterAuth = async () => {
-    REMOVE_DEPS.push("better-auth");
+    REMOVE_DEPS.push("better-auth", "@better-auth/prisma-adapter");
     await removeFiles([
       path.join(srcFolder, "lib", "auth"),
       path.join(appFolder, "api", "auth", "[...all]"),
@@ -188,6 +185,9 @@ async function main() {
   };
   const removeAuthApiFolder = async () => {
     await fs.remove(path.join(appFolder, "api", "auth"));
+  };
+  const removeProxyFile = async () => {
+    await fs.remove(path.join(srcFolder, "proxy.ts"));
   };
 
   if (CTX.authProvider === "clerk") {
@@ -197,6 +197,7 @@ async function main() {
   } else if (CTX.authProvider === "nextAuth") {
     await removeClerk();
     await removeBetterAuth();
+    await removeProxyFile();
   } else if (CTX.authProvider === "betterAuth") {
     await removeClerk();
     await removeNextAuth();
@@ -205,6 +206,7 @@ async function main() {
     await removeClerk();
     await removeBetterAuth();
     await removeAuthApiFolder();
+    await removeProxyFile();
     await fs.remove(path.join(appFolder, "api"));
   }
 
