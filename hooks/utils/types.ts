@@ -3,7 +3,7 @@ export type Database = "none" | "prisma";
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 
-export type ContextProps = {
+export interface ContextProps {
   projectSlug: string;
   pkgManager: PackageManager;
   pkgRun: string;
@@ -18,12 +18,12 @@ export type ContextProps = {
   useTriggerDev: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   automaticStart: boolean;
-};
+}
 
-export type SetFlagProps = {
+export interface SetFlagProps {
   filePath: string;
   flag: string;
   length?: number;
   value?: string;
   formatted?: string;
-};
+}
