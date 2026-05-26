@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-{% if dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
 import { ClerkProvider } from "@clerk/nextjs";
-{% endif %}
+{%- endif %}
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
