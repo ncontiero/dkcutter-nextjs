@@ -12,11 +12,15 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Project version**: The version of the project at its inception.
 
+- **Use app folder**: Indicates whether the project should be configured to use the app folder from [Next.js](https://nextjs.org/docs/app).
+
+- **Use React compiler**: Indicates whether the project should be configured to use the [React compiler](https://react.dev/learn/react-compiler) for improved performance.
+
 - **Use husky**: Indicates that the project should be configured with [husky](https://typicode.github.io/husky/).
 
 - **Use lint staged**: Indicates that the project should be configured with [lint-staged](https://github.com/okonet/lint-staged). This question will only be asked if `Use husky` is chosen.
 
-- **Use app folder**: Indicates whether the project should be configured use the app folder from [Next.js](https://nextjs.org/docs/app).
+- **Use commitlint**: Indicates that the project should be configured with [commitlint](https://commitlint.js.org).
 
 - **Database ORM**: Indicates whether the project should be configured using the following ORM:
   - None
@@ -27,7 +31,6 @@ This page describes all the template options that will be prompted by the [DKCut
 - **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
   - None
   - [Clerk](https://clerk.com/)
-  - [NextAuth.js](https://authjs.dev/)
   - [Better Auth](https://www.better-auth.com/)
 
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
