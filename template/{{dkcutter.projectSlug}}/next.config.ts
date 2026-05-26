@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import "./src/env";
 
-{% if dkcutter.useReactCompiler == "true" -%}
+{% if dkcutter.useReactCompiler or dkcutter.useReactCompiler == "true" -%}
 const nextConfig: NextConfig = {
   reactCompiler: true,
 };
