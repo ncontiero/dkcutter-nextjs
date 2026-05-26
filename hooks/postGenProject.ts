@@ -25,10 +25,11 @@ const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   pkgRun: "{{ dkcutter._pkgRun }}",
+  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
+  useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
-  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   database: "{{ dkcutter.database }}" as Database,
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
@@ -78,6 +79,10 @@ async function main() {
     });
   } else {
     await updatePackageJson({ projectDir, keys: ["packageManager"] });
+  }
+
+  if (!CTX.useReactCompiler) {
+    REMOVE_DEV_DEPS.push("babel-plugin-react-compiler");
   }
 
   if (CTX.useHusky) {

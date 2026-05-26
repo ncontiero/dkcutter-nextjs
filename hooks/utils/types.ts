@@ -7,10 +7,11 @@ export interface ContextProps {
   projectSlug: string;
   pkgManager: PackageManager;
   pkgRun: string;
+  useAppFolder: boolean;
+  useReactCompiler: boolean;
   useHusky: boolean;
   useLintStaged: boolean;
   useCommitlint: boolean;
-  useAppFolder: boolean;
   database: Database;
   useDockerCompose: boolean;
   authProvider: AuthProvider;

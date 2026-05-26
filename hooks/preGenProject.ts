@@ -31,3 +31,5 @@ export function validateProject({ ctx }: { ctx: unknown }) {
 }
 
 validateProject({ ctx });
+
+// {{ dkcutter.update("useReactCompiler", "{{ dkcutter.useReactCompiler or dkcutter.useReactCompiler == 'true' }}") }}

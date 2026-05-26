@@ -24,6 +24,14 @@
     "value": "0.1.0",
     "promptMessage": "What is the project version?"
   },
+  "useAppFolder": {
+    "value": true,
+    "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"
+  },
+  "useReactCompiler": {
+    "value": false,
+    "promptMessage": "Do you want to use {{ colors.blue('React compiler') }}?"
+  },
   "useHusky": {
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('husky') }}?"
@@ -36,10 +44,6 @@
   "useCommitlint": {
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('Commitlint') }}?"
-  },
-  "useAppFolder": {
-    "value": true,
-    "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"
   },
   "database": {
     "value": "none",
