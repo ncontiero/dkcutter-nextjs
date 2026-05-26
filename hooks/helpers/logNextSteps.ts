@@ -22,7 +22,7 @@ export async function logNextSteps({
     commands.push(installCommand);
 
     const isGitRepo =
-      (await isInsideGitRepo(projectDir)) || isRootGitRepo(projectDir);
+      (await isInsideGitRepo(projectDir)) || (await isRootGitRepo(projectDir));
     if (!isGitRepo) {
       commands.push(`git init`);
     }

@@ -5,5 +5,5 @@ export async function appendToGitignore(gitignorePath: string, lines: string) {
 }
 
 export async function removeFiles(files: string[]) {
-  await Promise.all(files.map((file) => fs.remove(file)));
+  await Promise.all(files.map(async (file) => fs.remove(file)));
 }

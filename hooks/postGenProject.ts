@@ -40,7 +40,7 @@ const CTX: ContextProps = {
 };
 
 async function setBetterAuthSecretKey(filePath: string) {
-  return await setFlag({ filePath, flag: "!!!SET BETTER_AUTH_SECRET!!!" });
+  return setFlag({ filePath, flag: "!!!SET BETTER_AUTH_SECRET!!!" });
 }
 
 async function setFlagsInEnvs() {

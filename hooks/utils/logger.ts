@@ -5,18 +5,38 @@ import { blue, green, red, yellow } from "colorette";
 
 type LOG_TYPE = "info" | "success" | "error" | "warn";
 
-export const colorize = (type: LOG_TYPE, data: any) => {
+const toLogString = (value: unknown): string => {
+  if (typeof value === "string") return value;
+  if (
+    typeof value === "number" ||
+    typeof value === "boolean" ||
+    value === null ||
+    value === undefined
+  )
+    return String(value);
+
+  try {
+    // Try JSON first for objects/arrays to preserve structure
+    return JSON.stringify(value);
+  } catch {
+    // Fallback to default string conversion
+    return String(value);
+  }
+};
+
+export const colorize = (type: LOG_TYPE, data: unknown) => {
+  const text = toLogString(data);
   switch (type) {
     case "info":
-      return blue(data);
+      return blue(text);
     case "warn":
-      return yellow(data);
+      return yellow(text);
     case "success":
-      return green(data);
+      return green(text);
     case "error":
-      return red(data);
+      return red(text);
     default:
-      return data;
+      return text;
   }
 };
 

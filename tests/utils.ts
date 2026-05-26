@@ -8,7 +8,7 @@ import { PATTERN } from "./constants";
 export async function buildFilesList(baseDir: string) {
   const files = await fs.readdir(baseDir);
   const paths: string[] = [];
-  files.forEach(async (file) => {
+  for (const file of files) {
     const filePath = path.join(baseDir, file);
     const stat = await fs.stat(filePath);
     if (stat.isDirectory()) {
@@ -16,7 +16,7 @@ export async function buildFilesList(baseDir: string) {
     } else {
       paths.push(filePath);
     }
-  });
+  }
   return paths;
 }
 
@@ -35,15 +35,19 @@ export async function checkPaths(paths: string[]) {
   }
 }
 
+export interface Combination {
+  [key: string]: string | boolean;
+}
+
 /**
  * Construct the args for the project.
  */
-export function constructArgs(combination: { [key: string]: any }) {
+export function constructArgs(combination: Combination) {
   const args: string[] = [];
   let name = "";
   for (const [item, value] of Object.entries(combination)) {
     name += `${item}-${value}_`.replace(" ", "");
-    args.push(`--${item}`, value);
+    args.push(`--${item}`, String(value));
   }
   name = name.slice(0, -1);
   const projectName = name.toLowerCase();

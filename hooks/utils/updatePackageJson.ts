@@ -21,15 +21,15 @@ export async function updatePackageJson({
   projectDir,
 }: UpdatePackageJsonProps) {
   const packageJsonPath = path.join(projectDir, "package.json");
-  const packageJson = await fs.readJSON(packageJsonPath);
+  const packageJson = (await fs.readJSON(packageJsonPath)) as PackageJson;
 
   packageJson.dependencies = packageJson.dependencies || {};
   packageJson.devDependencies = packageJson.devDependencies || {};
   removeDeps.forEach((dependency) => {
-    delete packageJson.dependencies[dependency];
+    delete packageJson.dependencies?.[dependency];
   });
   removeDevDeps.forEach((dependency) => {
-    delete packageJson.devDependencies[dependency];
+    delete packageJson.devDependencies?.[dependency];
   });
   packageJson.scripts = { ...packageJson.scripts, ...scripts };
   keys.forEach((key) => {

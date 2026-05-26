@@ -18,7 +18,7 @@ export async function isGitInstalled(dir: string) {
 
 /** @returns Whether or not the provided directory has a `.git` subdirectory in it. */
 export async function isRootGitRepo(dir: string) {
-  return await fs.exists(path.join(dir, ".git"));
+  return fs.exists(path.join(dir, ".git"));
 }
 
 /** @returns Whether or not this directory or a parent directory has a `.git` directory. */
@@ -80,13 +80,13 @@ export async function initializeGit(projectDir: string) {
   if (isInside && isRoot) {
     // Dir is a root git repo
     spinner.stop();
-    const { overwriteGit } = await prompts({
+    const { overwriteGit } = (await prompts({
       type: "confirm",
       name: "overwriteGit",
       message: `${bold(
         redBright("Warning:"),
       )} Git is already initialized in "${dirName}". Initializing a new git repository would delete the previous history. Would you like to continue anyways?`,
-    });
+    })) as { overwriteGit: boolean };
 
     if (!overwriteGit) {
       spinner.info("Skipping Git initialization.");
@@ -97,13 +97,13 @@ export async function initializeGit(projectDir: string) {
   } else if (isInside && !isRoot) {
     // Dir is inside a git worktree
     spinner.stop();
-    const { initializeChildGitRepo } = await prompts({
+    const { initializeChildGitRepo } = (await prompts({
       type: "confirm",
       name: "initializeChildGitRepo",
       message: `${bold(
         redBright("Warning:"),
       )} "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
-    });
+    })) as { initializeChildGitRepo: boolean };
     if (!initializeChildGitRepo) {
       spinner.info("Skipping Git initialization.");
       return;

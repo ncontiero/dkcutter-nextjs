@@ -17,6 +17,6 @@
     "isolatedModules": false,
     "skipLibCheck": true
   },
-  "include": ["hooks/**/*.ts"],
+  "include": ["hooks", "tests"],
   "exclude": ["node_modules"]
 }
