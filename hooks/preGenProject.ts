@@ -1,7 +1,7 @@
+import { logger } from "dkcutter/utils";
 import { z } from "zod";
 
 import { toBoolean } from "./utils/coerce";
-import { logger } from "./utils/logger";
 
 const ctx = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),

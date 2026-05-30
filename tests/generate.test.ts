@@ -1,8 +1,7 @@
 import { resolve } from "node:path";
-import { execa } from "execa";
-import fs from "fs-extra";
+import { emptyDir, remove } from "dkcutter/utils";
+import { x } from "tinyexec";
 import { afterAll, beforeAll, it as vitestIt } from "vitest";
-
 import {
   INVALID_SLUGS,
   SUPPORTED_COMBINATIONS,
@@ -16,10 +15,10 @@ const isWindows = process.platform === "win32";
 const TIMEOUT = isWindows ? 300_000 : 150_000;
 
 beforeAll(async () => {
-  await fs.emptyDir(TEST_OUTPUT);
+  await emptyDir(TEST_OUTPUT);
 });
 afterAll(async () => {
-  await fs.rm(TEST_OUTPUT, { recursive: true, force: true });
+  await remove(TEST_OUTPUT);
 });
 
 const it = vitestIt.extend<{
@@ -41,8 +40,8 @@ function runProjectTest(combination: { [key: string]: any }) {
       const target = resolve(TEST_OUTPUT, name);
 
       // Generate the project
-      await execa("pnpm", ["generate", "-o", TEST_OUTPUT, ...args, "-y"], {
-        cwd: TEST_OUTPUT,
+      await x("pnpm", ["generate", "-o", TEST_OUTPUT, ...args, "-y"], {
+        nodeOptions: { cwd: TEST_OUTPUT },
       });
 
       // Check that the project was generated
@@ -51,10 +50,10 @@ function runProjectTest(combination: { [key: string]: any }) {
 
       // Check that the project is linted
       const getWarnings = process.env.GET_WARNINGS === "true";
-      await execa(
+      await x(
         "pnpm",
         ["lint", ...(getWarnings ? ["--max-warnings", "0"] : [])],
-        { cwd: target },
+        { nodeOptions: { cwd: target } },
       );
 
       supportedOptions.push(name);
@@ -73,10 +72,10 @@ function runUnsupportedOptionsTest(
     testName,
     async ({ expect, invalidSlugs, unsupportedOptions }) => {
       // Generate the project and check that it fails
-      const { exitCode } = await execa(
+      const { exitCode } = await x(
         "pnpm",
         ["generate", "-o", TEST_OUTPUT, ...args, "-y"],
-        { cwd: TEST_OUTPUT, reject: false },
+        { nodeOptions: { cwd: TEST_OUTPUT } },
       );
       expect(exitCode).toBe(1);
       if (exitCode !== 1) return;

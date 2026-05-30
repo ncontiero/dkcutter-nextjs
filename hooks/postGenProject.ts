@@ -6,8 +6,9 @@ import type {
   PackageManager,
 } from "./utils/types";
 
+import fs from "node:fs/promises";
 import path from "node:path";
-import fs from "fs-extra";
+import { logger, remove, rename } from "dkcutter/utils";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
@@ -16,7 +17,6 @@ import { runLinters } from "./helpers/runLinters";
 import { toBoolean } from "./utils/coerce";
 import { appendToGitignore, removeFiles } from "./utils/files";
 import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
-import { logger } from "./utils/logger";
 import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
 
@@ -89,7 +89,7 @@ async function main() {
     SCRIPTS.prepare = "husky";
   } else {
     REMOVE_DEV_DEPS.push("husky");
-    await fs.remove(path.join(projectDir, ".husky"));
+    await remove(path.join(projectDir, ".husky"));
   }
 
   if (CTX.useLintStaged) {
@@ -113,23 +113,23 @@ async function main() {
   }
 
   if (CTX.useAppFolder) {
-    await fs.remove(pagesFolder);
+    await remove(pagesFolder);
     SCRIPTS.postinstall = "next typegen";
   } else {
-    await fs.move(
+    await rename(
       path.join(appFolder, "favicon.ico"),
       path.join(publicFolder, "favicon.ico"),
     );
-    await fs.remove(path.join(publicFolder, ".gitkeep"));
+    await remove(path.join(publicFolder, ".gitkeep"));
 
     if (CTX.authProvider !== "none" || CTX.clerkWebhook) {
       const appDirContents = await fs.readdir(appFolder);
       for (const file of appDirContents) {
         if (file === "api") continue;
-        await fs.remove(path.join(appFolder, file));
+        await remove(path.join(appFolder, file));
       }
     } else {
-      await fs.remove(appFolder);
+      await remove(appFolder);
     }
   }
 
@@ -156,7 +156,7 @@ async function main() {
   }
 
   if (!CTX.useDockerCompose) {
-    await fs.remove(path.join(projectDir, "docker-compose.yml"));
+    await remove(path.join(projectDir, "docker-compose.yml"));
   }
 
   const removeClerk = async () => {
@@ -176,7 +176,7 @@ async function main() {
     ]);
   };
   const removeProxyFile = async () => {
-    await fs.remove(path.join(srcFolder, "proxy.ts"));
+    await remove(path.join(srcFolder, "proxy.ts"));
   };
 
   if (CTX.authProvider === "clerk") {
@@ -187,11 +187,11 @@ async function main() {
     await removeClerk();
     await removeBetterAuth();
     await removeProxyFile();
-    await fs.remove(path.join(appFolder, "api"));
+    await remove(path.join(appFolder, "api"));
   }
 
   if (CTX.authProvider !== "betterAuth" && CTX.database === "none") {
-    await fs.remove(path.join(srcFolder, "lib"));
+    await remove(path.join(srcFolder, "lib"));
   }
 
   if (!CTX.useTriggerDev) {
@@ -216,9 +216,9 @@ async function main() {
 
   const githubFolder = path.join(projectDir, ".github");
   if (CTX.automatedDepsUpdater === "renovate") {
-    await fs.remove(path.join(githubFolder, "dependabot.yml"));
+    await remove(path.join(githubFolder, "dependabot.yml"));
   } else if (CTX.automatedDepsUpdater === "dependabot") {
-    await fs.remove(path.join(githubFolder, "renovate.json"));
+    await remove(path.join(githubFolder, "renovate.json"));
   } else {
     await removeFiles([
       path.join(githubFolder, "renovate.json"),
@@ -237,6 +237,7 @@ async function main() {
 }
 
 main().catch((error) => {
-  logger.error(`An error occurred: ${error}`);
+  logger.error("An error occurred:");
+  logger.error(error);
   process.exit(1);
 });

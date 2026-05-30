@@ -1,12 +1,9 @@
-import type { PackageJson } from "type-fest";
-
-import path from "node:path";
-import fs from "fs-extra";
+import { getPackageInfo, writeJsonFile } from "dkcutter/utils";
 
 interface UpdatePackageJsonProps {
   removeDeps?: string[];
   removeDevDeps?: string[];
-  scripts?: PackageJson["scripts"];
+  scripts?: Record<string, string>;
   keys?: string[];
   modifyKey?: Record<string, string>;
   projectDir: string;
@@ -20,8 +17,7 @@ export async function updatePackageJson({
   modifyKey = {},
   projectDir,
 }: UpdatePackageJsonProps) {
-  const packageJsonPath = path.join(projectDir, "package.json");
-  const packageJson = (await fs.readJSON(packageJsonPath)) as PackageJson;
+  const { packageJsonPath, packageJson } = await getPackageInfo(projectDir);
 
   packageJson.dependencies = packageJson.dependencies || {};
   packageJson.devDependencies = packageJson.devDependencies || {};
@@ -42,7 +38,7 @@ export async function updatePackageJson({
     });
   }
 
-  await fs.writeJson(packageJsonPath, packageJson, { spaces: 2 });
+  await writeJsonFile(packageJsonPath, packageJson);
 
   return packageJson;
 }
