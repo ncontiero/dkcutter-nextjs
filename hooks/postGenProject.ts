@@ -81,6 +81,26 @@ async function main() {
     await updatePackageJson({ projectDir, keys: ["packageManager"] });
   }
 
+  const npmrcFiles = [".npmrc"];
+  const yarnFiles = [".yarnrc.yml"];
+  const pnpmFiles = ["pnpm-workspace.yaml"];
+  switch (CTX.pkgManager) {
+    case "npm":
+      await removeFiles([...yarnFiles, ...pnpmFiles]);
+      break;
+    case "bun":
+      await removeFiles([...npmrcFiles, ...yarnFiles, ...pnpmFiles]);
+      break;
+    case "yarn":
+      await removeFiles([...npmrcFiles, ...pnpmFiles]);
+      break;
+    case "pnpm":
+      await removeFiles([...npmrcFiles, ...yarnFiles]);
+      break;
+    default:
+      break;
+  }
+
   if (!CTX.useReactCompiler) {
     REMOVE_DEV_DEPS.push("babel-plugin-react-compiler");
   }

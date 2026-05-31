@@ -8,9 +8,9 @@
   "author": "{{dkcutter.authorName}}",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next dev",
+    "build": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next build",
+    "start": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
