@@ -42,8 +42,8 @@ importers:
         specifier: ^2.0.20
         version: 2.0.20
       dkcutter:
-        specifier: 6.0.0-beta.4
-        version: 6.0.0-beta.4
+        specifier: 6.0.0
+        version: 6.0.0
       eslint:
         specifier: ^10.4.0
         version: 10.4.0(jiti@2.7.0)
@@ -1958,8 +1958,8 @@ packages:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  dkcutter@6.0.0-beta.4:
-    resolution: {integrity: sha512-/3KfbwfsJcSlrortJwr3SXiX1aXfLB1t2UCVxIjtqMjLRsc6OxM4ceaq4abchs/+LqZ9b/FzqTPtxzSGo4gxdA==}
+  dkcutter@6.0.0:
+    resolution: {integrity: sha512-86PaYS3TcSgCZ1os4OevYy4nyJuzfP66ZEeKl4BB4bIdkV9E1QfIYPF/LPF4Kw3yDA7C/Iw7YIBQzC3qW10NYQ==}
     engines: {node: ^22.3.0 || >=24.0.0}
     hasBin: true
 
@@ -5784,7 +5784,7 @@ snapshots:
 
   diff-sequences@29.6.3: {}
 
-  dkcutter@6.0.0-beta.4:
+  dkcutter@6.0.0:
     dependencies:
       colorette: 2.0.20
       commander: 14.0.3
