@@ -32,15 +32,14 @@ const it = vitestIt.extend<{
 });
 
 function runProjectTest(combination: { [key: string]: any }) {
-  const { args, testName } = constructArgs(combination);
-  const name = args[1];
+  const { args, testName, name } = constructArgs(combination);
   it.concurrent(
     testName,
     async ({ supportedOptions }) => {
       const target = resolve(TEST_OUTPUT, name);
 
       // Generate the project
-      await x("pnpm", ["generate", "-o", TEST_OUTPUT, ...args, "-y"], {
+      await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {
         nodeOptions: { cwd: TEST_OUTPUT },
       });
 
@@ -51,8 +50,8 @@ function runProjectTest(combination: { [key: string]: any }) {
       // Check that the project is linted
       const getWarnings = process.env.GET_WARNINGS === "true";
       await x(
-        "pnpm",
-        ["lint", ...(getWarnings ? ["--max-warnings", "0"] : [])],
+        "bun",
+        ["run", "lint", ...(getWarnings ? ["--max-warnings", "0"] : [])],
         { nodeOptions: { cwd: target } },
       );
 
@@ -66,15 +65,14 @@ function runUnsupportedOptionsTest(
   combination: { [key: string]: any },
   testOption: "slug" | "options" = "options",
 ) {
-  const { args, testName } = constructArgs(combination);
-  const name = args[1];
+  const { args, testName, name } = constructArgs(combination);
   it.concurrent(
     testName,
     async ({ expect, invalidSlugs, unsupportedOptions }) => {
       // Generate the project and check that it fails
       const { exitCode } = await x(
-        "pnpm",
-        ["generate", "-o", TEST_OUTPUT, ...args, "-y"],
+        "bun",
+        ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"],
         { nodeOptions: { cwd: TEST_OUTPUT } },
       );
       expect(exitCode).toBe(1);

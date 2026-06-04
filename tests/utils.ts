@@ -51,9 +51,9 @@ export function constructArgs(combination: Combination) {
   }
   name = name.slice(0, -1);
   const projectName = name.toLowerCase();
-  args.unshift(
-    "--projectName",
-    projectName.slice(0, 16).concat(Math.random().toString().slice(2, 14)),
-  );
-  return { args, testName: projectName };
+  const projectNameWithRandomSuffix = projectName
+    .slice(0, 16)
+    .concat(Math.random().toString().slice(2, 14));
+  args.unshift("--projectName", projectNameWithRandomSuffix);
+  return { args, testName: projectName, name: projectNameWithRandomSuffix };
 }
