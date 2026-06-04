@@ -19,7 +19,7 @@ beforeAll(async () => {
 });
 afterAll(async () => {
   await remove(TEST_OUTPUT);
-});
+}, TIMEOUT);
 
 const it = vitestIt.extend<{
   supportedOptions: string[];
@@ -46,6 +46,12 @@ function runProjectTest(combination: { [key: string]: any }) {
       // Check that the project was generated
       const paths = await buildFilesList(target);
       await checkPaths(paths);
+
+      // Install dependencies
+      await x("bun", ["install"], { nodeOptions: { cwd: target } });
+
+      // Check types
+      await x("bun", ["run", "typecheck"], { nodeOptions: { cwd: target } });
 
       // Check that the project is linted
       const getWarnings = process.env.GET_WARNINGS === "true";
