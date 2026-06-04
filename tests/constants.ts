@@ -11,6 +11,8 @@ export const SUPPORTED_COMBINATIONS = [
   { authProvider: "clerk", clerkWebhook: true },
   { authProvider: "betterAuth", database: "prisma" },
   { useTriggerDev: true },
+  { useTanstackQuery: true },
+  { useTanstackQuery: true, useAppFolder: false },
   { automatedDepsUpdater: "renovate" },
   { automatedDepsUpdater: "dependabot" },
   // Complex combinations
@@ -28,6 +30,8 @@ export const SUPPORTED_COMBINATIONS = [
   { authProvider: "clerk", clerkWebhook: true, useAppFolder: false },
   { database: "prisma", authProvider: "betterAuth", useAppFolder: false },
   { database: "prisma", useTriggerDev: true },
+  { authProvider: "clerk", useTanstackQuery: true },
+  { useAppFolder: false, authProvider: "clerk", useTanstackQuery: true },
 ];
 
 export const UNSUPPORTED_COMBINATIONS = [

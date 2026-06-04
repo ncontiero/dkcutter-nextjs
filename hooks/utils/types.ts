@@ -17,6 +17,7 @@ export interface ContextProps {
   authProvider: AuthProvider;
   clerkWebhook: boolean;
   useTriggerDev: boolean;
+  useTanstackQuery: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   automaticStart: boolean;
 }

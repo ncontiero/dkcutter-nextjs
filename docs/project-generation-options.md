@@ -37,6 +37,8 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Use Trigger.dev**: Indicates whether the project should be configured with [Trigger.dev](https://trigger.dev/).
 
+- **Use TanStack Query**: Indicates whether the project should be configured with [TanStack Query](https://tanstack.com/query/latest).
+
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)

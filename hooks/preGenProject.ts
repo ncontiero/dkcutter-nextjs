@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import { toBoolean } from "./utils/coerce";
 
+// {{ dkcutter.update("useTanstackQuery", "{{ dkcutter.useTanstackQuery }}") }}
+
 const ctx = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),

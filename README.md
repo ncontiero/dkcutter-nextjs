@@ -9,12 +9,13 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter Next.js is a ro
 
 ## Features
 
-- ⚡️ **Next.js**: Support for the Next.js App Router.
+- ⚡️ **Next.js v16**: Support for App Router and Pages Router.
 - ⚛️ **React Compiler**: Option to enable the experimental React Compiler for optimized performance.
 - 🎨 **Styling**: Pre-configured with Tailwind CSS 4.
 - 🗄️ **Database**: Optional Prisma ORM integration, complete with Docker Compose setup for your local database.
 - 🔐 **Authentication**: Out-of-the-box support for [Clerk](https://clerk.com/) (with webhooks) or [Better Auth](https://www.better-auth.com/).
 - ⚙️ **Background Jobs**: Integrated with [Trigger.dev](https://trigger.dev/) to handle complex background tasks.
+- 🔄 **Data Fetching**: Optional [TanStack Query](https://tanstack.com/query/latest) configuration for powerful async state management.
 - 🔒 **Environment Validation**: Type-safe environment variables via `@t3-oss/env-nextjs` and `zod`.
 - 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, lint-staged, and Commitlint.
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
@@ -70,6 +71,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Do you want to receive events from the Clerk using a webhook? … No / Yes
 ✔ Do you want to use Trigger.dev? … No / Yes
+✔ Do you want to use TanStack Query? … No / Yes
 ✔ What Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
 ✔ Do you want the project to be configured? … No / Yes
 
@@ -114,6 +116,7 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                               |
 | `--clerkWebhook [boolean]`        | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                         |
 | `--useTriggerDev [boolean]`       | Include [Trigger.dev](https://trigger.dev/) in the project.                                      |
+| `--useTanstackQuery [boolean]`    | Include [TanStack Query](https://tanstack.com/query/latest) in the project.                      |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                          |
 | `--automaticStart [boolean]`      | This option will install the application packages, start a git repo and make the initial commit. |
 

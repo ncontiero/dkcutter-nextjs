@@ -35,6 +35,7 @@ const CTX: ContextProps = {
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
   clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
+  useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
@@ -210,10 +211,6 @@ async function main() {
     await remove(path.join(appFolder, "api"));
   }
 
-  if (CTX.authProvider !== "betterAuth" && CTX.database === "none") {
-    await remove(path.join(srcFolder, "lib"));
-  }
-
   if (!CTX.useTriggerDev) {
     REMOVE_DEPS.push("@trigger.dev/sdk");
     REMOVE_DEV_DEPS.push("@trigger.dev/build", "trigger.dev", "concurrently");
@@ -225,6 +222,26 @@ async function main() {
     SCRIPTS["trigger:dev"] = "trigger dev";
     SCRIPTS["trigger:deploy"] = "trigger deploy";
     SCRIPTS.dev = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "next dev" "${CTX.pkgRun} trigger:dev"`;
+  }
+
+  if (!CTX.useTanstackQuery) {
+    REMOVE_DEPS.push("@tanstack/react-query");
+    REMOVE_DEV_DEPS.push(
+      "@tanstack/eslint-plugin-query",
+      "@tanstack/react-query-devtools",
+    );
+    await removeFiles([
+      path.join(appFolder, "providers.tsx"),
+      path.join(srcFolder, "lib", "query-client.ts"),
+    ]);
+  }
+
+  if (
+    CTX.authProvider !== "betterAuth" &&
+    CTX.database === "none" &&
+    !CTX.useTanstackQuery
+  ) {
+    await remove(path.join(srcFolder, "lib"));
   }
 
   await updatePackageJson({

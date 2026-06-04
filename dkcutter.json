@@ -81,6 +81,10 @@
     "value": false,
     "promptMessage": "Do you want to use {{ colors.green('Trigger.dev') }}?"
   },
+  "useTanstackQuery": {
+    "value": false,
+    "promptMessage": "Do you want to use {{ colors.blue('TanStack Query') }}?"
+  },
   "automatedDepsUpdater": {
     "value": "none",
     "choices": [
