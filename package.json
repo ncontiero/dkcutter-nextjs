@@ -13,7 +13,8 @@
     "lint:fix": "bun run lint --fix",
     "check": "bun run lint && bun run typecheck",
     "test": "bun --bun vitest run",
-    "test:strict": "GET_WARNINGS=true bun run test",
+    "test:typecheck": "RUN_TYPE_CHECK=true bun run test",
+    "test:strict-eslint": "GET_WARNINGS=true bun run test",
     "commitlint": "commitlint --edit",
     "pre-commit": "lint-staged -c ./package.json",
     "prepare": "husky"

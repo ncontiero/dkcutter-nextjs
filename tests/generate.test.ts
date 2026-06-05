@@ -38,6 +38,9 @@ function runProjectTest(combination: { [key: string]: any }) {
     async ({ supportedOptions }) => {
       const target = resolve(TEST_OUTPUT, name);
 
+      const runTypeCheck = process.env.RUN_TYPE_CHECK === "true";
+      if (!runTypeCheck) args.push("--useESLintWithTypeInformation", "false");
+
       // Generate the project
       await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {
         nodeOptions: { cwd: TEST_OUTPUT },
@@ -47,11 +50,12 @@ function runProjectTest(combination: { [key: string]: any }) {
       const paths = await buildFilesList(target);
       await checkPaths(paths);
 
-      // Install dependencies
-      await x("bun", ["install"], { nodeOptions: { cwd: target } });
-
-      // Check types
-      await x("bun", ["run", "typecheck"], { nodeOptions: { cwd: target } });
+      if (runTypeCheck) {
+        // Install dependencies
+        await x("bun", ["install"], { nodeOptions: { cwd: target } });
+        // Check types
+        await x("bun", ["run", "typecheck"], { nodeOptions: { cwd: target } });
+      }
 
       // Check that the project is linted
       const getWarnings = process.env.GET_WARNINGS === "true";

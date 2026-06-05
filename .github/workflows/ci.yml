@@ -52,5 +52,9 @@ jobs:
         uses: oven-sh/setup-bun@v2
       - name: Install dependencies
         run: bun install
+      - name: Run tests with type checking
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: bun run test:typecheck
       - name: Run tests
+        if: ${{ matrix.os != 'ubuntu-latest' }}
         run: bun run test
