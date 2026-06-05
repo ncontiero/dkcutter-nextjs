@@ -7,6 +7,7 @@ import { toBoolean } from "./utils/coerce";
 // {{ dkcutter.update("useReactCompiler", "{{ dkcutter.useReactCompiler }}") }}
 // {{ dkcutter.update("useLintStaged", "{{ dkcutter.useLintStaged }}") }}
 // {{ dkcutter.update("useCommitlint", "{{ dkcutter.useCommitlint }}") }}
+// {{ dkcutter.update("useESLintWithTypeInformation", "{{ dkcutter.useESLintWithTypeInformation }}") }}
 // {{ dkcutter.update("useDockerCompose", "{{ dkcutter.useDockerCompose }}") }}
 // {{ dkcutter.update("clerkWebhook", "{{ dkcutter.clerkWebhook }}") }}
 // {{ dkcutter.update("useTriggerDev", "{{ dkcutter.useTriggerDev }}") }}

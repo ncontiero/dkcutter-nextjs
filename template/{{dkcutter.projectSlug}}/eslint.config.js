@@ -1,6 +1,11 @@
 import { ncontiero } from "@ncontiero/eslint-config";
 
 export default ncontiero({
+{%- if dkcutter.useESLintWithTypeInformation %}
+  typescript: {
+    tsconfigPath: "./tsconfig.json",
+  },
+{%- endif %}
   tailwindcss: {
     cssGlobalPath: "./src/styles/globals.css",
   },

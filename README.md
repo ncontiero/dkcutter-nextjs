@@ -17,7 +17,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter Next.js is a ro
 - ⚙️ **Background Jobs**: Integrated with [Trigger.dev](https://trigger.dev/) to handle complex background tasks.
 - 🔄 **Data Fetching**: Optional [TanStack Query](https://tanstack.com/query/latest) configuration for powerful async state management.
 - 🔒 **Environment Validation**: Type-safe environment variables via `@t3-oss/env-nextjs` and `zod`.
-- 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, lint-staged, and Commitlint.
+- 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, lint-staged, Commitlint, and optional type-aware ESLint.
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
 - 📦 **Package Manager Agnostic**: Seamlessly use npm, yarn, pnpm, or bun.
 
@@ -66,6 +66,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Do you want to use husky? … No / Yes
 ✔ Do you want to use lint staged? … No / Yes
 ✔ Do you want to use Commitlint? … No / Yes
+✔ Do you want to use ESLint with type information? This will make the linting process slower but will provide more accurate linting results. … No / Yes
 ✔ What database ORM would you like to use? › None / Prisma
 ✔ Do you want to use Docker compose for the database? … No / Yes
 ✔ What Authentication Provider would you like to use? › None / Clerk / Better Auth
@@ -99,26 +100,27 @@ Now take a look at your repo. Don't forget to carefully look at the generated `R
 
 If you want to bypass the interactive prompts and start faster, you can provide configuration via CLI flags. All options in `dkcutter.json` are available as flags:
 
-| Flag                              | Description                                                                                      |
-| --------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `--projectName <string>`          | The Project name.                                                                                |
-| `--projectSlug <string>`          | The Project Slug.                                                                                |
-| `--description <string>`          | The Project description.                                                                         |
-| `--authorName <string>`           | The author name.                                                                                 |
-| `--projectVersion <string>`       | The project version.                                                                             |
-| `--useAppFolder [boolean]`        | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                 |
-| `--useReactCompiler [boolean]`    | Use the [React compiler](https://react.dev/learn/react-compiler).                                |
-| `--useHusky [boolean]`            | Include [husky](https://github.com/typicode/husky) in the project.                               |
-| `--useLintStaged [boolean]`       | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
-| `--useCommitlint [boolean]`       | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
-| `--database <string>`             | Choose a database ORM (`none`, `prisma`).                                                        |
-| `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if `database` is not `none`).            |
-| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                               |
-| `--clerkWebhook [boolean]`        | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                         |
-| `--useTriggerDev [boolean]`       | Include [Trigger.dev](https://trigger.dev/) in the project.                                      |
-| `--useTanstackQuery [boolean]`    | Include [TanStack Query](https://tanstack.com/query/latest) in the project.                      |
-| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                          |
-| `--automaticStart [boolean]`      | This option will install the application packages, start a git repo and make the initial commit. |
+| Flag                                       | Description                                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `--projectName <string>`                   | The Project name.                                                                                |
+| `--projectSlug <string>`                   | The Project Slug.                                                                                |
+| `--description <string>`                   | The Project description.                                                                         |
+| `--authorName <string>`                    | The author name.                                                                                 |
+| `--projectVersion <string>`                | The project version.                                                                             |
+| `--useAppFolder [boolean]`                 | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                 |
+| `--useReactCompiler [boolean]`             | Use the [React compiler](https://react.dev/learn/react-compiler).                                |
+| `--useHusky [boolean]`                     | Include [husky](https://github.com/typicode/husky) in the project.                               |
+| `--useLintStaged [boolean]`                | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
+| `--useCommitlint [boolean]`                | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
+| `--useESLintWithTypeInformation [boolean]` | Include ESLint with type information.                                                            |
+| `--database <string>`                      | Choose a database ORM (`none`, `prisma`).                                                        |
+| `--useDockerCompose [boolean]`             | Include Docker Compose in the project for the database (if `database` is not `none`).            |
+| `--authProvider <string>`                  | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                               |
+| `--clerkWebhook [boolean]`                 | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                         |
+| `--useTriggerDev [boolean]`                | Include [Trigger.dev](https://trigger.dev/) in the project.                                      |
+| `--useTanstackQuery [boolean]`             | Include [TanStack Query](https://tanstack.com/query/latest) in the project.                      |
+| `--automatedDepsUpdater <string>`          | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                          |
+| `--automaticStart [boolean]`               | This option will install the application packages, start a git repo and make the initial commit. |
 
 [See here for more information about options][options-url].
 

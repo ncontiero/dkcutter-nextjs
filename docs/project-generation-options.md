@@ -22,6 +22,8 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Use commitlint**: Indicates that the project should be configured with [commitlint](https://commitlint.js.org).
 
+- **Use ESLint with type information**: Indicates whether the project should use ESLint with type information for more accurate but slower linting. [See more information](https://typescript-eslint.io/getting-started/typed-linting/).
+
 - **Database ORM**: Indicates whether the project should be configured using the following ORM:
   - None
   - [Prisma](https://www.prisma.io/)

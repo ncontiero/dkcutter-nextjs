@@ -45,6 +45,10 @@
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('Commitlint') }}?"
   },
+  "useESLintWithTypeInformation": {
+    "value": true,
+    "promptMessage": "Do you want to use {{ colors.blue('ESLint with type information') }}? This will make the linting process slower but will provide more accurate linting results."
+  },
   "database": {
     "value": "none",
     "choices": [
