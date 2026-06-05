@@ -9,7 +9,7 @@
   "scripts": {
     "typecheck": "bun --bun tsc --noEmit",
     "generate": "bun --bun dkcutter .",
-    "lint": "bun --bun eslint .",
+    "lint": "bun --bun eslint . -c eslint.config.ts",
     "lint:fix": "bun run lint --fix",
     "check": "bun run lint && bun run typecheck",
     "test": "bun --bun vitest run",
