@@ -196,19 +196,25 @@ async function main() {
       path.join(appFolder, "api", "auth"),
     ]);
   };
+  const removeAPIFolder = async () => {
+    await remove(path.join(appFolder, "api"));
+  };
   const removeProxyFile = async () => {
     await remove(path.join(srcFolder, "proxy.ts"));
   };
 
   if (CTX.authProvider === "clerk") {
     await removeBetterAuth();
+    if (!CTX.clerkWebhook) {
+      await removeAPIFolder();
+    }
   } else if (CTX.authProvider === "betterAuth") {
     await removeClerk();
   } else {
     await removeClerk();
     await removeBetterAuth();
     await removeProxyFile();
-    await remove(path.join(appFolder, "api"));
+    await removeAPIFolder();
   }
 
   if (!CTX.useTriggerDev) {

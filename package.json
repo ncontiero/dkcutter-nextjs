@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "typecheck": "bun --bun tsc --noEmit",
-    "generate": "bun --bun dkcutter .",
+    "generate": "dkcutter .",
     "lint": "bun --bun eslint . -c eslint.config.ts",
     "lint:fix": "bun run lint --fix",
     "check": "bun run lint && bun run typecheck",

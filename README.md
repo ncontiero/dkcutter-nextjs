@@ -127,13 +127,13 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 Generate a project using [Commitlint](https://commitlint.js.org/):
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useCommitlint
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useCommitlint true
 ```
 
 If you want to use all the default values with the exception of one or more, you can do it as follows:
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useHusky --useLintStaged -y
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useHusky true --useLintStaged true -y
 ```
 
 This will use the default values, with the exception of the `--useHusky` and `--useLintStaged` options, skipping the interactive prompt (`-y`).
