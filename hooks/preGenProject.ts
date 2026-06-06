@@ -3,16 +3,6 @@ import { z } from "zod";
 
 import { toBoolean } from "./utils/coerce";
 
-// Make sure the context values are boolean
-// {{ dkcutter.update("useReactCompiler", "{{ dkcutter.useReactCompiler }}") }}
-// {{ dkcutter.update("useLintStaged", "{{ dkcutter.useLintStaged }}") }}
-// {{ dkcutter.update("useCommitlint", "{{ dkcutter.useCommitlint }}") }}
-// {{ dkcutter.update("useESLintWithTypeInformation", "{{ dkcutter.useESLintWithTypeInformation }}") }}
-// {{ dkcutter.update("useDockerCompose", "{{ dkcutter.useDockerCompose }}") }}
-// {{ dkcutter.update("clerkWebhook", "{{ dkcutter.clerkWebhook }}") }}
-// {{ dkcutter.update("useTriggerDev", "{{ dkcutter.useTriggerDev }}") }}
-// {{ dkcutter.update("useTanstackQuery", "{{ dkcutter.useTanstackQuery }}") }}
-
 const ctx = {
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
