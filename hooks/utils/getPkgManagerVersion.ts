@@ -12,7 +12,8 @@ const pkgManagersDefaultVersions: Record<PackageManager, string> = {
 export async function getPkgManagerVersion(packageManager: PackageManager) {
   try {
     const { stdout } = await x(packageManager, ["-v"], { throwOnError: true });
-    return `${packageManager}@${stdout}`;
+    const version = stdout.toString().trim();
+    return `${packageManager}@${version}`;
   } catch {
     logger.warn(
       `Failed to get version for package manager ${packageManager}, using default version instead.`,
