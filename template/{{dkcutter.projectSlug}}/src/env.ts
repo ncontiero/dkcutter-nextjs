@@ -14,16 +14,7 @@ export const env = createEnv({
     // Database ({{ dkcutter.database | capitalize }})
     DATABASE_URL: z.url(),
 {%- endif %}
-{%- if dkcutter.authProvider == 'nextAuth' %}
-    // Auth.js
-    AUTH_SECRET:
-      process.env.NODE_ENV === "production"
-        ? z.string()
-        : z.string().optional(),
-    // Add ` on ID and SECRET if you want to make sure they're not empty
-    AUTH_DISCORD_ID: z.string(),
-    AUTH_DISCORD_SECRET: z.string(),
-{%- elif dkcutter.  authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: z.string().min(1),
 {%- if dkcutter.clerkWebhook %}
@@ -65,12 +56,7 @@ export const env = createEnv({
     // Database ({{ dkcutter.database | capitalize }})
     DATABASE_URL: process.env.DATABASE_URL,
 {%- endif %}
-{%- if dkcutter.authProvider == 'nextAuth' %}
-    // Auth.js
-    AUTH_SECRET: process.env.AUTH_SECRET,
-    AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
-    AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
-{%- elif dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == 'clerk' %}
     // Clerk
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
 {%- if dkcutter.clerkWebhook %}
