@@ -41,10 +41,8 @@ export async function runPgkCommand(
   const onDataHandle = (data: Buffer) => {
     const text = data.toString();
     spinner.setText(
-      pkgManager === "pnpm" && text.includes("Progress")
-        ? text.includes("|")
-          ? (text.split(" | ")[1] ?? "")
-          : text
+      pkgManager === "pnpm" && text.includes("Progress") && text.includes("|")
+        ? (text.split(" | ")[1] ?? "")
         : text,
     );
   };
