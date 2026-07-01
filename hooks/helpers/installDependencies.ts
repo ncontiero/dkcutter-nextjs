@@ -1,6 +1,6 @@
 import type { PackageManager } from "../utils/types";
 
-import { colorize, logger, spinner } from "dkcutter/utils";
+import { colorize, logger, clackSpinner as spinner } from "dkcutter/utils";
 import { runPgkCommand } from "./runPkgCommand";
 
 export async function installDependencies(
@@ -10,6 +10,5 @@ export async function installDependencies(
   logger.info("Installing dependencies. This might take a while...");
 
   await runPgkCommand(pkgManager, projectDir);
-  spinner.succeed(colorize("success", "Successfully installed dependencies!"));
-  logger.break();
+  spinner.stop(colorize("success", "Successfully installed dependencies!"));
 }

@@ -22,6 +22,7 @@ import { updatePackageJson } from "./utils/updatePackageJson";
 
 const TEMPLATE_REPO = "ncontiero/dkcutter-nextjs";
 const CTX: ContextProps = {
+  default: toBoolean("{{ dkcutter.default }}"),
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   pkgRun: "{{ dkcutter._pkgRun }}",
@@ -269,14 +270,20 @@ async function main() {
     ]);
   }
 
+  let hasGitInitialized = false;
   if (CTX.automaticStart) {
-    await initializeGit(projectDir);
+    hasGitInitialized = await initializeGit(projectDir, CTX.default);
     await installDependencies(projectDir, CTX.pkgManager);
     await runLinters(projectDir, CTX.pkgManager);
-    await stageAndCommit(projectDir, `Initial commit from ${TEMPLATE_REPO}`);
+    if (hasGitInitialized) {
+      await stageAndCommit(
+        projectDir,
+        `feat: initial commit from ${TEMPLATE_REPO}`,
+      );
+    }
   }
 
-  await logNextSteps({ ctx: CTX, projectDir, pkgManager: CTX.pkgManager });
+  logNextSteps(CTX, hasGitInitialized);
 }
 
 main().catch((error) => {

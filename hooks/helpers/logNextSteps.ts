@@ -1,32 +1,18 @@
-import type { ContextProps, PackageManager } from "../utils/types";
-
+import type { ContextProps } from "../utils/types";
+import * as p from "@clack/prompts";
+import { dim } from "ansis";
 import { logger } from "dkcutter/utils";
-import { isInsideGitRepo, isRootGitRepo } from "./git";
 
-interface LogNextStepsOptions {
-  ctx: ContextProps;
-  projectDir: string;
-  pkgManager: PackageManager;
-}
+export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
+  const { projectSlug, pkgManager, automaticStart } = ctx;
+  const commands = [`cd ${projectSlug}`];
 
-export async function logNextSteps({
-  ctx,
-  projectDir,
-  pkgManager,
-}: LogNextStepsOptions) {
-  const commands = [`cd ${ctx.projectSlug}`];
+  if (!automaticStart) {
+    commands.push(`${pkgManager} install`);
 
-  if (!ctx.automaticStart) {
-    const installCommand =
-      pkgManager === "yarn" ? pkgManager : `${pkgManager} install`;
-    commands.push(installCommand);
-
-    const isGitRepo =
-      (await isInsideGitRepo(projectDir)) || (await isRootGitRepo(projectDir));
-    if (!isGitRepo) {
-      commands.push(`git init`);
+    if (!hasGitInitialized) {
+      commands.push("git init", "git add .", `git commit -m "initial commit"`);
     }
-    commands.push(`git add .`, `git commit -m "initial commit"`);
   }
 
   ctx.useDockerCompose && commands.push("docker compose up -d");
@@ -35,5 +21,8 @@ export async function logNextSteps({
   }
   commands.push(`${ctx.pkgRun} dev`);
 
+  p.note(commands.join("\n"), "Next steps", {
+    format: (line: string) => dim(line),
+  });
   logger.info(`Next steps:\n  ${commands.join("\n  ")}`);
 }

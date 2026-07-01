@@ -1,9 +1,12 @@
-export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+import type { PackageManager } from "dkcutter/utils";
+
+export type { PackageManager };
 export type Database = "none" | "prisma";
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 
 export interface ContextProps {
+  default: boolean;
   projectSlug: string;
   pkgManager: PackageManager;
   pkgRun: string;

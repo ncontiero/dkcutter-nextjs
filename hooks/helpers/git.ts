@@ -1,7 +1,12 @@
 import path from "node:path";
-import { bold, redBright } from "colorette";
-import { colorize, logger, pathExists, remove, spinner } from "dkcutter/utils";
-import prompts from "prompts";
+import * as p from "@clack/prompts";
+import {
+  colorize,
+  logger,
+  pathExists,
+  remove,
+  clackSpinner as spinner,
+} from "dkcutter/utils";
 import { x } from "tinyexec";
 
 export async function isGitInstalled(dir: string) {
@@ -59,16 +64,16 @@ async function getDefaultBranch() {
 }
 
 // This initializes the Git-repository for the project
-export async function initializeGit(projectDir: string) {
+export async function initializeGit(
+  projectDir: string,
+  ignorePrompts = false,
+): Promise<boolean> {
   logger.info("Initializing Git...");
 
   if (!(await isGitInstalled(projectDir))) {
     logger.warn("Git is not installed. Skipping Git initialization.");
-    return;
+    return false;
   }
-
-  spinner.setText("Creating a new git repo...");
-  !spinner.running && spinner.start();
 
   const isRoot = await isRootGitRepo(projectDir);
   const isInside = await isInsideGitRepo(projectDir);
@@ -76,36 +81,47 @@ export async function initializeGit(projectDir: string) {
 
   if (isInside && isRoot) {
     // Dir is a root git repo
-    spinner.stop();
-    const { overwriteGit } = (await prompts({
-      type: "confirm",
-      name: "overwriteGit",
-      message: `${bold(
-        redBright("Warning:"),
-      )} Git is already initialized in "${dirName}". Initializing a new git repository would delete the previous history. Would you like to continue anyways?`,
-    })) as { overwriteGit: boolean };
-
-    if (!overwriteGit) {
-      spinner.info("Skipping Git initialization.");
-      return;
+    if (ignorePrompts) {
+      logger.warn(
+        `Git is already initialized in "${dirName}". Skipping Git initialization.`,
+      );
+      return false;
     }
+
+    const overwriteGit = await p.confirm({
+      message: `Git is already initialized in "${dirName}". Initializing a new git repository would delete the previous history. Would you like to continue anyways?`,
+      initialValue: false,
+    });
+
+    if (p.isCancel(overwriteGit) || !overwriteGit) {
+      logger.warn("Skipping Git initialization.");
+      return false;
+    }
+
     // Deleting the .git folder
     await remove(path.join(projectDir, ".git"));
   } else if (isInside && !isRoot) {
     // Dir is inside a git worktree
-    spinner.stop();
-    const { initializeChildGitRepo } = (await prompts({
-      type: "confirm",
-      name: "initializeChildGitRepo",
-      message: `${bold(
-        redBright("Warning:"),
-      )} "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
-    })) as { initializeChildGitRepo: boolean };
-    if (!initializeChildGitRepo) {
-      spinner.info("Skipping Git initialization.");
-      return;
+
+    if (ignorePrompts) {
+      logger.warn(
+        `Warning: "${dirName}" is already in a git worktree. Skipping Git initialization.`,
+      );
+      return false;
+    }
+
+    const initializeChildGitRepo = await p.confirm({
+      message: `Warning: "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
+      initialValue: false,
+    });
+
+    if (p.isCancel(initializeChildGitRepo) || !initializeChildGitRepo) {
+      logger.warn("Skipping Git initialization.");
+      return false;
     }
   }
+
+  spinner.start("Creating a new git repo...");
 
   // We're good to go, initializing the git repo
   try {
@@ -127,20 +143,21 @@ export async function initializeGit(projectDir: string) {
       });
     }
     await x("git", ["add", "."], { nodeOptions: { cwd: projectDir } });
-    spinner.succeed(
+    spinner.stop(
       colorize("success", "Successfully initialized and staged git."),
     );
-    logger.break();
   } catch {
     // Safeguard, should be unreachable
-    spinner.fail(
+    spinner.error(
       colorize(
         "error",
         "Failed: could not initialize git. Update git to the latest version!",
       ),
     );
-    logger.break();
+    return false;
   }
+
+  return true;
 }
 
 export async function stageAndCommit(projectDir: string, message: string) {
