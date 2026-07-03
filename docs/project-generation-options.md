@@ -25,10 +25,14 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Nano Staged](https://github.com/usmanyunusov/nano-staged): Tiny tool to run commands for modified, staged, and committed files.
   - [Commitlint](https://commitlint.js.org/): Lint commit messages.
   - [React Compiler](https://react.dev/learn/react-compiler): Automatically optimize React component renders.
+  - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation.
   - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.
   - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
   - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.
   - [TanStack Query](https://tanstack.com/query/latest): Powerful asynchronous state management for TS/JS.
+  - [Shadcn](https://ui.shadcn.com/): Copy-paste accessible UI components (Tailwind + Radix primitives).
+  - [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography): A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML.
+  - [Unpic](https://unpic.pics): High-performance, framework-agnostic image component.
 
 - **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database (only prompted if Prisma is selected).
 

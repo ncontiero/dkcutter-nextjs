@@ -5,6 +5,41 @@
 
 {{ dkcutter.description }}
 
+## ✨ Features
+
+- ⚡️ **Next.js**: Modern full-stack React framework{% if dkcutter.useAppFolder %} using the App Router{% else %} using the Pages Router{% endif %}.
+{%- if dkcutter.authProvider == "clerk" %}
+- 🔐 **Authentication**: Out-of-the-box support for Clerk{% if dkcutter.useClerkWebhook %} (with webhooks){% endif %}.
+{%- elif dkcutter.authProvider == "betterAuth" %}
+- 🔐 **Authentication**: Self-hosted user accounts and sessions via Better Auth.
+{%- endif %}
+{%- if dkcutter.usePrisma %}
+- 🗄️ **Database ORM**: Prisma configured for type-safe database access.
+{%- if dkcutter.useDockerCompose %}
+- 🐳 **Local Database**: Docker Compose configured for an easy local database setup.
+{%- endif %}
+{%- endif %}
+{%- if dkcutter.useTriggerDev %}
+- ⚙️ **Background Jobs**: Integrated with Trigger.dev for serverless background tasks.
+{%- endif %}
+{%- if dkcutter.useTanstackQuery %}
+- 🔄 **Data Fetching**: TanStack Query configuration for powerful async state management.
+{%- endif %}
+{%- if dkcutter.useReactHookForm %}
+- 📝 **Form Validation**: Type-safe and performant forms via React Hook Form and Zod.
+{%- endif %}
+{%- if dkcutter.useShadcn %}
+- 🎨 **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
+{%- else %}
+- 🎨 **Styling**: Pre-configured with Tailwind CSS out-of-the-box.
+{%- endif %}
+{%- if dkcutter.useTailwindTypography %}
+- 📖 **Typography**: Tailwind CSS Typography plugin for beautiful text styles.
+{%- endif %}
+{%- if dkcutter.useUnpic %}
+- 🖼️ **Images**: High-performance, framework-agnostic image component via Unpic.
+{%- endif %}
+
 ## Getting Started
 
 First, run the development server:
