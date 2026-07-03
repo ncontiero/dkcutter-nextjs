@@ -28,6 +28,23 @@
     "value": true,
     "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"
   },
+  "authProvider": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "Clerk",
+        "value": "clerk",
+        "description": "Hosted user accounts with prebuilt sign-in UI and social providers - managed"
+      },
+      {
+        "title": "Better Auth",
+        "value": "betterAuth",
+        "description": "Self-hosted user accounts and sessions - open source, full control"
+      }
+    ],
+    "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
+  },
   "useReactCompiler": {
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('React compiler') }}?"
@@ -61,20 +78,6 @@
     "disabled": "{{ database == 'none' }}",
     "value": false,
     "promptMessage": "Do you want to use {{ colors.blue('Docker compose') }} for the database?"
-  },
-  "authProvider": {
-    "value": "none",
-    "choices": [
-      { "title": "None", "value": "none" },
-      { "title": "Clerk", "value": "clerk" },
-      {
-        "title": "Better Auth",
-        "value": "betterAuth",
-        "disabled": "{{ database == 'none' }}",
-        "helpTextForDisabled": "The Better Auth provider requires a database."
-      }
-    ],
-    "promptMessage": "What {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
   "clerkWebhook": {
     "value": false,

@@ -11,13 +11,13 @@ export interface ContextProps {
   pkgManager: PackageManager;
   pkgRun: string;
   useAppFolder: boolean;
+  authProvider: AuthProvider;
   useReactCompiler: boolean;
   useHusky: boolean;
   useLintStaged: boolean;
   useCommitlint: boolean;
   database: Database;
   useDockerCompose: boolean;
-  authProvider: AuthProvider;
   clerkWebhook: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
