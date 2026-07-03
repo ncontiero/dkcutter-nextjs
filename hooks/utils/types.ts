@@ -20,6 +20,7 @@ export interface ContextProps {
   usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
+  useShadcn: boolean;
   useTailwindTypography: boolean;
   useUnpic: boolean;
   useDockerCompose: boolean;

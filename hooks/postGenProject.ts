@@ -35,6 +35,7 @@ const CTX: ContextProps = {
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
+  useShadcn: toBoolean("{{ dkcutter.useShadcn }}"),
   useTailwindTypography: toBoolean("{{ dkcutter.useTailwindTypography }}"),
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
@@ -260,6 +261,20 @@ async function main() {
     );
   }
 
+  if (!CTX.useShadcn) {
+    REMOVE_DEPS.push(
+      "class-variance-authority",
+      "clsx",
+      "lucide-react",
+      "tailwind-merge",
+    );
+    REMOVE_DEV_DEPS.push("shadcn", "tw-animate-css");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "components.json"),
+      path.join(libFolder, "utils.ts"),
+    );
+  }
+
   if (!CTX.useTailwindTypography) {
     REMOVE_DEPS.push("@tailwindcss/typography");
   }
@@ -271,6 +286,7 @@ async function main() {
   if (
     !CTX.usePrisma &&
     !CTX.useTanstackQuery &&
+    !CTX.useShadcn &&
     CTX.authProvider !== "betterAuth"
   ) {
     FILES_TO_REMOVE.push(libFolder);
