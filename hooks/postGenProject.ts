@@ -107,11 +107,12 @@ async function main() {
     REMOVE_DEV_DEPS.push("babel-plugin-react-compiler");
   }
 
-  if (CTX.useHusky) {
-    SCRIPTS.prepare = "husky";
-  } else {
+  if (!CTX.useHusky && !CTX.useLintStaged) {
     REMOVE_DEV_DEPS.push("husky");
     await remove(path.join(projectDir, ".husky"));
+  } else if (CTX.useLintStaged) {
+    logger.warn("Husky is required for lint-staged. It will be installed.");
+    SCRIPTS.prepare = "husky";
   }
 
   if (CTX.useLintStaged) {
