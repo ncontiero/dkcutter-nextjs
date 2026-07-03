@@ -7,7 +7,12 @@ import {
   SUPPORTED_COMBINATIONS,
   UNSUPPORTED_COMBINATIONS,
 } from "./constants";
-import { buildFilesList, checkPaths, constructArgs } from "./utils";
+import {
+  type Combination,
+  buildFilesList,
+  checkPaths,
+  constructArgs,
+} from "./utils";
 
 const TEST_OUTPUT = resolve(".test");
 
@@ -31,15 +36,16 @@ const it = vitestIt.extend<{
   invalidSlugs: [],
 });
 
-function runProjectTest(combination: { [key: string]: any }) {
-  const { args, testName, name } = constructArgs(combination);
+function runProjectTest(combination: Combination) {
+  const runTypeCheck = process.env.RUN_TYPE_CHECK === "true";
+  const { args, testName, slug } = constructArgs(
+    combination,
+    runTypeCheck ? "eslintTypeInfo" : undefined,
+  );
   it.concurrent(
     testName,
     async ({ supportedOptions }) => {
-      const target = resolve(TEST_OUTPUT, name);
-
-      const runTypeCheck = process.env.RUN_TYPE_CHECK === "true";
-      if (!runTypeCheck) args.push("--useEslintWithType", "false");
+      const target = resolve(TEST_OUTPUT, slug);
 
       // Generate the project
       await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {
@@ -52,9 +58,15 @@ function runProjectTest(combination: { [key: string]: any }) {
 
       if (runTypeCheck) {
         // Install dependencies
-        await x("bun", ["install"], { nodeOptions: { cwd: target } });
+        await x("bun", ["install"], {
+          nodeOptions: { cwd: target },
+          throwOnError: true,
+        });
         // Check types
-        await x("bun", ["run", "typecheck"], { nodeOptions: { cwd: target } });
+        await x("bun", ["run", "typecheck"], {
+          nodeOptions: { cwd: target, stdio: "inherit" },
+          throwOnError: true,
+        });
       }
 
       // Check that the project is linted
@@ -62,10 +74,10 @@ function runProjectTest(combination: { [key: string]: any }) {
       await x(
         "bun",
         ["run", "lint", ...(getWarnings ? ["--max-warnings", "0"] : [])],
-        { nodeOptions: { cwd: target } },
+        { nodeOptions: { cwd: target, stdio: "inherit" }, throwOnError: true },
       );
 
-      supportedOptions.push(name);
+      supportedOptions.push(slug);
     },
     TIMEOUT,
   );
@@ -75,7 +87,7 @@ function runUnsupportedOptionsTest(
   combination: { [key: string]: any },
   testOption: "slug" | "options" = "options",
 ) {
-  const { args, testName, name } = constructArgs(combination);
+  const { args, testName, slug } = constructArgs(combination);
   it.concurrent(
     testName,
     async ({ expect, invalidSlugs, unsupportedOptions }) => {
@@ -87,8 +99,8 @@ function runUnsupportedOptionsTest(
       );
       expect(exitCode).toBe(1);
       if (exitCode !== 1) return;
-      if (testOption === "slug") invalidSlugs.push(name);
-      if (testOption === "options") unsupportedOptions.push(name);
+      if (testOption === "slug") invalidSlugs.push(slug);
+      if (testOption === "options") unsupportedOptions.push(slug);
     },
     30_000,
   );

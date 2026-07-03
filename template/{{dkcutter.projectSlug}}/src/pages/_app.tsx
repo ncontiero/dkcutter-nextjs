@@ -2,15 +2,17 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 {%- if dkcutter.useTanstackQuery %}
 import { useState } from "react";
+{%- endif %}
+{%- if dkcutter.authProvider == "clerk" %}
+import { ClerkProvider } from "@clerk/nextjs";
+{%- endif %}
+{%- if dkcutter.useTanstackQuery %}
 import {
   HydrationBoundary,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-{%- endif %}
-{%- if dkcutter.authProvider == 'clerk' %}
-import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}
 import { Inter } from "next/font/google";
 
