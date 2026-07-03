@@ -1,4 +1,7 @@
 @import "tailwindcss";
+{% if dkcutter.useTailwindTypography %}
+@plugin "@tailwindcss/typography";
+{% endif %}
 
 @theme inline {
   --font-inter: var(--font-inter);

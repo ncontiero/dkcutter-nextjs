@@ -99,6 +99,11 @@
         "description": "Powerful asynchronous state management for TS/JS"
       },
       {
+        "title": "Tailwind CSS Typography",
+        "value": "tailwindTypography",
+        "description": "A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML"
+      },
+      {
         "title": "Unpic",
         "value": "unpic",
         "description": "High-performance, framework-agnostic image component"

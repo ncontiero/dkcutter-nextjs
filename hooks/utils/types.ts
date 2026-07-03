@@ -20,6 +20,7 @@ export interface ContextProps {
   usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
+  useTailwindTypography: boolean;
   useUnpic: boolean;
   useDockerCompose: boolean;
   useClerkWebhook: boolean;
