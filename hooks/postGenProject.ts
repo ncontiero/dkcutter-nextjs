@@ -215,7 +215,8 @@ async function main() {
   if (CTX.usePrisma) {
     const dbGenerate = `${CTX.pkgRun} db:generate`;
     SCRIPTS.build = `${dbGenerate} && ${SCRIPTS.build}`;
-    SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${dbGenerate}`;
+    const existing = SCRIPTS.postinstall ? `${SCRIPTS.postinstall} && ` : "";
+    SCRIPTS.postinstall = existing + dbGenerate;
   } else {
     REMOVE_DEPS.push(
       "@better-auth/prisma-adapter",
