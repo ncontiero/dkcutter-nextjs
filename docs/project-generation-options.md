@@ -14,36 +14,31 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Use app folder**: Indicates whether the project should be configured to use the app folder from [Next.js](https://nextjs.org/docs/app).
 
-- **Use React compiler**: Indicates whether the project should be configured to use the [React compiler](https://react.dev/learn/react-compiler) for improved performance.
-
-- **Use husky**: Indicates that the project should be configured with [husky](https://typicode.github.io/husky/).
-
-- **Use lint staged**: Indicates that the project should be configured with [lint-staged](https://github.com/okonet/lint-staged). This question will only be asked if `Use husky` is chosen.
-
-- **Use commitlint**: Indicates that the project should be configured with [commitlint](https://commitlint.js.org).
-
-- **Use ESLint with type information**: Indicates whether the project should use ESLint with type information for more accurate but slower linting. [See more information](https://typescript-eslint.io/getting-started/typed-linting/).
-
-- **Database ORM**: Indicates whether the project should be configured using the following ORM:
-  - None
-  - [Prisma](https://www.prisma.io/)
-
-- **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database. This question will only be asked if `Database ORM` is different from `none`.
-
 - **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
   - None
   - [Clerk](https://clerk.com/)
   - [Better Auth](https://www.better-auth.com/)
 
+- **Additional Tools**: Indicates whether the project should be configured with the following tools:
+  - [Husky](https://typicode.github.io/husky/): Modern native git hooks made easy.
+  - [Lint Staged](https://github.com/okonet/lint-staged): Run linters against staged git files.
+  - [Nano Staged](https://github.com/usmanyunusov/nano-staged): Tiny tool to run commands for modified, staged, and committed files.
+  - [Commitlint](https://commitlint.js.org/): Lint commit messages.
+  - [React Compiler](https://react.dev/learn/react-compiler): Automatically optimize React component renders.
+  - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.
+  - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
+  - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.
+  - [TanStack Query](https://tanstack.com/query/latest): Powerful asynchronous state management for TS/JS.
+
+- **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database (only prompted if Prisma is selected).
+
 - **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
-
-- **Use Trigger.dev**: Indicates whether the project should be configured with [Trigger.dev](https://trigger.dev/).
-
-- **Use TanStack Query**: Indicates whether the project should be configured with [TanStack Query](https://tanstack.com/query/latest).
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
   - [Mend Renovate](https://docs.renovatebot.com/)
   - [Github Dependabot](https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
 
-- **Automatic start**: Indicates whether the project should be configured and started automatically, installing dependencies, running linters if chosen and starting a `git` repository.
+- **Install Dependencies**: Indicates whether the dependencies should be automatically installed right after project generation.
+
+- **Initialize Git**: Indicates whether a Git repository should be initialized with an initial commit.

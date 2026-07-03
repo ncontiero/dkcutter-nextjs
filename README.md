@@ -62,25 +62,16 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
 ✔ Do you want to use Next.Js app folder? … No / Yes
-✔ Do you want to use React compiler? … No / Yes
-✔ Do you want to use husky? … No / Yes
-✔ Do you want to use lint staged? … No / Yes
-✔ Do you want to use Commitlint? … No / Yes
-✔ Do you want to use ESLint with type information? This will make the linting process slower but will provide more accurate linting results. … No / Yes
-✔ What database ORM would you like to use? › None / Prisma
-✔ Do you want to use Docker compose for the database? … No / Yes
-✔ What Authentication Provider would you like to use? › None / Clerk / Better Auth
-✔ Do you want to receive events from the Clerk using a webhook? … No / Yes
-✔ Do you want to use Trigger.dev? … No / Yes
-✔ Do you want to use TanStack Query? … No / Yes
-✔ What Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
-✔ Do you want the project to be configured? … No / Yes
+✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
+✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query
+✔ Would you like to add Docker Compose for the database? … No / Yes
+✔ Would you like to receive Clerk events using webhooks? … No / Yes
+✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
+✔ Would you like to install the dependencies? … No / Yes
+✔ Would you like to initialize a git repository and create an initial commit? … No / Yes
 
 Next steps:
   cd my-awesome-project
-  pnpm install
-  git add .
-  git commit -m "initial commit"
   docker compose up -d
   pnpm dev
 
@@ -100,44 +91,38 @@ Now take a look at your repo. Don't forget to carefully look at the generated `R
 
 If you want to bypass the interactive prompts and start faster, you can provide configuration via CLI flags. All options in `dkcutter.json` are available as flags:
 
-| Flag                                       | Description                                                                                      |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `--projectName <string>`                   | The Project name.                                                                                |
-| `--projectSlug <string>`                   | The Project Slug.                                                                                |
-| `--description <string>`                   | The Project description.                                                                         |
-| `--authorName <string>`                    | The author name.                                                                                 |
-| `--projectVersion <string>`                | The project version.                                                                             |
-| `--useAppFolder [boolean]`                 | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                 |
-| `--useReactCompiler [boolean]`             | Use the [React compiler](https://react.dev/learn/react-compiler).                                |
-| `--useHusky [boolean]`                     | Include [husky](https://github.com/typicode/husky) in the project.                               |
-| `--useLintStaged [boolean]`                | Include [lint-staged](https://github.com/lint-staged/lint-staged) in the project.                |
-| `--useCommitlint [boolean]`                | Include [commitlint](https://commitlint.js.org/#/) in the project.                               |
-| `--useESLintWithTypeInformation [boolean]` | Include ESLint with type information.                                                            |
-| `--database <string>`                      | Choose a database ORM (`none`, `prisma`).                                                        |
-| `--useDockerCompose [boolean]`             | Include Docker Compose in the project for the database (if `database` is not `none`).            |
-| `--authProvider <string>`                  | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                               |
-| `--clerkWebhook [boolean]`                 | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                         |
-| `--useTriggerDev [boolean]`                | Include [Trigger.dev](https://trigger.dev/) in the project.                                      |
-| `--useTanstackQuery [boolean]`             | Include [TanStack Query](https://tanstack.com/query/latest) in the project.                      |
-| `--automatedDepsUpdater <string>`          | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                          |
-| `--automaticStart [boolean]`               | This option will install the application packages, start a git repo and make the initial commit. |
+| Flag                              | Description                                                                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--projectName <string>`          | The Project name.                                                                                                                                              |
+| `--projectSlug <string>`          | The Project Slug.                                                                                                                                              |
+| `--description <string>`          | The Project description.                                                                                                                                       |
+| `--authorName <string>`           | The author name.                                                                                                                                               |
+| `--projectVersion <string>`       | The project version.                                                                                                                                           |
+| `--useAppFolder [boolean]`        | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                                                                               |
+| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                             |
+| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`). |
+| `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if Prisma is selected).                                                                                |
+| `--useClerkWebhook [boolean]`     | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                                                                                       |
+| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                        |
+| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                      |
+| `--initializeGit [boolean]`       | Indicates whether to initialize a git repository and make an initial commit.                                                                                   |
 
 [See here for more information about options][options-url].
 
 ### Examples
 
-Generate a project using [Commitlint](https://commitlint.js.org/):
+Generate a project using Prisma:
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useCommitlint true
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --additionalTools prisma
 ```
 
 If you want to use all the default values with the exception of one or more, you can do it as follows:
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useHusky true --useLintStaged true -y
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useAppFolder false -y
 ```
 
-This will use the default values, with the exception of the `--useHusky` and `--useLintStaged` options, skipping the interactive prompt (`-y`).
+This will use the default values, with the exception of the `--useAppFolder` option, skipping the interactive prompt (`-y`).
 
 [options-url]: ./docs/project-generation-options.md
