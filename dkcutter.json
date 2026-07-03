@@ -97,6 +97,11 @@
         "title": "Tanstack Query",
         "value": "tanstackQuery",
         "description": "Powerful asynchronous state management for TS/JS"
+      },
+      {
+        "title": "Unpic",
+        "value": "unpic",
+        "description": "High-performance, framework-agnostic image component"
       }
     ],
     "choicesType": "multiselect",

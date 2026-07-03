@@ -35,6 +35,7 @@ const CTX: ContextProps = {
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
+  useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   useClerkWebhook: toBoolean("{{ dkcutter.useClerkWebhook }}"),
   automatedDepsUpdater:
@@ -256,6 +257,10 @@ async function main() {
       path.join(appFolder, "providers.tsx"),
       path.join(srcFolder, "lib", "query-client.ts"),
     );
+  }
+
+  if (!CTX.useUnpic) {
+    REMOVE_DEPS.push("@unpic/react");
   }
 
   if (
