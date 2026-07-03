@@ -8,6 +8,9 @@ import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}
 {%- if dkcutter.useTanstackQuery %}
 import {
+{%- if dkcutter.useTanstackQuery and dkcutter.useEslintWithType %}
+  type DehydratedState,
+{%- endif %}
   HydrationBoundary,
   QueryClient,
   QueryClientProvider,
@@ -18,7 +21,16 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+{%- if dkcutter.useTanstackQuery and dkcutter.useEslintWithType %}
+
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{ dehydratedState?: DehydratedState }>) {
+{%- else %}
+
 export default function App({ Component, pageProps }: AppProps) {
+{%- endif %}
 {%- if dkcutter.useTanstackQuery %}
   const [queryClient] = useState(() => new QueryClient());
 {% endif %}
