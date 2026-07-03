@@ -3,7 +3,9 @@ import { getPackageInfo, writeJsonFile } from "dkcutter/utils";
 interface UpdatePackageJsonProps {
   removeDeps?: string[];
   removeDevDeps?: string[];
-  scripts?: Record<string, string>;
+  scripts?: Awaited<
+    ReturnType<typeof getPackageInfo>
+  >["packageJson"]["scripts"];
   keys?: string[];
   modifyKey?: Record<string, string>;
   projectDir: string;
@@ -27,7 +29,7 @@ export async function updatePackageJson({
   removeDevDeps.forEach((dependency) => {
     delete packageJson.devDependencies?.[dependency];
   });
-  packageJson.scripts = { ...packageJson.scripts, ...scripts };
+  packageJson.scripts = scripts;
   keys.forEach((key) => {
     delete packageJson[key];
   });

@@ -2,20 +2,19 @@ import type {
   AuthProvider,
   AutomatedDepsUpdater,
   ContextProps,
-  Database,
   PackageManager,
 } from "./utils/types";
 
 import fs from "node:fs/promises";
 import path from "node:path";
-import { logger, remove, rename } from "dkcutter/utils";
+import { getPackageInfo, logger, remove } from "dkcutter/utils";
 
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
 import { logNextSteps } from "./helpers/logNextSteps";
 import { runLinters } from "./helpers/runLinters";
 import { toBoolean } from "./utils/coerce";
-import { appendToGitignore, removeFiles } from "./utils/files";
+import { appendToGitignore } from "./utils/files";
 import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
 import { setFlag } from "./utils/setFlag";
 import { updatePackageJson } from "./utils/updatePackageJson";
@@ -28,15 +27,16 @@ const CTX: ContextProps = {
   pkgRun: "{{ dkcutter._pkgRun }}",
   useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
-  useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
+  useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
-  database: "{{ dkcutter.database }}" as Database,
-  useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
-  clerkWebhook: toBoolean("{{ dkcutter.clerkWebhook }}"),
+  useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
+  usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
+  useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
+  useClerkWebhook: toBoolean("{{ dkcutter.useClerkWebhook }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
   automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
@@ -55,15 +55,19 @@ async function setFlagsInEnvs() {
 }
 
 async function main() {
-  const REMOVE_DEPS = [];
-  const REMOVE_DEV_DEPS = [];
-  const SCRIPTS: Record<string, string> = {};
-
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
   const publicFolder = path.join(projectDir, "public");
   const pagesFolder = path.join(srcFolder, "pages");
   const appFolder = path.join(srcFolder, "app");
+  const libFolder = path.join(srcFolder, "lib");
+
+  const { packageJson } = await getPackageInfo(projectDir);
+
+  const REMOVE_DEPS: string[] = [];
+  const REMOVE_DEV_DEPS: string[] = [];
+  const SCRIPTS = packageJson.scripts || {};
+  const FILES_TO_REMOVE: string[] = [];
 
   await setFlagsInEnvs();
 
@@ -83,153 +87,158 @@ async function main() {
     await updatePackageJson({ projectDir, keys: ["packageManager"] });
   }
 
-  const npmrcFiles = [".npmrc"];
-  const yarnFiles = [".yarnrc.yml"];
-  const pnpmFiles = ["pnpm-workspace.yaml"];
+  const npmrcFiles = ".npmrc";
+  const yarnFiles = ".yarnrc.yml";
+  const pnpmFiles = "pnpm-workspace.yaml";
   switch (CTX.pkgManager) {
     case "npm":
-      await removeFiles([...yarnFiles, ...pnpmFiles]);
+      FILES_TO_REMOVE.push(yarnFiles, pnpmFiles);
       break;
     case "bun":
-      await removeFiles([...npmrcFiles, ...yarnFiles, ...pnpmFiles]);
+      FILES_TO_REMOVE.push(npmrcFiles, yarnFiles, pnpmFiles);
       break;
     case "yarn":
-      await removeFiles([...npmrcFiles, ...pnpmFiles]);
+      FILES_TO_REMOVE.push(npmrcFiles, pnpmFiles);
       break;
     case "pnpm":
-      await removeFiles([...npmrcFiles, ...yarnFiles]);
+      FILES_TO_REMOVE.push(npmrcFiles, yarnFiles);
       break;
-    default:
-      break;
+  }
+
+  if (CTX.useAppFolder) {
+    FILES_TO_REMOVE.push(pagesFolder, path.join(publicFolder, "favicon.ico"));
+  } else {
+    delete SCRIPTS.postinstall;
+
+    if (CTX.authProvider === "betterAuth" || CTX.useClerkWebhook) {
+      const appDirContents = await fs.readdir(appFolder);
+      for (const file of appDirContents) {
+        if (file === "api") continue;
+        FILES_TO_REMOVE.push(path.join(appFolder, file));
+      }
+    } else {
+      FILES_TO_REMOVE.push(appFolder);
+    }
+  }
+
+  const removeClerk = () => {
+    REMOVE_DEPS.push("@clerk/nextjs");
+    const folder = CTX.useAppFolder ? appFolder : pagesFolder;
+    FILES_TO_REMOVE.push(
+      path.join(appFolder, "api", "webhook"),
+      path.join(folder, "sign-in"),
+      path.join(folder, "sign-up"),
+    );
+  };
+  const removeBetterAuth = () => {
+    REMOVE_DEPS.push("better-auth", "@better-auth/prisma-adapter");
+    FILES_TO_REMOVE.push(
+      path.join(srcFolder, "lib", "auth"),
+      path.join(appFolder, "api", "auth"),
+    );
+  };
+  const removeAPIFolder = () => {
+    FILES_TO_REMOVE.push(path.join(appFolder, "api"));
+  };
+  const removeProxyFile = () => {
+    FILES_TO_REMOVE.push(path.join(srcFolder, "proxy.ts"));
+  };
+
+  if (CTX.authProvider === "clerk") {
+    removeBetterAuth();
+    if (!CTX.useClerkWebhook) {
+      removeAPIFolder();
+    }
+  } else if (CTX.authProvider === "betterAuth") {
+    removeClerk();
+  } else {
+    removeClerk();
+    removeBetterAuth();
+    removeProxyFile();
+    removeAPIFolder();
+  }
+
+  if (!CTX.useHusky && !CTX.useLintStaged && !CTX.useNanoStaged) {
+    REMOVE_DEV_DEPS.push("husky");
+    FILES_TO_REMOVE.push(path.join(projectDir, ".husky"));
+    delete SCRIPTS.prepare;
+  } else if (CTX.useLintStaged || CTX.useNanoStaged) {
+    logger.warn(
+      "Husky is required for lint-staged or nano-staged. It will be installed.",
+    );
+  }
+
+  const removeLintStaged = () => {
+    REMOVE_DEV_DEPS.push("lint-staged");
+  };
+  if (!CTX.useLintStaged) {
+    removeLintStaged();
+    await updatePackageJson({ projectDir, keys: ["lint-staged"] });
+  }
+
+  if (!CTX.useNanoStaged) {
+    REMOVE_DEV_DEPS.push("nano-staged");
+  }
+
+  if (CTX.useLintStaged && CTX.useNanoStaged) {
+    removeLintStaged();
+    logger.warn(
+      "You have selected both lint-staged and nano-staged. nano-staged will be used for the pre-commit script.",
+    );
+  }
+  if (!CTX.useLintStaged && !CTX.useNanoStaged) {
+    delete SCRIPTS["pre-commit"];
+    FILES_TO_REMOVE.push(path.join(projectDir, ".husky", "pre-commit"));
+  }
+
+  if (!CTX.useCommitlint) {
+    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, ".commitlintrc.json"),
+      path.join(projectDir, ".husky", "commit-msg"),
+    );
+    delete SCRIPTS["commit-msg"];
   }
 
   if (!CTX.useReactCompiler) {
     REMOVE_DEV_DEPS.push("babel-plugin-react-compiler");
   }
 
-  if (!CTX.useHusky && !CTX.useLintStaged) {
-    REMOVE_DEV_DEPS.push("husky");
-    await remove(path.join(projectDir, ".husky"));
-  } else if (CTX.useLintStaged) {
-    logger.warn("Husky is required for lint-staged. It will be installed.");
-    SCRIPTS.prepare = "husky";
-  }
-
-  if (CTX.useLintStaged) {
-    SCRIPTS["pre-commit"] = "lint-staged";
+  if (CTX.usePrisma) {
+    const dbGenerate = `${CTX.pkgRun} db:generate`;
+    SCRIPTS.build = `${dbGenerate} && ${SCRIPTS.build}`;
+    SCRIPTS.postinstall = `${SCRIPTS.postinstall} && ${dbGenerate}`;
   } else {
-    REMOVE_DEV_DEPS.push("lint-staged");
-    await updatePackageJson({
-      projectDir,
-      keys: ["lint-staged"],
-    });
-  }
-
-  if (CTX.useCommitlint) {
-    SCRIPTS.commitlint = "commitlint --edit";
-  } else {
-    REMOVE_DEV_DEPS.push("@commitlint/cli", "@commitlint/config-conventional");
-    await removeFiles([
-      path.join(projectDir, ".commitlintrc.json"),
-      path.join(projectDir, ".husky", "commit-msg"),
-    ]);
-  }
-
-  if (CTX.useAppFolder) {
-    await remove(pagesFolder);
-    SCRIPTS.postinstall = "next typegen";
-  } else {
-    await rename(
-      path.join(appFolder, "favicon.ico"),
-      path.join(publicFolder, "favicon.ico"),
-    );
-    await remove(path.join(publicFolder, ".gitkeep"));
-
-    if (CTX.authProvider !== "none" || CTX.clerkWebhook) {
-      const appDirContents = await fs.readdir(appFolder);
-      for (const file of appDirContents) {
-        if (file === "api") continue;
-        await remove(path.join(appFolder, file));
-      }
-    } else {
-      await remove(appFolder);
-    }
-  }
-
-  if (CTX.database === "none") {
     REMOVE_DEPS.push(
+      "@better-auth/prisma-adapter",
       "@prisma/adapter-pg",
       "@prisma/client",
-      "@auth/prisma-adapter",
-      "@better-auth/prisma-adapter",
-      "dotenv",
     );
-    REMOVE_DEV_DEPS.push("prisma");
-    await removeFiles([
+    REMOVE_DEV_DEPS.push("dotenv-cli", "prisma");
+    FILES_TO_REMOVE.push(
       path.join(projectDir, "prisma"),
       path.join(projectDir, "prisma.config.ts"),
-      path.join(srcFolder, "lib", "prisma.ts"),
-    ]);
-  } else if (CTX.database === "prisma") {
-    if (SCRIPTS.postinstall) {
-      SCRIPTS.postinstall += " && prisma generate";
-    } else {
-      SCRIPTS.postinstall = "prisma generate";
-    }
+      path.join(libFolder, "prisma.ts"),
+    );
+    delete SCRIPTS["db:generate"];
+    delete SCRIPTS["db:push"];
+    delete SCRIPTS["db:migrate"];
+    delete SCRIPTS["db:studio"];
+    delete SCRIPTS["db:seed"];
   }
 
-  if (!CTX.useDockerCompose) {
-    await remove(path.join(projectDir, "docker-compose.yml"));
-  }
-
-  const removeClerk = async () => {
-    REMOVE_DEPS.push("@clerk/nextjs");
-    const folder = CTX.useAppFolder ? appFolder : pagesFolder;
-    await removeFiles([
-      path.join(appFolder, "api", "webhook"),
-      path.join(folder, "sign-in"),
-      path.join(folder, "sign-up"),
-    ]);
-  };
-  const removeBetterAuth = async () => {
-    REMOVE_DEPS.push("better-auth", "@better-auth/prisma-adapter");
-    await removeFiles([
-      path.join(srcFolder, "lib", "auth"),
-      path.join(appFolder, "api", "auth"),
-    ]);
-  };
-  const removeAPIFolder = async () => {
-    await remove(path.join(appFolder, "api"));
-  };
-  const removeProxyFile = async () => {
-    await remove(path.join(srcFolder, "proxy.ts"));
-  };
-
-  if (CTX.authProvider === "clerk") {
-    await removeBetterAuth();
-    if (!CTX.clerkWebhook) {
-      await removeAPIFolder();
-    }
-  } else if (CTX.authProvider === "betterAuth") {
-    await removeClerk();
+  if (CTX.useTriggerDev) {
+    const newDevScript = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "${SCRIPTS.dev}" "${CTX.pkgRun} trigger:dev"`;
+    SCRIPTS.dev = newDevScript;
   } else {
-    await removeClerk();
-    await removeBetterAuth();
-    await removeProxyFile();
-    await removeAPIFolder();
-  }
-
-  if (!CTX.useTriggerDev) {
     REMOVE_DEPS.push("@trigger.dev/sdk");
     REMOVE_DEV_DEPS.push("@trigger.dev/build", "trigger.dev", "concurrently");
-    await removeFiles([
+    FILES_TO_REMOVE.push(
       path.join(projectDir, "trigger.config.ts"),
       path.join(srcFolder, "trigger"),
-    ]);
-  } else {
-    SCRIPTS["trigger:dev"] = "trigger dev";
-    SCRIPTS["trigger:deploy"] = "trigger deploy";
-    SCRIPTS.dev = `concurrently --kill-others --names "next,trigger" --prefix-colors "black,green" "next dev" "${CTX.pkgRun} trigger:dev"`;
+    );
+    delete SCRIPTS["trigger:dev"];
+    delete SCRIPTS["trigger:deploy"];
   }
 
   if (!CTX.useTanstackQuery) {
@@ -238,18 +247,39 @@ async function main() {
       "@tanstack/eslint-plugin-query",
       "@tanstack/react-query-devtools",
     );
-    await removeFiles([
+    FILES_TO_REMOVE.push(
       path.join(appFolder, "providers.tsx"),
       path.join(srcFolder, "lib", "query-client.ts"),
-    ]);
+    );
   }
 
   if (
-    CTX.authProvider !== "betterAuth" &&
-    CTX.database === "none" &&
-    !CTX.useTanstackQuery
+    !CTX.usePrisma &&
+    !CTX.useTanstackQuery &&
+    CTX.authProvider !== "betterAuth"
   ) {
-    await remove(path.join(srcFolder, "lib"));
+    FILES_TO_REMOVE.push(libFolder);
+  }
+
+  if (!CTX.useDockerCompose) {
+    FILES_TO_REMOVE.push(path.join(projectDir, "docker-compose.yml"));
+  }
+
+  const githubFolder = path.join(projectDir, ".github");
+  const removeDependabot = () => {
+    FILES_TO_REMOVE.push(path.join(githubFolder, "dependabot.yml"));
+  };
+  const removeRenovate = () => {
+    FILES_TO_REMOVE.push(path.join(githubFolder, "renovate.json"));
+  };
+
+  if (CTX.automatedDepsUpdater === "renovate") {
+    removeDependabot();
+  } else if (CTX.automatedDepsUpdater === "dependabot") {
+    removeRenovate();
+  } else {
+    removeDependabot();
+    removeRenovate();
   }
 
   await updatePackageJson({
@@ -259,16 +289,8 @@ async function main() {
     scripts: SCRIPTS,
   });
 
-  const githubFolder = path.join(projectDir, ".github");
-  if (CTX.automatedDepsUpdater === "renovate") {
-    await remove(path.join(githubFolder, "dependabot.yml"));
-  } else if (CTX.automatedDepsUpdater === "dependabot") {
-    await remove(path.join(githubFolder, "renovate.json"));
-  } else {
-    await removeFiles([
-      path.join(githubFolder, "renovate.json"),
-      path.join(githubFolder, "dependabot.yml"),
-    ]);
+  for (const file of FILES_TO_REMOVE) {
+    await remove(file);
   }
 
   let hasGitInitialized = false;

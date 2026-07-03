@@ -1,7 +1,6 @@
 import type { PackageManager } from "dkcutter/utils";
 
 export type { PackageManager };
-export type Database = "none" | "prisma";
 export type AuthProvider = "none" | "clerk" | "betterAuth";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 
@@ -12,15 +11,16 @@ export interface ContextProps {
   pkgRun: string;
   useAppFolder: boolean;
   authProvider: AuthProvider;
-  useReactCompiler: boolean;
   useHusky: boolean;
   useLintStaged: boolean;
+  useNanoStaged: boolean;
   useCommitlint: boolean;
-  database: Database;
-  useDockerCompose: boolean;
-  clerkWebhook: boolean;
+  useReactCompiler: boolean;
+  usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
+  useDockerCompose: boolean;
+  useClerkWebhook: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
   automaticStart: boolean;
 }

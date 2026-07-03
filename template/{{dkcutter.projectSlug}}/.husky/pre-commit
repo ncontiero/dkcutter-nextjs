@@ -1,1 +1,1 @@
-{{ dkcutter._pkgRun }} {{ "pre-commit" if dkcutter.useLintStaged else "lint:fix" }}
+{{ dkcutter._pkgRun }} pre-commit

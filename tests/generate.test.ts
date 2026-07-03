@@ -39,7 +39,7 @@ function runProjectTest(combination: { [key: string]: any }) {
       const target = resolve(TEST_OUTPUT, name);
 
       const runTypeCheck = process.env.RUN_TYPE_CHECK === "true";
-      if (!runTypeCheck) args.push("--useESLintWithTypeInformation", "false");
+      if (!runTypeCheck) args.push("--useEslintWithType", "false");
 
       // Generate the project
       await x("bun", ["run", "generate", "-o", TEST_OUTPUT, ...args, "-y"], {

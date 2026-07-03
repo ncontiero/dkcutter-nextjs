@@ -19,7 +19,7 @@ updates:
         update-types:
           - minor
           - patch
-      {%- if dkcutter.database == "prisma" %}
+      {%- if dkcutter.usePrisma %}
       prisma:
         patterns:
           - "@prisma*"

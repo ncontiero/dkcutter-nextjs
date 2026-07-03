@@ -10,17 +10,16 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-{%- if dkcutter.database != 'none' %}
-    // Database ({{ dkcutter.database | capitalize }})
+{%- if dkcutter.usePrisma %}
     DATABASE_URL: z.url(),
 {%- endif %}
-{%- if dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     CLERK_SECRET_KEY: z.string().min(1),
-{%- if dkcutter.clerkWebhook %}
+{%- if dkcutter.useClerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: z.string().min(1),
 {%- endif %}
-{%- elif dkcutter.authProvider == 'betterAuth' %}
+{%- elif dkcutter.authProvider == "betterAuth" %}
     // Better Auth
     BETTER_AUTH_SECRET: z.string().min(1),
     BETTER_AUTH_URL: z.url(),
@@ -37,7 +36,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
-{%- if dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
     // Clerk URLs
@@ -52,17 +51,16 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-{%- if dkcutter.database != 'none' %}
-    // Database ({{ dkcutter.database | capitalize }})
-    DATABASE_URL: process.env.DATABASE_URL,
+{%- if dkcutter.usePrisma %}
+    DATABASE_URL: z.url(),
 {%- endif %}
-{%- if dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
-{%- if dkcutter.clerkWebhook %}
+{%- if dkcutter.useClerkWebhook %}
     CLERK_WEBHOOK_SIGNING_SECRET: process.env.CLERK_WEBHOOK_SIGNING_SECRET,
 {%- endif %}
-{%- elif dkcutter.authProvider == 'betterAuth' %}
+{%- elif dkcutter.authProvider == "betterAuth" %}
     // Better Auth
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
@@ -74,7 +72,7 @@ export const env = createEnv({
     // Client
     // ----------------------------
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-{%- if dkcutter.authProvider == 'clerk' %}
+{%- if dkcutter.authProvider == "clerk" %}
     // Clerk
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,

@@ -11,10 +11,21 @@
     "dev": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next dev",
     "build": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next build",
     "start": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next start",
+    "trigger:dev": "trigger dev",
+    "trigger:deploy": "trigger deploy",
+    "db:generate": "dotenv -e .env -- prisma generate",
+    "db:push": "dotenv -e .env -- prisma db push",
+    "db:migrate": "dotenv -e .env -- prisma migrate dev",
+    "db:studio": "dotenv -e .env -- prisma studio",
+    "db:seed": "dotenv -e .env -- prisma db seed",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "{{ dkcutter._pkgRun }} lint {{ '-- ' if dkcutter.pkgManager == 'npm' }}--fix",
     "typecheck": "tsc --noEmit",
-    "check": "{{ dkcutter._pkgRun }} lint && {{ dkcutter._pkgRun }} typecheck"
+    "check": "{{ dkcutter._pkgRun }} lint && {{ dkcutter._pkgRun }} typecheck",
+    "pre-commit": "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}",
+    "commit-msg": "commitlint --edit",
+    "prepare": "husky",
+    "postinstall": "next typegen"
   },
   "dependencies": {
     "@better-auth/prisma-adapter": "1.6.20",
@@ -43,17 +54,18 @@
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
     "concurrently": "^10.0.3",
-    "dotenv": "^17.4.2",
+    "dotenv-cli": "11.0.0",
     "eslint": "^10.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
+    "nano-staged": "1.0.2",
     "postcss": "^8.5.15",
     "prisma": "7.8.0",
     "tailwindcss": "4.3.1",
     "trigger.dev": "4.4.6",
     "typescript": "^6.0.3"
   },
-  "lint-staged": {
+  "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}": {
     "*": "{{ dkcutter._pkgRun }} lint:fix"
   }
 }

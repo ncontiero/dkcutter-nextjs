@@ -45,52 +45,67 @@
     ],
     "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
-  "useReactCompiler": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('React compiler') }}?"
-  },
-  "useHusky": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('husky') }}?"
-  },
-  "useLintStaged": {
-    "disabled": "{{ not useHusky }}",
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('lint staged') }}?"
-  },
-  "useCommitlint": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('Commitlint') }}?"
-  },
-  "useESLintWithTypeInformation": {
-    "value": true,
-    "promptMessage": "Do you want to use {{ colors.blue('ESLint with type information') }}? This will make the linting process slower but will provide more accurate linting results."
-  },
-  "database": {
+  "additionalTools": {
     "value": "none",
     "choices": [
-      { "title": "None", "value": "none" },
-      { "title": "Prisma", "value": "prisma" }
+      {
+        "title": "Husky",
+        "value": "husky",
+        "description": "Modern native git hooks made easy - Necessary for Lint Staged and Nano Staged"
+      },
+      {
+        "title": "Lint Staged",
+        "value": "lintStaged",
+        "description": "Run linters against staged git files and don't let 💩 slip into your code base! Requires Husky"
+      },
+      {
+        "title": "Nano Staged",
+        "value": "nanoStaged",
+        "description": "Tiny tool to run commands for modified, staged, and committed files in a GIT repository. Requires Husky"
+      },
+      {
+        "title": "Commitlint",
+        "value": "commitlint",
+        "description": "Lint commit messages"
+      },
+      {
+        "title": "React Compiler",
+        "value": "reactCompiler",
+        "description": "Automatically optimize React component renders"
+      },
+      {
+        "title": "ESlint + Type Information",
+        "value": "eslintTypeInfo",
+        "description": "Enable ESLint rules that require type information"
+      },
+      {
+        "title": "Prisma",
+        "value": "prisma",
+        "description": "Next-generation ORM for Node.js & TypeScript"
+      },
+      {
+        "title": "Trigger.dev",
+        "value": "triggerDev",
+        "description": "The open source background jobs platform"
+      },
+      {
+        "title": "Tanstack Query",
+        "value": "tanstackQuery",
+        "description": "Powerful asynchronous state management for TS/JS"
+      }
     ],
-    "promptMessage": "What {{ colors.blue('database ORM') }} would you like to use?"
+    "choicesType": "multiselect",
+    "promptMessage": "Which {{ colors.blue('Additional Tools') }} would you like to use?"
   },
   "useDockerCompose": {
-    "disabled": "{{ database == 'none' }}",
     "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('Docker compose') }} for the database?"
+    "disabled": "{{ 'prisma' not in additionalTools }}",
+    "promptMessage": "Would you like to add {{ colors.blue('Docker Compose') }} for the database?"
   },
-  "clerkWebhook": {
+  "useClerkWebhook": {
     "value": false,
-    "promptMessage": "Do you want to receive events from the Clerk using a webhook?",
+    "promptMessage": "Would you like to receive {{ colors.blue('Clerk') }} events using {{ colors.dim('webhooks') }}?",
     "disabled": "{{ authProvider != 'clerk' }}"
-  },
-  "useTriggerDev": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.green('Trigger.dev') }}?"
-  },
-  "useTanstackQuery": {
-    "value": false,
-    "promptMessage": "Do you want to use {{ colors.blue('TanStack Query') }}?"
   },
   "automatedDepsUpdater": {
     "value": "none",
@@ -99,7 +114,7 @@
       { "title": "Mend Renovate", "value": "renovate" },
       { "title": "Github Dependabot", "value": "dependabot" }
     ],
-    "promptMessage": "What {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
+    "promptMessage": "Which {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
   },
   "automaticStart": {
     "value": false,

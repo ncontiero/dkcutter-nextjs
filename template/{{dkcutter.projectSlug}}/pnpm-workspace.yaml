@@ -5,11 +5,11 @@ allowBuilds:
 {%- if dkcutter.authProvider == "clerk" %}
   "@clerk/shared": true
 {%- endif %}
-{%- if dkcutter.database == "prisma" %}
+{%- if dkcutter.usePrisma %}
   "@prisma/engines": true
 {%- endif %}
   esbuild: true
-{%- if dkcutter.database == "prisma" %}
+{%- if dkcutter.usePrisma %}
   prisma: true
 {%- endif %}
 {%- if dkcutter.useTriggerDev %}

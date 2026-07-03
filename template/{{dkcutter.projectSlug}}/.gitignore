@@ -31,11 +31,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-{% if dkcutter.database == 'prisma' %}
+
+{%- if dkcutter.usePrisma %}
+
 # Prisma
-src/lib/generated/
-{% endif %}
+src/lib/generated
+{%- endif %}
+
 {%- if dkcutter.useTriggerDev %}
+
 # Trigger.dev
 .trigger
-{% endif %}
+{%- endif %}

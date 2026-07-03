@@ -1,44 +1,47 @@
 export const PATTERN = /\{\{(\s?dkcutter)\.(.*?)\}\}/;
 
 export const SUPPORTED_COMBINATIONS = [
-  { useHusky: true },
-  { useLintStaged: true, useHusky: true },
-  { useCommitlint: true },
   { useAppFolder: false },
-  { database: "prisma" },
-  { database: "prisma", useDockerCompose: true },
   { authProvider: "clerk" },
-  { authProvider: "clerk", clerkWebhook: true },
-  { authProvider: "betterAuth", database: "prisma" },
-  { useTriggerDev: true },
-  { useTanstackQuery: true },
-  { useTanstackQuery: true, useAppFolder: false },
+  { authProvider: "betterAuth" },
+  { additionalTools: "husky" },
+  { additionalTools: "lintStaged" },
+  { additionalTools: "nanoStaged" },
+  { additionalTools: "commitlint" },
+  { additionalTools: "reactCompiler" },
+  { additionalTools: "prisma" },
+  { additionalTools: "triggerDev" },
+  { additionalTools: "tanstackQuery" },
   { automatedDepsUpdater: "renovate" },
   { automatedDepsUpdater: "dependabot" },
   // Complex combinations
-  { useHusky: true, useLintStaged: true },
-  { useHusky: true, useLintStaged: true, useCommitlint: true },
-  { database: "prisma", authProvider: "clerk" },
-  { database: "prisma", authProvider: "clerk", clerkWebhook: true },
-  { database: "prisma", authProvider: "clerk", useAppFolder: false },
   {
-    database: "prisma",
     authProvider: "clerk",
-    clerkWebhook: true,
-    useAppFolder: false,
+    additionalTools:
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery",
   },
-  { authProvider: "clerk", clerkWebhook: true, useAppFolder: false },
-  { database: "prisma", authProvider: "betterAuth", useAppFolder: false },
-  { database: "prisma", useTriggerDev: true },
-  { authProvider: "clerk", useTanstackQuery: true },
-  { useAppFolder: false, authProvider: "clerk", useTanstackQuery: true },
+  {
+    authProvider: "betterAuth",
+    additionalTools:
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery",
+  },
+  {
+    useAppFolder: false,
+    authProvider: "clerk",
+    additionalTools:
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery",
+  },
+  {
+    useAppFolder: false,
+    authProvider: "betterAuth",
+    additionalTools:
+      "husky,lintStaged,nanoStaged,commitlint,reactCompiler,prisma,triggerDev,tanstackQuery",
+  },
 ];
 
 export const UNSUPPORTED_COMBINATIONS = [
-  { database: "XXXXXX" },
   { authProvider: "non" },
-  // Better Auth is only supported with Database
-  { authProvider: "betterAuth" },
+  { additionalTools: "XXXXXX" },
   { automatedDepsUpdater: "xpto" },
 ];
 

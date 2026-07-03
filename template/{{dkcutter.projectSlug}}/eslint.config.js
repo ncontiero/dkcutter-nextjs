@@ -1,7 +1,7 @@
 import { ncontiero } from "@ncontiero/eslint-config";
 
 export default ncontiero({
-{%- if dkcutter.useESLintWithTypeInformation %}
+{%- if dkcutter.useEslintWithType %}
   typescript: {
     tsconfigPath: "./tsconfig.json",
   },
