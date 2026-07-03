@@ -116,9 +116,13 @@
     ],
     "promptMessage": "Which {{ colors.blue('Automated Dependency Updater')}} do you want to use?"
   },
-  "automaticStart": {
-    "value": false,
-    "promptMessage": "Do you want the project to be configured?"
+  "installDependencies": {
+    "value": true,
+    "promptMessage": "Would you like to install the dependencies?"
+  },
+  "initializeGit": {
+    "value": true,
+    "promptMessage": "Would you like to initialize a git repository and create an initial commit?"
   },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_pkgRun": "{{ _pkgManager }}{{ ' run' if not _pkgManager in ['pnpm', 'yarn'] }}",

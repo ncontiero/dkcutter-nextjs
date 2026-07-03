@@ -12,7 +12,6 @@ import { getPackageInfo, logger, remove } from "dkcutter/utils";
 import { initializeGit, stageAndCommit } from "./helpers/git";
 import { installDependencies } from "./helpers/installDependencies";
 import { logNextSteps } from "./helpers/logNextSteps";
-import { runLinters } from "./helpers/runLinters";
 import { toBoolean } from "./utils/coerce";
 import { appendToGitignore } from "./utils/files";
 import { getPkgManagerVersion } from "./utils/getPkgManagerVersion";
@@ -39,7 +38,8 @@ const CTX: ContextProps = {
   useClerkWebhook: toBoolean("{{ dkcutter.useClerkWebhook }}"),
   automatedDepsUpdater:
     "{{ dkcutter.automatedDepsUpdater }}" as AutomatedDepsUpdater,
-  automaticStart: toBoolean("{{ dkcutter.automaticStart }}"),
+  installDependencies: toBoolean("{{ dkcutter.installDependencies }}"),
+  initializeGit: toBoolean("{{ dkcutter.initializeGit }}"),
 };
 
 async function setBetterAuthSecretKey(filePath: string) {
@@ -294,16 +294,17 @@ async function main() {
   }
 
   let hasGitInitialized = false;
-  if (CTX.automaticStart) {
+  if (CTX.initializeGit) {
     hasGitInitialized = await initializeGit(projectDir, CTX.default);
+  }
+  if (CTX.installDependencies) {
     await installDependencies(projectDir, CTX.pkgManager);
-    await runLinters(projectDir, CTX.pkgManager);
-    if (hasGitInitialized) {
-      await stageAndCommit(
-        projectDir,
-        `feat: initial commit from ${TEMPLATE_REPO}`,
-      );
-    }
+  }
+  if (CTX.initializeGit && hasGitInitialized) {
+    await stageAndCommit(
+      projectDir,
+      `feat: initial commit from ${TEMPLATE_REPO}`,
+    );
   }
 
   logNextSteps(CTX, hasGitInitialized);

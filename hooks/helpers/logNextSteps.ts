@@ -4,22 +4,32 @@ import { dim } from "ansis";
 import { logger } from "dkcutter/utils";
 
 export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
-  const { projectSlug, pkgManager, automaticStart } = ctx;
+  const {
+    projectSlug,
+    installDependencies,
+    pkgManager,
+    initializeGit,
+    useDockerCompose,
+    authProvider,
+    usePrisma,
+    pkgRun,
+  } = ctx;
   const commands = [`cd ${projectSlug}`];
 
-  if (!automaticStart) {
+  if (!installDependencies) {
     commands.push(`${pkgManager} install`);
-
-    if (!hasGitInitialized) {
-      commands.push("git init", "git add .", `git commit -m "initial commit"`);
-    }
+  }
+  if (!initializeGit && !hasGitInitialized) {
+    commands.push("git init", "git add .", `git commit -m "initial commit"`);
   }
 
-  ctx.useDockerCompose && commands.push("docker compose up -d");
-  if (["betterAuth"].includes(ctx.authProvider) && ctx.database === "prisma") {
-    commands.push(`${pkgManager} prisma migrate dev --name init`);
+  useDockerCompose && commands.push("docker compose up -d");
+  if (authProvider === "betterAuth" && usePrisma) {
+    commands.push(
+      `${pkgRun} db:migrate ${pkgManager === "npm" ? "-- " : ""}--name init`,
+    );
   }
-  commands.push(`${ctx.pkgRun} dev`);
+  commands.push(`${pkgRun} dev`);
 
   p.note(commands.join("\n"), "Next steps", {
     format: (line: string) => dim(line),

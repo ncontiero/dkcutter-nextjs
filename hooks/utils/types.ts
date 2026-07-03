@@ -22,7 +22,8 @@ export interface ContextProps {
   useDockerCompose: boolean;
   useClerkWebhook: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;
-  automaticStart: boolean;
+  installDependencies: boolean;
+  initializeGit: boolean;
 }
 
 export interface SetFlagProps {
