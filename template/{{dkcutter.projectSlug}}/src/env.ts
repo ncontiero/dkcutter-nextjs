@@ -52,7 +52,7 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
 {%- if dkcutter.usePrisma %}
-    DATABASE_URL: z.url(),
+    DATABASE_URL: process.env.DATABASE_URL,
 {%- endif %}
 {%- if dkcutter.authProvider == "clerk" %}
     // Clerk
