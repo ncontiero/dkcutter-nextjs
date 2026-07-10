@@ -13,6 +13,9 @@
 {%- elif dkcutter.authProvider == "betterAuth" %}
 - 🔐 **Authentication**: Self-hosted user accounts and sessions via Better Auth.
 {%- endif %}
+{%- if dkcutter.i18n == "nextIntl" %}
+- 🌍 **Internationalization**: i18n support powered by next-intl.
+{%- endif %}
 {%- if dkcutter.usePrisma %}
 - 🗄️ **Database ORM**: Prisma configured for type-safe database access.
 {%- if dkcutter.useDockerCompose %}

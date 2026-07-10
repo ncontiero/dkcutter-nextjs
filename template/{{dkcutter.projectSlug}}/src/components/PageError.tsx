@@ -1,3 +1,6 @@
+{% if dkcutter.i18n == "nextIntl" -%}
+import { useTranslations } from "next-intl";
+{% endif -%}
 {% if not dkcutter.useAppFolder -%}
 import Head from "next/head";
 {% endif -%}
@@ -9,17 +12,26 @@ interface PageErrorProps {
 }
 
 export function PageError({ title, description }: PageErrorProps) {
+{%- if dkcutter.i18n == "nextIntl" %}
+  const t = useTranslations("ErrorComponent");
+{% endif %}
   return (
     <main className="flex h-screen flex-col items-center justify-center text-center">
-      {%- if not dkcutter.useAppFolder %}
+{%- if not dkcutter.useAppFolder %}
       <Head>
         <title>{title}</title>
       </Head>
-      {%- endif %}
+{%- endif %}
       <h1 className="text-4xl font-bold tracking-wide">{title}</h1>
       <p className="mt-4 text-lg">{description}</p>
       <p className="mt-2 text-base">
+{%- if dkcutter.i18n == "nextIntl" %}
+        {t.rich("backToHome", {
+          link: (chunks) => <Link href="/">{chunks}</Link>,
+        })}
+{%- else %}
         Go back to the <Link href="/">home</Link>.
+{%- endif %}
       </p>
     </main>
   );

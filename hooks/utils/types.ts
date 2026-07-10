@@ -2,6 +2,7 @@ import type { PackageManager } from "dkcutter/utils";
 
 export type { PackageManager };
 export type AuthProvider = "none" | "clerk" | "betterAuth";
+export type I18n = "none" | "nextIntl";
 export type AutomatedDepsUpdater = "none" | "renovate" | "dependabot";
 
 export interface ContextProps {
@@ -11,6 +12,7 @@ export interface ContextProps {
   pkgRun: string;
   useAppFolder: boolean;
   authProvider: AuthProvider;
+  i18n: I18n;
   useHusky: boolean;
   useLintStaged: boolean;
   useNanoStaged: boolean;

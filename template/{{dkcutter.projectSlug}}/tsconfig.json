@@ -20,6 +20,9 @@
 
     // JavaScript and Strictness
     "resolveJsonModule": true,
+{%- if dkcutter.i18n == "nextIntl" and dkcutter.useAppFolder %}
+    "allowArbitraryExtensions": true,
+{%- endif %}
     "allowJs": true,
     "checkJs": true,
     "strict": true,

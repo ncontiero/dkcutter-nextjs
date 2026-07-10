@@ -2,6 +2,7 @@ import type {
   AuthProvider,
   AutomatedDepsUpdater,
   ContextProps,
+  I18n,
   PackageManager,
 } from "./utils/types";
 
@@ -26,6 +27,7 @@ const CTX: ContextProps = {
   pkgRun: "{{ dkcutter._pkgRun }}",
   useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
+  i18n: "{{ dkcutter.i18n }}" as I18n,
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
   useLintStaged: toBoolean("{{ dkcutter.useLintStaged }}"),
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
@@ -144,9 +146,6 @@ async function main() {
   const removeAPIFolder = () => {
     FILES_TO_REMOVE.push(path.join(appFolder, "api"));
   };
-  const removeProxyFile = () => {
-    FILES_TO_REMOVE.push(path.join(srcFolder, "proxy.ts"));
-  };
 
   if (CTX.authProvider === "clerk") {
     removeBetterAuth();
@@ -158,8 +157,26 @@ async function main() {
   } else {
     removeClerk();
     removeBetterAuth();
-    removeProxyFile();
     removeAPIFolder();
+  }
+
+  const i18nFolder = path.join(srcFolder, "i18n");
+  const removeNextIntl = () => {
+    REMOVE_DEPS.push("next-intl");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "project.inlang"),
+      i18nFolder,
+      path.join(appFolder, "[locale]"),
+    );
+  };
+  if (CTX.i18n === "none") {
+    removeNextIntl();
+  } else if (CTX.i18n === "nextIntl" && !CTX.useAppFolder) {
+    FILES_TO_REMOVE.push(path.join(i18nFolder, "request.ts"));
+  }
+
+  if (CTX.i18n === "none" && CTX.authProvider === "none") {
+    FILES_TO_REMOVE.push(path.join(srcFolder, "proxy.ts"));
   }
 
   if (!CTX.useHusky && !CTX.useLintStaged && !CTX.useNanoStaged) {
@@ -258,6 +275,7 @@ async function main() {
     );
     FILES_TO_REMOVE.push(
       path.join(appFolder, "providers.tsx"),
+      path.join(appFolder, "[locale]", "providers.tsx"),
       path.join(srcFolder, "lib", "query-client.ts"),
     );
   }

@@ -9,6 +9,7 @@
     // Bundler mode
     "moduleResolution": "bundler",
     "types": ["bun"],
+    "allowArbitraryExtensions": true,
     "allowImportingTsExtensions": true,
     "allowJs": true,
 

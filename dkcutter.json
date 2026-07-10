@@ -45,6 +45,18 @@
     ],
     "promptMessage": "Which {{ colors.blue('Authentication Provider') }} would you like to use?"
   },
+  "i18n": {
+    "value": "none",
+    "choices": [
+      { "title": "None", "value": "none" },
+      {
+        "title": "next-intl",
+        "value": "nextIntl",
+        "description": "Internationalization for Next.js"
+      }
+    ],
+    "promptMessage": "Which {{ colors.blue('Internationalization (i18n)') }} solution would you like to use?"
+  },
   "additionalTools": {
     "value": "none",
     "choices": [

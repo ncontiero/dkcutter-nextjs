@@ -1,4 +1,12 @@
 import "@/styles/globals.css";
+{%- if dkcutter.i18n == "nextIntl" %}
+
+export default function RootLayout({
+  children,
+}: LayoutProps<"/">): LayoutProps<"/">["children"] {
+  return children;
+}
+{%- else %}
 import type { Metadata } from "next";
 {%- if dkcutter.authProvider == "clerk" %}
 import { ClerkProvider } from "@clerk/nextjs";
@@ -19,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
 {%- if dkcutter.authProvider == "clerk" %}
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
 {%- if dkcutter.useTanstackQuery %}
         <body className={inter.variable}>
           <Providers>{children}</Providers>
@@ -30,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </html>
     </ClerkProvider>
 {%- else %}
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
 {%- if dkcutter.useTanstackQuery %}
       <body className={inter.variable}>
         <Providers>{children}</Providers>
@@ -42,3 +50,4 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 {%- endif %}
   );
 }
+{%- endif %}

@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
-import { emptyDir, remove } from "dkcutter/utils";
+import { emptyDir } from "dkcutter/utils";
 import { x } from "tinyexec";
-import { afterAll, beforeAll, it as vitestIt } from "vitest";
+import { beforeAll, it as vitestIt } from "vitest";
 import {
   INVALID_SLUGS,
   SUPPORTED_COMBINATIONS,
@@ -22,9 +22,9 @@ const TIMEOUT = isWindows ? 300_000 : 150_000;
 beforeAll(async () => {
   await emptyDir(TEST_OUTPUT);
 });
-afterAll(async () => {
-  await remove(TEST_OUTPUT);
-}, TIMEOUT);
+// afterAll(async () => {
+//   await remove(TEST_OUTPUT);
+// }, TIMEOUT);
 
 const it = vitestIt.extend<{
   supportedOptions: string[];

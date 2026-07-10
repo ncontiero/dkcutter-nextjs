@@ -19,6 +19,10 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Clerk](https://clerk.com/)
   - [Better Auth](https://www.better-auth.com/)
 
+- **Internationalization (i18n)**: Indicates whether the project should be configured with internationalization support:
+  - None
+  - [next-intl](https://next-intl-docs.vercel.app/)
+
 - **Additional Tools**: Indicates whether the project should be configured with the following tools:
   - [Husky](https://typicode.github.io/husky/): Modern native git hooks made easy.
   - [Lint Staged](https://github.com/okonet/lint-staged): Run linters against staged git files.

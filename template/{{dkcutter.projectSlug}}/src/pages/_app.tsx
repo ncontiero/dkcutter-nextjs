@@ -8,7 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}
 {%- if dkcutter.useTanstackQuery %}
 import {
-{%- if dkcutter.useTanstackQuery and dkcutter.useEslintWithType %}
+{%- if dkcutter.useEslintWithType %}
   type DehydratedState,
 {%- endif %}
   HydrationBoundary,
@@ -17,7 +17,13 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 {%- endif %}
+{%- if dkcutter.i18n == "nextIntl" %}
+import { NextIntlClientProvider } from "next-intl";
+{%- endif %}
 import { Inter } from "next/font/google";
+{%- if dkcutter.i18n == "nextIntl" %}
+import { useRouter } from "next/router";
+{%- endif %}
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -31,6 +37,9 @@ export default function App({
 
 export default function App({ Component, pageProps }: AppProps) {
 {%- endif %}
+{%- if dkcutter.i18n == "nextIntl" %}
+  const router = useRouter();
+{%- endif %}
 {%- if dkcutter.useTanstackQuery %}
   const [queryClient] = useState(() => new QueryClient());
 {% endif %}
@@ -41,16 +50,38 @@ export default function App({ Component, pageProps }: AppProps) {
 {%- if dkcutter.useTanstackQuery %}
       <QueryClientProvider client={queryClient}>
         <HydrationBoundary state={pageProps.dehydratedState}>
+{%- if dkcutter.i18n == "nextIntl" %}
+          <NextIntlClientProvider
+            locale={router.locale}
+            messages={pageProps.messages}
+          >
+            <div className={inter.variable}>
+              <Component {...pageProps} />
+            </div>
+          </NextIntlClientProvider>
+{%- else %}
           <div className={inter.variable}>
             <Component {...pageProps} />
           </div>
+{%- endif %}
         </HydrationBoundary>
         <ReactQueryDevtools />
       </QueryClientProvider>
 {%- else %}
+{%- if dkcutter.i18n == "nextIntl" %}
+      <NextIntlClientProvider
+        locale={router.locale}
+        messages={pageProps.messages}
+      >
+        <div className={inter.variable}>
+          <Component {...pageProps} />
+        </div>
+      </NextIntlClientProvider>
+{%- else %}
       <div className={inter.variable}>
         <Component {...pageProps} />
       </div>
+{%- endif %}
 {%- endif %}
     </ClerkProvider>
   );
@@ -59,16 +90,38 @@ export default function App({ Component, pageProps }: AppProps) {
 {%- if dkcutter.useTanstackQuery %}
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
+{%- if dkcutter.i18n == "nextIntl" %}
+        <NextIntlClientProvider
+          locale={router.locale}
+          messages={pageProps.messages}
+        >
+          <div className={inter.variable}>
+            <Component {...pageProps} />
+          </div>
+        </NextIntlClientProvider>
+{%- else %}
         <div className={inter.variable}>
           <Component {...pageProps} />
         </div>
+{%- endif %}
       </HydrationBoundary>
       <ReactQueryDevtools />
     </QueryClientProvider>
 {%- else %}
+{%- if dkcutter.i18n == "nextIntl" %}
+    <NextIntlClientProvider
+      locale={router.locale}
+      messages={pageProps.messages}
+    >
+      <div className={inter.variable}>
+        <Component {...pageProps} />
+      </div>
+    </NextIntlClientProvider>
+{%- else %}
     <div className={inter.variable}>
       <Component {...pageProps} />
     </div>
+{%- endif %}
 {%- endif %}
   );
 {%- endif %}

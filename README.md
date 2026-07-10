@@ -63,6 +63,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project version? … 0.1.0
 ✔ Do you want to use Next.Js app folder? … No / Yes
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
+✔ Which Internationalization (i18n) solution would you like to use? › None / next-intl
 ✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, React Hook Form, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
 ✔ Would you like to add Docker Compose for the database? … No / Yes
 ✔ Would you like to receive Clerk events using webhooks? … No / Yes
@@ -100,6 +101,7 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--projectVersion <string>`       | The project version.                                                                                                                                                                                                     |
 | `--useAppFolder [boolean]`        | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                                                                                                                                         |
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                       |
+| `--i18n <string>`                 | Choose an internationalization solution (`none`, `nextIntl`).                                                                                                                                                            |
 | `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `reactHookForm`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
 | `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if Prisma is selected).                                                                                                                                          |
 | `--useClerkWebhook [boolean]`     | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                                                                                                                                                 |
