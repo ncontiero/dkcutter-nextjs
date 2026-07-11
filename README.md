@@ -9,7 +9,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter Next.js is a ro
 
 ## Features
 
-- ⚡️ **Next.js v16**: Support for App Router and Pages Router.
+- ⚡️ **Next.js v16**: Modern full-stack React framework with App Router.
 - ⚛️ **React Compiler**: Option to enable the experimental React Compiler for optimized performance.
 - 🎨 **Styling**: Pre-configured with Tailwind CSS 4.
 - 🗄️ **Database**: Optional Prisma ORM integration, complete with Docker Compose setup for your local database.
@@ -61,7 +61,6 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project description? … Behold My Awesome Project!
 ✔ What is the author name? … Nicolas Contiero <https://github.com/ncontiero>
 ✔ What is the project version? … 0.1.0
-✔ Do you want to use Next.Js app folder? … No / Yes
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Which Internationalization (i18n) solution would you like to use? › None / next-intl
 ✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, React Hook Form, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
@@ -99,7 +98,6 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--description <string>`          | The Project description.                                                                                                                                                                                                 |
 | `--authorName <string>`           | The author name.                                                                                                                                                                                                         |
 | `--projectVersion <string>`       | The project version.                                                                                                                                                                                                     |
-| `--useAppFolder [boolean]`        | Use [Next.js app folder](https://nextjs.org/docs/app) structure.                                                                                                                                                         |
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                       |
 | `--i18n <string>`                 | Choose an internationalization solution (`none`, `nextIntl`).                                                                                                                                                            |
 | `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `reactHookForm`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
@@ -122,9 +120,9 @@ pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --additionalTools prisma
 If you want to use all the default values with the exception of one or more, you can do it as follows:
 
 ```bash
-pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --useAppFolder false -y
+pnpm dlx dkcutter gh:ncontiero/dkcutter-nextjs --installDependencies false -y
 ```
 
-This will use the default values, with the exception of the `--useAppFolder` option, skipping the interactive prompt (`-y`).
+This will use the default values, with the exception of the `--installDependencies` option, skipping the interactive prompt (`-y`).
 
 [options-url]: ./docs/project-generation-options.md

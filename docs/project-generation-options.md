@@ -12,8 +12,6 @@ This page describes all the template options that will be prompted by the [DKCut
 
 - **Project version**: The version of the project at its inception.
 
-- **Use app folder**: Indicates whether the project should be configured to use the app folder from [Next.js](https://nextjs.org/docs/app).
-
 - **Authentication Provider**: Indicates whether the project should be configured using the following authentication providers:
   - None
   - [Clerk](https://clerk.com/)

@@ -7,7 +7,7 @@
 
 ## ✨ Features
 
-- ⚡️ **Next.js**: Modern full-stack React framework{% if dkcutter.useAppFolder %} using the App Router{% else %} using the Pages Router{% endif %}.
+- ⚡️ **Next.js v16**: Modern full-stack React framework with App Router.
 {%- if dkcutter.authProvider == "clerk" %}
 - 🔐 **Authentication**: Out-of-the-box support for Clerk{% if dkcutter.useClerkWebhook %} (with webhooks){% endif %}.
 {%- elif dkcutter.authProvider == "betterAuth" %}

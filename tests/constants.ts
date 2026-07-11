@@ -1,7 +1,6 @@
 export const PATTERN = /\{\{(\s?dkcutter)\.(.*?)\}\}/;
 
 export const SUPPORTED_COMBINATIONS = [
-  { useAppFolder: false },
   { authProvider: "clerk" },
   { authProvider: "betterAuth" },
   { i18n: "nextIntl" },
@@ -20,9 +19,7 @@ export const SUPPORTED_COMBINATIONS = [
   { automatedDepsUpdater: "dependabot" },
   // Complex combinations
   { authProvider: "clerk", i18n: "nextIntl" },
-  { useAppFolder: false, authProvider: "clerk", i18n: "nextIntl" },
   { authProvider: "betterAuth", i18n: "nextIntl" },
-  { useAppFolder: false, authProvider: "betterAuth", i18n: "nextIntl" },
   {
     authProvider: "clerk",
     i18n: "nextIntl",
@@ -30,20 +27,6 @@ export const SUPPORTED_COMBINATIONS = [
       "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
   },
   {
-    authProvider: "betterAuth",
-    i18n: "nextIntl",
-    additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
-  },
-  {
-    useAppFolder: false,
-    authProvider: "clerk",
-    i18n: "nextIntl",
-    additionalTools:
-      "husky,lintStaged,nanoStaged,commitlint,prisma,triggerDev,tanstackQuery,shadcn,tailwindTypography,unpic",
-  },
-  {
-    useAppFolder: false,
     authProvider: "betterAuth",
     i18n: "nextIntl",
     additionalTools:

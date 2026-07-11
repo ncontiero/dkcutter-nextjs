@@ -24,10 +24,6 @@
     "value": "0.1.0",
     "promptMessage": "What is the project version?"
   },
-  "useAppFolder": {
-    "value": true,
-    "promptMessage": "Do you want to use {{ colors.blue('Next.Js app folder') }}?"
-  },
   "authProvider": {
     "value": "none",
     "choices": [

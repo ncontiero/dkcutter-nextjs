@@ -10,7 +10,6 @@ export interface ContextProps {
   projectSlug: string;
   pkgManager: PackageManager;
   pkgRun: string;
-  useAppFolder: boolean;
   authProvider: AuthProvider;
   i18n: I18n;
   useHusky: boolean;

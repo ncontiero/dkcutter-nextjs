@@ -6,7 +6,6 @@ import type {
   PackageManager,
 } from "./utils/types";
 
-import fs from "node:fs/promises";
 import path from "node:path";
 import { getPackageInfo, logger, remove } from "dkcutter/utils";
 
@@ -25,7 +24,6 @@ const CTX: ContextProps = {
   projectSlug: "{{ dkcutter.projectSlug }}",
   pkgManager: "{{ dkcutter.pkgManager }}" as PackageManager,
   pkgRun: "{{ dkcutter._pkgRun }}",
-  useAppFolder: toBoolean("{{ dkcutter.useAppFolder }}"),
   authProvider: "{{ dkcutter.authProvider }}" as AuthProvider,
   i18n: "{{ dkcutter.i18n }}" as I18n,
   useHusky: toBoolean("{{ dkcutter.useHusky }}"),
@@ -63,8 +61,6 @@ async function setFlagsInEnvs() {
 async function main() {
   const projectDir = path.resolve(".");
   const srcFolder = path.join(projectDir, "src");
-  const publicFolder = path.join(projectDir, "public");
-  const pagesFolder = path.join(srcFolder, "pages");
   const appFolder = path.join(srcFolder, "app");
   const libFolder = path.join(srcFolder, "lib");
 
@@ -111,29 +107,12 @@ async function main() {
       break;
   }
 
-  if (CTX.useAppFolder) {
-    FILES_TO_REMOVE.push(pagesFolder, path.join(publicFolder, "favicon.ico"));
-  } else {
-    delete SCRIPTS.postinstall;
-
-    if (CTX.authProvider === "betterAuth" || CTX.useClerkWebhook) {
-      const appDirContents = await fs.readdir(appFolder);
-      for (const file of appDirContents) {
-        if (file === "api") continue;
-        FILES_TO_REMOVE.push(path.join(appFolder, file));
-      }
-    } else {
-      FILES_TO_REMOVE.push(appFolder);
-    }
-  }
-
   const removeClerk = () => {
     REMOVE_DEPS.push("@clerk/nextjs");
-    const folder = CTX.useAppFolder ? appFolder : pagesFolder;
     FILES_TO_REMOVE.push(
       path.join(appFolder, "api", "webhook"),
-      path.join(folder, "sign-in"),
-      path.join(folder, "sign-up"),
+      path.join(appFolder, "sign-in"),
+      path.join(appFolder, "sign-up"),
     );
   };
   const removeBetterAuth = () => {
@@ -171,8 +150,6 @@ async function main() {
   };
   if (CTX.i18n === "none") {
     removeNextIntl();
-  } else if (CTX.i18n === "nextIntl" && !CTX.useAppFolder) {
-    FILES_TO_REMOVE.push(path.join(i18nFolder, "request.ts"));
   }
 
   if (CTX.i18n === "none" && CTX.authProvider === "none") {
