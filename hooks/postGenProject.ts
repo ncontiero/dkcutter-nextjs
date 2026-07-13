@@ -152,7 +152,7 @@ async function main() {
     removeNextIntl();
   }
 
-  if (CTX.i18n === "none" && CTX.authProvider === "none") {
+  if (CTX.i18n === "none" && CTX.authProvider !== "clerk") {
     FILES_TO_REMOVE.push(path.join(srcFolder, "proxy.ts"));
   }
 
