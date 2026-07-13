@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware(routing);
 {%- endif %}
 
 {%- if dkcutter.i18n == "nextIntl" %}
-export default clerkMiddleware(async (_, req) => {
+export default clerkMiddleware((_, req) => {
   return intlMiddleware(req);
 });
 {%- else %}
