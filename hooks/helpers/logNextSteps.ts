@@ -1,7 +1,6 @@
 import type { ContextProps } from "../utils/types";
 import * as p from "@clack/prompts";
 import { dim } from "ansis";
-import { logger } from "dkcutter/utils";
 
 export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
   const {
@@ -34,5 +33,4 @@ export function logNextSteps(ctx: ContextProps, hasGitInitialized: boolean) {
   p.note(commands.join("\n"), "Next steps", {
     format: (line: string) => dim(line),
   });
-  logger.info(`Next steps:\n  ${commands.join("\n  ")}`);
 }
