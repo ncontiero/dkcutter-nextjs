@@ -46,21 +46,11 @@ export async function runPgkCommand(
     );
   };
 
-  switch (pkgManager) {
-    case "npm":
-      await x(pkgManager, args, {
-        nodeOptions: { cwd: projectDir, stdio: "inherit" },
-      });
-      return null;
-    case "pnpm":
-    case "yarn":
-    case "bun":
-      return execWithSpinner(
-        projectDir,
-        pkgManager,
-        args,
-        pkgManager === "bun" ? "ignore" : "pipe",
-        onDataHandle,
-      );
-  }
+  return execWithSpinner(
+    projectDir,
+    pkgManager,
+    args,
+    pkgManager === "bun" ? "ignore" : "pipe",
+    onDataHandle,
+  );
 }
