@@ -1,26 +1,6 @@
 import { render, screen } from "@testing-library/react";
-{%- if dkcutter.i18n == "nextIntl" %}
-import { describe, expect, it, vi } from "vitest";
-{%- else %}
 import { describe, expect, it } from "vitest";
-{%- endif %}
 import { PageError } from "./PageError";
-
-{%- if dkcutter.i18n == "nextIntl" %}
-
-vi.mock("next-intl", () => ({
-  useTranslations: () => {
-    const t = (key: string) => key;
-    t.rich = (key: string, values?: { link?: (chunk: string) => unknown }) => {
-      if (values?.link !== undefined) {
-        return values.link(key);
-      }
-      return key;
-    };
-    return t;
-  },
-}));
-{%- endif %}
 
 describe("PageError", () => {
   it("renders the title and description", () => {

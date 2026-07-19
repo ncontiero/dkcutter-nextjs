@@ -8,5 +8,8 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+{%- if dkcutter.i18n == "nextIntl" %}
+    setupFiles: ["./tests/setup.ts"],
+{%- endif %}
   },
 });

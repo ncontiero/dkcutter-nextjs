@@ -10,14 +10,6 @@ vi.mock("react", async (importOriginal) => {
   };
 });
 
-vi.mock("next-intl", () => ({
-  useTranslations: () => (key: string) => key,
-}));
-
-vi.mock("next-intl/server", () => ({
-  setRequestLocale: vi.fn(),
-}));
-
 describe("HomePage", () => {
   it("renders a heading with title key", () => {
     render(
