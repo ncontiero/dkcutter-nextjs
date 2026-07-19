@@ -18,6 +18,7 @@ export interface ContextProps {
   useCommitlint: boolean;
   useReactCompiler: boolean;
   useReactHookForm: boolean;
+  useVitest: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;

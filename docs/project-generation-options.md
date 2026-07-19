@@ -29,6 +29,7 @@ This page describes all the template options that will be prompted by the [DKCut
   - [React Compiler](https://react.dev/learn/react-compiler): Automatically optimize React component renders.
   - [React Hook Form](https://react-hook-form.com/): Performant, flexible and extensible forms with easy-to-use validation.
   - [ESLint + Type Information](https://typescript-eslint.io/getting-started/typed-linting): Enable ESLint rules that require type information.
+  - [Vitest](https://vitest.dev/): Blazing fast unit test framework powered by Vite.
   - [Prisma](https://www.prisma.io/): Next-generation ORM for Node.js & TypeScript.
   - [Trigger.dev](https://trigger.dev/): The open source background jobs platform.
   - [TanStack Query](https://tanstack.com/query/latest): Powerful asynchronous state management for TS/JS.

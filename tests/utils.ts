@@ -42,16 +42,20 @@ export interface Combination {
 /**
  * Construct the args for the project.
  */
-export function constructArgs(combination: Combination, toolToInsert?: string) {
+export function constructArgs(
+  combination: Combination,
+  toolsToInsert: string[] = [],
+) {
   const args: string[] = [];
   let name = "";
-  if (!("additionalTools" in combination) && toolToInsert) {
+  if (!("additionalTools" in combination) && toolsToInsert.length > 0) {
     combination.additionalTools = "";
   }
   for (const [item, value] of Object.entries(combination)) {
     name += `${item}-${value}_`.replace(" ", "");
     let newValue = String(value);
-    if (toolToInsert && item === "additionalTools") {
+    if (toolsToInsert.length > 0 && item === "additionalTools") {
+      const toolToInsert = toolsToInsert.join(",");
       newValue = newValue ? `${newValue},${toolToInsert}` : toolToInsert;
     }
     args.push(`--${item}`, newValue);

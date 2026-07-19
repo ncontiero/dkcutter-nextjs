@@ -1,7 +1,7 @@
 import { resolve } from "node:path";
-import { emptyDir } from "dkcutter/utils";
+import { emptyDir, remove } from "dkcutter/utils";
 import { x } from "tinyexec";
-import { beforeAll, it as vitestIt } from "vitest";
+import { afterAll, beforeAll, it as vitestIt } from "vitest";
 import {
   INVALID_SLUGS,
   SUPPORTED_COMBINATIONS,
@@ -22,9 +22,9 @@ const TIMEOUT = isWindows ? 300_000 : 150_000;
 beforeAll(async () => {
   await emptyDir(TEST_OUTPUT);
 });
-// afterAll(async () => {
-//   await remove(TEST_OUTPUT);
-// }, TIMEOUT);
+afterAll(async () => {
+  await remove(TEST_OUTPUT);
+}, TIMEOUT);
 
 const it = vitestIt.extend<{
   supportedOptions: string[];
@@ -38,10 +38,12 @@ const it = vitestIt.extend<{
 
 function runProjectTest(combination: Combination) {
   const runTypeCheck = process.env.RUN_TYPE_CHECK === "true";
-  const { args, testName, slug } = constructArgs(
-    combination,
-    runTypeCheck ? "eslintTypeInfo" : undefined,
-  );
+  const runTests = process.env.RUN_TESTS === "true";
+  const toolsToAdd = [
+    ...(runTypeCheck ? ["eslintTypeInfo"] : []),
+    ...(runTests ? ["vitest"] : []),
+  ];
+  const { args, testName, slug } = constructArgs(combination, toolsToAdd);
   it.concurrent(
     testName,
     async ({ supportedOptions }) => {
@@ -56,17 +58,28 @@ function runProjectTest(combination: Combination) {
       const paths = await buildFilesList(target);
       await checkPaths(paths);
 
-      if (runTypeCheck) {
+      if (runTypeCheck || runTests) {
         // Install dependencies
         await x("bun", ["install"], {
           nodeOptions: { cwd: target },
           throwOnError: true,
         });
-        // Check types
-        await x("bun", ["run", "typecheck"], {
-          nodeOptions: { cwd: target, stdio: "inherit" },
-          throwOnError: true,
-        });
+
+        if (runTypeCheck) {
+          // Check types
+          await x("bun", ["run", "typecheck"], {
+            nodeOptions: { cwd: target, stdio: "inherit" },
+            throwOnError: true,
+          });
+        }
+
+        if (runTests) {
+          // Run tests
+          await x("bun", ["run", "test"], {
+            nodeOptions: { cwd: target, stdio: "inherit" },
+            throwOnError: true,
+          });
+        }
       }
 
       // Check that the project is linted

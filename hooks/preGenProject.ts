@@ -6,6 +6,7 @@
 // {{ dkcutter.add("useReactCompiler", "{{ 'reactCompiler' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useReactHookForm", "{{ 'reactHookForm' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useEslintWithType", "{{ 'eslintTypeInfo' in dkcutter.additionalTools }}") }}
+// {{ dkcutter.add("useVitest", "{{ 'vitest' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("usePrisma", "{{ 'prisma' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTriggerDev", "{{ 'triggerDev' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useTanstackQuery", "{{ 'tanstackQuery' in dkcutter.additionalTools }}") }}

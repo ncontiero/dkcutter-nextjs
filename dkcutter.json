@@ -87,9 +87,14 @@
         "description": "Performant, flexible and extensible forms with easy-to-use validation"
       },
       {
-        "title": "ESlint + Type Information",
+        "title": "ESLint + Type Information",
         "value": "eslintTypeInfo",
         "description": "Enable ESLint rules that require type information"
+      },
+      {
+        "title": "Vitest",
+        "value": "vitest",
+        "description": "Blazing fast unit test framework powered by Vite"
       },
       {
         "title": "Prisma",
@@ -102,7 +107,7 @@
         "description": "The open source background jobs platform"
       },
       {
-        "title": "Tanstack Query",
+        "title": "TanStack Query",
         "value": "tanstackQuery",
         "description": "Powerful asynchronous state management for TS/JS"
       },

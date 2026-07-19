@@ -32,6 +32,7 @@ const CTX: ContextProps = {
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
+  useVitest: toBoolean("{{ dkcutter.useVitest }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
@@ -204,6 +205,34 @@ async function main() {
 
   if (!CTX.useReactHookForm) {
     REMOVE_DEPS.push("@hookform/resolvers", "react-hook-form");
+  }
+
+  const testNonLocaleFiles = [
+    path.join(appFolder, "page.test.tsx"),
+    path.join(appFolder, "not-found.test.tsx"),
+  ];
+  if (CTX.useVitest) {
+    if (CTX.i18n === "nextIntl") {
+      FILES_TO_REMOVE.push(...testNonLocaleFiles);
+    }
+  } else {
+    REMOVE_DEV_DEPS.push(
+      "@testing-library/dom",
+      "@testing-library/react",
+      "@vitejs/plugin-react",
+      "jsdom",
+      "vitest",
+    );
+
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "vitest.config.ts"),
+      path.join(appFolder, "[locale]", "page.test.tsx"),
+      path.join(appFolder, "[locale]", "not-found.test.tsx"),
+      path.join(srcFolder, "components", "PageError.test.tsx"),
+      ...testNonLocaleFiles,
+    );
+    delete SCRIPTS.test;
+    delete SCRIPTS["test:watch"];
   }
 
   if (CTX.usePrisma) {

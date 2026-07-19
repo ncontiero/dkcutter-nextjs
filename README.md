@@ -18,6 +18,7 @@ Powered by [DKCutter](https://dkcutter.ncontiero.com/), DKCutter Next.js is a ro
 - 🔄 **Data Fetching**: Optional [TanStack Query](https://tanstack.com/query/latest) configuration for powerful async state management.
 - 🔒 **Environment Validation**: Type-safe environment variables via `@t3-oss/env-nextjs` and `zod`.
 - 🛠️ **Code Quality & Git Hooks**: Enforce standards with Husky, lint-staged, Commitlint, and optional type-aware ESLint.
+- 🧪 **Testing**: Blazing fast unit test framework powered by Vitest.
 - 🤖 **Dependency Automation**: Keep your project up-to-date automatically using Mend Renovate or GitHub Dependabot.
 - 📦 **Package Manager Agnostic**: Seamlessly use npm, yarn, pnpm, or bun.
 
@@ -63,7 +64,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ What is the project version? … 0.1.0
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Which Internationalization (i18n) solution would you like to use? › None / next-intl
-✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, React Hook Form, ESlint + Type Information, Prisma, Trigger.dev, Tanstack Query, Shadcn, Tailwind CSS Typography, Unpic
+✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, React Hook Form, ESLint + Type Information, Vitest, Prisma, Trigger.dev, TanStack Query, Shadcn, Tailwind CSS Typography, Unpic
 ✔ Would you like to add Docker Compose for the database? … No / Yes
 ✔ Would you like to receive Clerk events using webhooks? … No / Yes
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
@@ -91,21 +92,21 @@ Now take a look at your repo. Don't forget to carefully look at the generated `R
 
 If you want to bypass the interactive prompts and start faster, you can provide configuration via CLI flags. All options in `dkcutter.json` are available as flags:
 
-| Flag                              | Description                                                                                                                                                                                                              |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--projectName <string>`          | The Project name.                                                                                                                                                                                                        |
-| `--projectSlug <string>`          | The Project Slug.                                                                                                                                                                                                        |
-| `--description <string>`          | The Project description.                                                                                                                                                                                                 |
-| `--authorName <string>`           | The author name.                                                                                                                                                                                                         |
-| `--projectVersion <string>`       | The project version.                                                                                                                                                                                                     |
-| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                       |
-| `--i18n <string>`                 | Choose an internationalization solution (`none`, `nextIntl`).                                                                                                                                                            |
-| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `reactHookForm`, `eslintTypeInfo`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
-| `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if Prisma is selected).                                                                                                                                          |
-| `--useClerkWebhook [boolean]`     | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                                                                                                                                                 |
-| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                                                  |
-| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                                                                                |
-| `--initializeGit [boolean]`       | Indicates whether to initialize a git repository and make an initial commit.                                                                                                                                             |
+| Flag                              | Description                                                                                                                                                                                                                        |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--projectName <string>`          | The Project name.                                                                                                                                                                                                                  |
+| `--projectSlug <string>`          | The Project Slug.                                                                                                                                                                                                                  |
+| `--description <string>`          | The Project description.                                                                                                                                                                                                           |
+| `--authorName <string>`           | The author name.                                                                                                                                                                                                                   |
+| `--projectVersion <string>`       | The project version.                                                                                                                                                                                                               |
+| `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                                 |
+| `--i18n <string>`                 | Choose an internationalization solution (`none`, `nextIntl`).                                                                                                                                                                      |
+| `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `reactHookForm`, `eslintTypeInfo`, `vitest`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
+| `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if Prisma is selected).                                                                                                                                                    |
+| `--useClerkWebhook [boolean]`     | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                                                                                                                                                           |
+| `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                                                            |
+| `--installDependencies [boolean]` | Indicates whether to automatically install dependencies after generation.                                                                                                                                                          |
+| `--initializeGit [boolean]`       | Indicates whether to initialize a git repository and make an initial commit.                                                                                                                                                       |
 
 [See here for more information about options][options-url].
 
