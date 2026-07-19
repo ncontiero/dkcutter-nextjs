@@ -54,7 +54,7 @@ export function constructArgs(
   for (const [item, value] of Object.entries(combination)) {
     name += `${item}-${value}_`.replace(" ", "");
     let newValue = String(value);
-    if (toolsToInsert.length > 0 && item === "additionalTools") {
+    if (item === "additionalTools" && toolsToInsert.length > 0) {
       const toolToInsert = toolsToInsert.join(",");
       newValue = newValue ? `${newValue},${toolToInsert}` : toolToInsert;
     }

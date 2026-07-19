@@ -4,6 +4,11 @@ export default ncontiero({
   ignores: ["template"],
   nextjs: false,
   typescript: {
-    tsconfigPath: "./tsconfig.json",
+    typeAware: true,
+  },
+  unicorn: {
+    overrides: {
+      "unicorn/prefer-simple-condition-first": "off",
+    },
   },
 });

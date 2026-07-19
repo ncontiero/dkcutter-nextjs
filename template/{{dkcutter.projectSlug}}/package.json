@@ -54,7 +54,7 @@
   "devDependencies": {
     "@commitlint/cli": "21.2.1",
     "@commitlint/config-conventional": "21.2.0",
-    "@ncontiero/eslint-config": "8.3.3",
+    "@ncontiero/eslint-config": "8.4.1",
     "@tailwindcss/postcss": "4.3.2",
     "@tailwindcss/typography": "0.5.20",
     "@tanstack/eslint-plugin-query": "5.101.2",
