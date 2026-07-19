@@ -237,7 +237,8 @@ async function main() {
 
   if (CTX.usePrisma) {
     const dbGenerate = `${CTX.pkgRun} db:generate`;
-    SCRIPTS.build = `${dbGenerate} && ${SCRIPTS.build}`;
+    const dbMigrate = `${CTX.pkgRun} db:migrate:prod`;
+    SCRIPTS.build = `${dbGenerate} && ${dbMigrate} && ${SCRIPTS.build}`;
     const existing = SCRIPTS.postinstall ? `${SCRIPTS.postinstall} && ` : "";
     SCRIPTS.postinstall = existing + dbGenerate;
   } else {
@@ -255,6 +256,7 @@ async function main() {
     delete SCRIPTS["db:generate"];
     delete SCRIPTS["db:push"];
     delete SCRIPTS["db:migrate"];
+    delete SCRIPTS["db:migrate:prod"];
     delete SCRIPTS["db:studio"];
     delete SCRIPTS["db:seed"];
   }
