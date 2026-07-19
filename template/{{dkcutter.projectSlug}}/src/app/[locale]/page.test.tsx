@@ -6,12 +6,11 @@ vi.mock("react", async (importOriginal) => {
   const actual = await importOriginal<typeof import("react")>();
   return {
     ...actual,
-    use: (p: any) => p,
+    use: () => ({ locale: "en" }),
   };
 });
 
 vi.mock("next-intl", () => ({
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   useTranslations: () => (key: string) => key,
 }));
 

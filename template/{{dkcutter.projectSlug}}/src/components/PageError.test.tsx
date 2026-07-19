@@ -10,10 +10,9 @@ import { PageError } from "./PageError";
 
 vi.mock("next-intl", () => ({
   useTranslations: () => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const t = (key: string) => key;
-    t.rich = (key: string, values: any) => {
-      if (values && values.link) {
+    t.rich = (key: string, values?: { link?: (chunk: string) => unknown }) => {
+      if (values?.link !== undefined) {
         return values.link(key);
       }
       return key;
