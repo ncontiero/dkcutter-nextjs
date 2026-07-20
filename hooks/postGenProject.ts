@@ -207,6 +207,7 @@ async function main() {
     REMOVE_DEPS.push("@hookform/resolvers", "react-hook-form");
   }
 
+  const testsFolder = path.join(projectDir, "tests");
   const testNonLocaleFiles = [
     path.join(appFolder, "page.test.tsx"),
     path.join(appFolder, "not-found.test.tsx"),
@@ -214,6 +215,8 @@ async function main() {
   if (CTX.useVitest) {
     if (CTX.i18n === "nextIntl") {
       FILES_TO_REMOVE.push(...testNonLocaleFiles);
+    } else {
+      FILES_TO_REMOVE.push(testsFolder);
     }
   } else {
     REMOVE_DEV_DEPS.push(
@@ -226,6 +229,7 @@ async function main() {
 
     FILES_TO_REMOVE.push(
       path.join(projectDir, "vitest.config.ts"),
+      testsFolder,
       path.join(appFolder, "[locale]", "page.test.tsx"),
       path.join(appFolder, "[locale]", "not-found.test.tsx"),
       path.join(srcFolder, "components", "PageError.test.tsx"),
