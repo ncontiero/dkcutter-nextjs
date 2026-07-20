@@ -6,10 +6,8 @@ describe("HomePage", () => {
   it("renders a heading with Hello World", () => {
     render(<HomePage />);
 
-    const heading = screen.getByRole("heading", {
-      level: 1,
-      name: "Hello World",
-    });
-    expect(heading).toBeDefined();
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent("Hello World");
   });
 });

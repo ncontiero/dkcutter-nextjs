@@ -20,6 +20,7 @@
 
     // JavaScript and Strictness
     "resolveJsonModule": true,
+    "types": ["{{ 'bun' if dkcutter.pkgManager == 'bun' else 'node' }}"{{ ', "@testing-library/jest-dom"'|safe if dkcutter.useVitest }}],
 {%- if dkcutter.i18n == "nextIntl" %}
     "allowArbitraryExtensions": true,
 {%- endif %}

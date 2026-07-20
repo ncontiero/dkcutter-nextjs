@@ -6,10 +6,14 @@ describe("PageNotFound", () => {
   it("renders the PageError component with correct keys", () => {
     render(<PageNotFound />);
 
-    expect(
-      screen.getByRole("heading", { level: 1, name: "title" }),
-    ).toBeDefined();
-    expect(screen.getByText("description")).toBeDefined();
-    expect(screen.getByRole("link", { name: "backToHome" })).toBeDefined();
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent("title");
+
+    const description = screen.getByText("description");
+    expect(description).toBeInTheDocument();
+
+    const link = screen.getByRole("link", { name: "backToHome" });
+    expect(link).toHaveAttribute("href", "/");
   });
 });
