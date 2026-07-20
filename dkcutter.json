@@ -159,5 +159,10 @@
   },
   "_pkgManager": "{{ dkcutter.pkgManager }}",
   "_pkgRun": "{{ _pkgManager }}{{ ' run' if not _pkgManager in ['pnpm', 'yarn'] }}",
-  "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}"
+  "_ciInstall": "{{ _pkgManager }} {{ 'ci' if _pkgManager == 'npm' else 'install' }}{{ ' --frozen-lockfile' if _pkgManager in ['yarn', 'pnpm', 'bun'] }}",
+  "_dkcutter": {
+    "engines": {
+      "dkcutter": ">=6.1.4 <7"
+    }
+  }
 }
