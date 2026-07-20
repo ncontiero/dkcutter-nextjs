@@ -2,6 +2,7 @@ allowBuilds:
 {%- if dkcutter.useTriggerDev %}
   "@depot/cli": true
 {%- endif %}
+  "@ncontiero/eslint-config": false
 {%- if dkcutter.usePrisma %}
   "@prisma/engines": true
 {%- endif %}
