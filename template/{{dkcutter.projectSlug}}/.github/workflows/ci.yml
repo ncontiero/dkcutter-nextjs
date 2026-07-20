@@ -1,26 +1,30 @@
 name: CI
 
 on:
-  pull_request:
   push:
     branches: [master, main]
+  pull_request:
 
 concurrency:
   group: {% raw %}${{ github.head_ref || github.run_id }}{% endraw %}
   cancel-in-progress: true
 
 jobs:
-  lint-styles:
-    name: Lint Styles
+  check-code:
+    name: Check Code/Commit - CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-{% if dkcutter.pkgManager == 'bun' %}
+{%- if dkcutter.useCommitlint %}
+        with:
+          fetch-depth: 0
+{%- endif %}
+{% if dkcutter.pkgManager == "bun" %}
       - name: Setup bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 {% else -%}
-{% if dkcutter.pkgManager == 'pnpm' %}
+{% if dkcutter.pkgManager == "pnpm" %}
       - name: Setup pnpm
         uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
 {% endif %}
@@ -35,14 +39,11 @@ jobs:
       - name: Check Code
         run: {{ dkcutter._pkgRun }} check
 {% if dkcutter.useCommitlint %}
-  lint-commits:
-    name: Lint Commits
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
-        with:
-          configFile: .commitlintrc.json
-{% endif -%}
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: |
+          {{ 'npx' if dkcutter.pkgManager == 'npm' else dkcutter.pkgManager }} commitlint \
+            --from {% raw %}${{ github.event.pull_request.base.sha }}{% endraw %} \
+            --to {% raw %}${{ github.event.pull_request.head.sha }}{% endraw %} \
+            --verbose
+{% endif %}
