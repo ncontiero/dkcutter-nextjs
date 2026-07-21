@@ -33,6 +33,7 @@ const CTX: ContextProps = {
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
   useVitest: toBoolean("{{ dkcutter.useVitest }}"),
+  usePlaywright: toBoolean("{{ dkcutter.usePlaywright }}"),
   usePrisma: toBoolean("{{ dkcutter.usePrisma }}"),
   useTriggerDev: toBoolean("{{ dkcutter.useTriggerDev }}"),
   useTanstackQuery: toBoolean("{{ dkcutter.useTanstackQuery }}"),
@@ -236,6 +237,19 @@ async function main() {
     );
     delete SCRIPTS.test;
     delete SCRIPTS["test:watch"];
+  }
+
+  if (!CTX.usePlaywright) {
+    REMOVE_DEV_DEPS.push("@playwright/test");
+    FILES_TO_REMOVE.push(
+      path.join(projectDir, "playwright.config.ts"),
+      path.join(projectDir, "tests"),
+    );
+    delete SCRIPTS["test:e2e"];
+    delete SCRIPTS["test:e2e:headed"];
+    delete SCRIPTS["test:e2e:debug"];
+    delete SCRIPTS["test:e2e:ui"];
+    delete SCRIPTS["test:e2e:report"];
   }
 
   if (CTX.usePrisma) {

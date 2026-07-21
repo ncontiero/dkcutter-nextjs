@@ -97,6 +97,11 @@
         "description": "Blazing fast unit test framework powered by Vite"
       },
       {
+        "title": "Playwright",
+        "value": "playwright",
+        "description": "Reliable end-to-end testing for modern web apps"
+      },
+      {
         "title": "Prisma",
         "value": "prisma",
         "description": "Next-generation ORM for Node.js & TypeScript"

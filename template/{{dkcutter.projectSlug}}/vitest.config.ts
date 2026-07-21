@@ -8,6 +8,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+{%- if dkcutter.usePlaywright %}
+    exclude: ["**/node_modules/**", "**/.git/**", "**/*.e2e.spec.ts"],
+{%- endif %}
     setupFiles: ["./vitest.setup.ts"],
   },
 });

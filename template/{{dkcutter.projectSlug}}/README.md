@@ -34,6 +34,9 @@
 {%- if dkcutter.useVitest %}
 - 🧪 **Testing**: Blazing fast unit test framework powered by Vitest.
 {%- endif %}
+{%- if dkcutter.usePlaywright %}
+- 🎭 **E2E Testing**: Reliable end-to-end testing powered by Playwright.
+{%- endif %}
 {%- if dkcutter.useShadcn %}
 - 🎨 **Styling**: Tailwind CSS configured with beautifully designed Shadcn UI components.
 {%- else %}

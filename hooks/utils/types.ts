@@ -19,6 +19,7 @@ export interface ContextProps {
   useReactCompiler: boolean;
   useReactHookForm: boolean;
   useVitest: boolean;
+  usePlaywright: boolean;
   usePrisma: boolean;
   useTriggerDev: boolean;
   useTanstackQuery: boolean;
