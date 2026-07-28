@@ -1,6 +1,6 @@
 import type { PackageManager } from "../utils/types";
 import type { SpawnOptions } from "node:child_process";
-import { clackSpinner as spinner } from "dkcutter/utils";
+import { spinner } from "dkcutter/utils";
 import { x } from "tinyexec";
 
 export async function execWithSpinner(
