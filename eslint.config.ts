@@ -6,9 +6,4 @@ export default ncontiero({
   typescript: {
     typeAware: true,
   },
-  unicorn: {
-    overrides: {
-      "unicorn/prefer-simple-condition-first": "off",
-    },
-  },
 });
