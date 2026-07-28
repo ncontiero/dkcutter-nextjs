@@ -20,6 +20,7 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
     "skipLibCheck": true,
   },
   "include": ["hooks/**/*.ts", "tests/**/*.ts", "eslint.config.ts", "vitest.config.ts"],
