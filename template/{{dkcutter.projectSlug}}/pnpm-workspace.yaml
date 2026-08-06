@@ -2,8 +2,14 @@ allowBuilds:
 {%- if dkcutter.useTriggerDev %}
   "@depot/cli": true
 {%- endif %}
+{%- if dkcutter.i18n == "nextIntl" %}
+  "@parcel/watcher": false
+{%- endif %}
 {%- if dkcutter.usePrisma %}
   "@prisma/engines": true
+{%- endif %}
+{%- if dkcutter.i18n == "nextIntl" %}
+  "@swc/core": false
 {%- endif %}
 {%- if dkcutter.useTriggerDev %}
   esbuild: true
@@ -11,10 +17,6 @@ allowBuilds:
 {%- if dkcutter.usePrisma %}
   prisma: true
 {%- endif %}
-{%- if dkcutter.useTriggerDev %}
-  protobufjs: true
-{%- endif %}
-  sharp: true
   unrs-resolver: true
 
 minimumReleaseAge: 4320
