@@ -39,18 +39,8 @@ export async function runPgkCommand(
 ) {
   const onDataHandle = (data: Buffer) => {
     const text = data.toString();
-    spinner.message(
-      pkgManager === "pnpm" && text.includes("Progress") && text.includes("|")
-        ? (text.split(" | ")[1] ?? "")
-        : text,
-    );
+    spinner.message(text);
   };
 
-  return execWithSpinner(
-    projectDir,
-    pkgManager,
-    args,
-    pkgManager === "bun" ? "ignore" : "pipe",
-    onDataHandle,
-  );
+  return execWithSpinner(projectDir, pkgManager, args, "ignore", onDataHandle);
 }
