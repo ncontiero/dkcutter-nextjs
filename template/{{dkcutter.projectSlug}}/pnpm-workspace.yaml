@@ -2,7 +2,6 @@ allowBuilds:
 {%- if dkcutter.useTriggerDev %}
   "@depot/cli": true
 {%- endif %}
-  "@ncontiero/eslint-config": false
 {%- if dkcutter.usePrisma %}
   "@prisma/engines": true
 {%- endif %}
@@ -19,5 +18,3 @@ allowBuilds:
   unrs-resolver: true
 
 minimumReleaseAge: 4320
-minimumReleaseAgeExclude:
-- "@ncontiero/eslint-config@8.4.1"
