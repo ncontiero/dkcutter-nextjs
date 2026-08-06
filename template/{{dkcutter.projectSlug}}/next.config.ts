@@ -7,11 +7,19 @@ import "./src/env";
 const nextConfig: NextConfig = {
   // Add your Next.js configuration options here...
 {%- if dkcutter.useReactCompiler or dkcutter.useRustReactCompiler %}
+  // https://nextjs.org/docs/app/api-reference/config/next-config-js/reactCompiler
   reactCompiler: true,
 {%- endif %}
-{%- if dkcutter.useRustReactCompiler %}
+{%- if dkcutter.experimentalFeatures != "none" %}
   experimental: {
+{%- if dkcutter.useRustReactCompiler %}
+    // https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackRustReactCompiler
     turbopackRustReactCompiler: true,
+{%- endif %}
+{%- if dkcutter.useNetworkResilience %}
+    // https://nextjs.org/docs/app/guides/offline-support
+    useOffline: true,
+{%- endif %}
   },
 {%- endif %}
 };

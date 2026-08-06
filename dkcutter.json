@@ -142,6 +142,11 @@
         "title": "Rust-based React Compiler",
         "value": "rustReactCompiler",
         "description": "Experimental Rust-based React compiler for faster builds"
+      },
+      {
+        "title": "Network resilience",
+        "value": "networkResilience",
+        "description": "Experimental network resilience features for improved reliability"
       }
     ],
     "choicesType": "multiselect",
