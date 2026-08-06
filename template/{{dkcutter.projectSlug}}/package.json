@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "",
   "description": "{{dkcutter.description}}",
-  "author": "{{dkcutter.authorName}}",
+  "author": "{{dkcutter.authorName|safe}}",
   "license": "MIT",
   "scripts": {
     "dev": "{% if dkcutter.pkgManager == 'bun' %}bun --bun {% endif %}next dev",
