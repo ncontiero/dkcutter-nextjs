@@ -31,6 +31,7 @@ const CTX: ContextProps = {
   useNanoStaged: toBoolean("{{ dkcutter.useNanoStaged }}"),
   useCommitlint: toBoolean("{{ dkcutter.useCommitlint }}"),
   useReactCompiler: toBoolean("{{ dkcutter.useReactCompiler }}"),
+  useRustReactCompiler: toBoolean("{{ dkcutter.useRustReactCompiler }}"),
   useReactHookForm: toBoolean("{{ dkcutter.useReactHookForm }}"),
   useVitest: toBoolean("{{ dkcutter.useVitest }}"),
   usePlaywright: toBoolean("{{ dkcutter.usePlaywright }}"),
@@ -201,7 +202,7 @@ async function main() {
     delete SCRIPTS["commit-msg"];
   }
 
-  if (!CTX.useReactCompiler) {
+  if (!CTX.useReactCompiler || CTX.useRustReactCompiler) {
     REMOVE_DEV_DEPS.push("babel-plugin-react-compiler");
   }
 

@@ -17,6 +17,7 @@ export interface ContextProps {
   useNanoStaged: boolean;
   useCommitlint: boolean;
   useReactCompiler: boolean;
+  useRustReactCompiler: boolean;
   useReactHookForm: boolean;
   useVitest: boolean;
   usePlaywright: boolean;

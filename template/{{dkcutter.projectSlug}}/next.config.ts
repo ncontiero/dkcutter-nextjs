@@ -5,10 +5,15 @@ import createNextIntlPlugin from "next-intl/plugin";
 import "./src/env";
 
 const nextConfig: NextConfig = {
-{%- if dkcutter.useReactCompiler %}
+  // Add your Next.js configuration options here...
+{%- if dkcutter.useReactCompiler or dkcutter.useRustReactCompiler %}
   reactCompiler: true,
 {%- endif %}
-  // Add your Next.js configuration options here...
+{%- if dkcutter.useRustReactCompiler %}
+  experimental: {
+    turbopackRustReactCompiler: true,
+  },
+{%- endif %}
 };
 
 {%- if dkcutter.i18n == "nextIntl" %}
@@ -20,5 +25,6 @@ const withNextIntl = createNextIntlPlugin({
 
 export default withNextIntl(nextConfig);
 {%- else %}
+
 export default nextConfig;
 {%- endif %}

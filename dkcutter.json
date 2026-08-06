@@ -79,7 +79,7 @@
       {
         "title": "React Compiler",
         "value": "reactCompiler",
-        "description": "Automatically optimize React component renders"
+        "description": "Optimizes your components at build time so you don't have to hand-tune memoization"
       },
       {
         "title": "React Hook Form",
@@ -134,6 +134,18 @@
     ],
     "choicesType": "multiselect",
     "promptMessage": "Which {{ colors.blue('Additional Tools') }} would you like to use?"
+  },
+  "experimentalFeatures": {
+    "value": "none",
+    "choices": [
+      {
+        "title": "Rust-based React Compiler",
+        "value": "rustReactCompiler",
+        "description": "Experimental Rust-based React compiler for faster builds"
+      }
+    ],
+    "choicesType": "multiselect",
+    "promptMessage": "Which {{ colors.yellow('Experimental Features') }} would you like to use?"
   },
   "useDockerCompose": {
     "value": false,
