@@ -27,7 +27,7 @@ export const config = {
     "/__clerk/(.*)",
   ],
 };
-{% elif dkcutter.authProvider == "none" and dkcutter.i18n == "nextIntl" -%}
+{% elif dkcutter.authProvider != "clerk" and dkcutter.i18n == "nextIntl" -%}
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
