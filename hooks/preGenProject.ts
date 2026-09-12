@@ -16,4 +16,6 @@
 // {{ dkcutter.add("useTailwindTypography", "{{ 'tailwindTypography' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useUnpic", "{{ 'unpic' in dkcutter.additionalTools }}") }}
 // {{ dkcutter.add("useNetworkResilience", "{{ 'networkResilience' in dkcutter.experimentalFeatures }}") }}
+// Better Auth Features
 // {{ dkcutter.add("useI18nBetterAuthPlugin", "{{ 'i18n' in dkcutter.betterAuthPlugins }}") }}
+// {{ dkcutter.add("useAdminBetterAuthPlugin", "{{ 'admin' in dkcutter.betterAuthPlugins }}") }}

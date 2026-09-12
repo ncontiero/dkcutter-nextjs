@@ -24,6 +24,8 @@ export const SUPPORTED_COMBINATIONS = [
   { authProvider: "betterAuth", i18n: "nextIntl" },
   { authProvider: "betterAuth", betterAuthPlugins: "i18n" },
   { authProvider: "betterAuth", i18n: "nextIntl", betterAuthPlugins: "i18n" },
+  { authProvider: "betterAuth", betterAuthPlugins: "admin" },
+  { authProvider: "betterAuth", betterAuthPlugins: "admin,i18n" },
   {
     authProvider: "clerk",
     i18n: "nextIntl",

@@ -143,6 +143,11 @@
         "value": "i18n",
         "description": "Internationalization plugin for translating error messages",
         "selected": "{{ i18n != 'none' }}"
+      },
+      {
+        "title": "Admin",
+        "value": "admin",
+        "description": "Admin plugin for Better Auth"
       }
     ],
     "choicesType": "multiselect",

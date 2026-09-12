@@ -25,6 +25,14 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  {% if dkcutter.useAdminBetterAuthPlugin -%}
+  role       String?
+  banned     Boolean?  @default(false)
+  banReason  String?
+  banExpires DateTime?
+
+  {% endif -%}
+
   @@unique([email])
   @@map("user")
 }
@@ -39,6 +47,11 @@ model Session {
   userAgent String?
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  {% if dkcutter.useAdminBetterAuthPlugin -%}
+  impersonatedBy String?
+
+  {% endif -%}
 
   @@unique([token])
   @@index([userId])
