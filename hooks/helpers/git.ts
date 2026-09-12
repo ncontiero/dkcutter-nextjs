@@ -87,6 +87,8 @@ export async function initializeGit(
       initialValue: false,
     });
 
+    // https://github.com/bombshell-dev/clack/issues/600
+    // eslint-disable-next-line ts/strict-boolean-expressions
     if (p.isCancel(overwriteGit) || !overwriteGit) {
       logger.warn("Skipping Git initialization.");
       return false;
@@ -109,6 +111,8 @@ export async function initializeGit(
       initialValue: false,
     });
 
+    // https://github.com/bombshell-dev/clack/issues/600
+    // eslint-disable-next-line ts/strict-boolean-expressions
     if (p.isCancel(initializeChildGitRepo) || !initializeChildGitRepo) {
       logger.warn("Skipping Git initialization.");
       return false;
