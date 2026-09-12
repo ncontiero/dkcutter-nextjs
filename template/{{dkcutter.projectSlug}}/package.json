@@ -93,6 +93,6 @@
     "vitest": "4.1.11"
   },
   "{{ 'nano-staged' if dkcutter.useNanoStaged else 'lint-staged' }}": {
-    "*": "{{ dkcutter._pkgRun }} lint:fix"
+    "*": "{{ dkcutter.pkgManager }} eslint --fix"
   }
 }

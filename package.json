@@ -39,6 +39,6 @@
     "zod": "4.6.0"
   },
   "lint-staged": {
-    "*": "bun run lint:fix"
+    "*": "bun eslint -c eslint.config.ts --fix"
   }
 }
