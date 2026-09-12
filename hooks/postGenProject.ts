@@ -152,7 +152,12 @@ async function main() {
       path.join(appFolder, "[locale]"),
     );
   };
-  if (CTX.i18n === "none") {
+  if (CTX.i18n === "nextIntl") {
+    FILES_TO_REMOVE.push(
+      path.join(appFolder, "layout.tsx"),
+      path.join(appFolder, "providers.tsx"),
+    );
+  } else if (CTX.i18n === "none") {
     removeNextIntl();
   }
 

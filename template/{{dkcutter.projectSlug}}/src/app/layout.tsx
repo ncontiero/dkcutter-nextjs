@@ -1,12 +1,4 @@
 import "@/styles/globals.css";
-{%- if dkcutter.i18n == "nextIntl" %}
-
-export default function RootLayout({
-  children,
-}: LayoutProps<"/">): LayoutProps<"/">["children"] {
-  return children;
-}
-{%- else %}
 import type { Metadata } from "next";
 {%- if dkcutter.authProvider == "clerk" %}
 import { ClerkProvider } from "@clerk/nextjs";
@@ -50,4 +42,3 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 {%- endif %}
   );
 }
-{%- endif %}

@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 {%- if dkcutter.authProvider == "clerk" %}
 import { ClerkProvider } from "@clerk/nextjs";
 {%- endif %}
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
-import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 {%- if dkcutter.useTanstackQuery %}
 import { Providers } from "./providers";
@@ -26,12 +25,7 @@ export default async function RootLayout({
   children,
   params,
 }: LayoutProps<"/[locale]">) {
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  setRequestLocale(locale);
+  const locale = await getLocale();
 
   return (
 {%- if dkcutter.authProvider == "clerk" %}
