@@ -3,10 +3,10 @@ import { logger } from "dkcutter/utils";
 import { x } from "tinyexec";
 
 const pkgManagersDefaultVersions: Record<PackageManager, string> = {
-  npm: "npm@12.0.1",
-  pnpm: "pnpm@11.15.1",
-  yarn: "yarn@4.17.0",
-  bun: "bun@1.3.14",
+  npm: "npm@12.0.2",
+  pnpm: "pnpm@12.4.1",
+  yarn: "yarn@4.18.0",
+  bun: "bun@1.4.2",
 };
 
 export async function getPkgManagerVersion(packageManager: PackageManager) {
