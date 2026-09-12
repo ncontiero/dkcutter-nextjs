@@ -41,6 +41,7 @@ const CTX: ContextProps = {
   useShadcn: toBoolean("{{ dkcutter.useShadcn }}"),
   useTailwindTypography: toBoolean("{{ dkcutter.useTailwindTypography }}"),
   useUnpic: toBoolean("{{ dkcutter.useUnpic }}"),
+  useI18nBetterAuthPlugin: toBoolean("{{ dkcutter.useI18nBetterAuthPlugin }}"),
   useDockerCompose: toBoolean("{{ dkcutter.useDockerCompose }}"),
   useClerkWebhook: toBoolean("{{ dkcutter.useClerkWebhook }}"),
   automatedDepsUpdater:
@@ -331,6 +332,10 @@ async function main() {
 
   if (!CTX.useUnpic) {
     REMOVE_DEPS.push("@unpic/react");
+  }
+
+  if (!CTX.useI18nBetterAuthPlugin) {
+    REMOVE_DEPS.push("@better-auth/i18n");
   }
 
   if (

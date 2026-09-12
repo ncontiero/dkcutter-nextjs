@@ -27,6 +27,7 @@ export interface ContextProps {
   useShadcn: boolean;
   useTailwindTypography: boolean;
   useUnpic: boolean;
+  useI18nBetterAuthPlugin: boolean;
   useDockerCompose: boolean;
   useClerkWebhook: boolean;
   automatedDepsUpdater: AutomatedDepsUpdater;

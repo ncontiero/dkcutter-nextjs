@@ -22,6 +22,8 @@ export const SUPPORTED_COMBINATIONS = [
   // Complex combinations
   { authProvider: "clerk", i18n: "nextIntl" },
   { authProvider: "betterAuth", i18n: "nextIntl" },
+  { authProvider: "betterAuth", betterAuthPlugins: "i18n" },
+  { authProvider: "betterAuth", i18n: "nextIntl", betterAuthPlugins: "i18n" },
   {
     authProvider: "clerk",
     i18n: "nextIntl",

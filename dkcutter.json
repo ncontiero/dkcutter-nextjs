@@ -135,6 +135,20 @@
     "choicesType": "multiselect",
     "promptMessage": "Which {{ colors.blue('Additional Tools') }} would you like to use?"
   },
+  "betterAuthPlugins": {
+    "value": "none",
+    "choices": [
+      {
+        "title": "I18n",
+        "value": "i18n",
+        "description": "Internationalization plugin for translating error messages",
+        "selected": "{{ i18n != 'none' }}"
+      }
+    ],
+    "choicesType": "multiselect",
+    "promptMessage": "Which {{ colors.black('Better Auth Plugins') }} would you like to use?",
+    "disabled": "{{ authProvider != 'betterAuth' }}"
+  },
   "experimentalFeatures": {
     "value": "none",
     "choices": [
