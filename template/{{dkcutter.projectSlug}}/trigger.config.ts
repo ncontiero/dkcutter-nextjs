@@ -2,7 +2,7 @@ import { defineConfig } from "@trigger.dev/sdk/v3";
 
 export default defineConfig({
   project: "YOUR_PROJECT_REF",
-  runtime: "{{ 'bun' if dkcutter.pkgManager == 'bun' else 'node' }}",
+  runtime: "{{ 'bun' if dkcutter.pkgManager == 'bun' else 'node-24' }}",
   logLevel: "log",
   // The max compute seconds a task is allowed to run. If the task run exceeds this duration, it will be stopped.
   // You can override this on an individual task.
