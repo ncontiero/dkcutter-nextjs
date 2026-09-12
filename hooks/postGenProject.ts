@@ -307,7 +307,12 @@ async function main() {
   }
 
   if (!CTX.useShadcn) {
-    REMOVE_DEPS.push("class-variance-authority", "cn", "lucide-react");
+    REMOVE_DEPS.push(
+      "@base-ui/react",
+      "class-variance-authority",
+      "cn",
+      "lucide-react",
+    );
     REMOVE_DEV_DEPS.push("shadcn", "tw-animate-css");
     FILES_TO_REMOVE.push(
       path.join(projectDir, "components.json"),
