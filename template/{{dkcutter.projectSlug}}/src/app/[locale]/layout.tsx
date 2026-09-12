@@ -23,14 +23,13 @@ export function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params,
 }: LayoutProps<"/[locale]">) {
   const locale = await getLocale();
 
   return (
 {%- if dkcutter.authProvider == "clerk" %}
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={locale} suppressHydrationWarning>
 {%- if dkcutter.useTanstackQuery %}
         <body className={inter.variable}>
           <Providers>
@@ -45,7 +44,7 @@ export default async function RootLayout({
       </html>
     </ClerkProvider>
 {%- else %}
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
 {%- if dkcutter.useTanstackQuery %}
       <body className={inter.variable}>
         <Providers>
