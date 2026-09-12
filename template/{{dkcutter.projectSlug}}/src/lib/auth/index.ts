@@ -10,7 +10,6 @@ import { nextCookies } from "better-auth/next-js";
 import { getLocale } from "next-intl/server";
 import { NEXT_LOCALE_COOKIE_NAME } from "@/i18n/routing";
 {%- endif %}
-import { env } from "@/env";
 {%- if dkcutter.usePrisma %}
 import { prisma } from "../prisma";
 {%- endif %}
@@ -51,11 +50,5 @@ export const auth = betterAuth({
   },
   emailAndPassword: {
     enabled: true,
-  },
-  socialProviders: {
-    google: {
-      clientId: env.AUTH_GOOGLE_CLIENT_ID,
-      clientSecret: env.AUTH_GOOGLE_CLIENT_SECRET,
-    },
   },
 });
