@@ -66,6 +66,7 @@ Answer the prompts with your own desired [options][options-url]. For example:
 ✔ Which Authentication Provider would you like to use? › None / Clerk / Better Auth
 ✔ Which Internationalization (i18n) solution would you like to use? › None / next-intl
 ✔ Which Additional Tools would you like to use? › Husky, Lint Staged, Nano Staged, Commitlint, React Compiler, React Hook Form, ESLint + Type Information, Vitest, Playwright, Prisma, Trigger.dev, TanStack Query, Shadcn, Tailwind CSS Typography, Unpic
+✔ Which Experimental Features would you like to use? › Rust-based React Compiler, Network resilience
 ✔ Would you like to add Docker Compose for the database? … No / Yes
 ✔ Would you like to receive Clerk events using webhooks? … No / Yes
 ✔ Which Automated Dependency Updater do you want to use? › None / Mend Renovate / Github Dependabot
@@ -103,6 +104,8 @@ If you want to bypass the interactive prompts and start faster, you can provide 
 | `--authProvider <string>`         | Choose an authentication provider (`none`, `clerk`, `betterAuth`).                                                                                                                                                                               |
 | `--i18n <string>`                 | Choose an internationalization solution (`none`, `nextIntl`).                                                                                                                                                                                    |
 | `--additionalTools <string>`      | Comma-separated list of tools (`husky`, `lintStaged`, `nanoStaged`, `commitlint`, `reactCompiler`, `reactHookForm`, `eslintTypeInfo`, `vitest`, `playwright`, `prisma`, `triggerDev`, `tanstackQuery`, `shadcn`, `tailwindTypography`, `unpic`). |
+| `--betterAuthPlugins <string>`    | Comma-separated list of Better Auth plugins (`i18n`, `admin`).                                                                                                                                                                                   |
+| `--experimentalFeatures <string>` | Comma-separated list of experimental features (`rustReactCompiler`, `networkResilience`).                                                                                                                                                        |
 | `--useDockerCompose [boolean]`    | Include Docker Compose in the project for the database (if Prisma is selected).                                                                                                                                                                  |
 | `--useClerkWebhook [boolean]`     | Includes an endpoint to receive events from [Clerk](https://clerk.com/).                                                                                                                                                                         |
 | `--automatedDepsUpdater <string>` | Choose Automated Dependency Updater (`none`, `renovate`, `dependabot`).                                                                                                                                                                          |

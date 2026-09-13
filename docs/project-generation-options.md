@@ -38,9 +38,17 @@ This page describes all the template options that will be prompted by the [DKCut
   - [Tailwind CSS Typography](https://github.com/tailwindlabs/tailwindcss-typography): A plugin that provides a set of prose classes you can use to add beautiful typographic defaults to any vanilla HTML.
   - [Unpic](https://unpic.pics): High-performance, framework-agnostic image component.
 
+- **Better Auth Plugins**: Indicates whether the project should be configured with the following [Better Auth](https://www.better-auth.com/) plugins (only prompted if Better Auth is selected):
+  - [I18n](https://www.better-auth.com/docs/plugins/i18n): Internationalization plugin for translating error messages (selected by default if internationalization is enabled).
+  - [Admin](https://www.better-auth.com/docs/plugins/admin): Admin plugin for Better Auth.
+
+- **Experimental Features**: Indicates whether the project should be configured with the following experimental features:
+  - [Rust-based React Compiler](https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopackRustReactCompiler): Experimental Rust-based React compiler for faster builds.
+  - [Network resilience](https://nextjs.org/docs/app/guides/offline-support): Experimental network resilience features for improved reliability.
+
 - **Use Docker Compose**: Indicates whether the project should include a Docker Compose for the database (only prompted if Prisma is selected).
 
-- **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
+- **Clerk Webhook**: Indicates whether the project must have an endpoint to receive [Clerk events](https://clerk.com/docs/guides/development/webhooks/overview#supported-webhook-events) (only prompted if Clerk is selected). [More information](https://clerk.com/docs/guides/development/webhooks/syncing).
 
 - **Automated Deps Updater**: Indicates whether the project should be configured using the following automated deps updater:
   - None
