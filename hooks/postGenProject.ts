@@ -224,6 +224,9 @@ async function main() {
     if (CTX.i18n === "nextIntl") {
       FILES_TO_REMOVE.push(...testNonLocaleFiles);
     }
+    if (CTX.pkgManager !== "yarn") {
+      REMOVE_DEV_DEPS.push("vite");
+    }
   } else {
     REMOVE_DEV_DEPS.push(
       "@testing-library/dom",
@@ -231,6 +234,7 @@ async function main() {
       "@testing-library/react",
       "@vitejs/plugin-react",
       "jsdom",
+      "vite",
       "vitest",
     );
 
