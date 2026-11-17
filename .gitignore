@@ -130,3 +130,4 @@ dist
 
 # Tests
 .test
+.vitest
